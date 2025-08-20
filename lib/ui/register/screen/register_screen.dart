@@ -99,7 +99,7 @@ class RegisterScreen extends StatelessWidget {
                 width: double.infinity,
                 child: CustomButton(
                   Textcolor: ColorManager.secondary,
-                  color: ColorManager.background,
+                  color: ColorManager.bottons,
                   text: StringsManager.withgoogle,
                   onPressed: () {
                     Navigator.push(

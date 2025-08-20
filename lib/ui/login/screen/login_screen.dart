@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                   color: ColorManager.primary,
                   text: StringsManager.login,
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                     );
@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                 width: double.infinity,
                 child: CustomButton(
                   Textcolor: ColorManager.secondary,
-                  color: ColorManager.background,
+                  color: ColorManager.bottons,
                   text: StringsManager.newuser,
                   onPressed: () {
                     Navigator.push(
