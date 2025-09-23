@@ -1,0 +1,11 @@
+{
+  "app_name": "Tech & Restore",
+  "dashboard": "لوحة التحكم",
+  "repair": "التصليح",
+  "devices": "الاجهزة",
+  "orders": "الطلبات",
+  "invoices": "الفواتير",
+  "inventory": "جرد",
+  "offers": "العروض",
+  "support": "الدعم"
+}

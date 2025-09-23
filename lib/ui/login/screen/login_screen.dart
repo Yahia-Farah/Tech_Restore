@@ -6,6 +6,7 @@ import '../../../core/reusable_components/CustomButton.dart';
 import '../../../core/reusable_components/customfield.dart';
 import '../../../core/strings_manager.dart';
 import '../../register/screen/register_screen.dart';
+import '../../shop/layout.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = "Login";
@@ -79,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                   text: StringsManager.withgoogle, onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    MaterialPageRoute(builder: (context) => MainLayout()),
                   );
                 },
                 ),

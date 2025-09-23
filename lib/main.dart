@@ -3,8 +3,8 @@ import 'package:tech_restore/ui/home/screen/home_screen.dart';
 import 'package:tech_restore/ui/login/screen/login_screen.dart';
 import 'package:tech_restore/ui/register/screen/register_screen.dart';
 import 'package:tech_restore/ui/start_screen/screen/start_screen.dart' show StartScreen;
-
 import 'core/color_manager.dart';
+import 'core/l10n/translation/app_localizations.dart';
 
 
 
@@ -15,11 +15,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale("ar"),
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: ColorManager.background,
         appBarTheme: AppBarTheme(
