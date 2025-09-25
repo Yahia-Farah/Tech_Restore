@@ -135,53 +135,6 @@ class _UsersScreenState extends State<UsersScreen> {
                         ],
                       ),
                     ),
-
-                    // Footer
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Showing 1 to ${filteredUsers.length} of ${_users.length}",
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.arrow_left),
-                                onPressed: () {},
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: const Text(
-                                  "1",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: const Text("2"),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.arrow_right),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),

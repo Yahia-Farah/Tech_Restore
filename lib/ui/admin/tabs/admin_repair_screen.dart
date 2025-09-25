@@ -138,48 +138,6 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
 
                     const SizedBox(height: 12),
 
-                    // 👇 Pagination OUTSIDE horizontal scroll
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Showing 1 to ${filteredShops.length} of ${_shops.length} shops",
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.arrow_left),
-                              onPressed: () {},
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Text(
-                                "1",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Text("2"),
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.arrow_right),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -254,3 +212,4 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
     );
   }
 }
+
