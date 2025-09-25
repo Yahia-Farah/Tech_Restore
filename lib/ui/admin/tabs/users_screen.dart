@@ -9,6 +9,7 @@ class UsersScreen extends StatefulWidget {
 
 class _UsersScreenState extends State<UsersScreen> {
   final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
 
   final List<Map<String, dynamic>> _users = [
     {
@@ -50,6 +51,13 @@ class _UsersScreenState extends State<UsersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 👇 Filter users based on search query
+    final filteredUsers = _users.where((user) {
+      final query = _searchQuery.toLowerCase();
+      return user["name"].toLowerCase().contains(query) ||
+          user["email"].toLowerCase().contains(query);
+    }).toList();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -63,7 +71,7 @@ class _UsersScreenState extends State<UsersScreen> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-          
+
               // Search bar
               TextField(
                 controller: _searchController,
@@ -86,13 +94,17 @@ class _UsersScreenState extends State<UsersScreen> {
                     borderSide: const BorderSide(color: Colors.blue, width: 2),
                   ),
                 ),
+                onChanged: (val) {
+                  setState(() => _searchQuery = val);
+                },
               ),
               const SizedBox(height: 20),
 
-// Table card
+              // Table card
               Card(
                 color: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
                 elevation: 2,
                 child: Column(
                   children: [
@@ -104,7 +116,8 @@ class _UsersScreenState extends State<UsersScreen> {
                           // Header row
                           Container(
                             color: Colors.grey[100],
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 8),
                             child: Row(
                               children: const [
                                 SizedBox(width: 150, child: Text("Name")),
@@ -117,13 +130,13 @@ class _UsersScreenState extends State<UsersScreen> {
                             ),
                           ),
 
-                          // Users rows
-                          ..._users.map((user) => _buildUserRow(user)),
+                          // Filtered Users rows
+                          ...filteredUsers.map((user) => _buildUserRow(user)),
                         ],
                       ),
                     ),
 
-                    // 👇 Footer OUTSIDE horizontal scroll (fixed)
+                    // Footer
                     Container(
                       padding: const EdgeInsets.all(12),
                       alignment: Alignment.centerLeft,
@@ -131,7 +144,7 @@ class _UsersScreenState extends State<UsersScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Showing 1 to ${_users.length} of 7",
+                            "Showing 1 to ${filteredUsers.length} of ${_users.length}",
                             style: const TextStyle(fontSize: 12),
                           ),
                           Row(
@@ -172,7 +185,6 @@ class _UsersScreenState extends State<UsersScreen> {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -219,6 +231,7 @@ class _UsersScreenState extends State<UsersScreen> {
       ),
     );
   }
+
   Widget _buildStatusChip(String status) {
     Color bg;
     Color text;

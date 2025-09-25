@@ -9,6 +9,7 @@ class AdminRepairScreen extends StatefulWidget {
 
 class _AdminRepairScreenState extends State<AdminRepairScreen> {
   final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
 
   final List<Map<String, dynamic>> _shops = [
     {
@@ -39,6 +40,14 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 👇 Filter shops by name, owner, or location
+    final filteredShops = _shops.where((shop) {
+      final query = _searchQuery.toLowerCase();
+      return shop["name"].toLowerCase().contains(query) ||
+          shop["owner"].toLowerCase().contains(query) ||
+          shop["location"].toLowerCase().contains(query);
+    }).toList();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -89,6 +98,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
+                            onChanged: (val) {
+                              setState(() => _searchQuery = val);
+                            },
                           ),
                         ),
                       ],
@@ -118,8 +130,8 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                             ),
                           ),
 
-                          // Shops list
-                          ..._shops.map((shop) => _buildShopRow(shop)),
+                          // Filtered Shops list
+                          ...filteredShops.map((shop) => _buildShopRow(shop)),
                         ],
                       ),
                     ),
@@ -131,7 +143,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Showing 1 to ${_shops.length} of ${_shops.length} users",
+                          "Showing 1 to ${filteredShops.length} of ${_shops.length} shops",
                           style: const TextStyle(fontSize: 12),
                         ),
                         Row(
