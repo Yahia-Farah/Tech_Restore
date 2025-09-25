@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/l10n/translation/app_localizations.dart';
 
 class DevicesScreen extends StatefulWidget {
   const DevicesScreen({super.key});
@@ -43,22 +44,6 @@ class _DevicesScreenState extends State<DevicesScreen> {
       "quantity": 2,
       "status": "new"
     },
-    {
-      "name": "MacBook Air\nApple certified refurbished",
-      "type": "Laptop",
-      "serial": "SN24681357",
-      "price": "999 EGP",
-      "quantity": 2,
-      "status": "new"
-    },
-    {
-      "name": "MacBook Air\nApple certified refurbished",
-      "type": "Laptop",
-      "serial": "SN24681357",
-      "price": "999 EGP",
-      "quantity": 2,
-      "status": "new"
-    },
   ];
 
   String selectedFilter = "all";
@@ -70,7 +55,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
   List<Map<String, dynamic>> get filteredDevices {
     final searchText = _searchController.text.toLowerCase();
     return devices.where((device) =>
-      device["name"].toString().toLowerCase().contains(searchText)
+        device["name"].toString().toLowerCase().contains(searchText)
     ).toList();
   }
 
@@ -84,6 +69,8 @@ class _DevicesScreenState extends State<DevicesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -99,18 +86,18 @@ class _DevicesScreenState extends State<DevicesScreen> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  "إدارة الأجهزة",
-                  style: TextStyle(
+                  local.devices_management,
+                  style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
-                  "يمكنك متابعة ورؤية جميع المنتجات في المحل الخاص بك من هنا",
-                  style: TextStyle(color: Colors.black54),
+                  local.devices_management_desc,
+                  style: const TextStyle(color: Colors.black54),
                 ),
               ],
             ),
@@ -119,35 +106,25 @@ class _DevicesScreenState extends State<DevicesScreen> {
 
           // 🔹 Action buttons
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton.icon(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purpleAccent),
-                icon: const Icon(Icons.add,color: Colors.white,),
-                label: const Text("إضافة جهاز",style: TextStyle(color: Colors.white)),
-              ),
-              const SizedBox(width: 12),
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade600),
-                icon: const Icon(Icons.devices,color: Colors.white,),
-                label: const Text("أنواع الأجهزة",style: TextStyle(color: Colors.white)),
+                icon: const Icon(Icons.add, color: Colors.white),
+                label: Text(local.add_device, style: const TextStyle(color: Colors.white)),
               ),
             ],
           ),
           const SizedBox(height: 20),
-
-          // 🔹 Search + Filters
           Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText:
-                    "ابحث باسم الجهاز، نوع الجهاز، الرقم التسلسلي...",
+                    hintText: local.search_hint,
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8)),
@@ -159,6 +136,20 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   },
                 ),
               ),
+            ],
+          ),
+          SizedBox(height: 20,),
+          // 🔹 Search + Filters
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue.shade600),
+                icon: const Icon(Icons.devices, color: Colors.white),
+                label: Text(local.device_types, style: const TextStyle(color: Colors.white)),
+              ),
               const SizedBox(width: 12),
               ElevatedButton(
                 onPressed: () {
@@ -168,7 +159,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade600),
-                child: const Text("حالة الجهاز",style: TextStyle(color: Colors.white)),
+                child: Text(local.device_status, style: const TextStyle(color: Colors.white)),
               ),
               const SizedBox(width: 12),
               ElevatedButton(
@@ -179,78 +170,87 @@ class _DevicesScreenState extends State<DevicesScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade600),
-                child: const Text("كل الأنواع",style: TextStyle(color: Colors.white)),
+                child: Text(local.all_types, style: const TextStyle(color: Colors.white)),
               ),
             ],
           ),
           const SizedBox(height: 20),
 
           // 🔹 Devices Table
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-              columns: const [
-                DataColumn(label: Text("اسم الجهاز")),
-                DataColumn(label: Text("نوع الجهاز")),
-                DataColumn(label: Text("الرقم التسلسلي")),
-                DataColumn(label: Text("السعر")),
-                DataColumn(label: Text("الكمية")),
-                DataColumn(label: Text("حالة الجهاز")),
-                DataColumn(label: Text("إزالة / تعديل")),
-              ],
-              rows: paginatedDevices.map((device) => _buildDeviceRow(device)).toList(),
-            ),
-          ),
-
-          const SizedBox(height: 12),
-
-          // 🔹 Pagination footer
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "${filteredDevices.isEmpty ? 0 : ((currentPage - 1) * devicesPerPage + 1)} to ${((currentPage * devicesPerPage) > filteredDevices.length ? filteredDevices.length : (currentPage * devicesPerPage))} of ${filteredDevices.length} devices",
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.chevron_left),
-                    onPressed: currentPage > 1
-                        ? () => setState(() => currentPage--)
-                        : null,
+          Card(
+            child: Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columns: [
+                      DataColumn(label: Text(local.device_name)),
+                      DataColumn(label: Text(local.device_type)),
+                      DataColumn(label: Text(local.serial_number)),
+                      DataColumn(label: Text(local.price)),
+                      DataColumn(label: Text(local.quantity)),
+                      DataColumn(label: Text(local.status)),
+                      DataColumn(label: Text(local.actions)),
+                    ],
+                    rows: paginatedDevices.map((device) => _buildDeviceRow(device, local)).toList(),
                   ),
-                  for (int i = 1; i <= totalPages; i++)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: currentPage == i ? Colors.blue : Colors.grey.shade300,
-                          foregroundColor: currentPage == i ? Colors.white : Colors.black,
-                        ),
-                        onPressed: () => setState(() => currentPage = i),
-                        child: Text("$i"),
+                ),
+
+                const SizedBox(height: 12),
+
+                // 🔹 Pagination footer
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${filteredDevices.isEmpty ? 0 : ((currentPage - 1) * devicesPerPage + 1)} ${local.toShow} ${((currentPage * devicesPerPage) > filteredDevices.length ? filteredDevices.length : (currentPage * devicesPerPage))} ${local.ofShow} ${filteredDevices.length} ${local.devices}",
                       ),
-                    ),
-                  IconButton(
-                    icon: const Icon(Icons.chevron_right),
-                    onPressed: currentPage < totalPages
-                        ? () => setState(() => currentPage++)
-                        : null,
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.chevron_left),
+                            onPressed: currentPage > 1
+                                ? () => setState(() => currentPage--)
+                                : null,
+                          ),
+                          for (int i = 1; i <= totalPages; i++)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: currentPage == i ? Colors.blue : Colors.grey.shade300,
+                                  foregroundColor: currentPage == i ? Colors.white : Colors.black,
+                                ),
+                                onPressed: () => setState(() => currentPage = i),
+                                child: Text("$i"),
+                              ),
+                            ),
+                          IconButton(
+                            icon: const Icon(Icons.chevron_right),
+                            onPressed: currentPage < totalPages
+                                ? () => setState(() => currentPage++)
+                                : null,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ],
+                )
+              ],
+            ),
           )
         ],
       ),
     );
   }
 
-  DataRow _buildDeviceRow(Map<String, dynamic> device) {
-    Color statusColor =
-    device["status"] == "new" ? Colors.green : Colors.red;
-    Color bgColor =
-    device["status"] == "new" ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1);
+  DataRow _buildDeviceRow(Map<String, dynamic> device, AppLocalizations local) {
+    Color statusColor = device["status"] == "new" ? Colors.green : Colors.red;
+    Color bgColor = device["status"] == "new"
+        ? Colors.green.withOpacity(0.1)
+        : Colors.red.withOpacity(0.1);
 
     return DataRow(cells: [
       DataCell(Text(device["name"])),
@@ -265,16 +265,20 @@ class _DevicesScreenState extends State<DevicesScreen> {
             color: bgColor,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Text(device["status"],
-              style: TextStyle(
-                  color: statusColor, fontWeight: FontWeight.bold)),
+          child: Text(
+            device["status"] == "new" ? local.newDev : local.used,
+            style: TextStyle(
+              color: statusColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
       DataCell(Row(
-        children: const [
-          Icon(Icons.edit, color: Colors.blue),
-          SizedBox(width: 8),
-          Icon(Icons.delete, color: Colors.red),
+        children: [
+          Icon(Icons.edit, color: Colors.blue, semanticLabel: local.edit),
+          const SizedBox(width: 8),
+          Icon(Icons.delete, color: Colors.red, semanticLabel: local.delete),
         ],
       )),
     ]);

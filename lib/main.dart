@@ -6,8 +6,6 @@ import 'package:tech_restore/ui/start_screen/screen/start_screen.dart' show Star
 import 'core/color_manager.dart';
 import 'core/l10n/translation/app_localizations.dart';
 
-
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale("ar"),
+      locale: Locale("en"),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: ColorManager.background,

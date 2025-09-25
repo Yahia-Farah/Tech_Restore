@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/color_manager.dart';
+import '../../../core/l10n/translation/app_localizations.dart';
 import '../widgets/dashboard_card.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -8,6 +8,8 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,27 +20,27 @@ class DashboardScreen extends StatelessWidget {
               height: 140,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: const [
+                children: [
                   DashboardCard(
-                    title: "مبيعات اليوم",
+                    title: local.today_sales,
                     value: "2,450 EGP",
                     change: "+12%",
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   DashboardCard(
-                    title: "طلبات جديدة",
+                    title: local.new_orders,
                     value: "24 Order",
                     change: "+4%",
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   DashboardCard(
-                    title: "اشعارات الرد",
+                    title: local.reply_notifications,
                     value: "5 items",
                     change: "-2%",
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   DashboardCard(
-                    title: "رضا العملاء",
+                    title: local.customer_satisfaction,
                     value: "92%",
                     change: "+3%",
                   ),
@@ -46,6 +48,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
           ),
+
           // Latest Orders
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -64,11 +67,11 @@ class DashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(12.0),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      "أحدث الطلبات",
-                      style: TextStyle(
+                      local.latest_orders,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -77,44 +80,21 @@ class DashboardScreen extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
-                      columns: const [
-                        DataColumn(label: Text("كود الطلب")),
-                        DataColumn(label: Text("العميل")),
-                        DataColumn(label: Text("الإجمالي")),
-                        DataColumn(label: Text("حالة الطلب")),
-                        DataColumn(label: Text("تفاصيل الطلب")),
+                      columns: [
+                        DataColumn(label: Text(local.order_code)),
+                        DataColumn(label: Text(local.customer)),
+                        DataColumn(label: Text(local.total)),
+                        DataColumn(label: Text(local.order_status)),
+                        DataColumn(label: Text(local.order_details)),
                       ],
                       rows: [
-                        _buildOrderRow(
-                          "#1001",
-                          "Mahmoud Ali",
-                          "120 EGP",
-                          "Completed",
-                        ),
-                        _buildOrderRow(
-                          "#1002",
-                          "Ahmed Ashraf",
-                          "85 EGP",
-                          "Processing",
-                        ),
-                        _buildOrderRow(
-                          "#1003",
-                          "Youssef Ehab",
-                          "230 EGP",
-                          "Shipped",
-                        ),
-                        _buildOrderRow(
-                          "#1004",
-                          "Mohtar",
-                          "54 EGP",
-                          "Completed",
-                        ),
-                        _buildOrderRow(
-                          "#1005",
-                          "Mohamed Haytham",
-                          "176 EGP",
-                          "Pending",
-                        ),
+                        _buildOrderRow("#1001", "Mahmoud Ali", "120 EGP", local.completed),
+                        _buildOrderRow("#1002", "Ahmed Ashraf", "85 EGP", local.processing),
+                        _buildOrderRow("#1003", "Youssef Ehab", "230 EGP", local.shipped),
+                        _buildOrderRow("#1004", "Mohtar", "54 EGP", local.completed),
+                        _buildOrderRow("#1005", "Mohamed Haytham", "176 EGP", local.pending),
+                        _buildOrderRow("#1005", "Mohamed Haytham", "176 EGP", local.pending),
+                        _buildOrderRow("#1005", "Mohamed Haytham", "176 EGP", local.pending),
                       ],
                     ),
                   ),
@@ -142,18 +122,18 @@ class DashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(12.0),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      "اشعارات الجرد",
-                      style: TextStyle(
+                      local.inventory_alerts,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  _buildAlert("الكمية ستنتهي قريباً", "A16 شاشة سامسونج"),
-                  _buildAlert("الكمية ستنتهي قريباً", "A16 شاحن سامسونج"),
+                  _buildAlert(local.low_stock, local.samsung_screen),
+                  _buildAlert(local.low_stock, local.samsung_charger),
                 ],
               ),
             ),
@@ -164,28 +144,32 @@ class DashboardScreen extends StatelessWidget {
   }
 
   static DataRow _buildOrderRow(
-    String code,
-    String customer,
-    String total,
-    String status,
-  ) {
+      String code,
+      String customer,
+      String total,
+      String status,
+      ) {
     Color statusColor;
     Color bgColor;
 
     switch (status) {
       case "Completed":
+      case "مكتمل":
         statusColor = Colors.green;
         bgColor = Colors.green.withOpacity(0.1);
         break;
       case "Processing":
+      case "قيد المعالجة":
         statusColor = Colors.blue;
         bgColor = Colors.blue.withOpacity(0.1);
         break;
       case "Shipped":
+      case "تم الشحن":
         statusColor = Colors.orange;
         bgColor = Colors.orange.withOpacity(0.1);
         break;
       case "Pending":
+      case "قيد الانتظار":
         statusColor = Colors.grey;
         bgColor = Colors.grey.withOpacity(0.1);
         break;
@@ -212,8 +196,12 @@ class DashboardScreen extends StatelessWidget {
             ),
           ),
         ),
-        const DataCell(Text("التفاصيل",
-          style: TextStyle(color: ColorManager.primary, fontSize: 18),)),
+        DataCell(
+          Text(
+            "التفاصيل",
+            style: const TextStyle(color: ColorManager.primary, fontSize: 18),
+          ),
+        ),
       ],
     );
   }

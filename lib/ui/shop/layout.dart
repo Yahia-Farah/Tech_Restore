@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/ui/shop/tabs/dashboard_screen.dart';
 import 'package:tech_restore/ui/shop/tabs/devices_screen.dart';
+import 'package:tech_restore/ui/shop/tabs/inventory_screen.dart';
+import 'package:tech_restore/ui/shop/tabs/offers_screen.dart';
 import 'package:tech_restore/ui/shop/tabs/orders_screen.dart';
 import 'package:tech_restore/ui/shop/tabs/repair_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/transactions_screens.dart';
-
-import '../../core/assset_manager.dart';
-import '../../core/color_manager.dart';
+import 'package:tech_restore/ui/shop/tabs/support_screen.dart';
+import 'package:tech_restore/ui/shop/tabs/transactions_screen.dart';
+import '../../core/l10n/translation/app_localizations.dart';
 import '../../core/reusable_components/drawer_widget.dart';
 
 class MainLayout extends StatefulWidget {
@@ -38,13 +39,16 @@ class _MainLayoutState extends State<MainLayout> {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          _getTitle(_selectedIndex),
-          style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
+        title: Center(
+          child: Text(
+            _getTitle(_selectedIndex,local),
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         backgroundColor: Colors.white,
@@ -92,54 +96,26 @@ class _MainLayoutState extends State<MainLayout> {
     );
   }
 
-  String _getTitle(int index) {
+  String _getTitle(int index, AppLocalizations local) {
     switch (index) {
       case 0:
-        return "لوحة التحكم";
+        return local.dashboard;
       case 1:
-        return "التصليح";
+        return local.repair;
       case 2:
-        return "الاجهزة";
+        return local.devices;
       case 3:
-        return "الطلبات";
+        return local.orders;
       case 4:
-        return "الفواتير";
+        return local.invoices;
       case 5:
-        return "جرد";
+        return local.inventory;
       case 6:
-        return "العروض";
+        return local.offers;
       case 7:
-        return "الدعم";
+        return local.support;
         default:
         return "";
     }
-  }
-}
-
-
-class InventoryScreen extends StatelessWidget {
-  const InventoryScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Inventory Screen"));
-  }
-}
-
-class OffersScreen extends StatelessWidget {
-  const OffersScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("🏷️ Offers Screen"));
-  }
-}
-
-class SupportScreen extends StatelessWidget {
-  const SupportScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("💬 Support Screen"));
   }
 }
