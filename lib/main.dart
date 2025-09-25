@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale("ar"),
+      locale: Locale("en"),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: ColorManager.background,
