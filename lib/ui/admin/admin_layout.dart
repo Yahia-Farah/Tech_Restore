@@ -7,14 +7,6 @@ import 'package:tech_restore/ui/admin/tabs/support_screen.dart';
 import 'package:tech_restore/ui/admin/tabs/transaction_screen.dart';
 import 'package:tech_restore/ui/admin/tabs/users_screen.dart';
 import 'package:tech_restore/ui/admin/widgets/admin_drawer.dart';
-import 'package:tech_restore/ui/shop/tabs/dashboard_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/devices_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/orders_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/repair_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/transactions_screens.dart';
-
-import '../../core/assset_manager.dart';
-import '../../core/color_manager.dart';
 
 
 class AdminLayout extends StatefulWidget {
