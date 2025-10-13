@@ -1,20 +1,9 @@
-// import 'package:flutter/material.dart';
-// import 'package:tech_restore/core/color_manager.dart';
-//
-// class Accounttab extends StatelessWidget {
-//   const Accounttab({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container( color: Colors.purpleAccent,);
-//   }
-// }\
 import 'package:flutter/material.dart';
 import 'package:tech_restore/core/strings_manager.dart';
 
-import '../../../../core/color_manager.dart';
-import '../../../../core/reusable_components/CustomButton.dart';
-import '../../../register/screen/register_screen.dart';
+import '../../../../../core/color_manager.dart';
+import '../../../../../core/reusable_components/CustomButton.dart';
+import '../../../../auth/register/screen/register_screen.dart';
 
 class Accounttab extends StatelessWidget {
   final List<Map<String, String>> repairHistory = [

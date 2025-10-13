@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/home/tabs/account_tab/AccountTab.dart';
-import 'package:tech_restore/ui/home/tabs/explore_tab/ExploreTab.dart';
-import 'package:tech_restore/ui/home/tabs/home_tab/HomeTab.dart';
-import 'package:tech_restore/ui/home/tabs/track_tab/TrackTab.dart';
-
-import '../../../core/color_manager.dart';
+import '../../../../core/color_manager.dart';
+import '../tabs/account_tab/AccountTab.dart';
+import '../tabs/explore_tab/ExploreTab.dart';
+import '../tabs/home_tab/HomeTab.dart';
+import '../tabs/track_tab/TrackTab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routename = "home";

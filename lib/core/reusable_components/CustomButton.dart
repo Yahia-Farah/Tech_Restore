@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/core/color_manager.dart';
-import 'package:tech_restore/ui/login/screen/login_screen.dart';
-import 'package:tech_restore/ui/register/screen/register_screen.dart';
+
 
 class CustomButton extends StatelessWidget {
   String text ;

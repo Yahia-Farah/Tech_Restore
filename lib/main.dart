@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/home/screen/home_screen.dart';
-import 'package:tech_restore/ui/login/screen/login_screen.dart';
-import 'package:tech_restore/ui/register/screen/register_screen.dart';
-import 'package:tech_restore/ui/start_screen/screen/start_screen.dart' show StartScreen;
 import 'core/color_manager.dart';
 import 'core/l10n/translation/app_localizations.dart';
+import 'features/auth/login/screen/login_screen.dart';
+import 'features/auth/register/screen/register_screen.dart';
+import 'features/onboarding/screen/onboarding_screen.dart';
+import 'features/user/home/screen/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
       )
       ),
       routes: {
-        StartScreen.routeName:(_)=>StartScreen(),
+        OnboardingScreen.routeName:(_)=>OnboardingScreen(),
         LoginScreen.routeName:(_)=>LoginScreen(),
         RegisterScreen.routeName:(_)=>RegisterScreen(),
         HomeScreen.routename:(_)=>HomeScreen(),
       },
-      initialRoute: StartScreen.routeName,
+      initialRoute: OnboardingScreen.routeName,
     );
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/shop/tabs/dashboard_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/devices_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/inventory_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/offers_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/orders_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/repair_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/support_screen.dart';
-import 'package:tech_restore/ui/shop/tabs/transactions_screen.dart';
+import 'package:tech_restore/features/shop/tabs/dashboard_screen.dart';
+import 'package:tech_restore/features/shop/tabs/devices_screen.dart';
+import 'package:tech_restore/features/shop/tabs/inventory_screen.dart';
+import 'package:tech_restore/features/shop/tabs/offers_screen.dart';
+import 'package:tech_restore/features/shop/tabs/orders_screen.dart';
+import 'package:tech_restore/features/shop/tabs/repair_screen.dart';
+import 'package:tech_restore/features/shop/tabs/support_screen.dart';
+import 'package:tech_restore/features/shop/tabs/transactions_screen.dart';
 import '../../core/l10n/translation/app_localizations.dart';
 import '../../core/reusable_components/drawer_widget.dart';
 

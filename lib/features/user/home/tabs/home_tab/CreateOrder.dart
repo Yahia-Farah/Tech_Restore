@@ -1,30 +1,9 @@
-// import 'package:flutter/material.dart';
-// import 'package:tech_restore/core/strings_manager.dart';
-//
-// import '../../../../core/color_manager.dart';
-//
-// class Createorder extends StatelessWidget {
-//   const Createorder({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//           title: Text(StringsManager.whatrepair),
-//           titleTextStyle: TextStyle(
-//               color: ColorManager.secondary,
-//               fontSize: 22,
-//               fontWeight: FontWeight.w700
-//           )),
-//
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/home/tabs/home_tab/device_issue.dart';
 
-import '../../../../core/color_manager.dart';
-import '../../../../core/strings_manager.dart';
+import '../../../../../core/color_manager.dart';
+import '../../../../../core/strings_manager.dart';
+import 'device_issue.dart';
+
 
 class Createorder extends StatelessWidget {
   final List<Map<String, dynamic>> devices = [

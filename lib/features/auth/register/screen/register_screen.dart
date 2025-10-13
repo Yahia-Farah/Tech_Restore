@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/core/color_manager.dart';
 import 'package:tech_restore/core/strings_manager.dart';
-import 'package:tech_restore/ui/admin/tabs/admin_dashboard_screen.dart';
 
-import '../../../core/reusable_components/CustomButton.dart';
-import '../../../core/reusable_components/customfield.dart';
-import '../../admin/admin_layout.dart';
-import '../../home/screen/home_screen.dart';
+import '../../../../core/reusable_components/CustomButton.dart';
+import '../../../../core/reusable_components/customfield.dart';
+import '../../../admin/admin_layout.dart';
+import '../../../user/home/screen/home_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   static const String routeName = "register";

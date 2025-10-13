@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/core/color_manager.dart';
 import 'package:tech_restore/core/strings_manager.dart';
-import 'package:tech_restore/ui/login/screen/login_screen.dart';
-
 import '../../../core/assset_manager.dart';
 import '../../../core/reusable_components/CustomButton.dart';
-import '../../register/screen/register_screen.dart';
+import '../../auth/login/screen/login_screen.dart';
 
-class StartScreen extends StatelessWidget {
+class OnboardingScreen extends StatelessWidget {
   static const String routeName = "start";
-  const StartScreen({super.key});
+  const OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

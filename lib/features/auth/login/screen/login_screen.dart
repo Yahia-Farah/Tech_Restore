@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/home/screen/home_screen.dart';
 
-import '../../../core/color_manager.dart';
-import '../../../core/reusable_components/CustomButton.dart';
-import '../../../core/reusable_components/customfield.dart';
-import '../../../core/strings_manager.dart';
+import '../../../../core/color_manager.dart';
+import '../../../../core/reusable_components/CustomButton.dart';
+import '../../../../core/reusable_components/customfield.dart';
+import '../../../../core/strings_manager.dart';
+import '../../../shop/layout.dart';
+import '../../../user/home/screen/home_screen.dart';
 import '../../register/screen/register_screen.dart';
-import '../../shop/layout.dart';
+
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = "Login";

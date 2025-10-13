@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/admin/tabs/admin_dashboard_screen.dart';
-import 'package:tech_restore/ui/admin/tabs/admin_repair_screen.dart';
-import 'package:tech_restore/ui/admin/tabs/promotional_offers.dart';
-import 'package:tech_restore/ui/admin/tabs/reviews_screen.dart';
-import 'package:tech_restore/ui/admin/tabs/support_screen.dart';
-import 'package:tech_restore/ui/admin/tabs/transaction_screen.dart';
-import 'package:tech_restore/ui/admin/tabs/users_screen.dart';
-import 'package:tech_restore/ui/admin/widgets/admin_drawer.dart';
+import 'package:tech_restore/features/admin/tabs/admin_dashboard_screen.dart';
+import 'package:tech_restore/features/admin/tabs/admin_repair_screen.dart';
+import 'package:tech_restore/features/admin/tabs/promotional_offers.dart';
+import 'package:tech_restore/features/admin/tabs/reviews_screen.dart';
+import 'package:tech_restore/features/admin/tabs/support_screen.dart';
+import 'package:tech_restore/features/admin/tabs/transaction_screen.dart';
+import 'package:tech_restore/features/admin/tabs/users_screen.dart';
+import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
 
 class AdminLayout extends StatefulWidget {

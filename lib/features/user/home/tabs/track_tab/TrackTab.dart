@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/home/screen/home_screen.dart';
 
-import '../../../../core/color_manager.dart';
-import '../../../../core/reusable_components/CustomButton.dart';
-import '../../../../core/strings_manager.dart';
+import '../../../../../core/color_manager.dart';
+import '../../../../../core/reusable_components/CustomButton.dart';
+import '../../../../../core/strings_manager.dart';
+import '../../screen/home_screen.dart';
 
 class Tracktab extends StatelessWidget {
   late final String trackingNumber;
 
-  // TracktabPage({required this.trackingNumber}) {
-  //   // TODO: implement TracktabPage
-  //   throw UnimplementedError();
-  // }
 
   final List<Map<String, String>> statusUpdates = [
     {"status": "Order received", "date": "Jan 21", "icon": "box"},
