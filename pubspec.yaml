@@ -40,6 +40,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   get: ^4.7.2
   get_it: ^8.2.0
+  injectable: ^2.5.1
   json_annotation: ^4.9.0
   loading_indicator: ^3.1.1
   logger: ^2.6.1

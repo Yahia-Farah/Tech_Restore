@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
 import 'package:tech_restore/core/widgets/custom_text_field.dart';
+import '../../../../core/config/di.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../shop/layout.dart';
 import '../../../user/home/screen/home_screen.dart';
+import '../../domain/usecases/sign_up_use_case.dart';
 import '../../register/screen/register_screen.dart';
+import '../../register/viewmodel/register_viewmodel.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -110,9 +114,15 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (_) => RegisterCubit(getIt<SignUpUseCase>()),
+                          child: const RegisterScreen(),
+                        ),
+                      ),
                     );
                   },
+
                 ),
               ),
             ],
