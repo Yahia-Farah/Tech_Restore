@@ -1,40 +1,60 @@
 import 'package:flutter/material.dart';
-import 'core/color_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/l10n/translation/app_localizations.dart';
-import 'features/auth/login/screen/login_screen.dart';
-import 'features/auth/register/screen/register_screen.dart';
-import 'features/onboarding/screen/onboarding_screen.dart';
-import 'features/user/home/screen/home_screen.dart';
+import 'core/routes/on_generate_route.dart';
+import 'core/theme/app_colors.dart';
+import 'features/localization/data/localization_preference.dart';
+import 'features/localization/localization_controller/localization_cubit.dart';
+import 'features/localization/localization_controller/localization_state.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Load saved language
+  String savedLang = await LocalizationPreference.getLanguage();
+
+  runApp(
+    BlocProvider(
+      create: (_) => LocalizationCubit(language: savedLang == "ar" ? "ar" : "en")
+        ..selectLanguage(savedLang == "ar" ? "Arabic" : "English"),
+      child: const MyApp(initialRoute: "/start"),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String initialRoute;
+  const MyApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale("en"),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: ColorManager.background,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-      )
-      ),
-      routes: {
-        OnboardingScreen.routeName:(_)=>OnboardingScreen(),
-        LoginScreen.routeName:(_)=>LoginScreen(),
-        RegisterScreen.routeName:(_)=>RegisterScreen(),
-        HomeScreen.routename:(_)=>HomeScreen(),
+    return BlocBuilder<LocalizationCubit, LocalizationState>(
+      builder: (context, state) {
+        Locale currentLocale;
+
+        if (state is ArabicLanguage) {
+          currentLocale = const Locale("ar");
+        } else {
+          currentLocale = const Locale("en");
+        }
+
+        return MaterialApp(
+          title: 'Tech Restore',
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: currentLocale,
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.background,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              centerTitle: true,
+            ),
+          ),
+          initialRoute: initialRoute,
+          onGenerateRoute: Routes.onGenerateRoute,
+        );
       },
-      initialRoute: OnboardingScreen.routeName,
     );
   }
 }

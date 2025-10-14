@@ -1,107 +1,120 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/color_manager.dart';
-import '../../../../core/reusable_components/CustomButton.dart';
-import '../../../../core/reusable_components/customfield.dart';
-import '../../../../core/strings_manager.dart';
+import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import 'package:tech_restore/core/widgets/custom_text_field.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../shop/layout.dart';
 import '../../../user/home/screen/home_screen.dart';
 import '../../register/screen/register_screen.dart';
 
-
 class LoginScreen extends StatelessWidget {
-  static const String routeName = "Login";
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        title: Text(StringsManager.login),
+        title: Text(local.login),
         titleTextStyle: TextStyle(
-            color: ColorManager.secondary,
-            fontSize: 18,
-            fontWeight: FontWeight.w700
+          color: AppColors.secondary,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Align(
                 alignment: Alignment.center,
-                child:
-                Text(StringsManager.welcomeback, style: TextStyle(
+                child: Text(
+                  local.welcomeBack,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 22
-                ),),
+                    fontSize: 22,
+                  ),
+                ),
               ),
-              SizedBox(height: 20,),
-              Customfield(
-                hint: StringsManager.Email,
-                keyboard: TextInputType.emailAddress,
+              const SizedBox(height: 20),
+
+              CustomTextFormField(
+                hint: local.email,
+                keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: 20,),
-              Customfield(
-                hint: StringsManager.password,
-                keyboard: TextInputType.visiblePassword,
-                isObscured: true,
+              const SizedBox(height: 20),
+
+              /// Password Field
+              CustomTextFormField(
+                hint: local.password,
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
               ),
-              SizedBox(height: 17,),
-              Text(StringsManager.forgetpassword,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color:ColorManager.hint
-              ),),
-              SizedBox(height: 20,),
-              Container(
+              const SizedBox(height: 17),
+
+              /// Forgot Password
+              Text(
+                local.forgetPassword,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.hint,
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              /// Login Button
+              SizedBox(
                 width: double.infinity,
-                child: CustomButton(
-                  Textcolor: ColorManager.background,
-                  color: ColorManager.primary,
-                  text: StringsManager.login,
+                child: CustomElevatedButton(
+                  color: AppColors.primary,
+                  text: local.login,
                   onPressed: () {
                     Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
                 ),
               ),
-              SizedBox(height: 14,),
-              Container(
+              const SizedBox(height: 14),
+
+              /// Continue with Google
+              SizedBox(
                 width: double.infinity,
-                child: CustomButton(
-                  Textcolor: ColorManager.secondary,
-                  color: ColorManager.bottons,
-                  text: StringsManager.withgoogle, onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainLayout()),
-                  );
-                },
-                ),
-              ),
-              SizedBox(height: 20,),
-              Container(
-                width: double.infinity,
-                child: CustomButton(
-                  Textcolor: ColorManager.secondary,
-                  color: ColorManager.bottons,
-                  text: StringsManager.newuser,
+                child: CustomElevatedButton(
+                  color: AppColors.buttons,
+                  text: local.withGoogle,
+                  textColor: AppColors.black,
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RegisterScreen()),
+                      MaterialPageRoute(builder: (context) => const MainLayout()),
                     );
                   },
                 ),
               ),
+              const SizedBox(height: 20),
 
+              /// New User / Sign Up
+              SizedBox(
+                width: double.infinity,
+                child: CustomElevatedButton(
+                  textColor: AppColors.black,
+                  color: AppColors.white,
+                  text: local.newUser,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

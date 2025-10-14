@@ -93,8 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get devices_management => 'Devices Management';
 
   @override
-  String get devices_management_desc =>
-      'You can monitor and view all devices in your store here';
+  String get devices_management_desc => 'You can monitor and view all devices in your store here';
 
   @override
   String get add_device => 'Add Device';
@@ -148,8 +147,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repair_requests_title => 'Repair Requests';
 
   @override
-  String get repair_requests_subtitle =>
-      'You can view all customer repair requests, accept them, and update their status here';
+  String get repair_requests_subtitle => 'You can view all customer repair requests, accept them, and update their status here';
 
   @override
   String get status_filter => 'Order Status';
@@ -227,8 +225,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transactions => 'Transactions';
 
   @override
-  String get transactions_subtitle =>
-      'You can view the monthly or yearly income for repair orders and sales from here';
+  String get transactions_subtitle => 'You can view the monthly or yearly income for repair orders and sales from here';
 
   @override
   String get month => 'Month';
@@ -289,8 +286,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inventory_title => 'Inventory System';
 
   @override
-  String get inventory_description =>
-      'You can monitor the number of devices and see if a product is running low from here';
+  String get inventory_description => 'You can monitor the number of devices and see if a product is running low from here';
 
   @override
   String get inventory_search => 'Search inventory...';
@@ -380,8 +376,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supportTitle => 'Support';
 
   @override
-  String get supportSubtitle =>
-      'You can view all customer issues and inquiries here';
+  String get supportSubtitle => 'You can view all customer issues and inquiries here';
 
   @override
   String get searchSupport => 'Search support requests...';
@@ -421,4 +416,106 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get requestsCount => 'requests';
+
+  @override
+  String get welcome => 'Welcome to TechRestore!';
+
+  @override
+  String get login => 'Log In';
+
+  @override
+  String get home => 'Home Page';
+
+  @override
+  String get deviceIssue => 'Device issue';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get liveStu => 'Live status updates';
+
+  @override
+  String get trackingNumber => 'Tracking number';
+
+  @override
+  String get repairStatue => 'Repair Status';
+
+  @override
+  String get start => 'Let’s Get Started';
+
+  @override
+  String get name => 'Full name';
+
+  @override
+  String get uploadPorV => 'Upload photos or videos';
+
+  @override
+  String get describeIssue => 'Describe the issue';
+
+  @override
+  String get deviceIssueQuote => 'What\'s the issue with your Device?';
+
+  @override
+  String get username => 'User name';
+
+  @override
+  String get phone => 'Phone Number';
+
+  @override
+  String get signup => 'Sign Up';
+
+  @override
+  String get welcomeBack => 'Welcome back';
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
+  String get addPhoto => 'Add a photo';
+
+  @override
+  String get email => 'Email address';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get forgetPassword => 'Forgot password?';
+
+  @override
+  String get withGoogle => 'Continue with Google';
+
+  @override
+  String get newOrder => 'New order';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get whatRepair => 'What do you need to repair?';
+
+  @override
+  String get newUser => 'New User Sign Up';
+
+  @override
+  String get signUpQuote => 'Get your tech fixed, fast.';
+
+  @override
+  String get secSignUpQuote => 'We\'ll connect you with the best local shops to get your device fixed.';
+
+  @override
+  String get byContinuing => 'By continuing, you agree to the Terms of Use. Read our Privacy Policy.';
+
+  @override
+  String get startQuote => 'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
+
+  @override
+  String get explore => 'explore';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get cancel => 'Cancel';
 }

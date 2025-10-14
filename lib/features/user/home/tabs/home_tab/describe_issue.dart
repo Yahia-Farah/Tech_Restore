@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/core/strings_manager.dart';
+import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import '../../../../../core/theme/app_colors.dart';
 
 class IssueDescriptionScreen extends StatefulWidget {
-  static const String routename = "issuedescription";
+  static const String routeName = "issueDescription";
+
+  const IssueDescriptionScreen({super.key});
+
   @override
   _IssueDescriptionScreenState createState() => _IssueDescriptionScreenState();
 }
@@ -12,14 +16,19 @@ class _IssueDescriptionScreenState extends State<IssueDescriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Other"),
+        title: Text(local.deviceIssue),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Cancel", style: TextStyle(color: Colors.blue)),
-          )
+            child: Text(
+              local.cancel,
+              style: const TextStyle(color: Colors.blue),
+            ),
+          ),
         ],
       ),
       body: Padding(
@@ -27,41 +36,42 @@ class _IssueDescriptionScreenState extends State<IssueDescriptionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Text field
+            /// Text field
             TextField(
               controller: _controller,
               maxLines: 4,
               decoration: InputDecoration(
-                hintText: StringsManager.describeissue,
+                hintText: local.describeIssue,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Upload placeholder
+            /// Upload placeholder
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(StringsManager.uploadporv),
+                Text(local.uploadPorV),
                 IconButton(
-                  icon: Icon(Icons.arrow_forward_ios, size: 18),
+                  icon: const Icon(Icons.arrow_forward_ios, size: 18),
                   onPressed: () {
                     // Upload logic
                   },
                 ),
               ],
             ),
-            Spacer(),
 
-            // Next button
+            const Spacer(),
+
+            /// Next button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  padding: EdgeInsets.symmetric(vertical: 14),
+                  backgroundColor: AppColors.primary,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -69,19 +79,36 @@ class _IssueDescriptionScreenState extends State<IssueDescriptionScreen> {
                 onPressed: () {
                   // Handle next
                 },
-                child: Text("Next", style: TextStyle(color: Colors.white)),
+                child: Text(
+                  local.next,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
         ),
       ),
+
+      /// Bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Explore"),
-          BottomNavigationBarItem(icon: Icon(Icons.local_shipping), label: "Track"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Account"),
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            label: local.home,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.search),
+            label: local.explore,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.local_shipping),
+            label: local.trackingNumber,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person),
+            label: local.profile,
+          ),
         ],
       ),
     );

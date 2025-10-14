@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/color_manager.dart';
 import '../../../core/l10n/translation/app_localizations.dart';
+import '../../../core/theme/app_colors.dart';
 import '../widgets/dashboard_card.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -199,7 +199,7 @@ class DashboardScreen extends StatelessWidget {
         DataCell(
           Text(
             "التفاصيل",
-            style: const TextStyle(color: ColorManager.primary, fontSize: 18),
+            style: const TextStyle(color: AppColors.primary, fontSize: 18),
           ),
         ),
       ],

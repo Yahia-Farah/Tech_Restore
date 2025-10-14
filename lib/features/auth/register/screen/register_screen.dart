@@ -1,122 +1,122 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/core/color_manager.dart';
-import 'package:tech_restore/core/strings_manager.dart';
-
-import '../../../../core/reusable_components/CustomButton.dart';
-import '../../../../core/reusable_components/customfield.dart';
+import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/custom_elevated_button.dart';
+import '../../../../core/widgets/custom_text_field.dart';
 import '../../../admin/admin_layout.dart';
 import '../../../user/home/screen/home_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
-  static const String routeName = "register";
   const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        title: Text(StringsManager.signup),
+        title: Text(local.signup),
         titleTextStyle: TextStyle(
-          color: ColorManager.secondary,
+          color: AppColors.secondary,
           fontSize: 18,
-          fontWeight: FontWeight.w700
+          fontWeight: FontWeight.w700,
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                Align(
-                  alignment: Alignment.center,
-                  child:
-                  Text(StringsManager.signupquote, style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 22
-                  ),),
-                ),
               Align(
                 alignment: Alignment.center,
-                child:
-                Text(StringsManager.secsignupquote, style: TextStyle(
+                child: Text(
+                  local.signUpQuote,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 22,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  local.secSignUpQuote,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontSize: 16
-                ),),
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
-              SizedBox(height: 20,),
-              Customfield(
-                hint: StringsManager.name,
-                keyboard: TextInputType.name,
-          
+              const SizedBox(height: 20),
+              CustomTextFormField(
+                hint: local.name,
+                keyboardType: TextInputType.name,
               ),
-              SizedBox(height: 20,),
-              Customfield(
-                hint: StringsManager.username,
-                keyboard: TextInputType.name,
+              const SizedBox(height: 20),
+              CustomTextFormField(
+                hint: local.username,
+                keyboardType: TextInputType.name,
               ),
-              SizedBox(height: 20,),
-              Customfield(
-                hint: StringsManager.Email,
-                keyboard: TextInputType.emailAddress,
+              const SizedBox(height: 20),
+              CustomTextFormField(
+                hint: local.email,
+                keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: 20,),
-              Customfield(
-                hint: StringsManager.phone,
-                keyboard: TextInputType.phone,
+              const SizedBox(height: 20),
+              CustomTextFormField(
+                hint: local.phone,
+                keyboardType: TextInputType.phone,
               ),
-              SizedBox(height: 20,),
-              Customfield(
-                hint: StringsManager.password,
-                keyboard: TextInputType.visiblePassword,
-                isObscured: true,
+              const SizedBox(height: 20),
+              CustomTextFormField(
+                hint: local.password,
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20),
               Text(
-                  StringsManager.bycontinuing,
+                local.byContinuing,
                 style: TextStyle(
-                  fontSize: 18,
-                  color: ColorManager.hint
+                  fontSize: 16,
+                  color: AppColors.hint,
                 ),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20,),
-              Container(
+              const SizedBox(height: 20),
+              SizedBox(
                 width: double.infinity,
-                child: CustomButton(
-                  Textcolor: ColorManager.secondary,
-                  color: ColorManager.bottons,
-                  text: StringsManager.signup,
+                child: CustomElevatedButton(
+                  textColor: AppColors.secondary,
+                  color: AppColors.buttons,
+                  text: local.signup,
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
                 ),
               ),
-              SizedBox(height: 20,),
-              Container(
+              const SizedBox(height: 20),
+              SizedBox(
                 width: double.infinity,
-                child: CustomButton(
-                  Textcolor: ColorManager.secondary,
-                  color: ColorManager.bottons,
-                  text: StringsManager.withgoogle,
+                child: CustomElevatedButton(
+                  textColor: AppColors.secondary,
+                  color: AppColors.buttons,
+                  text: local.withGoogle,
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AdminLayout()),
+                      MaterialPageRoute(builder: (context) => const AdminLayout()),
                     );
                   },
                 ),
               ),
-
-
-
-
-
-
-
             ],
           ),
         ),

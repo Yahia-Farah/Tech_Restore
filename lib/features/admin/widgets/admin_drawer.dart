@@ -1,8 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:tech_restore/core/contants/app_images.dart';
 
-import '../../../core/assset_manager.dart';
 
 class AdminDrawerWidget extends StatelessWidget {
   final int selectedIndex;
@@ -27,7 +27,7 @@ class AdminDrawerWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage(AsssetsManager.StartScreen), // replace with your logo
+                  backgroundImage: AssetImage(AppImages.startScreen), // replace with your logo
                 ),
                 const SizedBox(width: 10),
                 const Text(

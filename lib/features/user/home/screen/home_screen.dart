@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../core/color_manager.dart';
-import '../tabs/account_tab/AccountTab.dart';
-import '../tabs/explore_tab/ExploreTab.dart';
-import '../tabs/home_tab/HomeTab.dart';
-import '../tabs/track_tab/TrackTab.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../tabs/account_tab/account_tab.dart';
+import '../tabs/explore_tab/explore_tab.dart';
+import '../tabs/home_tab/home_tab.dart';
+import '../tabs/track_tab/track_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routename = "home";
@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> tabs = [
-    Hometab(),
+    HomeTab(),
     Exploretab(),
     Tracktab(),
     Accounttab(),
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: ColorManager.background,
+          backgroundColor: AppColors.background,
           currentIndex: selectedIndex,
             onTap: (index){
             selectedIndex = index;

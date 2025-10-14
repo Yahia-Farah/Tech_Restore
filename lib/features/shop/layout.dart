@@ -8,7 +8,7 @@ import 'package:tech_restore/features/shop/tabs/repair_screen.dart';
 import 'package:tech_restore/features/shop/tabs/support_screen.dart';
 import 'package:tech_restore/features/shop/tabs/transactions_screen.dart';
 import '../../core/l10n/translation/app_localizations.dart';
-import '../../core/reusable_components/drawer_widget.dart';
+import '../../core/widgets/drawer_widget.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});

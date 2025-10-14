@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/color_manager.dart';
-import '../../../../../core/reusable_components/CustomButton.dart';
-import '../../../../../core/strings_manager.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/widgets/custom_elevated_button.dart';
 import '../../screen/home_screen.dart';
 
 class Tracktab extends StatelessWidget {
@@ -33,20 +32,22 @@ class Tracktab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var local = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: Text(StringsManager.repairstatue)),
+      appBar: AppBar(title: Text(local.repairStatue)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(StringsManager.trackingnumber,
+            Text(local.trackingNumber,
                 style: TextStyle(fontSize: 16, color: Colors.black)),
             SizedBox(height: 15,),
             Text("#1077",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 20),
-            Text(StringsManager.livestu,
+            Text(local.liveStu,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             SizedBox(height: 10),
             Expanded(
@@ -67,10 +68,10 @@ class Tracktab extends StatelessWidget {
             Center(
               child:Container(
                 width: double.infinity,
-                child: CustomButton(
-                  Textcolor: ColorManager.background,
-                  color: ColorManager.primary,
-                  text: StringsManager.home,
+                child: CustomElevatedButton(
+                  textColor: AppColors.white,
+                  color: AppColors.primary,
+                  text: local.home,
                   onPressed: () {
                     Navigator.push(
                       context,
