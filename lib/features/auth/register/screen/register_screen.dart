@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import '../../../../core/routes/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
@@ -120,6 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           password: _passwordController.text.trim(),
                         );
                         context.read<RegisterCubit>().signUp(user);
+                        Navigator.pushNamed(context, AppRoutes.login);
                       },
                     ),
                   ),
