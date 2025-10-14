@@ -6,7 +6,7 @@ import '../../../core/widgets/custom_elevated_button.dart';
 import '../../auth/login/screen/login_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
-  static const String routeName = "start";
+  //static const String routeName = "start";
   const OnboardingScreen({super.key});
 
   @override
@@ -21,11 +21,9 @@ class OnboardingScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            /// Onboarding image
             Image.asset(AppImages.startScreen),
             const SizedBox(height: 30),
 
-            /// Welcome text
             Text(
               local.welcome,
               style: TextStyle(
@@ -35,7 +33,6 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
 
-            /// Description text
             Text(
               local.startQuote,
               style: TextStyle(
@@ -48,11 +45,10 @@ class OnboardingScreen extends StatelessWidget {
 
             const SizedBox(height: 50),
 
-            /// Start button
             SizedBox(
               width: double.infinity,
               child: CustomElevatedButton(
-                textColor: AppColors.secondary,
+                textColor: AppColors.white,
                 color: AppColors.primary,
                 text: local.start,
                 onPressed: () {
