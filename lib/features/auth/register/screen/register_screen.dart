@@ -75,13 +75,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 10),
                   CustomTextFormField(
                     controller: _firstNameController,
-                    hint: local.name,
+                    hint: local.firstName,
                     keyboardType: TextInputType.name,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
                     controller: _lastNameController,
-                    hint: local.username,
+                    hint: local.lastName,
                     keyboardType: TextInputType.name,
                   ),
                   const SizedBox(height: 20),
