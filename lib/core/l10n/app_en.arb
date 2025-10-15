@@ -169,5 +169,8 @@
   "next": "Next",
   "cancel": "Cancel",
   "firstName": "First Name",
-  "lastName": "Last Name"
+  "lastName": "Last Name",
+  "loginSuccessMsg": "Login Successfully",
+  "loading": "Loading..."
+
 }

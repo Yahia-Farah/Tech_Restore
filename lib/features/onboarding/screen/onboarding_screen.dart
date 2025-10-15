@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/core/contants/app_images.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import '../../../core/routes/route_names.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_elevated_button.dart';
 import '../../auth/login/screen/login_screen.dart';
@@ -15,51 +16,53 @@ class OnboardingScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(AppImages.startScreen),
-            const SizedBox(height: 30),
-
-            Text(
-              local.welcome,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: AppColors.secondary,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(AppImages.startScreen),
+              const SizedBox(height: 30),
+        
+              Text(
+                local.welcome,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: AppColors.secondary,
+                ),
               ),
-            ),
-
-            Text(
-              local.startQuote,
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
-                color: AppColors.secondary,
+        
+              Text(
+                local.startQuote,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                  color: AppColors.secondary,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 50),
-
-            SizedBox(
-              width: double.infinity,
-              child: CustomElevatedButton(
-                textColor: AppColors.white,
-                color: AppColors.primary,
-                text: local.start,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  );
-                },
+        
+              const SizedBox(height: 50),
+        
+              SizedBox(
+                width: double.infinity,
+                child: CustomElevatedButton(
+                  textColor: AppColors.white,
+                  color: AppColors.primary,
+                  text: local.start,
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.login,
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

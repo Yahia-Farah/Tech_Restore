@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
-import '../../../../core/routes/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
+import '../../../../core/widgets/toast_helper.dart';
 import '../../../user/home/screen/home_screen.dart';
 import '../../domain/entites/user_entity.dart';
 import '../viewmodel/register_states.dart';
@@ -44,16 +44,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
               if (state is RegisterSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.message)),
+                ToastHelper.showCustomToast(
+                  context,
+                  text: state.message,
+                  isError: false,
                 );
+
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()),
                 );
               } else if (state is RegisterError) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.message)),
+                ToastHelper.showCustomToast(
+                  context,
+                  text: state.message,
+                  isError: true,
                 );
               }
             },
@@ -121,7 +126,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           password: _passwordController.text.trim(),
                         );
                         context.read<RegisterCubit>().signUp(user);
-                        Navigator.pushNamed(context, AppRoutes.login);
                       },
                     ),
                   ),

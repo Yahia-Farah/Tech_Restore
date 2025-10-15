@@ -169,5 +169,8 @@
   "next": "التالي",
   "cancel": "إلغاء",
   "firstName": "الاسم الأول",
-  "lastName": "الاسم الأخير"
+  "lastName": "الاسم الأخير",
+  "loginSuccessMsg": "تم تسجيل الدخول بنجاح",
+  "loading": "نحميل..."
+
 }
