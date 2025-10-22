@@ -167,5 +167,7 @@
   "startQuote": "Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we'll connect you to reliable repair services. Let's get your devices back to their prime! Tap to begin.",
   "explore": "explore",
   "next": "Next",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "firstName": "First Name",
+  "lastName": "Last Name"
 }

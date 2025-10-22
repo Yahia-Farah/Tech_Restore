@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tech_restore/core/config/di.dart';
 import 'core/l10n/translation/app_localizations.dart';
 import 'core/routes/on_generate_route.dart';
 import 'core/theme/app_colors.dart';
@@ -9,8 +10,7 @@ import 'features/localization/localization_controller/localization_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Load saved language
+  await configureDependencies();
   String savedLang = await LocalizationPreference.getLanguage();
 
   runApp(

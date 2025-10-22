@@ -1108,6 +1108,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

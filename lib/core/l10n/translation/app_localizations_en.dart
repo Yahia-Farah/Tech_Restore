@@ -518,4 +518,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get firstName => 'First Name';
+
+  @override
+  String get lastName => 'Last Name';
 }

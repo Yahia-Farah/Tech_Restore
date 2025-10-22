@@ -518,4 +518,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancel => 'إلغاء';
+
+  @override
+  String get firstName => 'الاسم الأول';
+
+  @override
+  String get lastName => 'الاسم الأخير';
 }
