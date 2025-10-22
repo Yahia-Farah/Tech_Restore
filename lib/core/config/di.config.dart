@@ -50,10 +50,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i504.AuthRemoteDatasourceImpl(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i170.AuthRepository>(
         () => _i279.AuthRepositoryImpl(gh<_i24.AuthRemoteDataSource>()));
-    gh.factory<_i1037.SignUpUseCase>(
-        () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i188.LoginUseCase>(
         () => _i188.LoginUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i1037.SignUpUseCase>(
+        () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i146.LoginViewModel>(
         () => _i146.LoginViewModel(gh<_i188.LoginUseCase>()));
     return this;

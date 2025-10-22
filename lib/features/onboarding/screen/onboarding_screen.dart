@@ -4,10 +4,8 @@ import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
 import '../../../core/routes/route_names.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_elevated_button.dart';
-import '../../auth/login/screen/login_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
-  //static const String routeName = "start";
   const OnboardingScreen({super.key});
 
   @override
@@ -15,17 +13,15 @@ class OnboardingScreen extends StatelessWidget {
     final local = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          width: double.infinity,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 40),
+        child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: 30,),
               Image.asset(AppImages.startScreen),
               const SizedBox(height: 30),
-        
               Text(
                 local.welcome,
                 style: TextStyle(
@@ -34,7 +30,7 @@ class OnboardingScreen extends StatelessWidget {
                   color: AppColors.secondary,
                 ),
               ),
-        
+
               Text(
                 local.startQuote,
                 style: TextStyle(
@@ -44,9 +40,9 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-        
+
               const SizedBox(height: 50),
-        
+
               SizedBox(
                 width: double.infinity,
                 child: CustomElevatedButton(

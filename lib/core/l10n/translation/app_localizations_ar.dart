@@ -93,7 +93,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get devices_management => 'إدارة الأجهزة';
 
   @override
-  String get devices_management_desc => 'يمكنك متابعة ورؤية جميع المنتجات في المحل الخاص بك من هنا';
+  String get devices_management_desc =>
+      'يمكنك متابعة ورؤية جميع المنتجات في المحل الخاص بك من هنا';
 
   @override
   String get add_device => 'إضافة جهاز';
@@ -147,7 +148,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get repair_requests_title => 'طلبات التصليح';
 
   @override
-  String get repair_requests_subtitle => 'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
+  String get repair_requests_subtitle =>
+      'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
 
   @override
   String get status_filter => 'حالة الطلب';
@@ -183,7 +185,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orders_title => 'طلبات الشراء';
 
   @override
-  String get orders_subtitle => 'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
+  String get orders_subtitle =>
+      'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
 
   @override
   String get last_orders => 'آخر الطلبات';
@@ -225,7 +228,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get transactions => 'العمليات';
 
   @override
-  String get transactions_subtitle => 'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
+  String get transactions_subtitle =>
+      'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
 
   @override
   String get month => 'الشهر';
@@ -286,7 +290,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get inventory_title => 'نظام الجرد';
 
   @override
-  String get inventory_description => 'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
+  String get inventory_description =>
+      'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
 
   @override
   String get inventory_search => 'ابحث في الجرد...';
@@ -376,7 +381,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get supportTitle => 'الدعم';
 
   @override
-  String get supportSubtitle => 'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
+  String get supportSubtitle =>
+      'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
 
   @override
   String get searchSupport => 'ابحث في طلبات الدعم...';
@@ -502,13 +508,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signUpQuote => 'احصل على إصلاح لجهازك بسرعة.';
 
   @override
-  String get secSignUpQuote => 'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
+  String get secSignUpQuote =>
+      'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
 
   @override
-  String get byContinuing => 'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
+  String get byContinuing =>
+      'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
 
   @override
-  String get startQuote => 'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
+  String get startQuote =>
+      'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
 
   @override
   String get explore => 'تصفح';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import 'package:tech_restore/core/routes/route_names.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../auth/register/screen/register_screen.dart';
@@ -138,10 +139,7 @@ class Accounttab extends StatelessWidget {
                 color: AppColors.buttons,
                 text: local.signOut,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RegisterScreen()),
-                  );
+                  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login,(route)=>false);
                 },
               ),
             ),
