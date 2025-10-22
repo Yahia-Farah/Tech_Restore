@@ -524,4 +524,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get lastName => 'الاسم الأخير';
+
+  @override
+  String get loginSuccessMsg => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get loading => 'نحميل...';
 }

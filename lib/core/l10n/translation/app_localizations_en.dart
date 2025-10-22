@@ -524,4 +524,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lastName => 'Last Name';
+
+  @override
+  String get loginSuccessMsg => 'Login Successfully';
+
+  @override
+  String get loading => 'Loading...';
 }
