@@ -15,47 +15,31 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-  List<Widget> tabs = [
-    HomeTab(),
-    Exploretab(),
-    Tracktab(),
-    Accounttab(),
-  ];
+  List<Widget> tabs = [HomeTab(), Exploretab(), Tracktab(), Accounttab()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.background,
-          currentIndex: selectedIndex,
-            onTap: (index){
-            selectedIndex = index;
-            setState(() {
-
-            });
-            },
-            items: [
-              BottomNavigationBarItem(
-                  icon:Icon(Icons.home),
-                label: "Home",
-              ),
-              BottomNavigationBarItem(
-                  icon:Icon(Icons.search),
-                label: "Explore"
-
-              ),
-              BottomNavigationBarItem(
-                  icon:Icon(Icons.fire_truck_rounded),
-                label: "Track",
-
-              ),
-              BottomNavigationBarItem(
-                  icon:Icon(Icons.account_circle_outlined),
-                label: "Account"
-
-              ),
-            ]
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: AppColors.background,
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          selectedIndex = index;
+          setState(() {});
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Explore"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fire_truck_rounded),
+            label: "Track",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            label: "Account",
+          ),
+        ],
+      ),
       body: tabs[selectedIndex],
     );
   }

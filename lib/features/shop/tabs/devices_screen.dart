@@ -18,7 +18,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
       "serial": "SN12345678",
       "price": "699 EGP",
       "quantity": 5,
-      "status": "new"
+      "status": "new",
     },
     {
       "name": "Samsung Galaxy S21\nMinor scratches on back",
@@ -26,7 +26,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
       "serial": "SN87654321",
       "price": "649 EGP",
       "quantity": 3,
-      "status": "used"
+      "status": "used",
     },
     {
       "name": "iPad Pro\n2022 model with M1 chip",
@@ -34,7 +34,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
       "serial": "SN13579246",
       "price": "799 EGP",
       "quantity": 0,
-      "status": "new"
+      "status": "new",
     },
     {
       "name": "MacBook Air\nApple certified refurbished",
@@ -42,7 +42,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
       "serial": "SN24681357",
       "price": "999 EGP",
       "quantity": 2,
-      "status": "new"
+      "status": "new",
     },
   ];
 
@@ -54,18 +54,25 @@ class _DevicesScreenState extends State<DevicesScreen> {
 
   List<Map<String, dynamic>> get filteredDevices {
     final searchText = _searchController.text.toLowerCase();
-    return devices.where((device) =>
-        device["name"].toString().toLowerCase().contains(searchText)
-    ).toList();
+    return devices
+        .where(
+          (device) =>
+              device["name"].toString().toLowerCase().contains(searchText),
+        )
+        .toList();
   }
 
   List<Map<String, dynamic>> get paginatedDevices {
     final start = (currentPage - 1) * devicesPerPage;
-    final end = (start + devicesPerPage) > filteredDevices.length ? filteredDevices.length : (start + devicesPerPage);
+    final end =
+        (start + devicesPerPage) > filteredDevices.length
+            ? filteredDevices.length
+            : (start + devicesPerPage);
     return filteredDevices.sublist(start, end);
   }
 
-  int get totalPages => (filteredDevices.length / devicesPerPage).ceil().clamp(1, 999);
+  int get totalPages =>
+      (filteredDevices.length / devicesPerPage).ceil().clamp(1, 999);
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +97,10 @@ class _DevicesScreenState extends State<DevicesScreen> {
                 Text(
                   local.devices_management,
                   style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -111,9 +119,13 @@ class _DevicesScreenState extends State<DevicesScreen> {
               ElevatedButton.icon(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purpleAccent),
+                  backgroundColor: Colors.purpleAccent,
+                ),
                 icon: const Icon(Icons.add, color: Colors.white),
-                label: Text(local.add_device, style: const TextStyle(color: Colors.white)),
+                label: Text(
+                  local.add_device,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -127,7 +139,8 @@ class _DevicesScreenState extends State<DevicesScreen> {
                     hintText: local.search_hint,
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -138,7 +151,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
               ),
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 20),
           // 🔹 Search + Filters
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -146,9 +159,13 @@ class _DevicesScreenState extends State<DevicesScreen> {
               ElevatedButton.icon(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade600),
+                  backgroundColor: Colors.blue.shade600,
+                ),
                 icon: const Icon(Icons.devices, color: Colors.white),
-                label: Text(local.device_types, style: const TextStyle(color: Colors.white)),
+                label: Text(
+                  local.device_types,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
               const SizedBox(width: 12),
               ElevatedButton(
@@ -158,8 +175,12 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade600),
-                child: Text(local.device_status, style: const TextStyle(color: Colors.white)),
+                  backgroundColor: Colors.blue.shade600,
+                ),
+                child: Text(
+                  local.device_status,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
               const SizedBox(width: 12),
               ElevatedButton(
@@ -169,8 +190,12 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade600),
-                child: Text(local.all_types, style: const TextStyle(color: Colors.white)),
+                  backgroundColor: Colors.blue.shade600,
+                ),
+                child: Text(
+                  local.all_types,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -192,7 +217,10 @@ class _DevicesScreenState extends State<DevicesScreen> {
                       DataColumn(label: Text(local.status)),
                       DataColumn(label: Text(local.actions)),
                     ],
-                    rows: paginatedDevices.map((device) => _buildDeviceRow(device, local)).toList(),
+                    rows:
+                        paginatedDevices
+                            .map((device) => _buildDeviceRow(device, local))
+                            .toList(),
                   ),
                 ),
 
@@ -211,36 +239,47 @@ class _DevicesScreenState extends State<DevicesScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.chevron_left),
-                            onPressed: currentPage > 1
-                                ? () => setState(() => currentPage--)
-                                : null,
+                            onPressed:
+                                currentPage > 1
+                                    ? () => setState(() => currentPage--)
+                                    : null,
                           ),
                           for (int i = 1; i <= totalPages; i++)
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                              ),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: currentPage == i ? Colors.blue : Colors.grey.shade300,
-                                  foregroundColor: currentPage == i ? Colors.white : Colors.black,
+                                  backgroundColor:
+                                      currentPage == i
+                                          ? Colors.blue
+                                          : Colors.grey.shade300,
+                                  foregroundColor:
+                                      currentPage == i
+                                          ? Colors.white
+                                          : Colors.black,
                                 ),
-                                onPressed: () => setState(() => currentPage = i),
+                                onPressed:
+                                    () => setState(() => currentPage = i),
                                 child: Text("$i"),
                               ),
                             ),
                           IconButton(
                             icon: const Icon(Icons.chevron_right),
-                            onPressed: currentPage < totalPages
-                                ? () => setState(() => currentPage++)
-                                : null,
+                            onPressed:
+                                currentPage < totalPages
+                                    ? () => setState(() => currentPage++)
+                                    : null,
                           ),
                         ],
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -248,39 +287,45 @@ class _DevicesScreenState extends State<DevicesScreen> {
 
   DataRow _buildDeviceRow(Map<String, dynamic> device, AppLocalizations local) {
     Color statusColor = device["status"] == "new" ? Colors.green : Colors.red;
-    Color bgColor = device["status"] == "new"
-        ? Colors.green.withOpacity(0.1)
-        : Colors.red.withOpacity(0.1);
+    Color bgColor =
+        device["status"] == "new"
+            ? Colors.green.withOpacity(0.1)
+            : Colors.red.withOpacity(0.1);
 
-    return DataRow(cells: [
-      DataCell(Text(device["name"])),
-      DataCell(Text(device["type"])),
-      DataCell(Text(device["serial"])),
-      DataCell(Text(device["price"])),
-      DataCell(Text(device["quantity"].toString())),
-      DataCell(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            device["status"] == "new" ? local.newDev : local.used,
-            style: TextStyle(
-              color: statusColor,
-              fontWeight: FontWeight.bold,
+    return DataRow(
+      cells: [
+        DataCell(Text(device["name"])),
+        DataCell(Text(device["type"])),
+        DataCell(Text(device["serial"])),
+        DataCell(Text(device["price"])),
+        DataCell(Text(device["quantity"].toString())),
+        DataCell(
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: bgColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              device["status"] == "new" ? local.newDev : local.used,
+              style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
             ),
           ),
         ),
-      ),
-      DataCell(Row(
-        children: [
-          Icon(Icons.edit, color: Colors.blue, semanticLabel: local.edit),
-          const SizedBox(width: 8),
-          Icon(Icons.delete, color: Colors.red, semanticLabel: local.delete),
-        ],
-      )),
-    ]);
+        DataCell(
+          Row(
+            children: [
+              Icon(Icons.edit, color: Colors.blue, semanticLabel: local.edit),
+              const SizedBox(width: 8),
+              Icon(
+                Icons.delete,
+                color: Colors.red,
+                semanticLabel: local.delete,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

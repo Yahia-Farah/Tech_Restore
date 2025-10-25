@@ -7,36 +7,45 @@ class Exploretab extends StatelessWidget {
       "category": "Laptop",
       "price": "1,999 EGP",
       "status": "New",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/5/5e/MacBook_Pro_14_inch.png"
+      "image":
+          "https://upload.wikimedia.org/wikipedia/commons/5/5e/MacBook_Pro_14_inch.png",
     },
     {
       "name": "iPhone 13 Pro",
       "category": "Phone",
       "price": "999 EGP",
       "status": "New",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/f/f1/IPhone_13_Pro.png"
+      "image":
+          "https://upload.wikimedia.org/wikipedia/commons/f/f1/IPhone_13_Pro.png",
     },
     {
       "name": "iPad Air",
       "category": "Tablet",
       "price": "450 EGP",
       "status": "Used",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/f/fa/IPad_Air.png"
+      "image":
+          "https://upload.wikimedia.org/wikipedia/commons/f/fa/IPad_Air.png",
     },
     {
       "name": "PlayStation 5",
       "category": "Console",
       "price": "499 EGP",
       "status": "Used",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/0/05/PlayStation_5_console.png"
+      "image":
+          "https://upload.wikimedia.org/wikipedia/commons/0/05/PlayStation_5_console.png",
     },
   ];
+
+  Exploretab({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Explore Devices", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          "Explore Devices",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
@@ -48,7 +57,9 @@ class Exploretab extends StatelessWidget {
             children: [
               // 🔍 Filter Section
               Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 elevation: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(12),
@@ -69,22 +80,28 @@ class Exploretab extends StatelessWidget {
                         children: [
                           DropdownButton<String>(
                             hint: Text("All Categories"),
-                            items: ["Laptop", "Phone", "Tablet", "Console"]
-                                .map((e) => DropdownMenuItem(
-                              child: Text(e),
-                              value: e,
-                            ))
-                                .toList(),
+                            items:
+                                ["Laptop", "Phone", "Tablet", "Console"]
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
+                                    .toList(),
                             onChanged: (value) {},
                           ),
                           DropdownButton<String>(
                             hint: Text("All Conditions"),
-                            items: ["New", "Used"]
-                                .map((e) => DropdownMenuItem(
-                              child: Text(e),
-                              value: e,
-                            ))
-                                .toList(),
+                            items:
+                                ["New", "Used"]
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
+                                    .toList(),
                             onChanged: (value) {},
                           ),
                         ],
@@ -109,7 +126,9 @@ class Exploretab extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var device = devices[index];
                   return Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     elevation: 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,23 +143,36 @@ class Exploretab extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                              Text(device["name"], style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text(device["category"], style: TextStyle(color: Colors.grey)),
-                              Text(device["price"], style: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.bold)),
+                              Text(
+                                device["name"],
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                device["category"],
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              Text(
+                                device["price"],
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               SizedBox(height: 5),
                               ElevatedButton(
                                 onPressed: () {},
-                                child: Text("Buy Now"),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
+                                child: Text("Buy Now"),
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -149,17 +181,31 @@ class Exploretab extends StatelessWidget {
               SizedBox(height: 20),
 
               // 🔵 Why Choose Us Section
-              Text("Why Choose Our Platform?",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(
+                "Why Choose Our Platform?",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _infoCard(Icons.verified, "Verified Shops", "Strict verification for quality assurance"),
-                  _infoCard(Icons.star, "Customer Ratings", "Real reviews from satisfied customers"),
-                  _infoCard(Icons.flash_on, "Fast Service", "Quick repairs with guaranteed times"),
+                  _infoCard(
+                    Icons.verified,
+                    "Verified Shops",
+                    "Strict verification for quality assurance",
+                  ),
+                  _infoCard(
+                    Icons.star,
+                    "Customer Ratings",
+                    "Real reviews from satisfied customers",
+                  ),
+                  _infoCard(
+                    Icons.flash_on,
+                    "Fast Service",
+                    "Quick repairs with guaranteed times",
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -178,7 +224,11 @@ class Exploretab extends StatelessWidget {
               Icon(icon, color: Colors.blue),
               SizedBox(height: 8),
               Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-              Text(subtitle, textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12),
+              ),
             ],
           ),
         ),
@@ -186,4 +236,3 @@ class Exploretab extends StatelessWidget {
     );
   }
 }
-

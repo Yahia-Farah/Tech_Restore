@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class IssueDescriptionPage extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
 
+  IssueDescriptionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class IssueDescriptionPage extends StatelessWidget {
               Navigator.pop(context);
             },
             child: Text("Cancel", style: TextStyle(color: Colors.blue)),
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -39,8 +41,10 @@ class IssueDescriptionPage extends StatelessWidget {
             SizedBox(height: 16),
 
             // 📸 Upload section
-            Text("Upload photos or videos",
-                style: TextStyle(color: Colors.grey.shade700)),
+            Text(
+              "Upload photos or videos",
+              style: TextStyle(color: Colors.grey.shade700),
+            ),
 
             Spacer(),
 
@@ -50,7 +54,6 @@ class IssueDescriptionPage extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: Text("Next"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
@@ -58,15 +61,19 @@ class IssueDescriptionPage extends StatelessWidget {
                       ),
                       minimumSize: Size(double.infinity, 50),
                     ),
+                    child: Text("Next"),
                   ),
                 ),
                 SizedBox(width: 10),
                 TextButton(
                   onPressed: () {},
-                  child: Text("Need help?", style: TextStyle(color: Colors.grey)),
+                  child: Text(
+                    "Need help?",
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

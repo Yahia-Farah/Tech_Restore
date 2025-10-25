@@ -49,7 +49,7 @@ class CreateOrder extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  DeviceIssueScreen(),
+                          builder: (context) => DeviceIssueScreen(),
                         ),
                       );
                     },

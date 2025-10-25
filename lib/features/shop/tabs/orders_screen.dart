@@ -16,21 +16,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
       'address': '123 Nile St, Cairo, Egypt',
       'status': 'shipped',
       'status_timeline': [
-        {
-          'label': 'order_placed',
-          'date': '2023-05-01 10:00',
-          'active': true,
-        },
-        {
-          'label': 'processing',
-          'date': '2023-05-01 12:30',
-          'active': true,
-        },
-        {
-          'label': 'shipped',
-          'date': '2023-05-02 09:15',
-          'active': true,
-        },
+        {'label': 'order_placed', 'date': '2023-05-01 10:00', 'active': true},
+        {'label': 'processing', 'date': '2023-05-01 12:30', 'active': true},
+        {'label': 'shipped', 'date': '2023-05-02 09:15', 'active': true},
       ],
       'total': 4500,
       'payment_method': 'Credit Card',
@@ -45,21 +33,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
       'address': '123 Nile St, Cairo, Egypt',
       'status': 'delivered',
       'status_timeline': [
-        {
-          'label': 'order_placed',
-          'date': '2023-05-03 09:00',
-          'active': true,
-        },
-        {
-          'label': 'processing',
-          'date': '2023-05-03 11:00',
-          'active': true,
-        },
-        {
-          'label': 'delivered',
-          'date': '2023-05-04 15:30',
-          'active': true,
-        },
+        {'label': 'order_placed', 'date': '2023-05-03 09:00', 'active': true},
+        {'label': 'processing', 'date': '2023-05-03 11:00', 'active': true},
+        {'label': 'delivered', 'date': '2023-05-04 15:30', 'active': true},
       ],
       'total': 2500,
       'payment_method': 'Cash',
@@ -127,9 +103,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(local.last_orders,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text(
+                      local.last_orders,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                     const SizedBox(height: 12),
                     ...orders.asMap().entries.map((entry) {
                       final idx = entry.key;
@@ -140,13 +120,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           margin: const EdgeInsets.only(bottom: 8),
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: selectedOrderIndex == idx
-                                ? Colors.blue.shade50
-                                : Colors.white,
+                            color:
+                                selectedOrderIndex == idx
+                                    ? Colors.blue.shade50
+                                    : Colors.white,
                             border: Border.all(
-                                color: selectedOrderIndex == idx
-                                    ? Colors.blue.shade200
-                                    : Colors.grey.shade200),
+                              color:
+                                  selectedOrderIndex == idx
+                                      ? Colors.blue.shade200
+                                      : Colors.grey.shade200,
+                            ),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -155,21 +138,30 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('${local.order} #${o['id']}',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text(o['customer'],
-                                      style: const TextStyle(
-                                          color: Colors.black54)),
+                                  Text(
+                                    '${local.order} #${o['id']}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    o['customer'],
+                                    style: const TextStyle(
+                                      color: Colors.black54,
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: [
                                   _statusChip(o['status'], local),
                                   const SizedBox(width: 12),
-                                  Text('${o['total']} ${local.egp}',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                    '${o['total']} ${local.egp}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -195,10 +187,17 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('${local.order} #${orders[selectedOrderIndex]['id']}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
-                        _statusChip(orders[selectedOrderIndex]['status'], local),
+                        Text(
+                          '${local.order} #${orders[selectedOrderIndex]['id']}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        _statusChip(
+                          orders[selectedOrderIndex]['status'],
+                          local,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -208,20 +207,29 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(local.customer_info,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                local.customer_info,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               const SizedBox(height: 8),
                               Text(orders[selectedOrderIndex]['customer']),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.location_on,
-                                      size: 16, color: Colors.black54),
+                                  const Icon(
+                                    Icons.location_on,
+                                    size: 16,
+                                    color: Colors.black54,
+                                  ),
                                   const SizedBox(width: 4),
-                                  Text(orders[selectedOrderIndex]['address'],
-                                      style: const TextStyle(
-                                          color: Colors.black54)),
+                                  Text(
+                                    orders[selectedOrderIndex]['address'],
+                                    style: const TextStyle(
+                                      color: Colors.black54,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -231,15 +239,23 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(local.payment_details,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                local.payment_details,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               const SizedBox(height: 8),
-                              Text('${orders[selectedOrderIndex]['total']} ${local.egp}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              Text('${local.payment_method}: ${orders[selectedOrderIndex]['payment_method']}',
-                                  style: const TextStyle(color: Colors.black54)),
+                              Text(
+                                '${orders[selectedOrderIndex]['total']} ${local.egp}',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '${local.payment_method}: ${orders[selectedOrderIndex]['payment_method']}',
+                                style: const TextStyle(color: Colors.black54),
+                              ),
                             ],
                           ),
                         ),
@@ -248,8 +264,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     const SizedBox(height: 24),
 
                     // Order Items
-                    Text(local.order_items,
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      local.order_items,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 8),
                     Table(
                       border: TableBorder.all(color: Colors.grey.shade200),
@@ -260,53 +278,70 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       },
                       children: [
                         TableRow(
-                          decoration:
-                          BoxDecoration(color: Colors.grey.shade100),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                          ),
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(local.product,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(local.price,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(local.quantity,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ],
-                        ),
-                        ...orders[selectedOrderIndex]['items']
-                            .map<TableRow>((item) => TableRow(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(item['name'],
-                                  textAlign: TextAlign.center),
+                              child: Text(
+                                local.product,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                  '${item['price']} ${local.egp}',
-                                  textAlign: TextAlign.center),
+                                local.price,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('${item['qty']}',
-                                  textAlign: TextAlign.center),
+                              child: Text(
+                                local.quantity,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ],
-                        ))
+                        ),
+                        ...orders[selectedOrderIndex]['items']
+                            .map<TableRow>(
+                              (item) => TableRow(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      item['name'],
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      '${item['price']} ${local.egp}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      '${item['qty']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
                             .toList(),
                       ],
                     ),
@@ -325,64 +360,75 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(local.track_order,
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      local.track_order,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 16),
                     ...orders[selectedOrderIndex]['status_timeline']
                         .asMap()
                         .entries
                         .map((entry) {
-                      final idx = entry.key;
-                      final status = entry.value;
-                      final isActive = status['active'] == true;
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                width: 16,
-                                height: 16,
-                                decoration: BoxDecoration(
-                                  color: isActive
-                                      ? Colors.blue
-                                      : Colors.grey.shade300,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              if (idx !=
-                                  orders[selectedOrderIndex]['status_timeline']
-                                      .length -
-                                      1)
-                                Container(
-                                  width: 2,
-                                  height: 32,
-                                  color: Colors.grey.shade300,
-                                ),
-                            ],
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
+                          final idx = entry.key;
+                          final status = entry.value;
+                          final isActive = status['active'] == true;
+                          return Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                _getLocalizedStatus(status['label'], local),
-                                style: TextStyle(
-                                    fontWeight: isActive
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    color: isActive
-                                        ? Colors.blue
-                                        : Colors.black54),
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 16,
+                                    height: 16,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          isActive
+                                              ? Colors.blue
+                                              : Colors.grey.shade300,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  if (idx !=
+                                      orders[selectedOrderIndex]['status_timeline']
+                                              .length -
+                                          1)
+                                    Container(
+                                      width: 2,
+                                      height: 32,
+                                      color: Colors.grey.shade300,
+                                    ),
+                                ],
                               ),
-                              Text(status['date'],
-                                  style: const TextStyle(
-                                      color: Colors.black45, fontSize: 12)),
+                              const SizedBox(width: 12),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _getLocalizedStatus(status['label'], local),
+                                    style: TextStyle(
+                                      fontWeight:
+                                          isActive
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                      color:
+                                          isActive
+                                              ? Colors.blue
+                                              : Colors.black54,
+                                    ),
+                                  ),
+                                  Text(
+                                    status['date'],
+                                    style: const TextStyle(
+                                      color: Colors.black45,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
-                          ),
-                        ],
-                      );
-                    }).toList(),
+                          );
+                        })
+                        .toList(),
                   ],
                 ),
               ),
@@ -425,8 +471,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Text(_getLocalizedStatus(status, local),
-          style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+      child: Text(
+        _getLocalizedStatus(status, local),
+        style: TextStyle(color: color, fontWeight: FontWeight.bold),
+      ),
     );
   }
 

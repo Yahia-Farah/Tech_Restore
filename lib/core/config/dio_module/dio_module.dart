@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import '../../../features/auth/domain/services/auth_services.dart';
 import '../../api/api_constants/api_constants.dart';
-import '../../api/api_constants/api_end_points.dart';
 
 @module
 abstract class DioModule {

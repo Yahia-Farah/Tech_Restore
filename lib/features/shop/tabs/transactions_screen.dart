@@ -49,16 +49,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     final local = AppLocalizations.of(context)!;
 
     // 🔹 Filter search
-    final filteredTransactions = _allTransactions.where((txn) {
-      return txn["device"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          txn["shop"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          txn["type"]!.toLowerCase().contains(_searchQuery.toLowerCase());
-    }).toList();
+    final filteredTransactions =
+        _allTransactions.where((txn) {
+          return txn["device"]!.toLowerCase().contains(
+                _searchQuery.toLowerCase(),
+              ) ||
+              txn["shop"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+              txn["type"]!.toLowerCase().contains(_searchQuery.toLowerCase());
+        }).toList();
 
     final totalPages = (filteredTransactions.length / _rowsPerPage).ceil();
     final startIndex = (_currentPage - 1) * _rowsPerPage;
-    final endIndex =
-    (_currentPage * _rowsPerPage).clamp(0, filteredTransactions.length);
+    final endIndex = (_currentPage * _rowsPerPage).clamp(
+      0,
+      filteredTransactions.length,
+    );
     final currentPageItems = filteredTransactions.sublist(startIndex, endIndex);
 
     final months = [
@@ -109,12 +114,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             children: [
               DropdownButton<String>(
                 value: _selectedMonth,
-                items: months
-                    .map((m) => DropdownMenuItem(
-                  value: m["key"],
-                  child: Text(m["label"]!),
-                ))
-                    .toList(),
+                items:
+                    months
+                        .map(
+                          (m) => DropdownMenuItem(
+                            value: m["key"],
+                            child: Text(m["label"]!),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (val) {
                   setState(() {
                     _selectedMonth = val!;
@@ -148,9 +156,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                _buildSummaryCard(local.total_profits, "2045.00 EGP", Colors.blue),
-                _buildSummaryCard(local.repairs_percent(27), "548.00 EGP", Colors.green),
-                _buildSummaryCard(local.sales_percent(73), "1497.00 EGP", Colors.orange),
+                _buildSummaryCard(
+                  local.total_profits,
+                  "2045.00 EGP",
+                  Colors.blue,
+                ),
+                _buildSummaryCard(
+                  local.repairs_percent(27),
+                  "548.00 EGP",
+                  Colors.green,
+                ),
+                _buildSummaryCard(
+                  local.sales_percent(73),
+                  "1497.00 EGP",
+                  Colors.orange,
+                ),
               ],
             ),
           ),
@@ -172,20 +192,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       DataColumn(label: Text(local.amount)),
                       DataColumn(label: Text(local.status)),
                     ],
-                    rows: currentPageItems
-                        .map(
-                          (txn) => _buildTransactionRow(
-                        txn["date"]!,
-                        txn["type"]!,
-                        txn["device"]!,
-                        txn["shop"]!,
-                        txn["payment"]!,
-                        txn["amount"]!,
-                        txn["status"]!,
-                        local,
-                      ),
-                    )
-                        .toList(),
+                    rows:
+                        currentPageItems
+                            .map(
+                              (txn) => _buildTransactionRow(
+                                txn["date"]!,
+                                txn["type"]!,
+                                txn["device"]!,
+                                txn["shop"]!,
+                                txn["payment"]!,
+                                txn["amount"]!,
+                                txn["status"]!,
+                                local,
+                              ),
+                            )
+                            .toList(),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -196,38 +217,45 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(("${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${filteredTransactions.length} ${local.transactions}"),),
+                      Text(
+                        ("${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${filteredTransactions.length} ${local.transactions}"),
+                      ),
                       Row(
                         children: [
                           IconButton(
                             icon: const Icon(Icons.chevron_left),
-                            onPressed: _currentPage > 1
-                                ? () => setState(() => _currentPage--)
-                                : null,
+                            onPressed:
+                                _currentPage > 1
+                                    ? () => setState(() => _currentPage--)
+                                    : null,
                           ),
                           for (int i = 1; i <= totalPages; i++)
                             Padding(
-                              padding:
-                              const EdgeInsets.symmetric(horizontal: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                              ),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: _currentPage == i
-                                      ? Colors.blue
-                                      : Colors.grey.shade300,
-                                  foregroundColor: _currentPage == i
-                                      ? Colors.white
-                                      : Colors.black,
+                                  backgroundColor:
+                                      _currentPage == i
+                                          ? Colors.blue
+                                          : Colors.grey.shade300,
+                                  foregroundColor:
+                                      _currentPage == i
+                                          ? Colors.white
+                                          : Colors.black,
                                 ),
-                                onPressed: () =>
-                                    setState(() => _currentPage = i),
+                                onPressed:
+                                    () => setState(() => _currentPage = i),
                                 child: Text("$i"),
                               ),
                             ),
                           IconButton(
                             icon: const Icon(Icons.chevron_right),
-                            onPressed: _currentPage < totalPages
-                                ? () => setState(() => _currentPage++)
-                                : null,
+                            onPressed:
+                                _currentPage < totalPages
+                                    ? () => setState(() => _currentPage++)
+                                    : null,
                           ),
                         ],
                       ),
@@ -236,7 +264,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -254,14 +282,19 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         ),
         child: Column(
           children: [
-            Text(title,
-                style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: TextStyle(color: color, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
-            Text(value,
-                style: TextStyle(
-                    color: color,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold)),
+            Text(
+              value,
+              style: TextStyle(
+                color: color,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
@@ -269,15 +302,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   }
 
   DataRow _buildTransactionRow(
-      String date,
-      String type,
-      String device,
-      String shop,
-      String payment,
-      String amount,
-      String status,
-      AppLocalizations local,
-      ) {
+    String date,
+    String type,
+    String device,
+    String shop,
+    String payment,
+    String amount,
+    String status,
+    AppLocalizations local,
+  ) {
     Color statusColor;
     String statusLabel;
 

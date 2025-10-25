@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../core/contants/secure_storage.dart';
+import 'package:tech_restore/features/auth/domain/services/auth_services.dart';
 import '../../../../core/errors/api_error_result.dart';
 import '../../data/models/login_models/login_request_model.dart';
 import '../../data/models/login_models/login_response_model.dart';
@@ -17,7 +17,7 @@ class LoginViewModel extends Cubit<LoginStates> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  String role = "";
   Future<void> login() async {
     emit(LoginLoadingState());
 
@@ -28,11 +28,8 @@ class LoginViewModel extends Cubit<LoginStates> {
       );
 
       final LoginResponseModel response = await _loginUseCase(request);
-
-      await SecureStorage.write(
-        key: 'access_token',
-        value: response.accessToken ?? "",
-      );
+      role = response.role!.first;
+      await AuthService.saveAuthToken(response.accessToken ?? "");
 
       emit(LoginSuccessState(response));
     } on DioException catch (e) {
@@ -41,6 +38,10 @@ class LoginViewModel extends Cubit<LoginStates> {
     } catch (e) {
       emit(LoginErrorState(e.toString()));
     }
+  }
+
+  String getRole() {
+    return role;
   }
 
   @override

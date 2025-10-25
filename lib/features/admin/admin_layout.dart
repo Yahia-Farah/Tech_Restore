@@ -8,7 +8,6 @@ import 'package:tech_restore/features/admin/tabs/transaction_screen.dart';
 import 'package:tech_restore/features/admin/tabs/users_screen.dart';
 import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
-
 class AdminLayout extends StatefulWidget {
   const AdminLayout({super.key});
 
@@ -27,7 +26,6 @@ class _MainLayoutState extends State<AdminLayout> {
     AdminReviewsScreen(),
     AdminPromotionsScreen(),
     AdminSupportScreen(),
-
   ];
 
   void _onItemTapped(int index) {
@@ -88,7 +86,10 @@ class _MainLayoutState extends State<AdminLayout> {
           SizedBox(width: 10),
         ],
       ),
-      drawer: AdminDrawerWidget(onItemTapped: _onItemTapped, selectedIndex: _selectedIndex,),
+      drawer: AdminDrawerWidget(
+        onItemTapped: _onItemTapped,
+        selectedIndex: _selectedIndex,
+      ),
       body: IndexedStack(index: _selectedIndex, children: _screens),
     );
   }
@@ -114,7 +115,6 @@ class _MainLayoutState extends State<AdminLayout> {
     }
   }
 }
-
 
 class InventoryScreen extends StatelessWidget {
   const InventoryScreen({super.key});

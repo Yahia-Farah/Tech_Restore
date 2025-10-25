@@ -20,7 +20,7 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
       "discount": "20%",
       "duration": "2024-01-01 to 2024-01-31",
       "status": "Active",
-      "usage": 45
+      "usage": 45,
     },
     {
       "title": "Student Discount",
@@ -28,7 +28,7 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
       "discount": "\$10",
       "duration": "2024-01-15 to 2024-12-31",
       "status": "Active",
-      "usage": 23
+      "usage": 23,
     },
     {
       "title": "Summer Sale",
@@ -36,7 +36,7 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
       "discount": "15%",
       "duration": "2024-06-01 to 2024-08-31",
       "status": "Scheduled",
-      "usage": 0
+      "usage": 0,
     },
     {
       "title": "Black Friday Deal",
@@ -44,7 +44,7 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
       "discount": "50%",
       "duration": "2023-11-24 to 2023-11-26",
       "status": "Expired",
-      "usage": 156
+      "usage": 156,
     },
   ];
 
@@ -57,11 +57,12 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final filteredOffers = _offers.where((offer) {
-      final query = _searchQuery.toLowerCase();
-      return offer["title"].toLowerCase().contains(query) ||
-          offer["description"].toLowerCase().contains(query);
-    }).toList();
+    final filteredOffers =
+        _offers.where((offer) {
+          final query = _searchQuery.toLowerCase();
+          return offer["title"].toLowerCase().contains(query) ||
+              offer["description"].toLowerCase().contains(query);
+        }).toList();
 
     return Scaffold(
       drawer: AdminDrawerWidget(
@@ -94,8 +95,9 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
                     decoration: InputDecoration(
                       hintText: "Search offers...",
                       prefixIcon: const Icon(Icons.search),
-                      contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 12),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -143,16 +145,19 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
                     DataColumn(label: Text("Status")),
                     DataColumn(label: Text("Usage")),
                   ],
-                  rows: filteredOffers.map((offer) {
-                    return DataRow(cells: [
-                      DataCell(Text(offer["title"])),
-                      DataCell(Text(offer["description"])),
-                      DataCell(Text(offer["discount"])),
-                      DataCell(Text(offer["duration"])),
-                      DataCell(_buildStatusChip(offer["status"])),
-                      DataCell(Text("${offer["usage"]} uses")),
-                    ]);
-                  }).toList(),
+                  rows:
+                      filteredOffers.map((offer) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(offer["title"])),
+                            DataCell(Text(offer["description"])),
+                            DataCell(Text(offer["discount"])),
+                            DataCell(Text(offer["duration"])),
+                            DataCell(_buildStatusChip(offer["status"])),
+                            DataCell(Text("${offer["usage"]} uses")),
+                          ],
+                        );
+                      }).toList(),
                 ),
               ),
             ),

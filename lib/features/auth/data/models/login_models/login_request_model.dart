@@ -9,10 +9,7 @@ class LoginRequestModel {
   @JsonKey(name: "password")
   final String? password;
 
-  LoginRequestModel ({
-    this.email,
-    this.password,
-  });
+  LoginRequestModel({this.email, this.password});
 
   factory LoginRequestModel.fromJson(Map<String, dynamic> json) {
     return _$LoginRequestModelFromJson(json);

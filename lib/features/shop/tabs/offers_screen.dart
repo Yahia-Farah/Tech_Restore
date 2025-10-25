@@ -48,17 +48,25 @@ class _OffersScreenState extends State<OffersScreen> {
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
 
-    final filteredOffers = offers
-        .where((offer) =>
-    offer["title"].toLowerCase().contains(searchQuery.toLowerCase()) ||
-        offer["content"].toLowerCase().contains(searchQuery.toLowerCase()))
-        .toList();
+    final filteredOffers =
+        offers
+            .where(
+              (offer) =>
+                  offer["title"].toLowerCase().contains(
+                    searchQuery.toLowerCase(),
+                  ) ||
+                  offer["content"].toLowerCase().contains(
+                    searchQuery.toLowerCase(),
+                  ),
+            )
+            .toList();
 
     final totalPages = (filteredOffers.length / itemsPerPage).ceil();
     final startIndex = (currentPage - 1) * itemsPerPage;
-    final endIndex = (startIndex + itemsPerPage < filteredOffers.length)
-        ? startIndex + itemsPerPage
-        : filteredOffers.length;
+    final endIndex =
+        (startIndex + itemsPerPage < filteredOffers.length)
+            ? startIndex + itemsPerPage
+            : filteredOffers.length;
 
     final currentOffers = filteredOffers.sublist(startIndex, endIndex);
 
@@ -149,17 +157,18 @@ class _OffersScreenState extends State<OffersScreen> {
                           DataColumn(label: Text(local.offerColumnStatus)),
                           DataColumn(label: Text(local.offerColumnActions)),
                         ],
-                        rows: currentOffers
-                            .map(
-                              (offer) => _buildOfferRow(
-                            offer["title"],
-                            offer["content"],
-                            offer["discount"],
-                            offer["duration"],
-                            offer["status"],
-                          ),
-                        )
-                            .toList(),
+                        rows:
+                            currentOffers
+                                .map(
+                                  (offer) => _buildOfferRow(
+                                    offer["title"],
+                                    offer["content"],
+                                    offer["discount"],
+                                    offer["duration"],
+                                    offer["status"],
+                                  ),
+                                )
+                                .toList(),
                       ),
                     ),
 
@@ -176,33 +185,38 @@ class _OffersScreenState extends State<OffersScreen> {
                             children: [
                               IconButton(
                                 icon: const Icon(Icons.chevron_left),
-                                onPressed: currentPage > 1
-                                    ? () => setState(() => currentPage--)
-                                    : null,
+                                onPressed:
+                                    currentPage > 1
+                                        ? () => setState(() => currentPage--)
+                                        : null,
                               ),
                               for (int i = 1; i <= totalPages; i++)
                                 Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(horizontal: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                  ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: currentPage == i
-                                          ? Colors.blue
-                                          : Colors.grey.shade300,
-                                      foregroundColor: currentPage == i
-                                          ? Colors.white
-                                          : Colors.black,
+                                      backgroundColor:
+                                          currentPage == i
+                                              ? Colors.blue
+                                              : Colors.grey.shade300,
+                                      foregroundColor:
+                                          currentPage == i
+                                              ? Colors.white
+                                              : Colors.black,
                                     ),
-                                    onPressed: () =>
-                                        setState(() => currentPage = i),
+                                    onPressed:
+                                        () => setState(() => currentPage = i),
                                     child: Text("$i"),
                                   ),
                                 ),
                               IconButton(
                                 icon: const Icon(Icons.chevron_right),
-                                onPressed: currentPage < totalPages
-                                    ? () => setState(() => currentPage++)
-                                    : null,
+                                onPressed:
+                                    currentPage < totalPages
+                                        ? () => setState(() => currentPage++)
+                                        : null,
                               ),
                             ],
                           ),
@@ -220,12 +234,12 @@ class _OffersScreenState extends State<OffersScreen> {
   }
 
   DataRow _buildOfferRow(
-      String title,
-      String content,
-      String discount,
-      String duration,
-      String status,
-      ) {
+    String title,
+    String content,
+    String discount,
+    String duration,
+    String status,
+  ) {
     Color statusColor;
     switch (status) {
       case "Active":

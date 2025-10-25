@@ -88,13 +88,48 @@ class DashboardScreen extends StatelessWidget {
                         DataColumn(label: Text(local.order_details)),
                       ],
                       rows: [
-                        _buildOrderRow("#1001", "Mahmoud Ali", "120 EGP", local.completed),
-                        _buildOrderRow("#1002", "Ahmed Ashraf", "85 EGP", local.processing),
-                        _buildOrderRow("#1003", "Youssef Ehab", "230 EGP", local.shipped),
-                        _buildOrderRow("#1004", "Mohtar", "54 EGP", local.completed),
-                        _buildOrderRow("#1005", "Mohamed Haytham", "176 EGP", local.pending),
-                        _buildOrderRow("#1005", "Mohamed Haytham", "176 EGP", local.pending),
-                        _buildOrderRow("#1005", "Mohamed Haytham", "176 EGP", local.pending),
+                        _buildOrderRow(
+                          "#1001",
+                          "Mahmoud Ali",
+                          "120 EGP",
+                          local.completed,
+                        ),
+                        _buildOrderRow(
+                          "#1002",
+                          "Ahmed Ashraf",
+                          "85 EGP",
+                          local.processing,
+                        ),
+                        _buildOrderRow(
+                          "#1003",
+                          "Youssef Ehab",
+                          "230 EGP",
+                          local.shipped,
+                        ),
+                        _buildOrderRow(
+                          "#1004",
+                          "Mohtar",
+                          "54 EGP",
+                          local.completed,
+                        ),
+                        _buildOrderRow(
+                          "#1005",
+                          "Mohamed Haytham",
+                          "176 EGP",
+                          local.pending,
+                        ),
+                        _buildOrderRow(
+                          "#1005",
+                          "Mohamed Haytham",
+                          "176 EGP",
+                          local.pending,
+                        ),
+                        _buildOrderRow(
+                          "#1005",
+                          "Mohamed Haytham",
+                          "176 EGP",
+                          local.pending,
+                        ),
                       ],
                     ),
                   ),
@@ -144,11 +179,11 @@ class DashboardScreen extends StatelessWidget {
   }
 
   static DataRow _buildOrderRow(
-      String code,
-      String customer,
-      String total,
-      String status,
-      ) {
+    String code,
+    String customer,
+    String total,
+    String status,
+  ) {
     Color statusColor;
     Color bgColor;
 

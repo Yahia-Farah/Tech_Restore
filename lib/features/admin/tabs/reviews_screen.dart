@@ -20,7 +20,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
       "rating": 5,
       "comment": "Excellent service! Fixed my phone quickly.",
       "date": "2024-01-20",
-      "status": "Positive"
+      "status": "Positive",
     },
     {
       "customer": "Jane Smith",
@@ -28,7 +28,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
       "rating": 1,
       "comment": "Terrible service! They broke my phone.",
       "date": "2024-01-19",
-      "status": "Negative"
+      "status": "Negative",
     },
     {
       "customer": "Mike Johnson",
@@ -36,7 +36,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
       "rating": 4,
       "comment": "Good service, reasonable prices.",
       "date": "2024-01-18",
-      "status": "Positive"
+      "status": "Positive",
     },
     {
       "customer": "Sarah Wilson",
@@ -44,7 +44,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
       "rating": 2,
       "comment": "This place is a scam! They overcharged me.",
       "date": "2024-01-17",
-      "status": "Negative"
+      "status": "Negative",
     },
   ];
 
@@ -57,12 +57,13 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final filteredReviews = _reviews.where((review) {
-      final query = _searchQuery.toLowerCase();
-      return review["customer"].toLowerCase().contains(query) ||
-          review["shop"].toLowerCase().contains(query) ||
-          review["comment"].toLowerCase().contains(query);
-    }).toList();
+    final filteredReviews =
+        _reviews.where((review) {
+          final query = _searchQuery.toLowerCase();
+          return review["customer"].toLowerCase().contains(query) ||
+              review["shop"].toLowerCase().contains(query) ||
+              review["comment"].toLowerCase().contains(query);
+        }).toList();
 
     return Scaffold(
       drawer: AdminDrawerWidget(
@@ -92,8 +93,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
               decoration: InputDecoration(
                 hintText: "Search",
                 prefixIcon: const Icon(Icons.search),
-                contentPadding:
-                const EdgeInsets.symmetric(horizontal: 12),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -123,19 +123,24 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                     DataColumn(label: Text("Date")),
                     DataColumn(label: Text("Status")),
                   ],
-                  rows: filteredReviews.map((review) {
-                    return DataRow(cells: [
-                      DataCell(Text(review["customer"])),
-                      DataCell(Text(review["shop"])),
-                      DataCell(_buildStarRating(review["rating"])),
-                      DataCell(Text(
-                        review["comment"],
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                      DataCell(Text(review["date"])),
-                      DataCell(_buildStatusChip(review["status"])),
-                    ]);
-                  }).toList(),
+                  rows:
+                      filteredReviews.map((review) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(review["customer"])),
+                            DataCell(Text(review["shop"])),
+                            DataCell(_buildStarRating(review["rating"])),
+                            DataCell(
+                              Text(
+                                review["comment"],
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            DataCell(Text(review["date"])),
+                            DataCell(_buildStatusChip(review["status"])),
+                          ],
+                        );
+                      }).toList(),
                 ),
               ),
             ),

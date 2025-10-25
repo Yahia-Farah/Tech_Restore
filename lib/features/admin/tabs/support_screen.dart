@@ -21,7 +21,7 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
       "priority": "High",
       "status": "Open",
       "assigned": "Sarah Admin",
-      "lastUpdate": "2024-01-20"
+      "lastUpdate": "2024-01-20",
     },
     {
       "id": "SUP-002",
@@ -30,7 +30,7 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
       "priority": "Medium",
       "status": "In Progress",
       "assigned": "Mike Support",
-      "lastUpdate": "2024-01-21"
+      "lastUpdate": "2024-01-21",
     },
     {
       "id": "SUP-003",
@@ -39,7 +39,7 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
       "priority": "Low",
       "status": "Resolved",
       "assigned": "Lisa Help",
-      "lastUpdate": "2024-01-19"
+      "lastUpdate": "2024-01-19",
     },
     {
       "id": "SUP-004",
@@ -48,7 +48,7 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
       "priority": "High",
       "status": "Open",
       "assigned": "Tom Manager",
-      "lastUpdate": "2024-01-17"
+      "lastUpdate": "2024-01-17",
     },
     {
       "id": "SUP-005",
@@ -57,7 +57,7 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
       "priority": "Medium",
       "status": "Open",
       "assigned": "Sarah Admin",
-      "lastUpdate": "2024-01-16"
+      "lastUpdate": "2024-01-16",
     },
   ];
 
@@ -71,19 +71,20 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
   @override
   Widget build(BuildContext context) {
     // Filtered requests
-    final filteredRequests = _requests.where((req) {
-      final matchesSearch = req["customer"]
-          .toString()
-          .toLowerCase()
-          .contains(_searchQuery.toLowerCase()) ||
-          req["subject"]
-              .toString()
-              .toLowerCase()
-              .contains(_searchQuery.toLowerCase());
-      final matchesStatus =
-          _selectedStatus == "All Status" || req["status"] == _selectedStatus;
-      return matchesSearch && matchesStatus;
-    }).toList();
+    final filteredRequests =
+        _requests.where((req) {
+          final matchesSearch =
+              req["customer"].toString().toLowerCase().contains(
+                _searchQuery.toLowerCase(),
+              ) ||
+              req["subject"].toString().toLowerCase().contains(
+                _searchQuery.toLowerCase(),
+              );
+          final matchesStatus =
+              _selectedStatus == "All Status" ||
+              req["status"] == _selectedStatus;
+          return matchesSearch && matchesStatus;
+        }).toList();
 
     return Scaffold(
       drawer: AdminDrawerWidget(
@@ -117,8 +118,9 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
                       prefixIcon: const Icon(Icons.search),
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -132,15 +134,15 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
                 const SizedBox(width: 12),
                 DropdownButton<String>(
                   value: _selectedStatus,
-                  items: [
-                    "All Status",
-                    "Open",
-                    "In Progress",
-                    "Resolved",
-                  ]
-                      .map((status) =>
-                      DropdownMenuItem(value: status, child: Text(status)))
-                      .toList(),
+                  items:
+                      ["All Status", "Open", "In Progress", "Resolved"]
+                          .map(
+                            (status) => DropdownMenuItem(
+                              value: status,
+                              child: Text(status),
+                            ),
+                          )
+                          .toList(),
                   onChanged: (val) {
                     if (val != null) {
                       setState(() => _selectedStatus = val);
@@ -172,39 +174,46 @@ class _AdminSupportScreenState extends State<AdminSupportScreen> {
                     DataColumn(label: Text("Last Update")),
                     DataColumn(label: Text("Actions")),
                   ],
-                  rows: filteredRequests.map((req) {
-                    return DataRow(cells: [
-                      DataCell(Text(req["id"])),
-                      DataCell(Text(req["customer"])),
-                      DataCell(Text(
-                        req["subject"],
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                      DataCell(_buildPriorityChip(req["priority"])),
-                      DataCell(_buildStatusChip(req["status"])),
-                      DataCell(Text(req["assigned"])),
-                      DataCell(Text(req["lastUpdate"])),
-                      DataCell(Row(
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.chat_bubble_outline),
-                            onPressed: () {
-                              // TODO: Open chat
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.refresh),
-                            onPressed: () {
-                              // TODO: Refresh request
-                            },
-                          ),
-                        ],
-                      )),
-                    ]);
-                  }).toList(),
+                  rows:
+                      filteredRequests.map((req) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(req["id"])),
+                            DataCell(Text(req["customer"])),
+                            DataCell(
+                              Text(
+                                req["subject"],
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            DataCell(_buildPriorityChip(req["priority"])),
+                            DataCell(_buildStatusChip(req["status"])),
+                            DataCell(Text(req["assigned"])),
+                            DataCell(Text(req["lastUpdate"])),
+                            DataCell(
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.chat_bubble_outline),
+                                    onPressed: () {
+                                      // TODO: Open chat
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.refresh),
+                                    onPressed: () {
+                                      // TODO: Refresh request
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      }).toList(),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

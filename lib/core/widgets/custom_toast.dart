@@ -32,22 +32,30 @@ class CustomToast extends StatelessWidget {
             ),
             padding: padding,
             margin: const EdgeInsets.only(right: 16, left: 16),
-            child: Row(mainAxisSize: MainAxisSize.min, children: [
-              Icon(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
                   isError
                       ? CupertinoIcons.multiply_circle_fill
                       : Icons.check_circle,
-                  color: isError
-                      ? const Color(0xffFF9090).withOpacity(0.5)
-                      : const Color(0xff039D55),
-                  size: 20),
-              const SizedBox(width: 8),
-              Flexible(
-                  child: Text(text,
-                      style: TextStyle(color: textColor),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis)),
-            ]),
+                  color:
+                      isError
+                          ? const Color(0xffFF9090).withOpacity(0.5)
+                          : const Color(0xff039D55),
+                  size: 20,
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Text(
+                    text,
+                    style: TextStyle(color: textColor),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

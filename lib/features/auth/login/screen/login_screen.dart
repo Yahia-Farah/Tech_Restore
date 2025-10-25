@@ -7,8 +7,7 @@ import '../../../../core/routes/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/toast_helper.dart';
-import '../../../shop/layout.dart';
-import '../../../user/home/screen/home_screen.dart';
+import '../../../shop/shop_layout.dart';
 import '../viewmodel/login_states.dart';
 import '../viewmodel/login_viewmodel.dart';
 
@@ -29,11 +28,26 @@ class LoginScreen extends StatelessWidget {
               text: local.loginSuccessMsg,
               isError: false,
             );
-
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => const HomeScreen()),
-            );
+            final role = context.read<LoginViewModel>().getRole();
+            if (role == "ROLE_GUEST") {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.userHome,
+                (route) => false,
+              );
+            } else if (role == "ROLE_ADMIN") {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.adminDashboard,
+                (route) => false,
+              );
+            } else {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.shopDashboard,
+                (route) => false,
+              );
+            }
           } else if (state is LoginErrorState) {
             ToastHelper.showCustomToast(
               context,
@@ -59,7 +73,7 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Align(
                       alignment: Alignment.center,
@@ -88,12 +102,17 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 17),
 
-                    Text(
-                      local.forgetPassword,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.hint,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.forgetPassword);
+                      },
+                      child: Text(
+                        local.forgetPassword,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -102,14 +121,16 @@ class LoginScreen extends StatelessWidget {
                       width: double.infinity,
                       child: CustomElevatedButton(
                         color: AppColors.primary,
-                        text: state is LoginLoadingState
-                            ? local.loading
-                            : local.login,
-                        onPressed: state is LoginLoadingState
-                            ? null
-                            : () {
-                          cubit.login();
-                        },
+                        text:
+                            state is LoginLoadingState
+                                ? local.loading
+                                : local.login,
+                        onPressed:
+                            state is LoginLoadingState
+                                ? null
+                                : () {
+                                  cubit.login();
+                                },
                       ),
                     ),
                     const SizedBox(height: 14),
@@ -124,23 +145,36 @@ class LoginScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MainLayout()),
+                              builder: (context) => const ShopLayout(),
+                            ),
                           );
                         },
                       ),
                     ),
-                    const SizedBox(height: 20),
-
-                    SizedBox(
-                      width: double.infinity,
-                      child: CustomElevatedButton(
-                        textColor: AppColors.black,
-                        color: AppColors.white,
-                        text: local.newUser,
-                        onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.register);
-                        },
-                      ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          local.doHaveAnAccount,
+                          style: const TextStyle(fontSize: 19),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRoutes.register);
+                          },
+                          child: Text(
+                            local.signUp,
+                            style: const TextStyle(
+                              color: AppColors.primary,
+                              decoration: TextDecoration.underline,
+                              decorationThickness: 1.5,
+                              decorationColor: AppColors.primary,
+                              fontSize: 19,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

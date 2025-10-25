@@ -538,4 +538,97 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loading => 'Loading...';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get are_you_sure_logout => 'Are you sure you want to logout?';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get currentPassword => 'Current Password';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get invalidPasswordMsg => 'Invalid password';
+
+  @override
+  String get passwordErrorMatchingMsg => 'Passwords do not match!';
+
+  @override
+  String get updateText => 'Update';
+
+  @override
+  String get logoutAlertMsg => 'Logout';
+
+  @override
+  String get logoutConfirmTextCenter => 'Confirm logout!';
+
+  @override
+  String get resetPasswordUnderMsg =>
+      'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number';
+
+  @override
+  String get emailVerificationScreen => 'Email Verification';
+
+  @override
+  String get emailVerificationScreenUnderMsg =>
+      'Please enter the code that was sent to your\nemail address';
+
+  @override
+  String get codeReceiveMsgError => 'Didn\'t receive code?';
+
+  @override
+  String get forgetPasswordUnderText =>
+      'Please enter your email associated with\nyour account';
+
+  @override
+  String get validationEmailErrorMessage => 'This email is not valid';
+
+  @override
+  String get requiredEmailErrorMessage => 'Email is required';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get newPasswordLabel => 'New Password';
+
+  @override
+  String get newPasswordHint => 'Enter new password';
+
+  @override
+  String get wrongPasswordErrorMsg => 'Wrong password, try again';
+
+  @override
+  String get nextButton => 'Next';
+
+  @override
+  String get resend => 'Resend';
+
+  @override
+  String get passwordUpdatedSuccessMsg => 'Password changed successfully!';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get emailHintText => 'Enter your email';
+
+  @override
+  String get doHaveAnAccount => 'Don\'t have an account?';
+
+  @override
+  String get signUp => 'Sign up';
 }

@@ -7,9 +7,7 @@ class SignUpResponseModel {
   @JsonKey(name: "message")
   final String? message;
 
-  SignUpResponseModel ({
-    this.message,
-  });
+  SignUpResponseModel({this.message});
 
   factory SignUpResponseModel.fromJson(Map<String, dynamic> json) {
     return _$SignUpResponseModelFromJson(json);
@@ -19,5 +17,3 @@ class SignUpResponseModel {
     return _$SignUpResponseModelToJson(this);
   }
 }
-
-

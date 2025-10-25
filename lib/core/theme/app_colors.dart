@@ -8,7 +8,6 @@ abstract class AppColors {
   static const buttons = Color(0xffEDF0F2);
   static const Color grey = Color(0xFFEDF0F2);
 
-
   static const MaterialColor white = MaterialColor(0xFFF9F9F9, <int, Color>{
     10: Color(0xFFFEFEFE),
     20: Color(0xFFFDFDFD),

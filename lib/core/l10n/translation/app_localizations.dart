@@ -1135,6 +1135,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading...'**
   String get loading;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @are_you_sure_logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get are_you_sure_logout;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// No description provided for @currentPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get currentPassword;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPassword;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @invalidPasswordMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid password'**
+  String get invalidPasswordMsg;
+
+  /// No description provided for @passwordErrorMatchingMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match!'**
+  String get passwordErrorMatchingMsg;
+
+  /// No description provided for @updateText.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get updateText;
+
+  /// No description provided for @logoutAlertMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logoutAlertMsg;
+
+  /// No description provided for @logoutConfirmTextCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm logout!'**
+  String get logoutConfirmTextCenter;
+
+  /// No description provided for @resetPasswordUnderMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number'**
+  String get resetPasswordUnderMsg;
+
+  /// No description provided for @emailVerificationScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Verification'**
+  String get emailVerificationScreen;
+
+  /// No description provided for @emailVerificationScreenUnderMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the code that was sent to your\nemail address'**
+  String get emailVerificationScreenUnderMsg;
+
+  /// No description provided for @codeReceiveMsgError.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t receive code?'**
+  String get codeReceiveMsgError;
+
+  /// No description provided for @forgetPasswordUnderText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email associated with\nyour account'**
+  String get forgetPasswordUnderText;
+
+  /// No description provided for @validationEmailErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is not valid'**
+  String get validationEmailErrorMessage;
+
+  /// No description provided for @requiredEmailErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get requiredEmailErrorMessage;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @newPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPasswordLabel;
+
+  /// No description provided for @newPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter new password'**
+  String get newPasswordHint;
+
+  /// No description provided for @wrongPasswordErrorMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong password, try again'**
+  String get wrongPasswordErrorMsg;
+
+  /// No description provided for @nextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get nextButton;
+
+  /// No description provided for @resend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resend;
+
+  /// No description provided for @passwordUpdatedSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed successfully!'**
+  String get passwordUpdatedSuccessMsg;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @emailHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get emailHintText;
+
+  /// No description provided for @doHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get doHaveAnAccount;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get signUp;
 }
 
 class _AppLocalizationsDelegate

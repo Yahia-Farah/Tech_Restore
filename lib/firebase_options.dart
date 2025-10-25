@@ -3,9 +3,6 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:tech_restore/firebase_options.dart';
-
-
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -62,7 +59,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '79705890213',
     projectId: 'tech-restore',
     storageBucket: 'tech-restore.firebasestorage.app',
-    iosClientId: '79705890213-vtrvrbr2gvgs0hpm9nhisfk525qqnqpv.apps.googleusercontent.com',
+    iosClientId:
+        '79705890213-vtrvrbr2gvgs0hpm9nhisfk525qqnqpv.apps.googleusercontent.com',
     iosBundleId: 'com.example.techRestore',
   );
 
@@ -72,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '79705890213',
     projectId: 'tech-restore',
     storageBucket: 'tech-restore.firebasestorage.app',
-    iosClientId: '79705890213-vtrvrbr2gvgs0hpm9nhisfk525qqnqpv.apps.googleusercontent.com',
+    iosClientId:
+        '79705890213-vtrvrbr2gvgs0hpm9nhisfk525qqnqpv.apps.googleusercontent.com',
     iosBundleId: 'com.example.techRestore',
   );
 

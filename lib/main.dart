@@ -17,8 +17,10 @@ void main() async {
 
   runApp(
     BlocProvider(
-      create: (_) => LocalizationCubit(language: savedLang == "ar" ? "ar" : "en")
-        ..selectLanguage(savedLang == "ar" ? "Arabic" : "English"),
+      create:
+          (_) =>
+              LocalizationCubit(language: savedLang == "ar" ? "ar" : "en")
+                ..selectLanguage(savedLang == "ar" ? "Arabic" : "English"),
       child: const MyApp(initialRoute: "/start"),
     ),
   );

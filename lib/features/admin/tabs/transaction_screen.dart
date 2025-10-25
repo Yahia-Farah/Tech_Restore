@@ -22,7 +22,7 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
       "type": "Repair",
       "amount": 150.0,
       "status": "Completed",
-      "date": "2024-01-20"
+      "date": "2024-01-20",
     },
     {
       "id": "TXN-002",
@@ -31,7 +31,7 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
       "type": "Purchase",
       "amount": 89.99,
       "status": "Pending",
-      "date": "2024-01-21"
+      "date": "2024-01-21",
     },
     {
       "id": "TXN-003",
@@ -40,7 +40,7 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
       "type": "Repair",
       "amount": 220.0,
       "status": "In Progress",
-      "date": "2024-01-19"
+      "date": "2024-01-19",
     },
   ];
 
@@ -54,18 +54,19 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     // Filtered transactions
-    final filteredTransactions = _transactions.where((txn) {
-      final matchesSearch = txn["customer"]
-          .toString()
-          .toLowerCase()
-          .contains(_searchQuery.toLowerCase());
-      final matchesStatus =
-          _selectedStatus == "All Status" || txn["status"] == _selectedStatus;
-      return matchesSearch && matchesStatus;
-    }).toList();
+    final filteredTransactions =
+        _transactions.where((txn) {
+          final matchesSearch = txn["customer"]
+              .toString()
+              .toLowerCase()
+              .contains(_searchQuery.toLowerCase());
+          final matchesStatus =
+              _selectedStatus == "All Status" ||
+              txn["status"] == _selectedStatus;
+          return matchesSearch && matchesStatus;
+        }).toList();
 
     return Scaffold(
-
       drawer: AdminDrawerWidget(
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
@@ -97,8 +98,9 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
                       prefixIcon: const Icon(Icons.search),
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -112,15 +114,15 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
                 const SizedBox(width: 12),
                 DropdownButton<String>(
                   value: _selectedStatus,
-                  items: [
-                    "All Status",
-                    "Completed",
-                    "Pending",
-                    "In Progress",
-                  ]
-                      .map((status) =>
-                      DropdownMenuItem(value: status, child: Text(status)))
-                      .toList(),
+                  items:
+                      ["All Status", "Completed", "Pending", "In Progress"]
+                          .map(
+                            (status) => DropdownMenuItem(
+                              value: status,
+                              child: Text(status),
+                            ),
+                          )
+                          .toList(),
                   onChanged: (val) {
                     if (val != null) {
                       setState(() => _selectedStatus = val);
@@ -149,7 +151,10 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
               color: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: const BorderSide(color: Colors.grey, width: 1), // 👈 grey border
+                side: const BorderSide(
+                  color: Colors.grey,
+                  width: 1,
+                ), // 👈 grey border
               ),
               elevation: 2,
               child: SingleChildScrollView(
@@ -164,20 +169,25 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
                     DataColumn(label: Text("Status")),
                     DataColumn(label: Text("Date")),
                   ],
-                  rows: filteredTransactions.map((txn) {
-                    return DataRow(cells: [
-                      DataCell(Text(txn["id"])),
-                      DataCell(Text(txn["customer"])),
-                      DataCell(Text(txn["shop"])),
-                      DataCell(Text(txn["type"])),
-                      DataCell(Text("\$${txn["amount"].toStringAsFixed(2)}")),
-                      DataCell(_buildStatusChip(txn["status"])),
-                      DataCell(Text(txn["date"])),
-                    ]);
-                  }).toList(),
+                  rows:
+                      filteredTransactions.map((txn) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(txn["id"])),
+                            DataCell(Text(txn["customer"])),
+                            DataCell(Text(txn["shop"])),
+                            DataCell(Text(txn["type"])),
+                            DataCell(
+                              Text("\$${txn["amount"].toStringAsFixed(2)}"),
+                            ),
+                            DataCell(_buildStatusChip(txn["status"])),
+                            DataCell(Text(txn["date"])),
+                          ],
+                        );
+                      }).toList(),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

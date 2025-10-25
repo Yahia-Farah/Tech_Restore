@@ -18,7 +18,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
       "location": "New York, NY",
       "status": "Pending",
       "rating": null,
-      "joinDate": "2024-01-20"
+      "joinDate": "2024-01-20",
     },
     {
       "name": "Mobile Masters",
@@ -26,7 +26,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
       "location": "Los Angeles, CA",
       "status": "Approved",
       "rating": 4.8,
-      "joinDate": "2024-01-15"
+      "joinDate": "2024-01-15",
     },
     {
       "name": "Quick Repair Hub",
@@ -34,19 +34,20 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
       "location": "Chicago, IL",
       "status": "Suspended",
       "rating": 3.2,
-      "joinDate": "2024-01-10"
+      "joinDate": "2024-01-10",
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     // 👇 Filter shops by name, owner, or location
-    final filteredShops = _shops.where((shop) {
-      final query = _searchQuery.toLowerCase();
-      return shop["name"].toLowerCase().contains(query) ||
-          shop["owner"].toLowerCase().contains(query) ||
-          shop["location"].toLowerCase().contains(query);
-    }).toList();
+    final filteredShops =
+        _shops.where((shop) {
+          final query = _searchQuery.toLowerCase();
+          return shop["name"].toLowerCase().contains(query) ||
+              shop["owner"].toLowerCase().contains(query) ||
+              shop["location"].toLowerCase().contains(query);
+        }).toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -70,7 +71,8 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
             Card(
               color: Colors.white,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
+                borderRadius: BorderRadius.circular(12),
+              ),
               elevation: 2,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -83,7 +85,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                         const Text(
                           "Repair Shops",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         SizedBox(
                           width: 200,
@@ -92,8 +96,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                             decoration: InputDecoration(
                               hintText: "Search repair shops...",
                               prefixIcon: const Icon(Icons.search),
-                              contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 12),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -116,7 +121,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                           Container(
                             color: Colors.grey[200],
                             padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 8),
+                              vertical: 12,
+                              horizontal: 8,
+                            ),
                             child: Row(
                               children: const [
                                 SizedBox(width: 160, child: Text("Shop Name")),
@@ -137,7 +144,6 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                     ),
 
                     const SizedBox(height: 12),
-
                   ],
                 ),
               ),
@@ -162,15 +168,16 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
           SizedBox(width: 100, child: _buildStatusChip(shop["status"])),
           SizedBox(
             width: 100,
-            child: shop["rating"] != null
-                ? Row(
-              children: [
-                const Icon(Icons.star, color: Colors.amber, size: 16),
-                const SizedBox(width: 4),
-                Text(shop["rating"].toString()),
-              ],
-            )
-                : const Text("No ratings"),
+            child:
+                shop["rating"] != null
+                    ? Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 16),
+                        const SizedBox(width: 4),
+                        Text(shop["rating"].toString()),
+                      ],
+                    )
+                    : const Text("No ratings"),
           ),
           SizedBox(width: 120, child: Text(shop["joinDate"])),
           SizedBox(
@@ -203,13 +210,11 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration:
-      BoxDecoration(color: bg, borderRadius: BorderRadius.circular(8)),
-      child: Text(
-        status,
-        style: TextStyle(color: text, fontSize: 12),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(8),
       ),
+      child: Text(status, style: TextStyle(color: text, fontSize: 12)),
     );
   }
 }
-

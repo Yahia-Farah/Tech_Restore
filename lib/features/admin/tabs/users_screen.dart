@@ -52,11 +52,12 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     // 👇 Filter users based on search query
-    final filteredUsers = _users.where((user) {
-      final query = _searchQuery.toLowerCase();
-      return user["name"].toLowerCase().contains(query) ||
-          user["email"].toLowerCase().contains(query);
-    }).toList();
+    final filteredUsers =
+        _users.where((user) {
+          final query = _searchQuery.toLowerCase();
+          return user["name"].toLowerCase().contains(query) ||
+              user["email"].toLowerCase().contains(query);
+        }).toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -104,7 +105,8 @@ class _UsersScreenState extends State<UsersScreen> {
               Card(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 elevation: 2,
                 child: Column(
                   children: [
@@ -117,7 +119,9 @@ class _UsersScreenState extends State<UsersScreen> {
                           Container(
                             color: Colors.grey[100],
                             padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 8),
+                              vertical: 12,
+                              horizontal: 8,
+                            ),
                             child: Row(
                               children: const [
                                 SizedBox(width: 150, child: Text("Name")),
@@ -203,12 +207,11 @@ class _UsersScreenState extends State<UsersScreen> {
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration:
-      BoxDecoration(color: bg, borderRadius: BorderRadius.circular(8)),
-      child: Text(
-        status,
-        style: TextStyle(color: text, fontSize: 12),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(8),
       ),
+      child: Text(status, style: TextStyle(color: text, fontSize: 12)),
     );
   }
 }

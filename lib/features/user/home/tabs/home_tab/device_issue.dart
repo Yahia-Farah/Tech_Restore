@@ -152,8 +152,9 @@ import 'package:flutter/material.dart';
 
 import 'issue_description_page.dart';
 
-
 class DeviceIssueScreen extends StatefulWidget {
+  const DeviceIssueScreen({super.key});
+
   @override
   _DeviceIssuePageState createState() => _DeviceIssuePageState();
 }
@@ -177,9 +178,9 @@ class _DeviceIssuePageState extends State<DeviceIssueScreen> {
       );
     } else {
       // Handle other issues (e.g. show a message or next step)
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Selected: $selectedIssue")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Selected: $selectedIssue")));
     }
   }
 
@@ -196,26 +197,26 @@ class _DeviceIssuePageState extends State<DeviceIssueScreen> {
         children: [
           Expanded(
             child: ListView(
-              children: issues.map((issue) {
-                return RadioListTile<String>(
-                  title: Text(issue["title"]!),
-                  subtitle: Text(issue["subtitle"]!),
-                  value: issue["title"]!,
-                  groupValue: selectedIssue,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedIssue = value;
-                    });
-                  },
-                );
-              }).toList(),
+              children:
+                  issues.map((issue) {
+                    return RadioListTile<String>(
+                      title: Text(issue["title"]!),
+                      subtitle: Text(issue["subtitle"]!),
+                      value: issue["title"]!,
+                      groupValue: selectedIssue,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedIssue = value;
+                        });
+                      },
+                    );
+                  }).toList(),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
               onPressed: selectedIssue != null ? _onNextPressed : null,
-              child: Text("Next"),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
                 backgroundColor: Colors.blue,
@@ -223,8 +224,9 @@ class _DeviceIssuePageState extends State<DeviceIssueScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
+              child: Text("Next"),
             ),
-          )
+          ),
         ],
       ),
     );

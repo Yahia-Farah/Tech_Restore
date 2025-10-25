@@ -7,13 +7,14 @@ import '../../screen/home_screen.dart';
 class Tracktab extends StatelessWidget {
   late final String trackingNumber;
 
-
   final List<Map<String, String>> statusUpdates = [
     {"status": "Order received", "date": "Jan 21", "icon": "box"},
     {"status": "Technician assigned", "date": "Jan 23", "icon": "build"},
     {"status": "Diagnosing issue", "date": "Jan 24", "icon": "search"},
     {"status": "Repair in progress", "date": "Jan 25", "icon": "handyman"},
   ];
+
+  Tracktab({super.key});
 
   IconData _getIcon(String iconName) {
     switch (iconName) {
@@ -41,14 +42,20 @@ class Tracktab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(local.trackingNumber,
-                style: TextStyle(fontSize: 16, color: Colors.black)),
-            SizedBox(height: 15,),
-            Text("#1077",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(
+              local.trackingNumber,
+              style: TextStyle(fontSize: 16, color: Colors.black),
+            ),
+            SizedBox(height: 15),
+            Text(
+              "#1077",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 20),
-            Text(local.liveStu,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(
+              local.liveStu,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
@@ -56,8 +63,11 @@ class Tracktab extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var item = statusUpdates[index];
                   return ListTile(
-                    leading: Icon(_getIcon(item["icon"]!),
-                        color: Colors.blue, size: 30),
+                    leading: Icon(
+                      _getIcon(item["icon"]!),
+                      color: Colors.blue,
+                      size: 30,
+                    ),
                     title: Text(item["status"]!),
                     subtitle: Text(item["date"]!),
                   );
@@ -66,7 +76,7 @@ class Tracktab extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Center(
-              child:Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: CustomElevatedButton(
                   textColor: AppColors.white,
@@ -80,12 +90,10 @@ class Tracktab extends StatelessWidget {
                   },
                 ),
               ),
-
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-

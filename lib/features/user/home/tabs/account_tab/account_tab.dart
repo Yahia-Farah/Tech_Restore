@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
-import 'package:tech_restore/core/routes/route_names.dart';
+import '../../../../../core/config/di.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/custom_elevated_button.dart';
+import '../../../../auth/logout/viewmodel/logout_viewmodel.dart';
+import '../../../../auth/logout/views/logout_widget.dart';
 import '../../../../auth/register/screen/register_screen.dart';
 
 class Accounttab extends StatelessWidget {
@@ -10,16 +13,16 @@ class Accounttab extends StatelessWidget {
     {
       "title": "Macbook Pro",
       "date": "March 2024",
-      "image":
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
     },
     {
       "title": "Macbook Air",
       "date": "June 2019",
-      "image":
-      "https://images.unsplash.com/photo-1509395176047-4a66953fd231",
+      "image": "https://images.unsplash.com/photo-1509395176047-4a66953fd231",
     },
   ];
+
+  Accounttab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +33,7 @@ class Accounttab extends StatelessWidget {
         title: Text(local.profile),
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.settings),
-          ),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
         ],
       ),
       body: SingleChildScrollView(
@@ -54,14 +54,8 @@ class Accounttab extends StatelessWidget {
               "Nada El-Said",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const Text(
-              "@Nada2230",
-              style: TextStyle(color: Colors.grey),
-            ),
-            const Text(
-              "Maadi, Cairo",
-              style: TextStyle(color: Colors.grey),
-            ),
+            const Text("@Nada2230", style: TextStyle(color: Colors.grey)),
+            const Text("Maadi, Cairo", style: TextStyle(color: Colors.grey)),
             const SizedBox(height: 16),
 
             Row(
@@ -76,7 +70,9 @@ class Accounttab extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ),
                     );
                   },
                 ),
@@ -108,38 +104,48 @@ class Accounttab extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 local.repair,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 10),
 
             Column(
-              children: repairHistory.map((device) {
-                return ListTile(
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      device["image"]!,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  title: Text(device["title"]!),
-                  subtitle: Text(device["date"]!),
-                );
-              }).toList(),
+              children:
+                  repairHistory.map((device) {
+                    return ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          device["image"]!,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      title: Text(device["title"]!),
+                      subtitle: Text(device["date"]!),
+                    );
+                  }).toList(),
             ),
             const SizedBox(height: 30),
             SizedBox(
               width: double.infinity,
               child: CustomElevatedButton(
-
                 textColor: AppColors.secondary,
                 color: AppColors.buttons,
                 text: local.signOut,
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login,(route)=>false);
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => BlocProvider(
+                          create: (context) => getIt<LogoutViewModel>(),
+                          child: const LogoutDialogWidget(),
+                        ),
+                  );
                 },
               ),
             ),

@@ -161,18 +161,25 @@ class _OverviewCard extends StatelessWidget {
               children: [
                 Icon(icon, color: Colors.blue),
                 const SizedBox(width: 8),
-                Text(title,
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w500)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 12),
-            Text(value,
-                style:
-                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(
+              value,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
-            Text(change,
-                style: const TextStyle(color: Colors.green, fontSize: 12)),
+            Text(
+              change,
+              style: const TextStyle(color: Colors.green, fontSize: 12),
+            ),
           ],
         ),
       ),
@@ -198,9 +205,10 @@ class _SectionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title,
-                style:
-                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 12),
             child,
           ],
@@ -217,11 +225,12 @@ class _ActivityTile extends StatelessWidget {
   final String time;
   final Color color;
 
-  const _ActivityTile(
-      {required this.icon,
-        required this.text,
-        required this.time,
-        required this.color});
+  const _ActivityTile({
+    required this.icon,
+    required this.text,
+    required this.time,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -258,8 +267,10 @@ class _RevenueChart extends StatelessWidget {
             isCurved: true,
             color: Colors.blue,
             barWidth: 3,
-            belowBarData:
-            BarAreaData(show: true, color: Colors.blue.withOpacity(0.3)),
+            belowBarData: BarAreaData(
+              show: true,
+              color: Colors.blue.withOpacity(0.3),
+            ),
           ),
         ],
       ),
@@ -281,32 +292,40 @@ class _DevicePieChart extends StatelessWidget {
             color: Colors.blue,
             title: "Smartphones",
             radius: 40,
-            titleStyle:
-            const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            titleStyle: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           PieChartSectionData(
             value: 20,
             color: Colors.green,
             title: "Tablets",
             radius: 40,
-            titleStyle:
-            const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            titleStyle: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           PieChartSectionData(
             value: 15,
             color: Colors.orange,
             title: "Laptops",
             radius: 40,
-            titleStyle:
-            const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            titleStyle: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           PieChartSectionData(
             value: 15,
             color: Colors.purple,
             title: "Accessories",
             radius: 40,
-            titleStyle:
-            const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            titleStyle: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

@@ -1,4 +1,4 @@
-  import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'login_response_model.g.dart';
 
@@ -15,7 +15,7 @@ class LoginResponseModel {
   @JsonKey(name: "expires_in")
   final int? expiresIn;
 
-  LoginResponseModel ({
+  LoginResponseModel({
     this.accessToken,
     this.role,
     this.id,
@@ -31,5 +31,3 @@ class LoginResponseModel {
     return _$LoginResponseModelToJson(this);
   }
 }
-
-

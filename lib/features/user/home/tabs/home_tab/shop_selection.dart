@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class SelectRepairShopScreen extends StatefulWidget {
   static const String routename = "shop_selection";
+
+  const SelectRepairShopScreen({super.key});
   @override
   _SelectRepairShopScreenState createState() => _SelectRepairShopScreenState();
 }
@@ -12,25 +14,25 @@ class _SelectRepairShopScreenState extends State<SelectRepairShopScreen> {
       "name": "Sigma Computer",
       "status": "Open · Closes at 12:00 AM",
       "rating": "4.5 (1,300 ratings) · 0.8mi",
-      "logo": "https://via.placeholder.com/50" // Replace with actual
+      "logo": "https://via.placeholder.com/50", // Replace with actual
     },
     {
       "name": "Dream2000 Stores",
       "status": "Open · Closes at 12:00 AM",
       "rating": "4.6 (1,250 ratings) · 0.8mi",
-      "logo": "https://via.placeholder.com/50"
+      "logo": "https://via.placeholder.com/50",
     },
     {
       "name": "TechRestore",
       "status": "Open · Closes at 12:00 AM",
       "rating": "4.5 (1,250 ratings) · 0.8mi",
-      "logo": "https://via.placeholder.com/50"
+      "logo": "https://via.placeholder.com/50",
     },
     {
       "name": "Tradeline - Apple",
       "status": "Open · Closes at 12:00 AM",
       "rating": "4.8 (4,200 ratings) · 0.8mi",
-      "logo": "https://via.placeholder.com/50"
+      "logo": "https://via.placeholder.com/50",
     },
   ];
 
@@ -66,13 +68,29 @@ class _SelectRepairShopScreenState extends State<SelectRepairShopScreen> {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                FilterChip(label: Text("All"), selected: true, onSelected: (_) {}),
+                FilterChip(
+                  label: Text("All"),
+                  selected: true,
+                  onSelected: (_) {},
+                ),
                 SizedBox(width: 8),
-                FilterChip(label: Text("Apple"), selected: false, onSelected: (_) {}),
+                FilterChip(
+                  label: Text("Apple"),
+                  selected: false,
+                  onSelected: (_) {},
+                ),
                 SizedBox(width: 8),
-                FilterChip(label: Text("Samsung"), selected: false, onSelected: (_) {}),
+                FilterChip(
+                  label: Text("Samsung"),
+                  selected: false,
+                  onSelected: (_) {},
+                ),
                 SizedBox(width: 8),
-                FilterChip(label: Text("Huawei"), selected: false, onSelected: (_) {}),
+                FilterChip(
+                  label: Text("Huawei"),
+                  selected: false,
+                  onSelected: (_) {},
+                ),
               ],
             ),
           ),
@@ -88,13 +106,13 @@ class _SelectRepairShopScreenState extends State<SelectRepairShopScreen> {
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(shop["logo"]!),
                   ),
-                  title: Text(shop["name"]!, style: TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(
+                    shop["name"]!,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(shop["status"]!),
-                      Text(shop["rating"]!),
-                    ],
+                    children: [Text(shop["status"]!), Text(shop["rating"]!)],
                   ),
                 );
               },
@@ -117,7 +135,10 @@ class _SelectRepairShopScreenState extends State<SelectRepairShopScreen> {
                 onPressed: () {
                   // Handle selection
                 },
-                child: Text("Select this shop", style: TextStyle(color: Colors.white)),
+                child: Text(
+                  "Select this shop",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),

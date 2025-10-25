@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import '../../../../core/routes/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/toast_helper.dart';
-import '../../../user/home/screen/home_screen.dart';
 import '../../domain/entites/user_entity.dart';
+import '../../forget_password/presentation/viewmodel/verify_code_viewmodel.dart';
 import '../viewmodel/register_states.dart';
 import '../viewmodel/register_viewmodel.dart';
 
@@ -49,10 +50,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   text: state.message,
                   isError: false,
                 );
-
-                Navigator.pushReplacement(
+                Navigator.pushNamedAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (_) => const HomeScreen()),
+                  AppRoutes.emailVerification,
+                  arguments: VerifyEmailData(
+                    email: _emailController.text.trim(),
+                    isRegister: true,
+                  ),
+                  (routes) => false,
                 );
               } else if (state is RegisterError) {
                 ToastHelper.showCustomToast(
@@ -112,23 +117,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   state is RegisterLoading
                       ? const Center(child: CircularProgressIndicator())
                       : SizedBox(
-                    width: double.infinity,
-                    child: CustomElevatedButton(
-                      textColor: AppColors.secondary,
-                      color: AppColors.buttons,
-                      text: local.signup,
-                      onPressed: () {
-                        final user = UserEntity(
-                          firstName: _firstNameController.text.trim(),
-                          lastName: _lastNameController.text.trim(),
-                          email: _emailController.text.trim(),
-                          phone: _phoneController.text.trim(),
-                          password: _passwordController.text.trim(),
-                        );
-                        context.read<RegisterCubit>().signUp(user);
-                      },
-                    ),
-                  ),
+                        width: double.infinity,
+                        child: CustomElevatedButton(
+                          textColor: AppColors.white,
+                          color: AppColors.primary,
+                          text: local.signup,
+                          onPressed: () {
+                            final user = UserEntity(
+                              firstName: _firstNameController.text.trim(),
+                              lastName: _lastNameController.text.trim(),
+                              email: _emailController.text.trim(),
+                              phone: "+2${_phoneController.text.trim()}",
+                              password: _passwordController.text.trim(),
+                            );
+                            context.read<RegisterCubit>().signUp(user);
+                          },
+                        ),
+                      ),
                 ],
               );
             },

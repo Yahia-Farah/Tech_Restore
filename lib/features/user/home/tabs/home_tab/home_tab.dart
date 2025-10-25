@@ -11,16 +11,15 @@ class HomeTab extends StatelessWidget {
     var local = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-          title: Text("hello nada"),
-          titleTextStyle: TextStyle(
-              color: AppColors.secondary,
-              fontSize: 18,
-              fontWeight: FontWeight.w700
-          )),
+        title: Text("hello nada"),
+        titleTextStyle: TextStyle(
+          color: AppColors.secondary,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
 
-      body:
-      Container(
-
+      body: Container(
         padding: EdgeInsets.all(18),
         width: double.infinity,
         child: CustomElevatedButton(
@@ -35,7 +34,6 @@ class HomeTab extends StatelessWidget {
           },
         ),
       ),
-
     );
   }
 }

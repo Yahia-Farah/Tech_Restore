@@ -73,15 +73,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.grey.shade100, // Light background
+        fillColor: AppColors.grey, // Light background
         hintText: widget.hint ?? widget.label,
         hintStyle: TextStyle(
           color: Colors.grey.shade600,
           fontSize: 15,
           fontWeight: FontWeight.w400,
         ),
-        contentPadding:
-        const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 18,
+          horizontal: 16,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none, // Removes border
@@ -94,19 +96,20 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
-        suffixIcon: widget.obscureText
-            ? IconButton(
-          icon: Icon(
-            isTextObscured ? Icons.visibility_off : Icons.visibility,
-            color: Colors.grey.shade600,
-          ),
-          onPressed: () {
-            setState(() {
-              isTextObscured = !isTextObscured;
-            });
-          },
-        )
-            : null,
+        suffixIcon:
+            widget.obscureText
+                ? IconButton(
+                  icon: Icon(
+                    isTextObscured ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey.shade600,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isTextObscured = !isTextObscured;
+                    });
+                  },
+                )
+                : null,
       ),
     );
   }

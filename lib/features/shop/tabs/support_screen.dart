@@ -16,7 +16,7 @@ class _SupportScreenState extends State<SupportScreen> {
       "content": "Delayed repair delivery",
       "priority": "High",
       "status": "Open",
-      "lastUpdate": "2024-01-20"
+      "lastUpdate": "2024-01-20",
     },
     {
       "id": "SUP-002",
@@ -24,7 +24,7 @@ class _SupportScreenState extends State<SupportScreen> {
       "content": "Refund request for cancelled service",
       "priority": "Medium",
       "status": "In Progress",
-      "lastUpdate": "2024-01-21"
+      "lastUpdate": "2024-01-21",
     },
     {
       "id": "SUP-003",
@@ -32,7 +32,7 @@ class _SupportScreenState extends State<SupportScreen> {
       "content": "Question about warranty coverage",
       "priority": "Low",
       "status": "Resolved",
-      "lastUpdate": "2024-01-19"
+      "lastUpdate": "2024-01-19",
     },
     {
       "id": "SUP-004",
@@ -40,7 +40,7 @@ class _SupportScreenState extends State<SupportScreen> {
       "content": "Complaint about repair quality",
       "priority": "High",
       "status": "Open",
-      "lastUpdate": "2024-01-17"
+      "lastUpdate": "2024-01-17",
     },
     {
       "id": "SUP-005",
@@ -48,8 +48,8 @@ class _SupportScreenState extends State<SupportScreen> {
       "content": "Unable to track repair status",
       "priority": "Medium",
       "status": "Open",
-      "lastUpdate": "2024-01-16"
-    }
+      "lastUpdate": "2024-01-16",
+    },
   ];
 
   String searchQuery = "";
@@ -69,25 +69,29 @@ class _SupportScreenState extends State<SupportScreen> {
     };
 
     // Filtering
-    final filteredRequests = requests.where((req) {
-      final matchesSearch = req["id"]
-          .toLowerCase()
-          .contains(searchQuery.toLowerCase()) ||
-          req["customer"].toLowerCase().contains(searchQuery.toLowerCase()) ||
-          req["content"].toLowerCase().contains(searchQuery.toLowerCase());
+    final filteredRequests =
+        requests.where((req) {
+          final matchesSearch =
+              req["id"].toLowerCase().contains(searchQuery.toLowerCase()) ||
+              req["customer"].toLowerCase().contains(
+                searchQuery.toLowerCase(),
+              ) ||
+              req["content"].toLowerCase().contains(searchQuery.toLowerCase());
 
-      final matchesStatus = selectedStatus == "all" ||
-          req["status"].toLowerCase() == selectedStatus.toLowerCase();
+          final matchesStatus =
+              selectedStatus == "all" ||
+              req["status"].toLowerCase() == selectedStatus.toLowerCase();
 
-      return matchesSearch && matchesStatus;
-    }).toList();
+          return matchesSearch && matchesStatus;
+        }).toList();
 
     // Pagination
     final totalPages = (filteredRequests.length / itemsPerPage).ceil();
     final startIndex = (currentPage - 1) * itemsPerPage;
-    final endIndex = (startIndex + itemsPerPage < filteredRequests.length)
-        ? startIndex + itemsPerPage
-        : filteredRequests.length;
+    final endIndex =
+        (startIndex + itemsPerPage < filteredRequests.length)
+            ? startIndex + itemsPerPage
+            : filteredRequests.length;
     final currentRequests = filteredRequests.sublist(startIndex, endIndex);
 
     return Scaffold(
@@ -149,12 +153,13 @@ class _SupportScreenState extends State<SupportScreen> {
                 const SizedBox(width: 16),
                 DropdownButton<String>(
                   value: selectedStatus,
-                  items: statusOptions.entries.map((entry) {
-                    return DropdownMenuItem(
-                      value: entry.key,
-                      child: Text(entry.value),
-                    );
-                  }).toList(),
+                  items:
+                      statusOptions.entries.map((entry) {
+                        return DropdownMenuItem(
+                          value: entry.key,
+                          child: Text(entry.value),
+                        );
+                      }).toList(),
                   onChanged: (value) {
                     setState(() {
                       selectedStatus = value!;
@@ -182,18 +187,19 @@ class _SupportScreenState extends State<SupportScreen> {
                         DataColumn(label: Text(local.tableLastUpdate)),
                         DataColumn(label: Text(local.tableActions)),
                       ],
-                      rows: currentRequests
-                          .map(
-                            (req) => _buildSupportRow(
-                          req["id"],
-                          req["customer"],
-                          req["content"],
-                          req["priority"],
-                          req["status"],
-                          req["lastUpdate"],
-                        ),
-                      )
-                          .toList(),
+                      rows:
+                          currentRequests
+                              .map(
+                                (req) => _buildSupportRow(
+                                  req["id"],
+                                  req["customer"],
+                                  req["content"],
+                                  req["priority"],
+                                  req["status"],
+                                  req["lastUpdate"],
+                                ),
+                              )
+                              .toList(),
                     ),
                   ),
 
@@ -210,33 +216,38 @@ class _SupportScreenState extends State<SupportScreen> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.chevron_left),
-                              onPressed: currentPage > 1
-                                  ? () => setState(() => currentPage--)
-                                  : null,
+                              onPressed:
+                                  currentPage > 1
+                                      ? () => setState(() => currentPage--)
+                                      : null,
                             ),
                             for (int i = 1; i <= totalPages; i++)
                               Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                ),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: currentPage == i
-                                        ? Colors.blue
-                                        : Colors.grey.shade300,
-                                    foregroundColor: currentPage == i
-                                        ? Colors.white
-                                        : Colors.black,
+                                    backgroundColor:
+                                        currentPage == i
+                                            ? Colors.blue
+                                            : Colors.grey.shade300,
+                                    foregroundColor:
+                                        currentPage == i
+                                            ? Colors.white
+                                            : Colors.black,
                                   ),
-                                  onPressed: () =>
-                                      setState(() => currentPage = i),
+                                  onPressed:
+                                      () => setState(() => currentPage = i),
                                   child: Text("$i"),
                                 ),
                               ),
                             IconButton(
                               icon: const Icon(Icons.chevron_right),
-                              onPressed: currentPage < totalPages
-                                  ? () => setState(() => currentPage++)
-                                  : null,
+                              onPressed:
+                                  currentPage < totalPages
+                                      ? () => setState(() => currentPage++)
+                                      : null,
                             ),
                           ],
                         ),
@@ -253,13 +264,13 @@ class _SupportScreenState extends State<SupportScreen> {
   }
 
   DataRow _buildSupportRow(
-      String id,
-      String customer,
-      String content,
-      String priority,
-      String status,
-      String lastUpdate,
-      ) {
+    String id,
+    String customer,
+    String content,
+    String priority,
+    String status,
+    String lastUpdate,
+  ) {
     // Priority color
     Color priorityColor;
     switch (priority) {

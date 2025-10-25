@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'sign_up_request_model.g.dart';
+
 @JsonSerializable()
 class SignUpRequest {
   @JsonKey(name: "first_name")
@@ -14,7 +15,7 @@ class SignUpRequest {
   @JsonKey(name: "password")
   final String? password;
 
-  SignUpRequest ({
+  SignUpRequest({
     this.firstName,
     this.lastName,
     this.email,
@@ -30,5 +31,3 @@ class SignUpRequest {
     return _$SignUpRequestToJson(this);
   }
 }
-
-

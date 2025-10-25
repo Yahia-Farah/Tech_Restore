@@ -43,12 +43,4 @@ class AuthService {
     await SecureStorage.delete(rememberMeKey);
     await SecureStorage.delete(userIdKey);
   }
-
-  //HardCoded Token
-  static const String _driverTestToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2NzhhNTlmYTNjMzc5NzQ5Mjc0N2M4ZDQiLCJpYXQiOjE3MzcxMjAyNTB9.f-A1rvElymvDhEQM9bjqGl56O4c5Z8mhh7MkevnpqVQ";
-
-  static Future<String> getDriverTestToken() async {
-    return _driverTestToken;
-  }
 }

@@ -79,19 +79,29 @@ class _RepairScreenState extends State<RepairScreen> {
     };
 
     // 🔹 Apply filters
-    final filteredRequests = _allRequests.where((req) {
-      final matchesSearch = req["client"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          req["device"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          req["issue"]!.toLowerCase().contains(_searchQuery.toLowerCase());
+    final filteredRequests =
+        _allRequests.where((req) {
+          final matchesSearch =
+              req["client"]!.toLowerCase().contains(
+                _searchQuery.toLowerCase(),
+              ) ||
+              req["device"]!.toLowerCase().contains(
+                _searchQuery.toLowerCase(),
+              ) ||
+              req["issue"]!.toLowerCase().contains(_searchQuery.toLowerCase());
 
-      final matchesStatus = _selectedStatus == "all" || req["status"] == _selectedStatus;
+          final matchesStatus =
+              _selectedStatus == "all" || req["status"] == _selectedStatus;
 
-      return matchesSearch && matchesStatus;
-    }).toList();
+          return matchesSearch && matchesStatus;
+        }).toList();
 
     final totalPages = (filteredRequests.length / _rowsPerPage).ceil();
     final startIndex = (_currentPage - 1) * _rowsPerPage;
-    final endIndex = (_currentPage * _rowsPerPage).clamp(0, filteredRequests.length);
+    final endIndex = (_currentPage * _rowsPerPage).clamp(
+      0,
+      filteredRequests.length,
+    );
     final currentPageItems = filteredRequests.sublist(startIndex, endIndex);
 
     return SingleChildScrollView(
@@ -151,12 +161,15 @@ class _RepairScreenState extends State<RepairScreen> {
               const SizedBox(width: 16),
               DropdownButton<String>(
                 value: _selectedStatus,
-                items: statusOptions.entries
-                    .map((entry) => DropdownMenuItem(
-                  value: entry.key,
-                  child: Text(entry.value),
-                ))
-                    .toList(),
+                items:
+                    statusOptions.entries
+                        .map(
+                          (entry) => DropdownMenuItem(
+                            value: entry.key,
+                            child: Text(entry.value),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (val) {
                   setState(() {
                     _selectedStatus = val!;
@@ -183,16 +196,19 @@ class _RepairScreenState extends State<RepairScreen> {
                       DataColumn(label: Text(local.table_date)),
                       DataColumn(label: Text(local.table_action)),
                     ],
-                    rows: currentPageItems
-                        .map((req) => _buildRepairRow(
-                      context,
-                      req["client"]!,
-                      req["device"]!,
-                      req["issue"]!,
-                      req["status"]!,
-                      req["date"]!,
-                    ))
-                        .toList(),
+                    rows:
+                        currentPageItems
+                            .map(
+                              (req) => _buildRepairRow(
+                                context,
+                                req["client"]!,
+                                req["device"]!,
+                                req["issue"]!,
+                                req["status"]!,
+                                req["date"]!,
+                              ),
+                            )
+                            .toList(),
                   ),
                 ),
 
@@ -204,36 +220,45 @@ class _RepairScreenState extends State<RepairScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${filteredRequests.length} ${local.requestsCount}"),
+                      Text(
+                        "${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${filteredRequests.length} ${local.requestsCount}",
+                      ),
                       Row(
                         children: [
                           IconButton(
                             icon: const Icon(Icons.chevron_left),
-                            onPressed: _currentPage > 1
-                                ? () => setState(() => _currentPage--)
-                                : null,
+                            onPressed:
+                                _currentPage > 1
+                                    ? () => setState(() => _currentPage--)
+                                    : null,
                           ),
                           for (int i = 1; i <= totalPages; i++)
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                              ),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: _currentPage == i
-                                      ? Colors.blue
-                                      : Colors.grey.shade300,
-                                  foregroundColor: _currentPage == i
-                                      ? Colors.white
-                                      : Colors.black,
+                                  backgroundColor:
+                                      _currentPage == i
+                                          ? Colors.blue
+                                          : Colors.grey.shade300,
+                                  foregroundColor:
+                                      _currentPage == i
+                                          ? Colors.white
+                                          : Colors.black,
                                 ),
-                                onPressed: () => setState(() => _currentPage = i),
+                                onPressed:
+                                    () => setState(() => _currentPage = i),
                                 child: Text("$i"),
                               ),
                             ),
                           IconButton(
                             icon: const Icon(Icons.chevron_right),
-                            onPressed: _currentPage < totalPages
-                                ? () => setState(() => _currentPage++)
-                                : null,
+                            onPressed:
+                                _currentPage < totalPages
+                                    ? () => setState(() => _currentPage++)
+                                    : null,
                           ),
                         ],
                       ),
@@ -242,20 +267,20 @@ class _RepairScreenState extends State<RepairScreen> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
   DataRow _buildRepairRow(
-      BuildContext context,
-      String client,
-      String device,
-      String issue,
-      String status,
-      String date,
-      ) {
+    BuildContext context,
+    String client,
+    String device,
+    String issue,
+    String status,
+    String date,
+  ) {
     final local = AppLocalizations.of(context)!;
 
     String localizedStatus;

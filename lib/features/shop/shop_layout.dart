@@ -10,14 +10,14 @@ import 'package:tech_restore/features/shop/tabs/transactions_screen.dart';
 import '../../core/l10n/translation/app_localizations.dart';
 import '../../core/widgets/drawer_widget.dart';
 
-class MainLayout extends StatefulWidget {
-  const MainLayout({super.key});
+class ShopLayout extends StatefulWidget {
+  const ShopLayout({super.key});
 
   @override
-  State<MainLayout> createState() => _MainLayoutState();
+  State<ShopLayout> createState() => _ShopLayoutState();
 }
 
-class _MainLayoutState extends State<MainLayout> {
+class _ShopLayoutState extends State<ShopLayout> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
@@ -44,7 +44,7 @@ class _MainLayoutState extends State<MainLayout> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            _getTitle(_selectedIndex,local),
+            _getTitle(_selectedIndex, local),
             style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class _MainLayoutState extends State<MainLayout> {
         return local.offers;
       case 7:
         return local.support;
-        default:
+      default:
         return "";
     }
   }

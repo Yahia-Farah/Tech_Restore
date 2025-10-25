@@ -14,12 +14,12 @@ class OnboardingScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 40),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 30,),
+              SizedBox(height: 30),
               Image.asset(AppImages.startScreen),
               const SizedBox(height: 30),
               Text(
@@ -50,9 +50,10 @@ class OnboardingScreen extends StatelessWidget {
                   color: AppColors.primary,
                   text: local.start,
                   onPressed: () {
-                    Navigator.pushNamed(
+                    Navigator.pushNamedAndRemoveUntil(
                       context,
                       AppRoutes.login,
+                      (route) => false,
                     );
                   },
                 ),
