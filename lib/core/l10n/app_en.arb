@@ -1,7 +1,7 @@
 {
   "app_name": "Tech & Restore",
   "dashboard": "Dashboard",
-  "repair": "Repair",
+  "repair": "Repair History",
   "devices": "Devices",
   "orders": "Orders",
   "invoices": "Invoices",

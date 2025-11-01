@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard => 'Dashboard';
 
   @override
-  String get repair => 'Repair';
+  String get repair => 'Repair History';
 
   @override
   String get devices => 'Devices';
@@ -93,8 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get devices_management => 'Devices Management';
 
   @override
-  String get devices_management_desc =>
-      'You can monitor and view all devices in your store here';
+  String get devices_management_desc => 'You can monitor and view all devices in your store here';
 
   @override
   String get add_device => 'Add Device';
@@ -148,8 +147,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repair_requests_title => 'Repair Requests';
 
   @override
-  String get repair_requests_subtitle =>
-      'You can view all customer repair requests, accept them, and update their status here';
+  String get repair_requests_subtitle => 'You can view all customer repair requests, accept them, and update their status here';
 
   @override
   String get status_filter => 'Order Status';
@@ -227,8 +225,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transactions => 'Transactions';
 
   @override
-  String get transactions_subtitle =>
-      'You can view the monthly or yearly income for repair orders and sales from here';
+  String get transactions_subtitle => 'You can view the monthly or yearly income for repair orders and sales from here';
 
   @override
   String get month => 'Month';
@@ -289,8 +286,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inventory_title => 'Inventory System';
 
   @override
-  String get inventory_description =>
-      'You can monitor the number of devices and see if a product is running low from here';
+  String get inventory_description => 'You can monitor the number of devices and see if a product is running low from here';
 
   @override
   String get inventory_search => 'Search inventory...';
@@ -380,8 +376,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supportTitle => 'Support';
 
   @override
-  String get supportSubtitle =>
-      'You can view all customer issues and inquiries here';
+  String get supportSubtitle => 'You can view all customer issues and inquiries here';
 
   @override
   String get searchSupport => 'Search support requests...';
@@ -507,16 +502,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signUpQuote => 'Get your tech fixed, fast.';
 
   @override
-  String get secSignUpQuote =>
-      'We\'ll connect you with the best local shops to get your device fixed.';
+  String get secSignUpQuote => 'We\'ll connect you with the best local shops to get your device fixed.';
 
   @override
-  String get byContinuing =>
-      'By continuing, you agree to the Terms of Use. Read our Privacy Policy.';
+  String get byContinuing => 'By continuing, you agree to the Terms of Use. Read our Privacy Policy.';
 
   @override
-  String get startQuote =>
-      'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
+  String get startQuote => 'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
 
   @override
   String get explore => 'explore';
@@ -573,22 +565,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutConfirmTextCenter => 'Confirm logout!';
 
   @override
-  String get resetPasswordUnderMsg =>
-      'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number';
+  String get resetPasswordUnderMsg => 'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number';
 
   @override
   String get emailVerificationScreen => 'Email Verification';
 
   @override
-  String get emailVerificationScreenUnderMsg =>
-      'Please enter the code that was sent to your\nemail address';
+  String get emailVerificationScreenUnderMsg => 'Please enter the code that was sent to your\nemail address';
 
   @override
   String get codeReceiveMsgError => 'Didn\'t receive code?';
 
   @override
-  String get forgetPasswordUnderText =>
-      'Please enter your email associated with\nyour account';
+  String get forgetPasswordUnderText => 'Please enter your email associated with\nyour account';
 
   @override
   String get validationEmailErrorMessage => 'This email is not valid';

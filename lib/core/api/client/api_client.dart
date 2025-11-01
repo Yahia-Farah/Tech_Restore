@@ -9,6 +9,7 @@ import '../../../features/auth/data/models/login_models/login_request_model.dart
 import '../../../features/auth/data/models/login_models/login_response_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_request_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_response_model.dart';
+import '../../../features/user/profile/data/models/profile_response.dart';
 import '../api_constants/api_end_points.dart';
 
 part 'api_client.g.dart';
@@ -48,4 +49,8 @@ abstract class ApiClient {
   @POST(ApiEndPoints.logout)
   @Extra({'auth': true})
   Future<String> logout();
+
+  @GET(ApiEndPoints.profile)
+  @Extra({'auth': true})
+  Future<ProfileResponse> getProfile();
 }
