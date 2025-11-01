@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
 import '../../../../../core/config/di.dart';
+import '../../../../../core/routes/route_names.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../auth/logout/viewmodel/logout_viewmodel.dart';
 import '../../../../auth/logout/views/logout_widget.dart';
-import '../../../../auth/register/screen/register_screen.dart';
 import '../../../profile/presentation/viewmodel/profile_cubit.dart';
-import '../../../profile/presentation/viewmodel/profile_states.dart';
+import '../../../profile/presentation/viewmodel/states/profile_states.dart';
 
 class AccountTab extends StatelessWidget {
   AccountTab({super.key});
@@ -71,7 +71,6 @@ class AccountTab extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      /// Profile picture
                       CircleAvatar(
                         radius: 50,
                         backgroundColor: Colors.grey.shade300,
@@ -82,8 +81,6 @@ class AccountTab extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 12),
-
-                      /// User Info
                       Text(
                         "${user.firstName ?? ''} ${user.lastName ?? ''}",
                         style: const TextStyle(
@@ -114,13 +111,16 @@ class AccountTab extends StatelessWidget {
                             textColor: AppColors.black,
                             color: AppColors.buttons,
                             text: local.editProfile,
-                            onPressed: () {
-                              Navigator.push(
+                            onPressed: () async {
+                              final updated = await Navigator.pushNamed(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => const RegisterScreen(),
-                                ),
+                                AppRoutes.editProfile,
+                                arguments: user,
                               );
+
+                              if (updated == true && context.mounted) {
+                                context.read<ProfileCubit>().getUserProfile();
+                              }
                             },
                           ),
                           const SizedBox(width: 10),

@@ -620,4 +620,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signUp => 'Sign up';
+
+  @override
+  String get editProfileTitle => 'Edit Profile';
+
+  @override
+  String get phoneNumber => 'Phone Number';
+
+  @override
+  String get updateProfile => 'Update Profile';
+
+  @override
+  String get profileUpdated => 'Profile updated successfully!';
+
+  @override
+  String get error => 'Error';
 }

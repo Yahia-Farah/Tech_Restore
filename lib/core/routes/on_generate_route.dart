@@ -7,6 +7,8 @@ import 'package:tech_restore/features/auth/register/screen/register_screen.dart'
 import 'package:tech_restore/features/onboarding/screen/onboarding_screen.dart';
 import 'package:tech_restore/features/shop/shop_layout.dart';
 import 'package:tech_restore/features/user/home/screen/home_screen.dart';
+import 'package:tech_restore/features/user/profile/data/models/profile_response.dart';
+import 'package:tech_restore/features/user/profile/presentation/view/screens/edit_profile_screen.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
 import '../../features/auth/forget_password/presentation/viewmodel/forget_password_viewmodel.dart';
@@ -17,6 +19,7 @@ import '../../features/auth/forget_password/presentation/views/screens/email_ver
 import '../../features/auth/forget_password/presentation/views/screens/forgertPasswordScreen.dart';
 import '../../features/auth/login/viewmodel/login_viewmodel.dart';
 import '../../features/auth/register/viewmodel/register_viewmodel.dart';
+import '../../features/user/profile/presentation/viewmodel/edit_profile_cubit.dart';
 import '../config/di.dart';
 
 class Routes {
@@ -83,6 +86,19 @@ class Routes {
 
       case AppRoutes.shopDashboard:
         return MaterialPageRoute(builder: (_) => const ShopLayout());
+
+      case AppRoutes.editProfile:
+        final user = settings.arguments as ProfileResponse;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<EditProfileCubit>()..setInitialData(user),
+            child: EditProfileScreen(user: user),
+          ),
+        );
+
+
+
+
 
       default:
         return MaterialPageRoute(

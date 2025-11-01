@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tech_restore/features/user/profile/presentation/viewmodel/profile_states.dart';
+import 'package:tech_restore/features/user/profile/presentation/viewmodel/states/profile_states.dart';
 import '../../data/repositories/profile_repo_impl.dart';
 
 
