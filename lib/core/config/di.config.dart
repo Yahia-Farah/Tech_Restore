@@ -39,6 +39,8 @@ import '../../features/user/profile/data/data_sources/profile_remote_data_source
     as _i904;
 import '../../features/user/profile/data/repositories/profile_repo_impl.dart'
     as _i890;
+import '../../features/user/profile/presentation/viewmodel/edit_profile_cubit.dart'
+    as _i327;
 import '../../features/user/profile/presentation/viewmodel/profile_cubit.dart'
     as _i1061;
 import '../api/client/api_client.dart' as _i364;
@@ -92,6 +94,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i188.LoginUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i1061.ProfileCubit>(
         () => _i1061.ProfileCubit(gh<_i890.ProfileRepository>()));
+    gh.factory<_i327.EditProfileCubit>(
+        () => _i327.EditProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i164.ForgetPasswordCubit>(
         () => _i164.ForgetPasswordCubit(gh<_i948.ForgetPasswordUseCase>()));
     gh.factory<_i146.LoginViewModel>(

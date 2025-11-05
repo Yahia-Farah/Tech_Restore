@@ -620,4 +620,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signUp => 'إنشاء حساب';
+
+  @override
+  String get editProfileTitle => 'تعديل الملف الشخصي';
+
+  @override
+  String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get updateProfile => 'تحديث الملف الشخصي';
+
+  @override
+  String get profileUpdated => 'تم تحديث الملف الشخصي بنجاح!';
+
+  @override
+  String get error => 'خطأ';
 }

@@ -1,4 +1,4 @@
-import '../../data/models/profile_response.dart';
+import '../../../data/models/profile_response.dart';
 
 abstract class ProfileState {}
 

@@ -201,5 +201,10 @@
   "emailLabel": "Email",
   "emailHintText": "Enter your email",
   "doHaveAnAccount": "Don't have an account?",
-  "signUp": "Sign up"
+  "signUp": "Sign up",
+  "editProfileTitle": "Edit Profile",
+  "phoneNumber": "Phone Number",
+  "updateProfile": "Update Profile",
+  "profileUpdated": "Profile updated successfully!",
+  "error": "Error"
 }

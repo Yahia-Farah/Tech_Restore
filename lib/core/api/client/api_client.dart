@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tech_restore/features/auth/data/models/forget_password_models/verify_email_request_model.dart';
+import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
 
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
@@ -53,4 +54,10 @@ abstract class ApiClient {
   @GET(ApiEndPoints.profile)
   @Extra({'auth': true})
   Future<ProfileResponse> getProfile();
+
+  @PUT(ApiEndPoints.profile)
+  @Extra({'auth': true})
+  Future<ProfileResponse> editProfile(
+      @Body() EditProfileRequest model);
+
 }
