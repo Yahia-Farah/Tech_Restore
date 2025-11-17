@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/ui/home/screen/home_screen.dart';
+import 'package:tech_restore/ui/home/tabs/delivery/delivery-main.dart';
 import 'package:tech_restore/ui/login/screen/login_screen.dart';
 import 'package:tech_restore/ui/register/screen/register_screen.dart';
 import 'package:tech_restore/ui/start_screen/screen/start_screen.dart' show StartScreen;
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName:(_)=>LoginScreen(),
         RegisterScreen.routeName:(_)=>RegisterScreen(),
         HomeScreen.routename:(_)=>HomeScreen(),
+        DeliveryDashboardScreen.routeName:(_)=>DeliveryDashboardScreen(),
       },
       initialRoute: StartScreen.routeName,
     );

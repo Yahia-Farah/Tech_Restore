@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/ui/home/screen/home_screen.dart';
+import 'package:tech_restore/ui/home/tabs/delivery/delivery-main.dart';
 
 import '../../../core/color_manager.dart';
 import '../../../core/reusable_components/CustomButton.dart';
@@ -99,6 +100,22 @@ class LoginScreen extends StatelessWidget {
                   },
                 ),
               ),
+              SizedBox(height: 20,),
+              Container(
+                width: double.infinity,
+                child: CustomButton(
+                  Textcolor: ColorManager.secondary,
+                  color: ColorManager.bottons,
+                  text: "delivery",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DeliveryDashboardScreen()),
+                    );
+                  },
+                ),
+              ),
+
 
             ],
           ),
