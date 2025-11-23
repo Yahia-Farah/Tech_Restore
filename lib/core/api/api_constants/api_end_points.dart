@@ -9,4 +9,5 @@ abstract class ApiEndPoints {
   static const String verifyEmail = 'auth/verify-email';
   static const String profile = 'users/profile';
   static const String getAllUsers = 'admin/users';
+  static const String getAllShops = 'admin/shops';
 }

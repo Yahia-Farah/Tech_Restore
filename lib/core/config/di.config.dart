@@ -12,6 +12,12 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/admin/tabs/manage-shops/data/datasource/get_shops_data_source_impl.dart'
+    as _i392;
+import '../../features/admin/tabs/manage-shops/data/repo/get_shops_repo.dart'
+    as _i63;
+import '../../features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart'
+    as _i697;
 import '../../features/admin/tabs/manage-user/data/datasource/get_user_remote_data_source_impl.dart'
     as _i508;
 import '../../features/admin/tabs/manage-user/data/repo/get_user_repo_impl.dart'
@@ -81,6 +87,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i904.ProfileRemoteDataSource(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i508.GetUserRemoteDataSource>(
         () => _i508.GetUserRemoteDataSource(gh<_i364.ApiClient>()));
+    gh.lazySingleton<_i392.GetShopsRemoteDataSource>(
+        () => _i392.GetShopsRemoteDataSource(gh<_i364.ApiClient>()));
     gh.factory<_i341.ResetPasswordCubit>(
         () => _i341.ResetPasswordCubit(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i890.ProfileRepository>(
@@ -89,6 +97,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i279.AuthRepositoryImpl(gh<_i24.AuthRemoteDataSource>()));
     gh.lazySingleton<_i680.GetUserRepository>(
         () => _i680.GetUserRepository(gh<_i508.GetUserRemoteDataSource>()));
+    gh.lazySingleton<_i63.GetShopsRepository>(
+        () => _i63.GetShopsRepository(gh<_i392.GetShopsRemoteDataSource>()));
     gh.factory<_i48.LogoutUseCase>(
         () => _i48.LogoutUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i30.VerifyEmailUseCase>(
@@ -113,6 +123,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i327.EditProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i164.ForgetPasswordCubit>(
         () => _i164.ForgetPasswordCubit(gh<_i948.ForgetPasswordUseCase>()));
+    gh.factory<_i697.GetShopsCubit>(
+        () => _i697.GetShopsCubit(gh<_i63.GetShopsRepository>()));
     gh.factory<_i146.LoginViewModel>(
         () => _i146.LoginViewModel(gh<_i188.LoginUseCase>()));
     gh.factory<_i71.LogoutViewModel>(
