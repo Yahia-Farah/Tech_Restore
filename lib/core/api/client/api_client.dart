@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:tech_restore/features/auth/data/models/forget_password_models/verify_email_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
+import '../../../features/admin/tabs/manage-user/data/models/user_model_response.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -63,5 +64,9 @@ abstract class ApiClient {
   @Extra({'auth': true})
   Future<ProfileResponse> editProfile(
       @Body() EditProfileRequest model);
+
+  @GET(ApiEndPoints.getAllUsers)
+  @Extra({'auth': true})
+  Future<UserListResponse> getUsers();
 
 }

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tech_restore/core/config/di.dart';
 import 'package:tech_restore/features/admin/tabs/admin_dashboard_screen.dart';
 import 'package:tech_restore/features/admin/tabs/admin_repair_screen.dart';
 import 'package:tech_restore/features/admin/tabs/promotional_offers.dart';
 import 'package:tech_restore/features/admin/tabs/reviews_screen.dart';
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
 import 'package:tech_restore/features/admin/tabs/transaction_screen.dart';
-import 'package:tech_restore/features/admin/tabs/users_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-user/presentation/view/users_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
 class AdminLayout extends StatefulWidget {
@@ -18,9 +21,12 @@ class AdminLayout extends StatefulWidget {
 class _MainLayoutState extends State<AdminLayout> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
+  List<Widget> get _screens => [
     AdminDashboardScreen(),
-    UsersScreen(),
+    BlocProvider(
+      create: (context) => getIt<GetUsersCubit>(),
+      child: const UsersScreen(),
+    ),
     AdminRepairScreen(),
     AdminTransactionsScreen(),
     AdminReviewsScreen(),
