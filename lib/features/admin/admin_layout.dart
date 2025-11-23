@@ -31,6 +31,7 @@ class _MainLayoutState extends State<AdminLayout> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      Navigator.pop(context);
     });
   }
 

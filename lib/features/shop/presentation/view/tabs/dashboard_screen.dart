@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/l10n/translation/app_localizations.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../core/theme/app_colors.dart';
 import '../widgets/dashboard_card.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -233,7 +233,7 @@ class DashboardScreen extends StatelessWidget {
         ),
         DataCell(
           Text(
-            "التفاصيل",
+            "View",
             style: const TextStyle(color: AppColors.primary, fontSize: 18),
           ),
         ),

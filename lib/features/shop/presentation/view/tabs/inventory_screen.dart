@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});

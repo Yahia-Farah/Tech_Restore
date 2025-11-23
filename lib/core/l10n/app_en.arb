@@ -206,5 +206,16 @@
   "phoneNumber": "Phone Number",
   "updateProfile": "Update Profile",
   "profileUpdated": "Profile updated successfully!",
-  "error": "Error"
+  "error": "Error",
+  "signupAsUser": "Sign up as User",
+  "signupAsShop": "Sign up as Shop",
+  "shopDescription": "Shop Description",
+  "shopType": "Shop Type",
+  "shopTypeRepairer": "Repairer",
+  "shopTypeSeller": "Seller",
+  "shopTypeBoth": "Both",
+  "shopAddressState": "State",
+  "shopAddressCity": "City",
+  "shopAddressStreet": "Street",
+  "shopAddressBuilding": "Building"
 }

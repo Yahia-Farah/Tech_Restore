@@ -1,3 +1,5 @@
+import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_response_model.dart';
+import 'package:tech_restore/features/auth/domain/entites/shop_entity.dart';
 import '../../data/models/login_models/login_request_model.dart';
 import '../../data/models/login_models/login_response_model.dart';
 import '../../data/models/signupmodels/sign_up_response_model.dart';
@@ -16,4 +18,5 @@ abstract class AuthRepository {
   Future<AuthResponse<String>> resendVerifyCode(String email);
   Future<AuthResponse<String>> verifyEmail(String email, String code);
   Future<String> logout();
+  Future<SignUpShopResponseModel> signUpShop(ShopEntity shop);
 }

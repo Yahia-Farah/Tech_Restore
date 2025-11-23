@@ -206,5 +206,16 @@
   "phoneNumber": "رقم الهاتف",
   "updateProfile": "تحديث الملف الشخصي",
   "profileUpdated": "تم تحديث الملف الشخصي بنجاح!",
-  "error": "خطأ"
+  "error": "خطأ",
+  "signupAsUser": "تسجيل كمستخدم",
+  "signupAsShop": "تسجيل كمتجر",
+  "shopDescription": "وصف المتجر",
+  "shopType": "نوع المتجر",
+  "shopTypeRepairer": "مصلح",
+  "shopTypeSeller": "بائع",
+  "shopTypeBoth": "الاثنان معاً",
+  "shopAddressState": "المحافظة",
+  "shopAddressCity": "المدينة",
+  "shopAddressStreet": "الشارع",
+  "shopAddressBuilding": "المبنى"
 }

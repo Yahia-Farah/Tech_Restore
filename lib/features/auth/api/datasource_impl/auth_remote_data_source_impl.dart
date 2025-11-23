@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tech_restore/features/auth/data/models/login_models/login_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/login_models/login_response_model.dart';
+import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_response_model.dart';
 import '../../../../core/api/client/api_client.dart';
 import '../../../../core/errors/api_error_result.dart';
 import '../../data/datasource/auth_remote_data_source.dart';
 import '../../data/models/forget_password_models/forget_password_request_model.dart';
 import '../../data/models/forget_password_models/reset_password_request_model.dart';
 import '../../data/models/forget_password_models/verify_email_request_model.dart';
+import '../../data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import '../../data/models/signupmodels/sign_up_request_model.dart';
 import '../../data/models/signupmodels/sign_up_response_model.dart';
 import '../../domain/responses/auth_response.dart';
@@ -107,5 +109,17 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDataSource {
   @override
   Future<String> logout() async {
     return await _apiClient.logout();
+  }
+  @override
+  Future<SignUpShopResponseModel> signUpShop(SignUpShopRequestModel request) async {
+    try {
+      final result = await _apiClient.signUpShop(request);
+      return result;
+    } on DioException catch (e) {
+      final apiMessage = ApiErrorHandler.extractMessage(e);
+      throw Exception(apiMessage);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

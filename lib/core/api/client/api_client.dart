@@ -2,12 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tech_restore/features/auth/data/models/forget_password_models/verify_email_request_model.dart';
+import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
-
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_response_model.dart';
+import '../../../features/auth/data/models/signup_shop_models/sign_up_shop_response_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_request_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_response_model.dart';
 import '../../../features/user/profile/data/models/profile_response.dart';
@@ -23,6 +24,9 @@ abstract class ApiClient {
 
   @POST(ApiEndPoints.register)
   Future<SignUpResponseModel> signUp(@Body() SignUpRequest request);
+
+  @POST(ApiEndPoints.registerShop)
+  Future<SignUpShopResponseModel> signUpShop(@Body() SignUpShopRequestModel request);
 
   @POST(ApiEndPoints.login)
   Future<LoginResponseModel> login(@Body() LoginRequestModel request);

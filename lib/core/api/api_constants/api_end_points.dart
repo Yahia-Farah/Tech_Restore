@@ -4,6 +4,7 @@ abstract class ApiEndPoints {
   static const String resetPassword = 'auth/reset-password';
   static const String resendCode = 'auth/resend-otp';
   static const String register = 'auth/register/user';
+  static const String registerShop = 'auth/register/shop';
   static const String logout = 'auth/logout';
   static const String verifyEmail = 'auth/verify-email';
   static const String profile = 'users/profile';

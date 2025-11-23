@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
 
 class TransactionsScreen extends StatefulWidget {
   const TransactionsScreen({super.key});
@@ -22,7 +22,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       "shop": "Tech Haven",
       "payment": "VISA",
       "amount": "999.00 EGP",
-      "status": "completed", // use lowercase key
+      "status": "completed",
     },
     {
       "date": "2023-04-22",

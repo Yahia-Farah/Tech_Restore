@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});

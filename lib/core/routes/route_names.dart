@@ -9,4 +9,5 @@ abstract class AppRoutes {
   static const String emailVerification = "/emailVerification";
   static const String resetPassword = "/ResetPasswordScreen";
   static const String editProfile = "/EditProfile";
+  static const String shopRegister = "/shopRegister";
 }

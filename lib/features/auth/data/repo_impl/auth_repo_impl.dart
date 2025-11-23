@@ -2,8 +2,11 @@ import 'package:injectable/injectable.dart';
 import 'package:tech_restore/features/auth/data/models/forget_password_models/verify_email_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/login_models/login_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/login_models/login_response_model.dart';
+import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
+import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_response_model.dart';
 import 'package:tech_restore/features/auth/data/models/signupmodels/sign_up_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/signupmodels/sign_up_response_model.dart';
+import 'package:tech_restore/features/auth/domain/entites/shop_entity.dart';
 import 'package:tech_restore/features/auth/domain/entites/user_entity.dart';
 import 'package:tech_restore/features/auth/domain/repo/auth_repo.dart';
 
@@ -74,5 +77,20 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<String> logout() {
     return _remoteDatasource.logout();
+  }
+
+  @override
+  Future<SignUpShopResponseModel> signUpShop(ShopEntity shop) async {
+    final request = SignUpShopRequestModel(
+      name: shop.name,
+      email: shop.email,
+      phone: shop.phone,
+      password: shop.password,
+      shopType: shop.shopType,
+      description: shop.description,
+      shopAddress: shop.shopAddress,
+    );
+
+    return _remoteDatasource.signUpShop(request);
   }
 }

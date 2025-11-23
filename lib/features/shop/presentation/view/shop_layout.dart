@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/features/shop/tabs/dashboard_screen.dart';
-import 'package:tech_restore/features/shop/tabs/devices_screen.dart';
-import 'package:tech_restore/features/shop/tabs/inventory_screen.dart';
-import 'package:tech_restore/features/shop/tabs/offers_screen.dart';
-import 'package:tech_restore/features/shop/tabs/orders_screen.dart';
-import 'package:tech_restore/features/shop/tabs/repair_screen.dart';
-import 'package:tech_restore/features/shop/tabs/support_screen.dart';
-import 'package:tech_restore/features/shop/tabs/transactions_screen.dart';
-import '../../core/l10n/translation/app_localizations.dart';
-import '../../core/widgets/drawer_widget.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/dashboard_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/devices_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/inventory_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/offers_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/orders_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/repair_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/support_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/transactions_screen.dart';
+import '../../../../core/l10n/translation/app_localizations.dart';
+import '../../../../core/widgets/drawer_widget.dart';
 
 class ShopLayout extends StatefulWidget {
   const ShopLayout({super.key});

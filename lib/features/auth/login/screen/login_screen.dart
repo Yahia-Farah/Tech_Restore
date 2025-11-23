@@ -7,7 +7,7 @@ import '../../../../core/routes/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/toast_helper.dart';
-import '../../../shop/shop_layout.dart';
+import '../../../shop/presentation/view/shop_layout.dart';
 import '../viewmodel/login_states.dart';
 import '../viewmodel/login_viewmodel.dart';
 
@@ -160,8 +160,32 @@ class LoginScreen extends StatelessWidget {
                           style: const TextStyle(fontSize: 19),
                         ),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, AppRoutes.register);
+                          onPressed: () async {
+                            final choice = await showDialog<String>(
+                              context: context,
+                              builder: (context) {
+                                final local = AppLocalizations.of(context)!;
+                                return AlertDialog(
+                                  title: Text(local.signup,style: const TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
+                                  content: Text(local.signUpQuote,style: const TextStyle(fontSize: 16),),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'user'),
+                                      child: Text('${local.signUp} ${local.customer}',style: const TextStyle(color: AppColors.primary,fontSize: 16),),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'shop'),
+                                      child: Text('${local.signUp} ${local.shop}',style: const TextStyle(color: AppColors.primary,fontSize: 16),),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            if (choice == 'user') {
+                              Navigator.pushNamed(context, AppRoutes.register);
+                            } else if (choice == 'shop') {
+                              Navigator.pushNamed(context, AppRoutes.shopRegister);
+                            }
                           },
                           child: Text(
                             local.signUp,
