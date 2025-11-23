@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-shops/data/models/shop_response.dart';
 import 'package:tech_restore/features/auth/data/models/forget_password_models/verify_email_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
@@ -68,5 +69,8 @@ abstract class ApiClient {
   @GET(ApiEndPoints.getAllUsers)
   @Extra({'auth': true})
   Future<UserListResponse> getUsers();
+
+  @GET(ApiEndPoints.getAllShops)
+  Future<ShopListResponse> getShops();
 
 }
