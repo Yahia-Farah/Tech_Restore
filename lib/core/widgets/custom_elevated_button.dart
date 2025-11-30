@@ -11,6 +11,7 @@ class CustomElevatedButton extends StatelessWidget {
   final bool isLoading; // New loading flag
   final double? width; // Custom width
   final double? height; // Custom height
+  final Widget? suffixIcon;
 
   const CustomElevatedButton({
     super.key,
@@ -23,6 +24,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.isLoading = false,
     this.width,
     this.height,
+    this.suffixIcon,
   });
 
   @override
@@ -44,20 +46,29 @@ class CustomElevatedButton extends StatelessWidget {
           ),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        child:
-            isLoading
-                ? const SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                )
-                : Text(
-                  text,
-                  style: TextStyle(color: textColor ?? AppColors.white),
+        child: isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    text,
+                    style: TextStyle(color: textColor ?? AppColors.white),
+                  ),
+                  if (suffixIcon != null) ...[
+                    const SizedBox(width: 12),
+                    suffixIcon!,
+                  ],
+                ],
+              ),
       ),
     );
   }

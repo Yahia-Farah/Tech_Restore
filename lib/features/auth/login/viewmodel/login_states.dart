@@ -17,3 +17,5 @@ class LoginErrorState extends LoginStates {
 
   LoginErrorState(this.message);
 }
+
+final class ChangeRememberMeState extends LoginStates {}
