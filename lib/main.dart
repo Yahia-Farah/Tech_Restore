@@ -1,41 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:tech_restore/ui/home/screen/home_screen.dart';
-import 'package:tech_restore/ui/home/tabs/delivery/delivery-main.dart';
-import 'package:tech_restore/ui/login/screen/login_screen.dart';
-import 'package:tech_restore/ui/register/screen/register_screen.dart';
-import 'package:tech_restore/ui/start_screen/screen/start_screen.dart' show StartScreen;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tech_restore/core/config/di.dart';
+import 'core/contants/secure_storage.dart';
+import 'core/l10n/translation/app_localizations.dart';
+import 'core/routes/on_generate_route.dart';
+import 'core/theme/app_colors.dart';
+import 'features/localization/data/localization_preference.dart';
+import 'features/localization/localization_controller/localization_cubit.dart';
+import 'features/localization/localization_controller/localization_state.dart';
 
-import 'core/color_manager.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SecureStorage.initialize();
+  await configureDependencies();
+  String savedLang = await LocalizationPreference.getLanguage();
 
-
-
-void main() {
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create:
+          (_) =>
+              LocalizationCubit(language: savedLang == "ar" ? "ar" : "en")
+                ..selectLanguage(savedLang == "ar" ? "Arabic" : "English"),
+      child: const MyApp(initialRoute: "/start"),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String initialRoute;
+  const MyApp({super.key, required this.initialRoute});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        scaffoldBackgroundColor: ColorManager.background,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-      )
-      ),
-      routes: {
-        StartScreen.routeName:(_)=>StartScreen(),
-        LoginScreen.routeName:(_)=>LoginScreen(),
-        RegisterScreen.routeName:(_)=>RegisterScreen(),
-        HomeScreen.routename:(_)=>HomeScreen(),
-        DeliveryDashboardScreen.routeName:(_)=>DeliveryDashboardScreen(),
+    return BlocBuilder<LocalizationCubit, LocalizationState>(
+      builder: (context, state) {
+        Locale currentLocale;
+
+        if (state is ArabicLanguage) {
+          currentLocale = const Locale("ar");
+        } else {
+          currentLocale = const Locale("en");
+        }
+
+        return MaterialApp(
+          title: 'Tech Restore',
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: currentLocale,
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.background,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              centerTitle: true,
+            ),
+          ),
+          initialRoute: initialRoute,
+          onGenerateRoute: Routes.onGenerateRoute,
+        );
       },
-      initialRoute: StartScreen.routeName,
     );
   }
 }

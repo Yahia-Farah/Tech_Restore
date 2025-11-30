@@ -1,0 +1,29 @@
+abstract class ApiEndPoints {
+  static const String login = 'auth/login';
+  static const String forgetPassword = 'auth/forgot-password';
+  static const String resetPassword = 'auth/reset-password';
+  static const String resendCode = 'auth/resend-otp';
+  static const String register = 'auth/register/user';
+  static const String registerShop = 'auth/register/shop';
+  static const String logout = 'auth/logout';
+  static const String verifyEmail = 'auth/verify-email';
+  static const String profile = 'users/profile';
+  static const String getAllUsers = 'admin/users';
+  static const String getAllOffers = 'shop/offers';
+  static const String addOffer = 'shop/offers';
+  static const String deleteOffer = 'shop/offers/{offerId}';
+  static const String updateOffer = 'shop/offers/{offerId}';
+  static const String getAllCategory = 'admin/categories';
+  static const String getAllProducts = 'shops/products';
+  static const String addProducts = 'shops/products';
+  static const String updateProducts = 'shops/products/{productId}';
+  static const String updateProductStock = 'shops/products/{productId}/stock';
+  static const String deleteProducts = 'shops/products/{productId}';
+  static const String searchInventory = 'shop/inventory/search';
+  static const String outOfStockInInventory = 'shop/inventory/out-of-stock';
+  static const String lowStockInInventory = 'shop/inventory/low-stock';
+  static const String totalItemsInInventory = 'shop/inventory/total-items';
+  static const String totalInventoryValue = 'shop/inventory/total-value';
+  static const String exportInventoryData = 'shop/inventory/export';
+  static const String getAllShops = 'admin/shops';
+}
