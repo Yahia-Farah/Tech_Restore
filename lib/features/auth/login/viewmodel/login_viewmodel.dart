@@ -18,6 +18,11 @@ class LoginViewModel extends Cubit<LoginStates> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   String role = "";
+  bool rememberMe = false;
+  void toggleRememberMe(bool boxValue) {
+    rememberMe = boxValue;
+    emit(ChangeRememberMeState());
+  }
   Future<void> login() async {
     emit(LoginLoadingState());
 
@@ -30,7 +35,10 @@ class LoginViewModel extends Cubit<LoginStates> {
       final LoginResponseModel response = await _loginUseCase(request);
       role = response.role!.first;
       await AuthService.saveAuthToken(response.accessToken ?? "");
-
+      await AuthService.saveUserId(response.id ?? "");
+      if (rememberMe) {
+        await AuthService.saveRememberMe(rememberMe);
+      }
       emit(LoginSuccessState(response));
     } on DioException catch (e) {
       final message = ApiErrorHandler.extractMessage(e);

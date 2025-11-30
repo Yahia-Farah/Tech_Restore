@@ -8,12 +8,18 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/toast_helper.dart';
 import '../../../shop/presentation/view/shop_layout.dart';
+import '../../domain/services/auth_services.dart';
 import '../viewmodel/login_states.dart';
 import '../viewmodel/login_viewmodel.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
@@ -21,7 +27,7 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<LoginViewModel>(),
       child: BlocConsumer<LoginViewModel, LoginStates>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is LoginSuccessState) {
             ToastHelper.showCustomToast(
               context,
@@ -29,6 +35,7 @@ class LoginScreen extends StatelessWidget {
               isError: false,
             );
             final role = context.read<LoginViewModel>().getRole();
+            await AuthService.saveRole(role);
             if (role == "ROLE_GUEST") {
               Navigator.pushNamedAndRemoveUntil(
                 context,
@@ -101,19 +108,36 @@ class LoginScreen extends StatelessWidget {
                       obscureText: true,
                     ),
                     const SizedBox(height: 17),
-
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.forgetPassword);
-                      },
-                      child: Text(
-                        local.forgetPassword,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.primary,
+                    Row(
+                      children: [
+                        Checkbox(
+                          activeColor: AppColors.primary,
+                          checkColor: AppColors.white,
+                          value: cubit.rememberMe,
+                          onChanged: (value) {
+                            cubit.toggleRememberMe(value ?? false);
+                            setState(() {});
+                          },
                         ),
-                      ),
+                        Text(
+                          local.rememberMe,
+                          style: const TextStyle(color: AppColors.black),
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, AppRoutes.forgetPassword);
+                          },
+                          child: Text(
+                            local.forgetPassword,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 20),
 

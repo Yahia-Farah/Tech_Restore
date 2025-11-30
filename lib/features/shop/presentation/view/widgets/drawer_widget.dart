@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/contants/app_images.dart';
-import '../../features/auth/logout/viewmodel/logout_viewmodel.dart';
-import '../../features/auth/logout/views/logout_widget.dart';
-import '../config/di.dart';
-import '../l10n/translation/app_localizations.dart';
-import '../theme/app_colors.dart';
+import '../../../../auth/logout/viewmodel/logout_viewmodel.dart';
+import '../../../../auth/logout/views/logout_widget.dart';
+import '../../../../../core/config/di.dart';
+import '../../../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../core/theme/app_colors.dart';
 
 class DrawerWidget extends StatelessWidget {
   final Function(int) onItemTapped;
@@ -74,15 +74,21 @@ class DrawerWidget extends StatelessWidget {
                   context: context,
                 ),
                 _drawerItem(
+                  icon: Icons.wallet_rounded,
+                  title: local.subs,
+                  index: 6,
+                  context: context,
+                ),
+                _drawerItem(
                   icon: Icons.local_offer_outlined,
                   title: local.offers,
-                  index: 6,
+                  index: 7,
                   context: context,
                 ),
                 _drawerItem(
                   icon: Icons.chat_bubble_outline,
                   title: local.support,
-                  index: 7,
+                  index: 8,
                   context: context,
                 ),
               ],

@@ -42,6 +42,9 @@ import '../../features/auth/forget_password/presentation/viewmodel/verify_code_v
     as _i215;
 import '../../features/auth/login/viewmodel/login_viewmodel.dart' as _i146;
 import '../../features/auth/logout/viewmodel/logout_viewmodel.dart' as _i71;
+import '../../features/shop/data/data_source/shop_remote_datasource.dart'
+    as _i622;
+import '../../features/shop/data/repositories/shop_repository.dart' as _i57;
 import '../../features/user/profile/data/data_sources/profile_remote_data_source_impl.dart'
     as _i904;
 import '../../features/user/profile/data/repositories/profile_repo_impl.dart'
@@ -79,10 +82,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i504.AuthRemoteDatasourceImpl(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i904.ProfileRemoteDataSource>(
         () => _i904.ProfileRemoteDataSource(gh<_i364.ApiClient>()));
+    gh.lazySingleton<_i622.ShopRemoteDataSource>(
+        () => _i622.ShopRemoteDataSource(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i508.GetUserRemoteDataSource>(
         () => _i508.GetUserRemoteDataSource(gh<_i364.ApiClient>()));
     gh.factory<_i341.ResetPasswordCubit>(
         () => _i341.ResetPasswordCubit(gh<_i364.ApiClient>()));
+    gh.lazySingleton<_i57.ShopRepository>(
+        () => _i57.ShopRepository(gh<_i622.ShopRemoteDataSource>()));
     gh.lazySingleton<_i890.ProfileRepository>(
         () => _i890.ProfileRepository(gh<_i904.ProfileRemoteDataSource>()));
     gh.lazySingleton<_i170.AuthRepository>(
@@ -99,18 +106,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i474.ResetPasswordUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i294.VerifyCodeUseCase>(
         () => _i294.VerifyCodeUseCase(gh<_i170.AuthRepository>()));
-    gh.factory<_i1037.SignUpUseCase>(
-        () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i188.LoginUseCase>(
         () => _i188.LoginUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i1037.SignUpUseCase>(
+        () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i80.SignUpUseCase>(
         () => _i80.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i524.GetUsersCubit>(
         () => _i524.GetUsersCubit(gh<_i680.GetUserRepository>()));
-    gh.factory<_i1061.ProfileCubit>(
-        () => _i1061.ProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i327.EditProfileCubit>(
         () => _i327.EditProfileCubit(gh<_i890.ProfileRepository>()));
+    gh.factory<_i1061.ProfileCubit>(
+        () => _i1061.ProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i164.ForgetPasswordCubit>(
         () => _i164.ForgetPasswordCubit(gh<_i948.ForgetPasswordUseCase>()));
     gh.factory<_i146.LoginViewModel>(

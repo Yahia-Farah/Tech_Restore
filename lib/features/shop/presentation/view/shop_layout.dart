@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/dashboard_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/devices_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/inventory_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/offers_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/orders_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/repair_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/subscriptions_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/support_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/transactions_screen.dart';
+import 'package:tech_restore/features/shop/presentation/view/widgets/drawer_widget.dart';
+import 'package:tech_restore/features/shop/presentation/viewmodel/devices_cubit.dart';
 import '../../../../core/l10n/translation/app_localizations.dart';
-import '../../../../core/widgets/drawer_widget.dart';
+import '../../data/repositories/shop_repository.dart';
+import '../../../../core/config/di.dart';
+import '../viewmodel/offers_cubit.dart';
+import '../viewmodel/inventory_cubit.dart';
 
 class ShopLayout extends StatefulWidget {
   const ShopLayout({super.key});
@@ -23,11 +30,21 @@ class _ShopLayoutState extends State<ShopLayout> {
   final List<Widget> _screens = [
     const DashboardScreen(),
     const RepairScreen(),
-    const DevicesScreen(),
+    BlocProvider(
+      create: (context) => DevicesCubit(getIt<ShopRepository>()),
+      child: const DevicesScreen(),
+    ),
     const OrdersScreen(),
     const TransactionsScreen(),
-    const InventoryScreen(),
-    const OffersScreen(),
+    BlocProvider(
+      create: (context) => InventoryCubit(getIt<ShopRepository>()),
+      child: const InventoryScreen(),
+    ),
+    const SubscriptionsScreen(),
+    BlocProvider(
+      create: (context) => OffersCubit(getIt<ShopRepository>()),
+      child: const OffersScreen(),
+    ),
     const SupportScreen(),
   ];
 
@@ -111,8 +128,10 @@ class _ShopLayoutState extends State<ShopLayout> {
       case 5:
         return local.inventory;
       case 6:
-        return local.offers;
+        return local.subs;
       case 7:
+        return local.offers;
+      case 9:
         return local.support;
       default:
         return "";

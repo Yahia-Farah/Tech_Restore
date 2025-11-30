@@ -4,12 +4,21 @@ class AuthService {
   static const String tokenKey = 'auth_token';
   static const String rememberMeKey = 'remember_me';
   static const String userIdKey = 'user_id';
+  static const String roleKey = 'role';
 
   static Future<void> saveAuthToken(String token) async {
     await SecureStorage.write(key: tokenKey, value: token);
   }
 
-  static Future<void> saveToken(String userId) async {
+  static Future<void> saveRole(String role) async {
+    await SecureStorage.write(key: roleKey, value: role);
+  }
+
+  static Future<String?> getRole() async {
+    return await SecureStorage.read(roleKey);
+  }
+
+  static Future<void> saveUserId(String userId) async {
     await SecureStorage.write(key: userIdKey, value: userId);
   }
 
@@ -36,6 +45,10 @@ class AuthService {
 
   static Future<String?> getToken() async {
     return await SecureStorage.read(tokenKey);
+  }
+
+  static Future<String?> getUserId() async {
+    return await SecureStorage.read(userIdKey);
   }
 
   static Future<void> logout() async {
