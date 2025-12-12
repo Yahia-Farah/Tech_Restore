@@ -4,6 +4,7 @@ import 'package:tech_restore/features/admin/tabs/manage-shops/data/models/shop_m
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/states/get_shops_states.dart';
 
+import '../../../../../../core/theme/app_colors.dart';
 import '../../../../../auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 
 class AdminRepairScreen extends StatefulWidget {
@@ -95,7 +96,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                 children: [
                   const Text(
                     "Repair Shop Management",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary),
                   ),
                   const SizedBox(height: 4),
                   const Text(
@@ -124,6 +125,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
+                                  color: AppColors.primary
                                 ),
                               ),
                               SizedBox(

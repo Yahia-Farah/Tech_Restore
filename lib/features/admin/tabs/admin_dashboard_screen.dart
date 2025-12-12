@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../../../core/theme/app_colors.dart';
 import '../widgets/admin_drawer.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    Navigator.pop(context); // Close drawer after tapping
+    Navigator.pop(context);
   }
 
   @override
@@ -34,7 +35,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ====== Top Cards Horizontal Scroll ======
             SizedBox(
               height: 150, // set fixed height for horizontal cards
               child: ListView(
@@ -72,7 +72,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             ),
             const SizedBox(height: 20),
 
-            // ====== Latest Activities (same as before) ======
             const _SectionCard(
               title: "Latest Activities",
               child: Column(
@@ -81,7 +80,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     icon: Icons.store_mall_directory,
                     text: "New repair shop 'TechFix Pro' pending approval",
                     time: "2 hours ago",
-                    color: Colors.blue,
+                    color: AppColors.primary,
                   ),
                   _ActivityTile(
                     icon: Icons.report_problem_outlined,
@@ -159,7 +158,7 @@ class _OverviewCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, color: Colors.blue),
+                Icon(icon, color: AppColors.primary),
                 const SizedBox(width: 8),
                 Text(
                   title,
@@ -207,7 +206,7 @@ class _SectionCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.primary),
             ),
             const SizedBox(height: 12),
             child,

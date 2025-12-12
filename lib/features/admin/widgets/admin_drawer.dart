@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/contants/app_images.dart';
 import '../../../core/config/di.dart';
 import '../../../core/l10n/translation/app_localizations.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../auth/logout/viewmodel/logout_viewmodel.dart';
 import '../../auth/logout/views/logout_widget.dart';
 
@@ -24,12 +25,12 @@ class AdminDrawerWidget extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.white),
+            decoration: const BoxDecoration(color: AppColors.white),
             child: Row(
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage(AppImages.startScreen),
+                  backgroundImage: AssetImage(AppImages.appIcon),
                 ),
                 const SizedBox(width: 10),
                 const Text(
@@ -37,7 +38,7 @@ class AdminDrawerWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: AppColors.black,
                   ),
                 ),
               ],
@@ -120,17 +121,17 @@ class AdminDrawerWidget extends StatelessWidget {
     final bool isSelected = index == selectedIndex;
 
     return ListTile(
-      leading: Icon(icon, color: isSelected ? Colors.blue : Colors.black54),
+      leading: Icon(icon, color: isSelected ? AppColors.primary : AppColors.primary),
       title: Text(
         text,
         style: TextStyle(
-          color: isSelected ? Colors.blue : Colors.black87,
+          color: isSelected ? AppColors.primary : Colors.black87,
           fontSize: 16,
           fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         ),
       ),
       selected: isSelected,
-      selectedTileColor: Colors.blue.withOpacity(0.1),
+      selectedTileColor: AppColors.primary.withOpacity(0.2),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       onTap: () => onItemTapped(index),
     );

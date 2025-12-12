@@ -4,6 +4,8 @@ import 'package:tech_restore/features/admin/tabs/manage-user/data/models/user_mo
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/states/get_users_states.dart';
 
+import '../../../../../../core/theme/app_colors.dart';
+
 class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
 
@@ -90,7 +92,7 @@ class _UsersScreenState extends State<UsersScreen> {
                 children: [
                   const Text(
                     "User Management",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary),
                   ),
                   const SizedBox(height: 10),
 
@@ -131,12 +133,10 @@ class _UsersScreenState extends State<UsersScreen> {
                     elevation: 2,
                     child: Column(
                       children: [
-                        // 👇 Scroll only table, not footer
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Column(
                             children: [
-                              // Header row
                               Container(
                                 color: Colors.grey[100],
                                 padding: const EdgeInsets.symmetric(

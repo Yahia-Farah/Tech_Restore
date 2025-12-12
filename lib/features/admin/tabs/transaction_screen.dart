@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_colors.dart';
 import '../widgets/admin_drawer.dart';
 
 class AdminTransactionsScreen extends StatefulWidget {
@@ -79,7 +80,7 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
           children: [
             const Text(
               "Transaction Management",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primary),
             ),
             const SizedBox(height: 4),
             const Text(

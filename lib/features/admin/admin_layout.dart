@@ -12,6 +12,8 @@ import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmo
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
+import '../../core/theme/app_colors.dart';
+
 class AdminLayout extends StatefulWidget {
   const AdminLayout({super.key});
 
@@ -53,7 +55,7 @@ class _MainLayoutState extends State<AdminLayout> {
         title: Text(
           _getTitle(_selectedIndex),
           style: const TextStyle(
-            color: Colors.black,
+            color: AppColors.primary,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -67,7 +69,7 @@ class _MainLayoutState extends State<AdminLayout> {
                 iconSize: 32,
                 icon: const Icon(
                   Icons.notifications_none,
-                  color: Colors.black54,
+                  color: AppColors.primary,
                 ),
                 onPressed: () {},
               ),
