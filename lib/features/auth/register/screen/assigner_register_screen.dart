@@ -74,7 +74,7 @@ class _AssignerRegisterScreenState extends State<AssignerRegisterScreen> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      local.driverSubtitle,
+                      local.assignerSubtitle,
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: 20,
