@@ -9,6 +9,7 @@ import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/toast_helper.dart';
 import '../../../shop/presentation/view/shop_layout.dart';
 import '../../domain/services/auth_services.dart';
+import '../../register/widgets/register_select_widget.dart';
 import '../viewmodel/login_states.dart';
 import '../viewmodel/login_viewmodel.dart';
 
@@ -48,7 +49,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppRoutes.adminDashboard,
                 (route) => false,
               );
-            } else {
+            } else if (role == "ROLE_DELIVERY") {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.deliveryDashboard,
+                    (route) => false,
+              );
+            }else {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRoutes.shopDashboard,
@@ -68,13 +75,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               scrolledUnderElevation: 0,
               title: Text(local.login),
               titleTextStyle: TextStyle(
-                color: AppColors.secondary,
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
+                  fontSize: 26,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary,
+                ),
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -86,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       child: Text(
                         local.welcomeBack,
-                        style: const TextStyle(
+                        style: TextStyle(
+                          color: AppColors.primary[70],
                           fontWeight: FontWeight.w700,
                           fontSize: 22,
                         ),
@@ -126,7 +135,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, AppRoutes.forgetPassword);
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.forgetPassword,
+                            );
                           },
                           child: Text(
                             local.forgetPassword,
@@ -144,7 +156,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: CustomElevatedButton(
-                        color: AppColors.primary,
                         text:
                             state is LoginLoadingState
                                 ? local.loading
@@ -159,23 +170,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 14),
 
-                    SizedBox(
-                      width: double.infinity,
-                      child: CustomElevatedButton(
-                        color: AppColors.buttons,
-                        text: local.withGoogle,
-                        textColor: AppColors.black,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ShopLayout(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -184,32 +178,34 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: const TextStyle(fontSize: 19),
                         ),
                         TextButton(
-                          onPressed: () async {
-                            final choice = await showDialog<String>(
-                              context: context,
-                              builder: (context) {
-                                final local = AppLocalizations.of(context)!;
-                                return AlertDialog(
-                                  title: Text(local.signup,style: const TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
-                                  content: Text(local.signUpQuote,style: const TextStyle(fontSize: 16),),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, 'user'),
-                                      child: Text('${local.signUp} ${local.customer}',style: const TextStyle(color: AppColors.primary,fontSize: 16),),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => RegisterSelectScreen(
+                                      onDriverTap: () => Navigator.pushNamed(
+                                        context,
+                                        AppRoutes.deliveryRegister,
+                                      ),
+                                      onUserTap:
+                                          () => Navigator.pushNamed(
+                                            context,
+                                            AppRoutes.register,
+                                          ),
+                                      onShopTap:
+                                          () => Navigator.pushNamed(
+                                            context,
+                                            AppRoutes.shopRegister,
+                                          ),
+                                      onAssignerTap:
+                                          () => Navigator.pushNamed(
+                                            context,
+                                            AppRoutes.assignerRegister,
+                                          ),
                                     ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, 'shop'),
-                                      child: Text('${local.signUp} ${local.shop}',style: const TextStyle(color: AppColors.primary,fontSize: 16),),
-                                    ),
-                                  ],
-                                );
-                              },
+                              ),
                             );
-                            if (choice == 'user') {
-                              Navigator.pushNamed(context, AppRoutes.register);
-                            } else if (choice == 'shop') {
-                              Navigator.pushNamed(context, AppRoutes.shopRegister);
-                            }
                           },
                           child: Text(
                             local.signUp,

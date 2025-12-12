@@ -21,7 +21,6 @@ class ShopRegisterCubit extends Cubit<ShopRegisterState> {
   Future<void> signUp(ShopEntity entity) async {
     emit(ShopRegisterLoading());
     try {
-      // Ensure shopType value is sent uppercase
       final result = await _signUpUseCase(
         ShopEntity(
           email: entity.email,
@@ -33,7 +32,7 @@ class ShopRegisterCubit extends Cubit<ShopRegisterState> {
           shopAddress: entity.shopAddress,
         ),
       );
-      emit(ShopRegisterSuccess(result.message ?? "Registered successfully"));
+      emit(ShopRegisterSuccess(result.message));
     } catch (e) {
       emit(ShopRegisterError(e.toString()));
     }

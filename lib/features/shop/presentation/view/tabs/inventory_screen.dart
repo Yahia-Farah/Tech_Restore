@@ -107,7 +107,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.blue.shade50,
+                      color: Colors.green.shade50,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
@@ -118,7 +118,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            color: Colors.green,
                           ),
                         ),
                         const SizedBox(height: 8),

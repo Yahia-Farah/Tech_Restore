@@ -30,6 +30,10 @@ import '../../features/auth/data/datasource/auth_remote_data_source.dart'
     as _i24;
 import '../../features/auth/data/repo_impl/auth_repo_impl.dart' as _i279;
 import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
+import '../../features/auth/domain/usecases/assigner_signup_usecase.dart'
+    as _i68;
+import '../../features/auth/domain/usecases/delivery_signup_usecase.dart'
+    as _i77;
 import '../../features/auth/domain/usecases/forget_password_usecase.dart'
     as _i948;
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
@@ -122,6 +126,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i80.SignUpUseCase>(
         () => _i80.SignUpUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i68.AssignerSignupUseCase>(
+        () => _i68.AssignerSignupUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i77.DeliverySignUpUseCase>(
+        () => _i77.DeliverySignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i524.GetUsersCubit>(
         () => _i524.GetUsersCubit(gh<_i680.GetUserRepository>()));
     gh.factory<_i327.EditProfileCubit>(

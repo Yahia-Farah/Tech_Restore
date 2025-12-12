@@ -1441,6 +1441,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remember me'**
   String get rememberMe;
+
+  /// No description provided for @joinUsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Us'**
+  String get joinUsTitle;
+
+  /// No description provided for @joinUsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your role to get started'**
+  String get joinUsSubtitle;
+
+  /// No description provided for @driverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get driverTitle;
+
+  /// No description provided for @driverSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver orders and earn money'**
+  String get driverSubtitle;
+
+  /// No description provided for @userTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get userTitle;
+
+  /// No description provided for @userSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order and receive deliveries'**
+  String get userSubtitle;
+
+  /// No description provided for @shopTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop'**
+  String get shopTitle;
+
+  /// No description provided for @shopSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your store and products'**
+  String get shopSubtitle;
+
+  /// No description provided for @assignerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigner'**
+  String get assignerTitle;
+
+  /// No description provided for @assignerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coordinate and assign deliveries'**
+  String get assignerSubtitle;
+
+  /// No description provided for @department.
+  ///
+  /// In en, this message translates to:
+  /// **'Department'**
+  String get department;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
 }
 
 class _AppLocalizationsDelegate

@@ -16,6 +16,8 @@ import '../../../features/auth/data/models/forget_password_models/forget_passwor
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_response_model.dart';
+import '../../../features/auth/data/models/signup_assigner_model/signup_assigner_request_model.dart';
+import '../../../features/auth/data/models/signup_delivery_models/signup_delivery_request_model.dart';
 import '../../../features/auth/data/models/signup_shop_models/sign_up_shop_response_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_request_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_response_model.dart';
@@ -40,8 +42,18 @@ abstract class ApiClient {
     @Body() SignUpShopRequestModel request,
   );
 
+  @POST(ApiEndPoints.registerDelivery)
+  Future<SignUpShopResponseModel> signUpDelivery(
+    @Body() SignupDeliveryRequestModel request,
+  );
+
+  @POST(ApiEndPoints.registerAssigner)
+  Future<SignUpShopResponseModel> signUpAssigner(
+    @Body() SignupAssignerRequestModel request,
+  );
+
   @POST(ApiEndPoints.login)
-  Future<LoginResponseModel> login(@Body() LoginRequestModel request);
+  Future<HttpResponse<LoginResponseModel>> login(@Body() LoginRequestModel request);
 
   @POST(ApiEndPoints.forgetPassword)
   Future<String> forgetPassword(

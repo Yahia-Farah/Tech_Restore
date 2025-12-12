@@ -5,12 +5,17 @@ import '../models/forget_password_models/reset_password_request_model.dart';
 import '../models/forget_password_models/verify_email_request_model.dart';
 import '../models/login_models/login_request_model.dart';
 import '../models/login_models/login_response_model.dart';
+import '../models/signup_assigner_model/signup_assigner_request_model.dart';
+import '../models/signup_delivery_models/signup_delivery_request_model.dart';
 import '../models/signup_shop_models/sign_up_shop_response_model.dart';
 import '../models/signupmodels/sign_up_request_model.dart';
 import '../models/signupmodels/sign_up_response_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<SignUpResponseModel> signUp(SignUpRequest request);
+  Future<SignUpShopResponseModel> signUpShop(SignUpShopRequestModel request);
+  Future<SignUpShopResponseModel> signUpDelivery(SignupDeliveryRequestModel request);
+  Future<SignUpShopResponseModel> signUpAssigner(SignupAssignerRequestModel request);
   Future<LoginResponseModel> login(LoginRequestModel request);
   Future<AuthResponse<String>> forgetPassword(
     ForgetPasswordRequestModel forgetPasswordRequestModel,
@@ -25,5 +30,4 @@ abstract class AuthRemoteDataSource {
     VerifyEmailRequestModel verifyEmailRequestModel,
   );
   Future<String> logout();
-  Future<SignUpShopResponseModel> signUpShop(SignUpShopRequestModel request);
 }

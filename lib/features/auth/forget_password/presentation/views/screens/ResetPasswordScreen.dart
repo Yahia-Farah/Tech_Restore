@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/extensions/extensions.dart';
 import 'package:tech_restore/core/widgets/toast_helper.dart';
-import '../../../../../../core/contants/app_images.dart';
+import '../../../../../../core/contants/app_icons.dart';
 import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/routes/route_names.dart';
 import '../../../../../../core/theme/app_colors.dart';
@@ -47,14 +47,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Image.asset(AppImages.arrowBack),
+          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
         ),
         title: Text(
           local.password,
-          style: const TextStyle(
-            color: AppColors.black,
-            fontWeight: FontWeight.w500,
-          ),
         ),
       ),
       body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
@@ -81,7 +77,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: [
                 Text(
                   local.resetPassword,
-                  style: const TextStyle(
+                  style: TextStyle(
+                    color: AppColors.primary[60],
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
                   ),

@@ -222,5 +222,17 @@
   "showMore": "عرض المزيد",
   "are_you_sure_delete": "هل أنت متأكد أنك تريد حذف العرض؟",
   "subs":"الاشتراك",
-  "rememberMe": "تذكرني"
+  "rememberMe": "تذكرني",
+  "joinUsTitle": "انضم إلينا",
+  "joinUsSubtitle": "اختر دورك للبدء",
+  "driverTitle": "سائق",
+  "driverSubtitle": "قم بتوصيل الطلبات واربح المال",
+  "userTitle": "مستخدم",
+  "userSubtitle": "اطلب واستقبل التوصيلات",
+  "shopTitle": "متجر",
+  "shopSubtitle": "إدارة متجرك ومنتجاتك",
+  "assignerTitle": "مُنسّق",
+  "assignerSubtitle": "تنسيق وتعيين عمليات التوصيل",
+  "department": "القسم",
+  "address": "العنوان"
 }

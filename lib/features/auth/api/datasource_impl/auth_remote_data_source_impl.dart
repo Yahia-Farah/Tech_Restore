@@ -9,10 +9,13 @@ import '../../data/datasource/auth_remote_data_source.dart';
 import '../../data/models/forget_password_models/forget_password_request_model.dart';
 import '../../data/models/forget_password_models/reset_password_request_model.dart';
 import '../../data/models/forget_password_models/verify_email_request_model.dart';
+import '../../data/models/signup_assigner_model/signup_assigner_request_model.dart';
+import '../../data/models/signup_delivery_models/signup_delivery_request_model.dart';
 import '../../data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import '../../data/models/signupmodels/sign_up_request_model.dart';
 import '../../data/models/signupmodels/sign_up_response_model.dart';
 import '../../domain/responses/auth_response.dart';
+import '../../domain/services/auth_services.dart';
 
 @LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDatasourceImpl implements AuthRemoteDataSource {
@@ -33,11 +36,55 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDataSource {
     }
   }
 
+
+  @override
+  Future<SignUpShopResponseModel> signUpShop(SignUpShopRequestModel request) async {
+    try {
+      final result = await _apiClient.signUpShop(request);
+      return result;
+    } on DioException catch (e) {
+      final apiMessage = ApiErrorHandler.extractMessage(e);
+      throw Exception(apiMessage);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+
+  @override
+  Future<SignUpShopResponseModel> signUpDelivery(SignupDeliveryRequestModel request) async {
+    try {
+      final result = await _apiClient.signUpDelivery(request);
+      return result;
+    } on DioException catch (e) {
+      final apiMessage = ApiErrorHandler.extractMessage(e);
+      throw Exception(apiMessage);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<SignUpShopResponseModel> signUpAssigner(SignupAssignerRequestModel request) async {
+    try {
+      final result = await _apiClient.signUpAssigner(request);
+      return result;
+    } on DioException catch (e) {
+      final apiMessage = ApiErrorHandler.extractMessage(e);
+      throw Exception(apiMessage);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   @override
   Future<LoginResponseModel> login(LoginRequestModel request) async {
     try {
-      final response = await _apiClient.login(request);
-      return response;
+      final httpResponse = await _apiClient.login(request);
+
+      _extractAndSaveRefreshToken(httpResponse.response);
+
+      return httpResponse.data;
     } on DioException catch (e) {
       final apiMessage = ApiErrorHandler.extractMessage(e);
       throw Exception(apiMessage);
@@ -110,16 +157,17 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDataSource {
   Future<String> logout() async {
     return await _apiClient.logout();
   }
-  @override
-  Future<SignUpShopResponseModel> signUpShop(SignUpShopRequestModel request) async {
-    try {
-      final result = await _apiClient.signUpShop(request);
-      return result;
-    } on DioException catch (e) {
-      final apiMessage = ApiErrorHandler.extractMessage(e);
-      throw Exception(apiMessage);
-    } catch (e) {
-      throw Exception(e.toString());
+
+  void _extractAndSaveRefreshToken(Response response) async {
+    final cookies = response.headers['set-cookie'];
+    if (cookies == null) return;
+
+    for (final cookie in cookies) {
+      if (cookie.startsWith("refresh_token=")) {
+        final token = cookie.split("refresh_token=").last.split(";").first;
+        await AuthService.saveRefreshToken(token);
+        break;
+      }
     }
   }
 }

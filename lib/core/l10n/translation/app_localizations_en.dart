@@ -693,4 +693,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rememberMe => 'Remember me';
+
+  @override
+  String get joinUsTitle => 'Join Us';
+
+  @override
+  String get joinUsSubtitle => 'Choose your role to get started';
+
+  @override
+  String get driverTitle => 'Driver';
+
+  @override
+  String get driverSubtitle => 'Deliver orders and earn money';
+
+  @override
+  String get userTitle => 'User';
+
+  @override
+  String get userSubtitle => 'Order and receive deliveries';
+
+  @override
+  String get shopTitle => 'Shop';
+
+  @override
+  String get shopSubtitle => 'Manage your store and products';
+
+  @override
+  String get assignerTitle => 'Assigner';
+
+  @override
+  String get assignerSubtitle => 'Coordinate and assign deliveries';
+
+  @override
+  String get department => 'Department';
+
+  @override
+  String get address => 'Address';
 }

@@ -7,7 +7,7 @@ class ApiErrorHandler {
     final data = e.response?.data;
 
     if (data is Map<String, dynamic>) {
-      return data['error'] ??
+      return
           data['message'] ??
           ServerFailure.fromDio(e).errorMessage;
     }
@@ -16,7 +16,7 @@ class ApiErrorHandler {
       try {
         final decoded = json.decode(data);
         if (decoded is Map<String, dynamic>) {
-          return decoded['error'] ??
+          return
               decoded['message'] ??
               ServerFailure.fromDio(e).errorMessage;
         }

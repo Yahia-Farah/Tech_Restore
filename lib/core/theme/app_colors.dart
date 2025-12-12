@@ -2,11 +2,26 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   static const background = Color(0xffFAFAFA);
-  static const primary = Color(0xff617AFA);
   static const secondary = Color(0xff000000);
   static const hint = Color(0xff3D404A);
   static const buttons = Color(0xffEDF0F2);
   static const Color grey = Color(0xFFEDF0F2);
+
+  static const MaterialColor primary = MaterialColor(
+    0xFF65A30D, <int, Color>{
+    10: Color(0xFFEAF4D8),
+    20: Color(0xFFD4E9B1),
+    30: Color(0xFFBEE089),
+    40: Color(0xFFA8D662),
+    50: Color(0xFF92CC3A),
+    0:  Color(0xFF65A30D), // BASE
+    60: Color(0xFF57810B),
+    70: Color(0xFF456006),
+    80: Color(0xFF334002),
+    90: Color(0xFF263101),
+    100: Color(0xFF192200),
+  },
+  );
 
   static const MaterialColor white = MaterialColor(0xFFF9F9F9, <int, Color>{
     10: Color(0xFFFEFEFE),

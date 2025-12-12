@@ -25,7 +25,7 @@ abstract class DioModule {
       ),
     );
     dio.interceptors.add(
-      InterceptorsWrapper(
+      QueuedInterceptorsWrapper(
         onRequest: (options, handler) async {
           final requiresAuth = options.extra['auth'] == true;
 
@@ -36,10 +36,40 @@ abstract class DioModule {
             }
           }
 
-          return handler.next(options);
+          handler.next(options);
+        },
+
+        onError: (error, handler) async {
+          if (error.response?.statusCode == 401) {
+            final requestOptions = error.requestOptions;
+
+            if (requestOptions.extra['retry'] == true) {
+              await AuthService.logout();
+              return handler.reject(error);
+            }
+
+            try {
+              final newToken = await _refreshToken();
+
+              if (newToken != null) {
+                await AuthService.saveAuthToken(newToken);
+
+                requestOptions.headers['Authorization'] = 'Bearer $newToken';
+                requestOptions.extra['retry'] = true;
+
+                final response = await dio.fetch(requestOptions);
+                return handler.resolve(response);
+              }
+            } catch (_) {
+              await AuthService.logout();
+            }
+          }
+
+          handler.reject(error);
         },
       ),
     );
+
 
     return dio;
   }
@@ -47,3 +77,23 @@ abstract class DioModule {
   @Named('baseurl')
   String get baseUrl => ApiConstant.baseUrl;
 }
+
+Future<String?> _refreshToken() async {
+  final refreshToken = await AuthService.getRefreshToken();
+
+  if (refreshToken == null) return null;
+
+  try {
+    final response = await Dio().post(
+      'http://localhost:8080/api/auth/refresh-token',
+      data: {
+        "refreshToken": refreshToken,
+      },
+    );
+
+    return response.data["accessToken"];
+  } catch (_) {
+    return null;
+  }
+}
+

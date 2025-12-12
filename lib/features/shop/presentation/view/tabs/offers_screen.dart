@@ -107,7 +107,7 @@ class _OffersScreenState extends State<OffersScreen> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
+                        color: Colors.green.shade50,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(
@@ -118,7 +118,7 @@ class _OffersScreenState extends State<OffersScreen> {
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Colors.blue,
+                              color: Colors.green,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -135,23 +135,17 @@ class _OffersScreenState extends State<OffersScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: TextField(
+                          child: CustomTextFormField(
                             controller: _searchController,
-                            decoration: InputDecoration(
-                              hintText: local.searchOffers, // localized
-                              prefixIcon: const Icon(Icons.search),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
+                            hint: local.searchOffers,
                           ),
                         ),
                         const SizedBox(width: 16),
                         CustomElevatedButton(
                           text: local.addNewOffer,
                           onPressed: () => _showAddOrEditDialog(context, local),
-                          color: Colors.blue.shade50,
-                          textColor: Colors.blue,
+                          color: Colors.green.shade50,
+                          textColor: Colors.green,
                           borderRadius: 12,
                           width: 138,
                           height: 48,

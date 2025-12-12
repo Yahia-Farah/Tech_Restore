@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (_) => getIt<ProfileCubit>()..getUserProfile(),
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: AppColors.primary,
           type: BottomNavigationBarType.fixed,
           backgroundColor: AppColors.background,
           currentIndex: selectedIndex,

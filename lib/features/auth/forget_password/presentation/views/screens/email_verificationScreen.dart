@@ -4,7 +4,7 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:tech_restore/core/extensions/extensions.dart';
 import 'package:tech_restore/core/widgets/toast_helper.dart';
 import '../../../../../../core/Widgets/custom_Elevated_Button.dart';
-import '../../../../../../core/contants/app_images.dart';
+import '../../../../../../core/contants/app_icons.dart';
 import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/theme/app_colors.dart';
 import '../../viewmodel/states/verify_code_states.dart';
@@ -45,7 +45,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               : AppBar(
                 leading: IconButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  icon: Image.asset(AppImages.arrowBack),
+                  icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
                 ),
                 title: Text(local.password),
               ),
@@ -69,7 +69,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 children: [
                   Text(
                     local.emailVerificationScreen,
-                    style: const TextStyle(
+                    style: TextStyle(
+                      color: AppColors.primary[60],
                       fontWeight: FontWeight.w600,
                       fontSize: 20,
                     ),
@@ -101,7 +102,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                             fontSize: 17,
                             color:
                                 cubit.isResendEnabled
-                                    ? Colors.blue
+                                    ? AppColors.primary
                                     : Colors.grey,
                           ),
                         ),

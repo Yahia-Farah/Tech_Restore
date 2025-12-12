@@ -694,4 +694,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rememberMe => 'تذكرني';
+
+  @override
+  String get joinUsTitle => 'انضم إلينا';
+
+  @override
+  String get joinUsSubtitle => 'اختر دورك للبدء';
+
+  @override
+  String get driverTitle => 'سائق';
+
+  @override
+  String get driverSubtitle => 'قم بتوصيل الطلبات واربح المال';
+
+  @override
+  String get userTitle => 'مستخدم';
+
+  @override
+  String get userSubtitle => 'اطلب واستقبل التوصيلات';
+
+  @override
+  String get shopTitle => 'متجر';
+
+  @override
+  String get shopSubtitle => 'إدارة متجرك ومنتجاتك';
+
+  @override
+  String get assignerTitle => 'مُنسّق';
+
+  @override
+  String get assignerSubtitle => 'تنسيق وتعيين عمليات التوصيل';
+
+  @override
+  String get department => 'القسم';
+
+  @override
+  String get address => 'العنوان';
 }

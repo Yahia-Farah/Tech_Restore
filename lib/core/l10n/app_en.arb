@@ -222,5 +222,17 @@
   "showMore": "Show more",
   "are_you_sure_delete": "Are you sure you want to delete offer?",
   "subs": "Subscriptions",
-  "rememberMe": "Remember me"
+  "rememberMe": "Remember me",
+  "joinUsTitle": "Join Us",
+  "joinUsSubtitle": "Choose your role to get started",
+  "driverTitle": "Driver",
+  "driverSubtitle": "Deliver orders and earn money",
+  "userTitle": "User",
+  "userSubtitle": "Order and receive deliveries",
+  "shopTitle": "Shop",
+  "shopSubtitle": "Manage your store and products",
+  "assignerTitle": "Assigner",
+  "assignerSubtitle": "Coordinate and assign deliveries",
+  "department": "Department",
+  "address": "Address"
 }
