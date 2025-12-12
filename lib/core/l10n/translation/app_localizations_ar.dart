@@ -93,7 +93,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get devices_management => 'إدارة الأجهزة';
 
   @override
-  String get devices_management_desc => 'يمكنك متابعة ورؤية جميع المنتجات في المحل الخاص بك من هنا';
+  String get devices_management_desc => 'يمكنك وصف جهازك هنا...';
 
   @override
   String get add_device => 'إضافة جهاز';
@@ -129,7 +129,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get status => 'حالة الجهاز';
 
   @override
-  String get actions => 'إزالة / تعديل';
+  String get actions => 'تعديل / إزالة';
 
   @override
   String get newDev => 'جديد';
@@ -147,7 +147,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get repair_requests_title => 'طلبات التصليح';
 
   @override
-  String get repair_requests_subtitle => 'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
+  String get repair_requests_subtitle =>
+      'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
 
   @override
   String get status_filter => 'حالة الطلب';
@@ -183,7 +184,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orders_title => 'طلبات الشراء';
 
   @override
-  String get orders_subtitle => 'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
+  String get orders_subtitle =>
+      'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
 
   @override
   String get last_orders => 'آخر الطلبات';
@@ -225,7 +227,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get transactions => 'العمليات';
 
   @override
-  String get transactions_subtitle => 'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
+  String get transactions_subtitle =>
+      'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
 
   @override
   String get month => 'الشهر';
@@ -286,7 +289,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get inventory_title => 'نظام الجرد';
 
   @override
-  String get inventory_description => 'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
+  String get inventory_description =>
+      'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
 
   @override
   String get inventory_search => 'ابحث في الجرد...';
@@ -346,16 +350,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchOffers => 'ابحث في العروض...';
 
   @override
-  String get addNewOffer => 'إضافة عرض جديد';
+  String get addNewOffer => 'عرض جديد';
 
   @override
   String get offerColumnTitle => 'العرض';
 
   @override
-  String get offerColumnContent => 'محتويات العرض';
+  String get offerColumnContent => 'وصف العرض';
 
   @override
-  String get offerColumnDiscount => 'الخصم';
+  String get offerColumnDiscount => 'الخصم %';
 
   @override
   String get offerColumnDuration => 'مدة العرض';
@@ -376,7 +380,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get supportTitle => 'الدعم';
 
   @override
-  String get supportSubtitle => 'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
+  String get supportSubtitle =>
+      'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
 
   @override
   String get searchSupport => 'ابحث في طلبات الدعم...';
@@ -502,13 +507,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signUpQuote => 'احصل على إصلاح لجهازك بسرعة.';
 
   @override
-  String get secSignUpQuote => 'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
+  String get secSignUpQuote =>
+      'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
 
   @override
-  String get byContinuing => 'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
+  String get byContinuing =>
+      'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
 
   @override
-  String get startQuote => 'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
+  String get startQuote =>
+      'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
 
   @override
   String get explore => 'تصفح';
@@ -565,19 +573,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get logoutConfirmTextCenter => 'تأكيد تسجيل الخروج!';
 
   @override
-  String get resetPasswordUnderMsg => 'يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل';
+  String get resetPasswordUnderMsg =>
+      'يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل';
 
   @override
   String get emailVerificationScreen => 'التحقق من البريد الإلكتروني';
 
   @override
-  String get emailVerificationScreenUnderMsg => 'يرجى إدخال الرمز الذي تم إرساله إلى\nعنوان بريدك الإلكتروني';
+  String get emailVerificationScreenUnderMsg =>
+      'يرجى إدخال الرمز الذي تم إرساله إلى\nعنوان بريدك الإلكتروني';
 
   @override
   String get codeReceiveMsgError => 'لم تستلم الرمز؟';
 
   @override
-  String get forgetPasswordUnderText => 'يرجى إدخال البريد الإلكتروني المرتبط\nبحسابك';
+  String get forgetPasswordUnderText =>
+      'يرجى إدخال البريد الإلكتروني المرتبط\nبحسابك';
 
   @override
   String get validationEmailErrorMessage => 'هذا البريد الإلكتروني غير صالح';
@@ -668,4 +679,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shopAddressBuilding => 'المبنى';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get showMore => 'عرض المزيد';
+
+  @override
+  String get are_you_sure_delete => 'هل أنت متأكد أنك تريد حذف العرض؟';
+
+  @override
+  String get subs => 'الاشتراك';
+
+  @override
+  String get rememberMe => 'تذكرني';
+
+  @override
+  String get joinUsTitle => 'انضم إلينا';
+
+  @override
+  String get joinUsSubtitle => 'اختر دورك للبدء';
+
+  @override
+  String get driverTitle => 'سائق';
+
+  @override
+  String get driverSubtitle => 'قم بتوصيل الطلبات واربح المال';
+
+  @override
+  String get userTitle => 'مستخدم';
+
+  @override
+  String get userSubtitle => 'اطلب واستقبل التوصيلات';
+
+  @override
+  String get shopTitle => 'متجر';
+
+  @override
+  String get shopSubtitle => 'إدارة متجرك ومنتجاتك';
+
+  @override
+  String get assignerTitle => 'مُنسّق';
+
+  @override
+  String get assignerSubtitle => 'تنسيق وتعيين عمليات التوصيل';
+
+  @override
+  String get department => 'القسم';
+
+  @override
+  String get address => 'العنوان';
 }

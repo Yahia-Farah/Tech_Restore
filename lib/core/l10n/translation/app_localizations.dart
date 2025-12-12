@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,17 +84,18 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
-    Locale('en')
+    Locale('en'),
   ];
 
   /// No description provided for @app_name.
@@ -266,7 +269,7 @@ abstract class AppLocalizations {
   /// No description provided for @devices_management_desc.
   ///
   /// In en, this message translates to:
-  /// **'You can monitor and view all devices in your store here'**
+  /// **'Describe your device...'**
   String get devices_management_desc;
 
   /// No description provided for @add_device.
@@ -338,7 +341,7 @@ abstract class AppLocalizations {
   /// No description provided for @actions.
   ///
   /// In en, this message translates to:
-  /// **'Remove / Edit'**
+  /// **'Edit / Remove'**
   String get actions;
 
   /// No description provided for @newDev.
@@ -764,7 +767,7 @@ abstract class AppLocalizations {
   /// No description provided for @addNewOffer.
   ///
   /// In en, this message translates to:
-  /// **'Add New Offer'**
+  /// **'New Offer'**
   String get addNewOffer;
 
   /// No description provided for @offerColumnTitle.
@@ -776,13 +779,13 @@ abstract class AppLocalizations {
   /// No description provided for @offerColumnContent.
   ///
   /// In en, this message translates to:
-  /// **'Offer Content'**
+  /// **'Offer Description'**
   String get offerColumnContent;
 
   /// No description provided for @offerColumnDiscount.
   ///
   /// In en, this message translates to:
-  /// **'Discount'**
+  /// **'Discount %'**
   String get offerColumnDiscount;
 
   /// No description provided for @offerColumnDuration.
@@ -1408,9 +1411,112 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Building'**
   String get shopAddressBuilding;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @showMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get showMore;
+
+  /// No description provided for @are_you_sure_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete offer?'**
+  String get are_you_sure_delete;
+
+  /// No description provided for @subs.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions'**
+  String get subs;
+
+  /// No description provided for @rememberMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get rememberMe;
+
+  /// No description provided for @joinUsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Us'**
+  String get joinUsTitle;
+
+  /// No description provided for @joinUsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your role to get started'**
+  String get joinUsSubtitle;
+
+  /// No description provided for @driverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get driverTitle;
+
+  /// No description provided for @driverSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver orders and earn money'**
+  String get driverSubtitle;
+
+  /// No description provided for @userTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get userTitle;
+
+  /// No description provided for @userSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order and receive deliveries'**
+  String get userSubtitle;
+
+  /// No description provided for @shopTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop'**
+  String get shopTitle;
+
+  /// No description provided for @shopSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your store and products'**
+  String get shopSubtitle;
+
+  /// No description provided for @assignerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigner'**
+  String get assignerTitle;
+
+  /// No description provided for @assignerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coordinate and assign deliveries'**
+  String get assignerSubtitle;
+
+  /// No description provided for @department.
+  ///
+  /// In en, this message translates to:
+  /// **'Department'**
+  String get department;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1419,25 +1525,26 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

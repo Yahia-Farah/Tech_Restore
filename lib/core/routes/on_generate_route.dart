@@ -12,6 +12,8 @@ import 'package:tech_restore/features/user/profile/presentation/view/screens/edi
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart' as user_signup;
 import '../../features/auth/domain/usecases/shop_signup_usecase.dart' as shop_signup;
+import '../../features/auth/domain/usecases/delivery_signup_usecase.dart' as delivery_signup;
+import '../../features/auth/domain/usecases/assigner_signup_usecase.dart' as assigner_signup;
 import '../../features/auth/forget_password/presentation/viewmodel/forget_password_viewmodel.dart';
 import '../../features/auth/forget_password/presentation/viewmodel/reset_password_viewmodel.dart';
 import '../../features/auth/forget_password/presentation/viewmodel/verify_code_viewmodel.dart';
@@ -19,9 +21,14 @@ import '../../features/auth/forget_password/presentation/views/screens/ResetPass
 import '../../features/auth/forget_password/presentation/views/screens/email_verificationScreen.dart';
 import '../../features/auth/forget_password/presentation/views/screens/forgertPasswordScreen.dart';
 import '../../features/auth/login/viewmodel/login_viewmodel.dart';
+import '../../features/auth/register/screen/assigner_register_screen.dart';
+import '../../features/auth/register/screen/delivery_register_screen.dart';
 import '../../features/auth/register/screen/shop_register_screen.dart';
+import '../../features/auth/register/viewmodel/assigner_register_viewmodel.dart';
+import '../../features/auth/register/viewmodel/delivery_register_viewmodel.dart';
 import '../../features/auth/register/viewmodel/register_viewmodel.dart';
 import '../../features/auth/register/viewmodel/shop_register_viewmodel.dart';
+import '../../features/delivery/delivery-main.dart';
 import '../../features/user/profile/presentation/viewmodel/edit_profile_cubit.dart';
 import '../config/di.dart';
 
@@ -47,6 +54,30 @@ class Routes {
                 create: (context) => RegisterCubit(getIt<user_signup.SignUpUseCase>()),
                 child: const RegisterScreen(),
               ),
+        );
+
+      case AppRoutes.shopRegister:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ShopRegisterCubit(getIt<shop_signup.SignUpUseCase>()),
+            child: const ShopRegisterScreen(),
+          ),
+        );
+
+      case AppRoutes.deliveryRegister:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => DeliveryRegisterCubit(getIt<delivery_signup.DeliverySignUpUseCase>()),
+            child: const DeliveryRegisterScreen(),
+          ),
+        );
+
+      case AppRoutes.assignerRegister:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AssignerRegisterCubit(getIt<assigner_signup.AssignerSignupUseCase>()),
+            child: const AssignerRegisterScreen(),
+          ),
         );
 
       case AppRoutes.forgetPassword:
@@ -90,13 +121,8 @@ class Routes {
       case AppRoutes.shopDashboard:
         return MaterialPageRoute(builder: (_) => const ShopLayout());
 
-      case AppRoutes.shopRegister:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => ShopRegisterCubit(getIt<shop_signup.SignUpUseCase>()),
-            child: const ShopRegisterScreen(),
-          ),
-        );
+      case AppRoutes.deliveryDashboard:
+        return MaterialPageRoute(builder: (_) => const DeliveryDashboardScreen());
 
       case AppRoutes.editProfile:
         final user = settings.arguments as ProfileResponse;
@@ -106,10 +132,6 @@ class Routes {
             child: EditProfileScreen(user: user),
           ),
         );
-
-
-
-
 
       default:
         return MaterialPageRoute(

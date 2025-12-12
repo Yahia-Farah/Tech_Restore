@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
+import '../../../../core/contants/app_icons.dart';
 import '../../../../core/routes/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
@@ -28,7 +29,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
   final _cityController = TextEditingController();
   final _streetController = TextEditingController();
   final _buildingController = TextEditingController();
-  String _shopType = 'REPAIRER';
+  String _shopType = '';
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -36,13 +37,12 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
     final local = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+          onPressed: () => Navigator.pop(context),
+        ),
         scrolledUnderElevation: 0,
         title: Text(local.signup),
-        titleTextStyle: TextStyle(
-          color: AppColors.secondary,
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -81,55 +81,68 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        local.signUpQuote,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 22,
+                        local.shopSubtitle,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 20,
+                          color: AppColors.primary[80],
                         ),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     CustomTextFormField(
+                      prefixIcon: Icon(Icons.person_2_outlined,color: AppColors.primary,),
                       controller: _nameController,
                       hint: local.name,
                       keyboardType: TextInputType.name,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
+                      prefixIcon: Icon(Icons.email_outlined,color: AppColors.primary,),
                       controller: _emailController,
                       hint: local.email,
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
+                      prefixIcon: Icon(Icons.comment_outlined,color: AppColors.primary,),
                       controller: _descriptionController,
                       hint: local.shopDescription,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
+                      prefixIcon: Icon(Icons.phone_outlined,color: AppColors.primary,),
                       controller: _phoneController,
                       hint: local.phone,
                       keyboardType: TextInputType.phone,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
+                      prefixIcon: Icon(Icons.lock_outline,color: AppColors.primary,),
                       controller: _passwordController,
                       hint: local.password,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                     ),
                     const SizedBox(height: 20),
-                    // Shop Type Dropdown
                     DropdownButtonFormField<String>(
-                      value: _shopType,
+                      hint: Row(
+                        children: [
+                          Icon(Icons.store, color: AppColors.primary),
+                          SizedBox(width: 8),
+                          Text('Select shop type', style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
+                        ],
+                      ),
+                      isExpanded: true,
+                      value: _shopType.isEmpty ? null : _shopType,
                       items: [
                         'REPAIRER',
                         'SELLER',
                         'BOTH',
                       ].map((type) => DropdownMenuItem(
                         value: type,
-                        child: Text(type),
+                        child: Text(type, style: TextStyle(fontSize: 16,color: AppColors.primary)),
                       )).toList(),
                       decoration: InputDecoration(
                         filled: true,
@@ -140,6 +153,8 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                           borderSide: BorderSide.none,
                         ),
                       ),
+                      dropdownColor: Colors.white,
+                      borderRadius: BorderRadius.circular(24),
                       onChanged: (value) {
                         setState(() {
                           _shopType = value!;
@@ -151,6 +166,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                     Row(children: [
                       Expanded(
                         child: CustomTextFormField(
+                          prefixIcon: Icon(Icons.location_on_outlined,color: AppColors.primary,),
                           controller: _stateController,
                           hint: 'State',
                         ),
@@ -158,6 +174,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: CustomTextFormField(
+                          prefixIcon: Icon(Icons.location_city,color: AppColors.primary,),
                           controller: _cityController,
                           hint: 'City',
                         ),
@@ -167,6 +184,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                     Row(children: [
                       Expanded(
                         child: CustomTextFormField(
+                          prefixIcon: Icon(Icons.edit_road,color: AppColors.primary,),
                           controller: _streetController,
                           hint: 'Street',
                         ),
@@ -174,6 +192,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: CustomTextFormField(
+                          prefixIcon: Icon(Icons.home_work_outlined,color: AppColors.primary,),
                           controller: _buildingController,
                           hint: 'Building',
                         ),

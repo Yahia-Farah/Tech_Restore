@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/config/di.dart';
+import 'package:tech_restore/core/theme/app_theme.dart';
 import 'core/contants/secure_storage.dart';
 import 'core/l10n/translation/app_localizations.dart';
 import 'core/routes/on_generate_route.dart';
 import 'core/theme/app_colors.dart';
+import 'features/auth/logout/viewmodel/app_navigator.dart';
 import 'features/localization/data/localization_preference.dart';
 import 'features/localization/localization_controller/localization_cubit.dart';
 import 'features/localization/localization_controller/localization_state.dart';
@@ -43,18 +45,13 @@ class MyApp extends StatelessWidget {
         }
 
         return MaterialApp(
+          navigatorKey: AppNavigator.navigatorKey,
           title: 'Tech Restore',
           debugShowCheckedModeBanner: false,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: currentLocale,
-          theme: ThemeData(
-            scaffoldBackgroundColor: AppColors.background,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.transparent,
-              centerTitle: true,
-            ),
-          ),
+          theme: AppTheme.lightTheme,
           initialRoute: initialRoute,
           onGenerateRoute: Routes.onGenerateRoute,
         );

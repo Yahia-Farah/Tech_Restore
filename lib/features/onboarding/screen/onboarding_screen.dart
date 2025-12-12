@@ -4,6 +4,7 @@ import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
 import '../../../core/routes/route_names.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_elevated_button.dart';
+import '../../auth/domain/services/auth_services.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -49,12 +50,9 @@ class OnboardingScreen extends StatelessWidget {
                   textColor: AppColors.white,
                   color: AppColors.primary,
                   text: local.start,
-                  onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      AppRoutes.login,
-                      (route) => false,
-                    );
+                  onPressed: () async {
+                    final initialRoute = await _getInitialRoute();
+                    Navigator.pushReplacementNamed(context, initialRoute);
                   },
                 ),
               ),
@@ -63,5 +61,22 @@ class OnboardingScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<String> _getInitialRoute() async {
+  final isLoggedIn = await AuthService.isUserAuthenticated();
+  final role = await AuthService.getRole();
+  if (isLoggedIn) {
+    if (role == "ROLE_GUEST") {
+      return AppRoutes.userHome;
+    } else if (role == "ROLE_ADMIN") {
+      return AppRoutes.adminDashboard;
+    } else {
+      return AppRoutes.shopDashboard;
+    }
+  } else {
+    await AuthService.logout();
+    return AppRoutes.login;
   }
 }

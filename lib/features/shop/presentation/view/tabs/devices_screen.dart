@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/l10n/translation/app_localizations.dart';
+import '../../../data/models/products/get_all_category_model.dart';
+import '../../../../../core/widgets/custom_elevated_button.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../presentation/viewmodel/devices_cubit.dart';
+import '../../../presentation/viewmodel/devices_state.dart';
+import '../../../data/models/products/product_model.dart';
+import '../../../data/models/products/add_product_request.dart';
+import '../widgets/add_device_screen.dart';
 
 class DevicesScreen extends StatefulWidget {
   const DevicesScreen({super.key});
@@ -10,295 +20,432 @@ class DevicesScreen extends StatefulWidget {
 
 class _DevicesScreenState extends State<DevicesScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final ValueNotifier<String> _searchQueryNotifier = ValueNotifier<String>('');
+  final ValueNotifier<int> _currentPageNotifier = ValueNotifier<int>(1);
+  final int itemsPerPage = 8;
 
-  List<Map<String, dynamic>> devices = [
-    {
-      "name": "iPhone 13\nIncludes original box and charger",
-      "type": "Smartphone",
-      "serial": "SN12345678",
-      "price": "699 EGP",
-      "quantity": 5,
-      "status": "new",
-    },
-    {
-      "name": "Samsung Galaxy S21\nMinor scratches on back",
-      "type": "Smartphone",
-      "serial": "SN87654321",
-      "price": "649 EGP",
-      "quantity": 3,
-      "status": "used",
-    },
-    {
-      "name": "iPad Pro\n2022 model with M1 chip",
-      "type": "Tablet",
-      "serial": "SN13579246",
-      "price": "799 EGP",
-      "quantity": 0,
-      "status": "new",
-    },
-    {
-      "name": "MacBook Air\nApple certified refurbished",
-      "type": "Laptop",
-      "serial": "SN24681357",
-      "price": "999 EGP",
-      "quantity": 2,
-      "status": "new",
-    },
-  ];
-
-  String selectedFilter = "all";
-
-  // Pagination state
-  int currentPage = 1;
-  static const int devicesPerPage = 4;
-
-  List<Map<String, dynamic>> get filteredDevices {
-    final searchText = _searchController.text.toLowerCase();
-    return devices
-        .where(
-          (device) =>
-              device["name"].toString().toLowerCase().contains(searchText),
-        )
-        .toList();
+  @override
+  void initState() {
+    super.initState();
+    context.read<DevicesCubit>().getAllDevices(isRefresh: true);
+    _searchController.addListener(() {
+      _searchQueryNotifier.value = _searchController.text;
+    });
   }
 
-  List<Map<String, dynamic>> get paginatedDevices {
-    final start = (currentPage - 1) * devicesPerPage;
-    final end =
-        (start + devicesPerPage) > filteredDevices.length
-            ? filteredDevices.length
-            : (start + devicesPerPage);
-    return filteredDevices.sublist(start, end);
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _searchQueryNotifier.dispose();
+    super.dispose();
   }
-
-  int get totalPages =>
-      (filteredDevices.length / devicesPerPage).ceil().clamp(1, 999);
 
   @override
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context)!;
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 🔹 Header
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  local.devices_management,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  local.devices_management_desc,
-                  style: const TextStyle(color: Colors.black54),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // 🔹 Action buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purpleAccent,
-                ),
-                icon: const Icon(Icons.add, color: Colors.white),
-                label: Text(
-                  local.add_device,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: local.search_hint,
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      currentPage = 1; // Reset to first page on search
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          // 🔹 Search + Filters
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue.shade600,
-                ),
-                icon: const Icon(Icons.devices, color: Colors.white),
-                label: Text(
-                  local.device_types,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-              const SizedBox(width: 12),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    selectedFilter = "status";
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue.shade600,
-                ),
-                child: Text(
-                  local.device_status,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-              const SizedBox(width: 12),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    selectedFilter = "all";
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue.shade600,
-                ),
-                child: Text(
-                  local.all_types,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-
-          // 🔹 Devices Table
-          Card(
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: [
-                      DataColumn(label: Text(local.device_name)),
-                      DataColumn(label: Text(local.device_type)),
-                      DataColumn(label: Text(local.serial_number)),
-                      DataColumn(label: Text(local.price)),
-                      DataColumn(label: Text(local.quantity)),
-                      DataColumn(label: Text(local.status)),
-                      DataColumn(label: Text(local.actions)),
-                    ],
-                    rows:
-                        paginatedDevices
-                            .map((device) => _buildDeviceRow(device, local))
-                            .toList(),
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-
-                // 🔹 Pagination footer
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "${filteredDevices.isEmpty ? 0 : ((currentPage - 1) * devicesPerPage + 1)} ${local.toShow} ${((currentPage * devicesPerPage) > filteredDevices.length ? filteredDevices.length : (currentPage * devicesPerPage))} ${local.ofShow} ${filteredDevices.length} ${local.devices}",
-                      ),
-                      Row(
+    return BlocConsumer<DevicesCubit, DevicesState>(
+      listener: (context, state) {
+        if (state is DeviceAddSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.msg)));
+        } else if (state is DeviceAddError || state is DevicesError) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text((state as dynamic).msg)));
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<DevicesCubit>();
+        List<ProductModel> devices = cubit.devices;
+        if (state is DevicesLoading || (state is DevicesInitial && devices.isEmpty)) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return ValueListenableBuilder<String>(
+          valueListenable: _searchQueryNotifier,
+          builder: (context, searchQuery, _) {
+            final filteredDevices = searchQuery.isEmpty
+                ? devices
+                : devices.where((d) {
+                    final name = d.name?.toLowerCase() ?? '';
+                    final desc = d.description?.toLowerCase() ?? '';
+                    final query = searchQuery.toLowerCase();
+                    return name.contains(query) || desc.contains(query);
+                  }).toList();
+            return ValueListenableBuilder<int>(
+              valueListenable: _currentPageNotifier,
+              builder: (context, currentPage, _) {
+                final totalPages = filteredDevices.isEmpty
+                    ? 1
+                    : (filteredDevices.length / itemsPerPage).ceil();
+                final startIndex = (currentPage - 1) * itemsPerPage;
+                final endIndex = (startIndex + itemsPerPage < filteredDevices.length)
+                    ? startIndex + itemsPerPage
+                    : filteredDevices.length;
+                final currentDevices = filteredDevices.isEmpty
+                    ? <ProductModel>[]
+                    : filteredDevices.sublist(startIndex, endIndex);
+                return RefreshIndicator(
+                  onRefresh: () => cubit.getAllDevices(isRefresh: true),
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          IconButton(
-                            icon: const Icon(Icons.chevron_left),
-                            onPressed:
-                                currentPage > 1
-                                    ? () => setState(() => currentPage--)
-                                    : null,
-                          ),
-                          for (int i = 1; i <= totalPages; i++)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 4,
-                              ),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      currentPage == i
-                                          ? Colors.blue
-                                          : Colors.grey.shade300,
-                                  foregroundColor:
-                                      currentPage == i
-                                          ? Colors.white
-                                          : Colors.black,
-                                ),
-                                onPressed:
-                                    () => setState(() => currentPage = i),
-                                child: Text("$i"),
-                              ),
+                          // Header
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade50,
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                          IconButton(
-                            icon: const Icon(Icons.chevron_right),
-                            onPressed:
-                                currentPage < totalPages
-                                    ? () => setState(() => currentPage++)
-                                    : null,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  local.devices_management,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  local.devices_management_desc,
+                                  style: const TextStyle(color: Colors.black54),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextFormField(
+                                  controller: _searchController,
+                                  hint: local.search_hint,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: CustomElevatedButton(
+                                  text: local.add_device,
+                                  onPressed: () async {
+                                    final devicesCubit = cubit;
+                                    final result = await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (newContext) => BlocProvider.value(
+                                          value: devicesCubit,
+                                          child: const AddDeviceScreen(),
+                                        ),
+                                      ),
+                                    );
+                                    if (result == true) {
+                                      cubit.getAllDevices(isRefresh: true);
+                                    }
+                                  },
+                                  color: AppColors.primary,
+                                  textColor: Colors.white,
+                                  suffixIcon: const Icon(Icons.add, color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          // Devices Table
+                          Card(
+                            child: Column(
+                              children: [
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: DataTable(
+                                    columns: [
+                                      DataColumn(label: Text(local.device_name)),
+                                      DataColumn(label: Text(local.device_type)),
+                                      DataColumn(label: Text(local.price)),
+                                      DataColumn(label: Text(local.quantity)),
+                                      DataColumn(label: Text(local.status)),
+                                      DataColumn(label: Text(local.actions)),
+                                    ],
+                                    rows: currentDevices.map((device) => _buildDeviceRow(device, local)).toList(),
+                                  ),
+                                ),
+                                // Pagination bar like offers_screen
+                                if (filteredDevices.isNotEmpty)
+                                  Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${filteredDevices.length} ${local.devices}"),
+                                        Row(
+                                          children: [
+                                            IconButton(
+                                              icon: const Icon(Icons.chevron_left),
+                                              onPressed: currentPage > 1
+                                                  ? () => _currentPageNotifier.value = currentPage - 1
+                                                  : null,
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.blue,
+                                                foregroundColor: Colors.white,
+                                              ),
+                                              onPressed: null,
+                                              child: Text('$currentPage'),
+                                            ),
+                                            if (currentPage < totalPages)
+                                              Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                child: ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: Colors.grey.shade300,
+                                                    foregroundColor: Colors.black,
+                                                  ),
+                                                  onPressed: () => _currentPageNotifier.value = currentPage + 1,
+                                                  child: Text('${currentPage + 1}'),
+                                                ),
+                                              ),
+                                            IconButton(
+                                              icon: const Icon(Icons.chevron_right),
+                                              onPressed: (currentPage < totalPages || (currentPage == totalPages && !cubit.lastPage))
+                                                  ? () async {
+                                                      if (currentPage < totalPages) {
+                                                        // Local pagination
+                                                        _currentPageNotifier.value = currentPage + 1;
+                                                      } else if (currentPage == totalPages && !cubit.lastPage) {
+                                                        // Fetch next page from API
+                                                        await cubit.getAllDevices();
+                                                        // Move to next page after fetching
+                                                        _currentPageNotifier.value = currentPage + 1;
+                                                      }
+                                                    }
+                                                  : null,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                const SizedBox(height: 10),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 
-  DataRow _buildDeviceRow(Map<String, dynamic> device, AppLocalizations local) {
-    Color statusColor = device["status"] == "new" ? Colors.green : Colors.red;
-    Color bgColor =
-        device["status"] == "new"
-            ? Colors.green.withOpacity(0.1)
-            : Colors.red.withOpacity(0.1);
+  void _showEditDialog(BuildContext context, ProductModel product) async {
+    final local = AppLocalizations.of(context)!;
+    final outerContext = context; // Capture the outer context that has access to DevicesCubit
+    final cubit = outerContext.read<DevicesCubit>();
+    final formKey = GlobalKey<FormState>();
+    final nameController = TextEditingController(text: product.name ?? '');
+    final descriptionController = TextEditingController(text: product.description ?? '');
+    final priceController = TextEditingController(text: product.price?.toString() ?? '');
+    final imageUrlController = TextEditingController(text: product.imageUrl ?? '');
+    final stockQuantityController =
+        TextEditingController(text: product.stock?.toString() ?? '');
+    String? selectedCategoryId = product.categoryId;
+    String condition = product.condition?.toUpperCase() ?? 'NEW';
+    String? imageWarning;
+    List<Content> categories = cubit.categories;
+    await showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (ctx, setState) => AlertDialog(
+            title: Text(local.edit),
+            content: Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextFormField(
+                      controller: nameController,
+                      label: local.device_name,
+                      validator: (v) => v!.trim().isEmpty ? 'Required' : null,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomTextFormField(
+                      controller: descriptionController,
+                      label: local.devices_management_desc,
+                      validator: (v) => v!.trim().isEmpty ? 'Required' : null,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomTextFormField(
+                      controller: priceController,
+                      label: local.price,
+                      keyboardType: TextInputType.number,
+                      validator: (v) {
+                        if (v!.trim().isEmpty) return 'Required';
+                        if (double.tryParse(v.trim()) == null) return 'Invalid number';
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    CustomTextFormField(
+                      controller: imageUrlController,
+                      label: 'Image URL',
+                      keyboardType: TextInputType.url,
+                      onChanged: (val) { setState(() { imageWarning = null; }); },
+                    ),
+                    if (imageUrlController.text.isNotEmpty)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              imageUrlController.text,
+                              height: 94, width: 110, fit: BoxFit.cover,
+                              errorBuilder: (c, e, s) => const SizedBox(height: 94, width: 110, child: Center(child: Text('Invalid/No Image'))),
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (imageWarning != null)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Text(imageWarning!, style: const TextStyle(color: Colors.red, fontSize: 12)),
+                        ),
+                      ),
+                    const SizedBox(height: 10),
+                    CustomTextFormField(
+                      controller: stockQuantityController,
+                      label: local.quantity,
+                      keyboardType: TextInputType.number,
+                      validator: (v) {
+                        if (v!.trim().isEmpty) return 'Required';
+                        if (int.tryParse(v.trim()) == null) return 'Invalid number';
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    DropdownButtonFormField<String>(
+                      value: selectedCategoryId,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: local.inventory_category,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      items: categories
+                          .map((category) => DropdownMenuItem<String>(
+                                value: category.id,
+                                child: Text(category.name ?? ''),
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedCategoryId = value;
+                        });
+                      },
+                      validator: (v) => v == null ? 'Required' : null,
+                    ),
+                    const SizedBox(height: 10),
+                    DropdownButtonFormField<String>(
+                      value: condition,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: local.status,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      items: const [
+                        DropdownMenuItem(value: 'NEW', child: Text('NEW')),
+                        DropdownMenuItem(value: 'USED', child: Text('USED')),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          condition = value!;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: Text(local.cancel),
+              ),
+              CustomElevatedButton(
+                text: local.save,
+                onPressed: () {
+                  if (!formKey.currentState!.validate()) return;
+                  if (imageUrlController.text.isNotEmpty && !imageUrlController.text.startsWith('http')) {
+                    setState(() {
+                      imageWarning = 'Please upload your image to an image hosting and paste a public URL.';
+                    });
+                    return;
+                  }
+                  final req = AddProductRequest(
+                    name: nameController.text.trim(),
+                    description: descriptionController.text.trim(),
+                    price: double.tryParse(priceController.text.trim()),
+                    imageUrl: imageUrlController.text.trim().isEmpty
+                        ? null
+                        : imageUrlController.text.trim(),
+                    category: selectedCategoryId != null ? Category(id: selectedCategoryId) : null,
+                    stockQuantity: int.tryParse(stockQuantityController.text.trim()),
+                    condition: condition,
+                  );
+                  if (product.id != null) {
+                    outerContext.read<DevicesCubit>().updateDevice(product.id!, req);
+                  }
+                  Navigator.pop(ctx);
+                },
+                color: AppColors.primary,
+                textColor: Colors.white,
+                borderRadius: 12,
+                width: 120,
+                height: 44,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
+  DataRow _buildDeviceRow(ProductModel device, AppLocalizations local) {
+    Color statusColor = (device.condition?.toUpperCase() == 'NEW') ? Colors.green : Colors.red;
+    Color bgColor = (device.condition?.toUpperCase() == 'NEW')
+        ? Colors.green.withOpacity(0.1)
+        : Colors.red.withOpacity(0.1);
     return DataRow(
       cells: [
-        DataCell(Text(device["name"])),
-        DataCell(Text(device["type"])),
-        DataCell(Text(device["serial"])),
-        DataCell(Text(device["price"])),
-        DataCell(Text(device["quantity"].toString())),
+        DataCell(Text(device.name ?? '')),
+        DataCell(Text(device.categoryName ?? '')),
+        DataCell(Text(device.price?.toStringAsFixed(2) ?? '')),
+        DataCell(Text(device.stock?.toString() ?? '')),
         DataCell(
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -307,7 +454,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              device["status"] == "new" ? local.newDev : local.used,
+              device.condition?.toUpperCase() == 'NEW' ? local.newDev : local.used,
               style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
             ),
           ),
@@ -315,12 +462,37 @@ class _DevicesScreenState extends State<DevicesScreen> {
         DataCell(
           Row(
             children: [
-              Icon(Icons.edit, color: Colors.blue, semanticLabel: local.edit),
+              IconButton(
+                icon: const Icon(Icons.edit, color: Colors.blue),
+                tooltip: local.edit,
+                onPressed: () => _showEditDialog(context, device),
+              ),
               const SizedBox(width: 8),
-              Icon(
-                Icons.delete,
-                color: Colors.red,
-                semanticLabel: local.delete,
+              IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                tooltip: local.delete,
+                onPressed: () async {
+                  final confirm = await showDialog<bool>(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Text(local.delete, style: TextStyle(color: Colors.red)),
+                      content: Text('Are you sure you want to delete this device?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(ctx, false),
+                          child: Text(local.cancel),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(ctx, true),
+                          child: Text(local.delete, style: TextStyle(color: Colors.red)),
+                        ),
+                      ],
+                    ),
+                  );
+                  if (confirm == true) {
+                    context.read<DevicesCubit>().deleteDevice(device.id!);
+                  }
+                },
               ),
             ],
           ),

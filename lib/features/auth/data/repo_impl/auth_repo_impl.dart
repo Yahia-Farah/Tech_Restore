@@ -6,14 +6,18 @@ import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_u
 import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_response_model.dart';
 import 'package:tech_restore/features/auth/data/models/signupmodels/sign_up_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/signupmodels/sign_up_response_model.dart';
+import 'package:tech_restore/features/auth/domain/entites/delivery_entity.dart';
 import 'package:tech_restore/features/auth/domain/entites/shop_entity.dart';
 import 'package:tech_restore/features/auth/domain/entites/user_entity.dart';
 import 'package:tech_restore/features/auth/domain/repo/auth_repo.dart';
 
+import '../../domain/entites/assigner_entity.dart';
 import '../../domain/responses/auth_response.dart';
 import '../datasource/auth_remote_data_source.dart';
 import '../models/forget_password_models/forget_password_request_model.dart';
 import '../models/forget_password_models/reset_password_request_model.dart';
+import '../models/signup_assigner_model/signup_assigner_request_model.dart';
+import '../models/signup_delivery_models/signup_delivery_request_model.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
@@ -32,6 +36,49 @@ class AuthRepositoryImpl implements AuthRepository {
     );
 
     final response = await _remoteDatasource.signUp(request);
+    return response;
+  }
+
+  @override
+  Future<SignUpShopResponseModel> signUpShop(ShopEntity shop) async {
+    final request = SignUpShopRequestModel(
+      name: shop.name,
+      email: shop.email,
+      phone: shop.phone,
+      password: shop.password,
+      shopType: shop.shopType,
+      description: shop.description,
+      shopAddress: shop.shopAddress,
+    );
+
+    return _remoteDatasource.signUpShop(request);
+  }
+
+  @override
+  Future<SignUpShopResponseModel> signUpDelivery(DeliveryEntity delivery) async {
+    final request = SignupDeliveryRequestModel(
+      name: delivery.firstName,
+      address: delivery.address,
+      email: delivery.email,
+      phone: delivery.phone,
+      password: delivery.password,
+    );
+
+    final response = await _remoteDatasource.signUpDelivery(request);
+    return response;
+  }
+
+  @override
+  Future<SignUpShopResponseModel> signUpAssigner(AssignerEntity delivery) async {
+    final request = SignupAssignerRequestModel(
+      name: delivery.firstName,
+      department: delivery.department,
+      email: delivery.email,
+      phone: delivery.phone,
+      password: delivery.password,
+    );
+
+    final response = await _remoteDatasource.signUpAssigner(request);
     return response;
   }
 
@@ -77,20 +124,5 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<String> logout() {
     return _remoteDatasource.logout();
-  }
-
-  @override
-  Future<SignUpShopResponseModel> signUpShop(ShopEntity shop) async {
-    final request = SignUpShopRequestModel(
-      name: shop.name,
-      email: shop.email,
-      phone: shop.phone,
-      password: shop.password,
-      shopType: shop.shopType,
-      description: shop.description,
-      shopAddress: shop.shopAddress,
-    );
-
-    return _remoteDatasource.signUpShop(request);
   }
 }

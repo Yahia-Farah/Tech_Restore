@@ -6,14 +6,15 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
+      centerTitle: true,
       elevation: 0,
       titleSpacing: 0,
-      iconTheme: IconThemeData(color: AppColors.black, size: 26),
+      iconTheme: IconThemeData(color: AppColors.primary, size: 26),
       titleTextStyle: TextStyle(
-        color: AppColors.black,
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
+          fontSize: 28,
+          fontWeight: FontWeight.w600,
+          color: AppColors.primary,
       ),
     ),
     textTheme: TextTheme(
@@ -47,11 +48,6 @@ class AppTheme {
         fontWeight: FontWeight.w400,
         color: AppColors.black,
       ),
-      // displayMedium: GoogleFonts.inter(
-      //   fontSize: 16,
-      //   fontWeight: FontWeight.w400,
-      //   color: AppColors.grey,
-      // ),
     ),
   );
 }

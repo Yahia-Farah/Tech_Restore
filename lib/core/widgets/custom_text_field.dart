@@ -15,6 +15,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool readonly;
   final bool showUploadIcon;
   final String? initialText;
+  final Widget? prefixIcon;
 
   const CustomTextFormField({
     super.key,
@@ -31,6 +32,7 @@ class CustomTextFormField extends StatefulWidget {
     this.readonly = false,
     this.initialText,
     this.showUploadIcon = false,
+    this.prefixIcon,
   });
 
   @override
@@ -96,6 +98,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
+        prefixIcon: widget.prefixIcon,
         suffixIcon:
             widget.obscureText
                 ? IconButton(

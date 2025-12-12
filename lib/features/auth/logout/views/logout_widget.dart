@@ -17,11 +17,7 @@ class LogoutDialogWidget extends StatelessWidget {
     return BlocConsumer<LogoutViewModel, LogoutStates>(
       listener: (context, state) {
         if (state is LogoutSuccess) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            AppRoutes.login,
-            (route) => false,
-          );
+          print("logout successfully");
         } else if (state is LogoutError) {
           ScaffoldMessenger.of(
             context,
