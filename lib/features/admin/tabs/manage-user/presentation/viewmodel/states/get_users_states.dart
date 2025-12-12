@@ -16,3 +16,4 @@ class GetUsersError extends GetUsersState {
   GetUsersError(this.message);
 }
 
+
