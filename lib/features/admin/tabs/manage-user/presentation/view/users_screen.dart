@@ -296,7 +296,7 @@ class _UsersScreenState extends State<UsersScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    displayId,
+                    userId,
                     style: const TextStyle(fontSize: 12),
                     overflow: TextOverflow.ellipsis,
                   ),
