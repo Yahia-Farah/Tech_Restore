@@ -719,4 +719,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get address => 'العنوان';
+
+  @override
+  String get admin_dashboard => 'لوحة تحكم المسؤول';
+
+  @override
+  String get total_users => 'إجمالي المستخدمين';
+
+  @override
+  String get total_shops => 'إجمالي المتاجر';
+
+  @override
+  String get repair_requests => 'طلبات الإصلاح';
+
+  @override
+  String get total_orders => 'إجمالي الطلبات';
+
+  @override
+  String get count => 'العدد';
+
+  @override
+  String get real_time_platform_insights => 'رؤى المنصة في الوقت الفعلي';
+
+  @override
+  String get users => 'المستخدمون';
+
+  @override
+  String get shops => 'المتاجر';
 }

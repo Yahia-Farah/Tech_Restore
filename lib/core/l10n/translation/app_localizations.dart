@@ -1510,6 +1510,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Address'**
   String get address;
+
+  /// No description provided for @admin_dashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin Dashboard'**
+  String get admin_dashboard;
+
+  /// No description provided for @total_users.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Users'**
+  String get total_users;
+
+  /// No description provided for @total_shops.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Shops'**
+  String get total_shops;
+
+  /// No description provided for @repair_requests.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair Requests'**
+  String get repair_requests;
+
+  /// No description provided for @total_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get total_orders;
+
+  /// No description provided for @count.
+  ///
+  /// In en, this message translates to:
+  /// **'Count'**
+  String get count;
+
+  /// No description provided for @real_time_platform_insights.
+  ///
+  /// In en, this message translates to:
+  /// **'Real-time platform insights'**
+  String get real_time_platform_insights;
+
+  /// No description provided for @users.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get users;
+
+  /// No description provided for @shops.
+  ///
+  /// In en, this message translates to:
+  /// **'Shops'**
+  String get shops;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

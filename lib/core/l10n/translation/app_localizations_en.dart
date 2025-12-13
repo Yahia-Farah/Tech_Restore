@@ -719,4 +719,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get address => 'Address';
+
+  @override
+  String get admin_dashboard => 'Admin Dashboard';
+
+  @override
+  String get total_users => 'Total Users';
+
+  @override
+  String get total_shops => 'Total Shops';
+
+  @override
+  String get repair_requests => 'Repair Requests';
+
+  @override
+  String get total_orders => 'Total Orders';
+
+  @override
+  String get count => 'Count';
+
+  @override
+  String get real_time_platform_insights => 'Real-time platform insights';
+
+  @override
+  String get users => 'Users';
+
+  @override
+  String get shops => 'Shops';
 }

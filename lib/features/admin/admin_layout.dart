@@ -13,6 +13,7 @@ import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewm
 import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/l10n/translation/app_localizations.dart';
 
 class AdminLayout extends StatefulWidget {
   const AdminLayout({super.key});
@@ -49,16 +50,38 @@ class _MainLayoutState extends State<AdminLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+    final isDashboard = _selectedIndex == 0;
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          _getTitle(_selectedIndex),
-          style: const TextStyle(
-            color: AppColors.primary,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: isDashboard
+            ? Row(
+                children: [
+                  Icon(
+                    Icons.show_chart,
+                    color: const Color(0xFF456006),
+                    size: 24,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    local.admin_dashboard,
+                    style: const TextStyle(
+                      color: Color(0xFF456006),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              )
+            : Text(
+                _getTitle(_selectedIndex),
+                style: const TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
         backgroundColor: Colors.white,
         elevation: 1,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -90,13 +113,7 @@ class _MainLayoutState extends State<AdminLayout> {
               ),
             ],
           ),
-          SizedBox(width: 15),
-          CircleAvatar(child: Text("M")),
-          SizedBox(width: 10),
-          Center(
-            child: Text("Mahmoud Ali", style: TextStyle(color: Colors.black)),
-          ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
       drawer: AdminDrawerWidget(
