@@ -746,4 +746,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shops => 'المتاجر';
+
+  @override
+  String get user_management => 'إدارة المستخدمين';
+
+  @override
+  String get manage_user_accounts_roles_status => 'إدارة حسابات المستخدمين والأدوار والحالة';
+
+  @override
+  String get active => 'نشط';
+
+  @override
+  String get inactive => 'غير نشط';
+
+  @override
+  String get search_by_name_or_email => 'البحث بالاسم أو البريد الإلكتروني...';
 }

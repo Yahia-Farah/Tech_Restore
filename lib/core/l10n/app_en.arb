@@ -243,5 +243,10 @@
   "count": "Count",
   "real_time_platform_insights": "Real-time platform insights",
   "users": "Users",
-  "shops": "Shops"
+  "shops": "Shops",
+  "user_management": "User Management",
+  "manage_user_accounts_roles_status": "Manage user accounts, roles, and status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "search_by_name_or_email": "Search by name or email..."
 }

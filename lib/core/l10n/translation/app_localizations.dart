@@ -1564,6 +1564,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shops'**
   String get shops;
+
+  /// No description provided for @user_management.
+  ///
+  /// In en, this message translates to:
+  /// **'User Management'**
+  String get user_management;
+
+  /// No description provided for @manage_user_accounts_roles_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage user accounts, roles, and status'**
+  String get manage_user_accounts_roles_status;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @inactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get inactive;
+
+  /// No description provided for @search_by_name_or_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or email...'**
+  String get search_by_name_or_email;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -56,6 +56,7 @@ class _MainLayoutState extends State<AdminLayout> {
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
     final isDashboard = _selectedIndex == 0;
+    final isUsersScreen = _selectedIndex == 1;
     
     return Scaffold(
       backgroundColor: Colors.white,
@@ -79,13 +80,32 @@ class _MainLayoutState extends State<AdminLayout> {
                   ),
                 ],
               )
-            : Text(
-                _getTitle(_selectedIndex),
-                style: const TextStyle(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            : isUsersScreen
+                ? Row(
+                    children: [
+                      Icon(
+                        Icons.people_outline,
+                        color: const Color(0xFF456006),
+                        size: 24,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        local.user_management,
+                        style: const TextStyle(
+                          color: Color(0xFF456006),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  )
+                : Text(
+                    _getTitle(_selectedIndex),
+                    style: const TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
         backgroundColor: Colors.white,
         elevation: 1,
         iconTheme: const IconThemeData(color: Colors.black),

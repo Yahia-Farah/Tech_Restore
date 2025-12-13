@@ -746,4 +746,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shops => 'Shops';
+
+  @override
+  String get user_management => 'User Management';
+
+  @override
+  String get manage_user_accounts_roles_status => 'Manage user accounts, roles, and status';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String get search_by_name_or_email => 'Search by name or email...';
 }
