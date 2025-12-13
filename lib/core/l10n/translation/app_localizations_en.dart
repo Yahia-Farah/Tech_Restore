@@ -445,7 +445,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get start => 'Let’s Get Started';
 
   @override
-  String get name => 'Full name';
+  String get name => 'Name';
 
   @override
   String get uploadPorV => 'Upload photos or videos';
@@ -460,7 +460,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get username => 'User name';
 
   @override
-  String get phone => 'Phone Number';
+  String get phone => 'Phone';
 
   @override
   String get signup => 'Sign Up';
@@ -475,7 +475,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addPhoto => 'Add a photo';
 
   @override
-  String get email => 'Email address';
+  String get email => 'Email';
 
   @override
   String get password => 'Password';
@@ -761,4 +761,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search_by_name_or_email => 'Search by name or email...';
+
+  @override
+  String get user_details => 'User Details';
+
+  @override
+  String get user_info => 'User Info';
+
+  @override
+  String get id => 'ID';
+
+  @override
+  String get role => 'Role';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get role_updated_successfully => 'Role updated successfully';
+
+  @override
+  String get role_update_failed => 'Failed to update role';
+
+  @override
+  String get user_deactivated_successfully => 'User deactivated successfully';
+
+  @override
+  String get user_activated_successfully => 'User activated successfully';
+
+  @override
+  String get user_status_update_failed => 'Failed to update user status';
+
+  @override
+  String get delete_user => 'Delete User?';
+
+  @override
+  String get delete_user_warning => 'This action cannot be undone!';
+
+  @override
+  String get yes_delete => 'Yes, delete';
 }

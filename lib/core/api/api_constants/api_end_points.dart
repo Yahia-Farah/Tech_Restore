@@ -29,4 +29,7 @@ abstract class ApiEndPoints {
   static const String exportInventoryData = 'shop/inventory/export';
   static const String getAllShops = 'admin/shops';
   static const String getAdminStats = 'admin/stats';
+  static const String deactivateUser = 'admin/users/{userId}/deactivate';
+  static const String activateUser = 'admin/users/{userId}/activate';
+  static const String UpdateUserRole = 'admin/users/{userId}';
 }

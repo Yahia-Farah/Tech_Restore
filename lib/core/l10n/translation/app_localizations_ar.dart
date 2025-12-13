@@ -126,7 +126,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get quantity => 'الكمية';
 
   @override
-  String get status => 'حالة الجهاز';
+  String get status => 'الحالة';
 
   @override
   String get actions => 'تعديل / إزالة';
@@ -445,7 +445,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get start => 'لنبدأ';
 
   @override
-  String get name => 'الاسم الكامل';
+  String get name => 'الاسم';
 
   @override
   String get uploadPorV => 'تحميل الصور أو مقاطع الفيديو';
@@ -460,7 +460,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get username => 'اسم المستخدم';
 
   @override
-  String get phone => 'رقم الهاتف';
+  String get phone => 'الهاتف';
 
   @override
   String get signup => 'إنشاء حساب';
@@ -475,7 +475,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get addPhoto => 'إضافة صورة';
 
   @override
-  String get email => 'عنوان البريد الإلكتروني';
+  String get email => 'البريد الإلكتروني';
 
   @override
   String get password => 'كلمة المرور';
@@ -761,4 +761,43 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search_by_name_or_email => 'البحث بالاسم أو البريد الإلكتروني...';
+
+  @override
+  String get user_details => 'تفاصيل المستخدم';
+
+  @override
+  String get user_info => 'معلومات المستخدم';
+
+  @override
+  String get id => 'الرقم التعريفي';
+
+  @override
+  String get role => 'الدور';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String get role_updated_successfully => 'تم تحديث الدور بنجاح';
+
+  @override
+  String get role_update_failed => 'فشل تحديث الدور';
+
+  @override
+  String get user_deactivated_successfully => 'تم تعطيل المستخدم بنجاح';
+
+  @override
+  String get user_activated_successfully => 'تم تفعيل المستخدم بنجاح';
+
+  @override
+  String get user_status_update_failed => 'فشل تحديث حالة المستخدم';
+
+  @override
+  String get delete_user => 'حذف المستخدم؟';
+
+  @override
+  String get delete_user_warning => 'لا يمكن التراجع عن هذا الإجراء!';
+
+  @override
+  String get yes_delete => 'نعم، احذف';
 }

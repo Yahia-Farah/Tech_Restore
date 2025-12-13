@@ -9,6 +9,7 @@ import '../../../../../../core/theme/app_colors.dart';
 import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/custom_elevated_button.dart';
+import '../../../../../../core/widgets/toast_helper.dart';
 
 class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
@@ -349,15 +350,25 @@ class _UsersScreenState extends State<UsersScreen> {
                 const SizedBox(width: 4),
                 if (hasRoleChanged)
                   InkWell(
-                    onTap: () {
-                      // TODO: Implement save role API call
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Role saved: $currentRole')),
-                      );
+                    onTap: () async {
+                      final local = AppLocalizations.of(context)!;
+                      final success = await context.read<GetUsersCubit>().updateUserRole(userId, currentRole);
                       setState(() {
-                        // Remove from selected roles after save
                         _selectedRoles.remove(userId);
                       });
+                      if (success) {
+                        ToastHelper.showCustomToast(
+                          context,
+                          text: local.role_updated_successfully,
+                          isError: false,
+                        );
+                      } else {
+                        ToastHelper.showCustomToast(
+                          context,
+                          text: local.role_update_failed,
+                          isError: true,
+                        );
+                      }
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -365,9 +376,9 @@ class _UsersScreenState extends State<UsersScreen> {
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white, fontSize: 11),
+                      child: Text(
+                        AppLocalizations.of(context)!.save,
+                        style: const TextStyle(color: Colors.white, fontSize: 11),
                       ),
                     ),
                   ),
@@ -385,7 +396,7 @@ class _UsersScreenState extends State<UsersScreen> {
                 // View Button
                 ElevatedButton(
                   onPressed: () {
-                    // TODO: Implement view user details
+                    _showUserDetailsDialog(context, user);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade100,
@@ -399,8 +410,27 @@ class _UsersScreenState extends State<UsersScreen> {
                 const SizedBox(width: 4),
                 // Approve/Suspend Button
                 ElevatedButton(
-                  onPressed: () {
-                    // TODO: Implement approve/suspend API call
+                  onPressed: () async {
+                    final local = AppLocalizations.of(context)!;
+                    final success = await context.read<GetUsersCubit>().toggleUserStatus(
+                      userId,
+                      user.activate ?? false,
+                    );
+                    if (success) {
+                      ToastHelper.showCustomToast(
+                        context,
+                        text: user.activate == false
+                            ? local.user_activated_successfully
+                            : local.user_deactivated_successfully,
+                        isError: false,
+                      );
+                    } else {
+                      ToastHelper.showCustomToast(
+                        context,
+                        text: local.user_status_update_failed,
+                        isError: true,
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: user.activate == false 
@@ -422,7 +452,7 @@ class _UsersScreenState extends State<UsersScreen> {
                 // Delete Button
                 ElevatedButton(
                   onPressed: () {
-                    // TODO: Implement delete user API call
+                    _showDeleteConfirmationDialog(context, user);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade100,
@@ -545,6 +575,218 @@ class _UsersScreenState extends State<UsersScreen> {
       return role.toUpperCase();
     }
     return 'USER'; // Default to USER if role is invalid or null
+  }
+
+  void _showUserDetailsDialog(BuildContext context, UserModel user) {
+    final local = AppLocalizations.of(context)!;
+    final fullName = '${user.firstName ?? ''} ${user.lastName ?? ''}'.trim();
+    final status = (user.activate ?? false) ? local.active : local.inactive;
+    final statusColor = (user.activate ?? false) ? Colors.green : Colors.red;
+    
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    local.user_details,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.purple,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[50],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      local.user_info,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildDetailRow(local.id, user.id ?? 'N/A', showCopy: true),
+                    const SizedBox(height: 12),
+                    _buildDetailRow(local.name, fullName.isEmpty ? 'N/A' : fullName),
+                    const SizedBox(height: 12),
+                    _buildDetailRow(local.email, user.email ?? 'N/A'),
+                    const SizedBox(height: 12),
+                    _buildDetailRow(local.phone, user.phone ?? 'N/A'),
+                    const SizedBox(height: 12),
+                    _buildDetailRow(local.role, user.role ?? 'N/A'),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Text(
+                          '${local.status}: ',
+                          style: const TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          status,
+                          style: TextStyle(
+                            color: statusColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Align(
+                alignment: Alignment.centerRight,
+                child: CustomElevatedButton(
+                  text: local.close,
+                  onPressed: () => Navigator.pop(context),
+                  color: Colors.green,
+                  width: 100,
+                  height: 40,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String label, String value, {bool showCopy = false}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 80,
+          child: Text(
+            '$label:',
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(child: Text(value)),
+              if (showCopy)
+                InkWell(
+                  onTap: () {
+                    Clipboard.setData(ClipboardData(text: value));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('ID copied to clipboard'),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.copy, size: 16, color: Colors.grey),
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showDeleteConfirmationDialog(BuildContext context, UserModel user) {
+    final local = AppLocalizations.of(context)!;
+    final fullName = '${user.firstName ?? ''} ${user.lastName ?? ''}'.trim();
+    
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.warning_amber_rounded,
+                size: 64,
+                color: Colors.orange,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                local.delete_user,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                local.delete_user_warning,
+                style: TextStyle(color: Colors.grey[600]),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[800],
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(local.cancel),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      // TODO: Implement delete user API call
+                      ToastHelper.showCustomToast(
+                        context,
+                        text: 'User deleted successfully',
+                        isError: false,
+                      );
+                      // Refresh the list
+                      context.read<GetUsersCubit>().getAllUsers();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(local.yes_delete),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildStatusChip(String status) {

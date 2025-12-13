@@ -962,7 +962,7 @@ abstract class AppLocalizations {
   /// No description provided for @name.
   ///
   /// In en, this message translates to:
-  /// **'Full name'**
+  /// **'Name'**
   String get name;
 
   /// No description provided for @uploadPorV.
@@ -992,7 +992,7 @@ abstract class AppLocalizations {
   /// No description provided for @phone.
   ///
   /// In en, this message translates to:
-  /// **'Phone Number'**
+  /// **'Phone'**
   String get phone;
 
   /// No description provided for @signup.
@@ -1022,7 +1022,7 @@ abstract class AppLocalizations {
   /// No description provided for @email.
   ///
   /// In en, this message translates to:
-  /// **'Email address'**
+  /// **'Email'**
   String get email;
 
   /// No description provided for @password.
@@ -1594,6 +1594,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search by name or email...'**
   String get search_by_name_or_email;
+
+  /// No description provided for @user_details.
+  ///
+  /// In en, this message translates to:
+  /// **'User Details'**
+  String get user_details;
+
+  /// No description provided for @user_info.
+  ///
+  /// In en, this message translates to:
+  /// **'User Info'**
+  String get user_info;
+
+  /// No description provided for @id.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get id;
+
+  /// No description provided for @role.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get role;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @role_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Role updated successfully'**
+  String get role_updated_successfully;
+
+  /// No description provided for @role_update_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update role'**
+  String get role_update_failed;
+
+  /// No description provided for @user_deactivated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'User deactivated successfully'**
+  String get user_deactivated_successfully;
+
+  /// No description provided for @user_activated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'User activated successfully'**
+  String get user_activated_successfully;
+
+  /// No description provided for @user_status_update_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update user status'**
+  String get user_status_update_failed;
+
+  /// No description provided for @delete_user.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete User?'**
+  String get delete_user;
+
+  /// No description provided for @delete_user_warning.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone!'**
+  String get delete_user_warning;
+
+  /// No description provided for @yes_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, delete'**
+  String get yes_delete;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

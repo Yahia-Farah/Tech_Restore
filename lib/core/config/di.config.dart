@@ -18,8 +18,14 @@ import '../../features/admin/tabs/data/datasource/admin_remote_datasource.dart'
     as _i532;
 import '../../features/admin/tabs/data/repo_impl/admin_repo_impl.dart' as _i737;
 import '../../features/admin/tabs/domain/repo/admin_repo.dart' as _i253;
+import '../../features/admin/tabs/domain/usecases/activate_user_usecase.dart'
+    as _i839;
 import '../../features/admin/tabs/domain/usecases/admin_states_usecase.dart'
     as _i902;
+import '../../features/admin/tabs/domain/usecases/deactivate_user_usecase.dart'
+    as _i217;
+import '../../features/admin/tabs/domain/usecases/update_user_role_usecase.dart'
+    as _i586;
 import '../../features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart'
     as _i80;
 import '../../features/admin/tabs/manage-shops/data/datasource/get_shops_data_source_impl.dart'
@@ -118,6 +124,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i57.ShopRepository(gh<_i622.ShopRemoteDataSource>()));
     gh.factory<_i902.AdminStatesUseCase>(
         () => _i902.AdminStatesUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i839.ActivateUserUseCase>(
+        () => _i839.ActivateUserUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i217.DeactivateUserUseCase>(
+        () => _i217.DeactivateUserUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i586.UpdateUserRoleUseCase>(
+        () => _i586.UpdateUserRoleUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i80.AdminStatsCubit>(
         () => _i80.AdminStatsCubit(gh<_i902.AdminStatesUseCase>()));
     gh.lazySingleton<_i890.ProfileRepository>(
@@ -148,8 +160,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i68.AssignerSignupUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i77.DeliverySignUpUseCase>(
         () => _i77.DeliverySignUpUseCase(gh<_i170.AuthRepository>()));
-    gh.factory<_i524.GetUsersCubit>(
-        () => _i524.GetUsersCubit(gh<_i680.GetUserRepository>()));
     gh.factory<_i1061.ProfileCubit>(
         () => _i1061.ProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i327.EditProfileCubit>(
@@ -160,6 +170,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i697.GetShopsCubit(gh<_i63.GetShopsRepository>()));
     gh.factory<_i146.LoginViewModel>(
         () => _i146.LoginViewModel(gh<_i188.LoginUseCase>()));
+    gh.factory<_i524.GetUsersCubit>(() => _i524.GetUsersCubit(
+          gh<_i680.GetUserRepository>(),
+          gh<_i586.UpdateUserRoleUseCase>(),
+          gh<_i217.DeactivateUserUseCase>(),
+          gh<_i839.ActivateUserUseCase>(),
+        ));
     gh.factory<_i71.LogoutViewModel>(
         () => _i71.LogoutViewModel(gh<_i48.LogoutUseCase>()));
     gh.factory<_i215.VerifyCodeCubit>(() => _i215.VerifyCodeCubit(
