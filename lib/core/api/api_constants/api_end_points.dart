@@ -28,4 +28,5 @@ abstract class ApiEndPoints {
   static const String totalInventoryValue = 'shop/inventory/total-value';
   static const String exportInventoryData = 'shop/inventory/export';
   static const String getAllShops = 'admin/shops';
+  static const String getAdminStats = 'admin/stats';
 }

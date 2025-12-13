@@ -12,6 +12,7 @@ import 'package:tech_restore/features/shop/data/models/products/total_elements_r
 import 'package:tech_restore/features/shop/data/models/products/product_model.dart';
 import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
 import '../../../features/admin/tabs/manage-user/data/models/user_model_response.dart';
+import '../../../features/admin/tabs/data/model/admin-states/admin_states_response.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -93,6 +94,10 @@ abstract class ApiClient {
 
   @GET(ApiEndPoints.getAllShops)
   Future<ShopListResponse> getShops();
+
+  @GET(ApiEndPoints.getAdminStats)
+  @Extra({'auth': true})
+  Future<AdminStatesResponse> getAdminStats();
 
   @GET(ApiEndPoints.getAllOffers)
   @Extra({'auth': true})

@@ -12,6 +12,16 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/admin/tabs/api/datasource_impl/admin_remote_data_source_impl.dart'
+    as _i702;
+import '../../features/admin/tabs/data/datasource/admin_remote_datasource.dart'
+    as _i532;
+import '../../features/admin/tabs/data/repo_impl/admin_repo_impl.dart' as _i737;
+import '../../features/admin/tabs/domain/repo/admin_repo.dart' as _i253;
+import '../../features/admin/tabs/domain/usecases/admin_states_usecase.dart'
+    as _i902;
+import '../../features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart'
+    as _i80;
 import '../../features/admin/tabs/manage-shops/data/datasource/get_shops_data_source_impl.dart'
     as _i392;
 import '../../features/admin/tabs/manage-shops/data/repo/get_shops_repo.dart'
@@ -90,6 +100,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i24.AuthRemoteDataSource>(
         () => _i504.AuthRemoteDatasourceImpl(gh<_i364.ApiClient>()));
+    gh.lazySingleton<_i532.AdminRemoteDataSource>(
+        () => _i702.AdminRemoteDataSourceImpl(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i904.ProfileRemoteDataSource>(
         () => _i904.ProfileRemoteDataSource(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i622.ShopRemoteDataSource>(
@@ -100,8 +112,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i392.GetShopsRemoteDataSource(gh<_i364.ApiClient>()));
     gh.factory<_i341.ResetPasswordCubit>(
         () => _i341.ResetPasswordCubit(gh<_i364.ApiClient>()));
+    gh.factory<_i253.AdminRepo>(
+        () => _i737.AdminRepoImpl(gh<_i532.AdminRemoteDataSource>()));
     gh.lazySingleton<_i57.ShopRepository>(
         () => _i57.ShopRepository(gh<_i622.ShopRemoteDataSource>()));
+    gh.factory<_i902.AdminStatesUseCase>(
+        () => _i902.AdminStatesUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i80.AdminStatsCubit>(
+        () => _i80.AdminStatsCubit(gh<_i902.AdminStatesUseCase>()));
     gh.lazySingleton<_i890.ProfileRepository>(
         () => _i890.ProfileRepository(gh<_i904.ProfileRemoteDataSource>()));
     gh.lazySingleton<_i170.AuthRepository>(
@@ -120,10 +138,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i474.ResetPasswordUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i294.VerifyCodeUseCase>(
         () => _i294.VerifyCodeUseCase(gh<_i170.AuthRepository>()));
-    gh.factory<_i188.LoginUseCase>(
-        () => _i188.LoginUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i1037.SignUpUseCase>(
         () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i188.LoginUseCase>(
+        () => _i188.LoginUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i80.SignUpUseCase>(
         () => _i80.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i68.AssignerSignupUseCase>(
@@ -132,10 +150,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i77.DeliverySignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i524.GetUsersCubit>(
         () => _i524.GetUsersCubit(gh<_i680.GetUserRepository>()));
-    gh.factory<_i327.EditProfileCubit>(
-        () => _i327.EditProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i1061.ProfileCubit>(
         () => _i1061.ProfileCubit(gh<_i890.ProfileRepository>()));
+    gh.factory<_i327.EditProfileCubit>(
+        () => _i327.EditProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i164.ForgetPasswordCubit>(
         () => _i164.ForgetPasswordCubit(gh<_i948.ForgetPasswordUseCase>()));
     gh.factory<_i697.GetShopsCubit>(

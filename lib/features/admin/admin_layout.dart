@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/config/di.dart';
-import 'package:tech_restore/features/admin/tabs/admin_dashboard_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/view/admin_dashboard_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_repair_screen.dart';
 import 'package:tech_restore/features/admin/tabs/promotional_offers.dart';
 import 'package:tech_restore/features/admin/tabs/reviews_screen.dart';
@@ -26,7 +27,10 @@ class _MainLayoutState extends State<AdminLayout> {
   int _selectedIndex = 0;
 
   List<Widget> get _screens => [
-    AdminDashboardScreen(),
+    BlocProvider(
+      create: (context) => getIt<AdminStatsCubit>(),
+      child: const AdminDashboardScreen(),
+    ),
     BlocProvider(
       create: (context) => getIt<GetUsersCubit>(),
       child: const UsersScreen(),
