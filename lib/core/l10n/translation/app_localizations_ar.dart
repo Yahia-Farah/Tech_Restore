@@ -851,4 +851,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get category_deleted_successfully => 'تم حذف الفئة بنجاح';
+
+  @override
+  String get transactions_management => 'إدارة المعاملات';
+
+  @override
+  String get view_and_monitor_transactions => 'عرض ومراقبة جميع معاملات الدفع';
+
+  @override
+  String get total_transactions => 'إجمالي المعاملات';
+
+  @override
+  String get total_revenue => 'إجمالي الإيرادات';
+
+  @override
+  String get search_by_user_id => 'البحث برقم المستخدم (اتركه فارغاً لجميع المعاملات)';
+
+  @override
+  String get search_user => 'بحث المستخدم';
+
+  @override
+  String get show_all => 'عرض الكل';
+
+  @override
+  String get transaction_id => 'رقم المعاملة';
+
+  @override
+  String get user_id => 'رقم المستخدم';
+
+  @override
+  String get type => 'النوع';
+
+  @override
+  String get no_transactions_available => 'لا توجد معاملات متاحة.';
 }

@@ -8,7 +8,7 @@ import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_promotional_offers_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/view/admin_categories_screen.dart';
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
-import 'package:tech_restore/features/admin/tabs/transaction_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/view/transaction_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/view/users_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';

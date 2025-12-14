@@ -285,5 +285,18 @@
   "id_copied_to_clipboard": "ID copied to clipboard",
   "category_added_successfully": "Category added successfully",
   "category_updated_successfully": "Category updated successfully",
-  "category_deleted_successfully": "Category deleted successfully"
+  "category_deleted_successfully": "Category deleted successfully",
+  "transactions_management": "Transactions Management",
+  "view_and_monitor_transactions": "View and monitor all payment transactions",
+  "total_transactions": "Total Transactions",
+  "total_revenue": "Total Revenue",
+  "search_by_user_id": "Search by User ID (leave empty for all transactions)",
+  "search_user": "Search User",
+  "show_all": "Show All",
+  "transaction_id": "TRANSACTION ID",
+  "user_id": "USER ID",
+  "amount": "AMOUNT",
+  "date": "DATE",
+  "type": "TYPE",
+  "no_transactions_available": "No transactions available."
 }

@@ -262,7 +262,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get date => 'Date';
+  String get date => 'DATE';
 
   @override
   String get service_type => 'Service Type';
@@ -274,7 +274,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shop => 'Shop';
 
   @override
-  String get amount => 'Amount';
+  String get amount => 'AMOUNT';
 
   @override
   String get out_for_delivery => 'Out for delivery';
@@ -851,4 +851,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get category_deleted_successfully => 'Category deleted successfully';
+
+  @override
+  String get transactions_management => 'Transactions Management';
+
+  @override
+  String get view_and_monitor_transactions => 'View and monitor all payment transactions';
+
+  @override
+  String get total_transactions => 'Total Transactions';
+
+  @override
+  String get total_revenue => 'Total Revenue';
+
+  @override
+  String get search_by_user_id => 'Search by User ID (leave empty for all transactions)';
+
+  @override
+  String get search_user => 'Search User';
+
+  @override
+  String get show_all => 'Show All';
+
+  @override
+  String get transaction_id => 'TRANSACTION ID';
+
+  @override
+  String get user_id => 'USER ID';
+
+  @override
+  String get type => 'TYPE';
+
+  @override
+  String get no_transactions_available => 'No transactions available.';
 }

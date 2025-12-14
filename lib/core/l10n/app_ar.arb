@@ -285,5 +285,18 @@
   "id_copied_to_clipboard": "تم نسخ الرقم التعريفي إلى الحافظة",
   "category_added_successfully": "تم إضافة الفئة بنجاح",
   "category_updated_successfully": "تم تحديث الفئة بنجاح",
-  "category_deleted_successfully": "تم حذف الفئة بنجاح"
+  "category_deleted_successfully": "تم حذف الفئة بنجاح",
+  "transactions_management": "إدارة المعاملات",
+  "view_and_monitor_transactions": "عرض ومراقبة جميع معاملات الدفع",
+  "total_transactions": "إجمالي المعاملات",
+  "total_revenue": "إجمالي الإيرادات",
+  "search_by_user_id": "البحث برقم المستخدم (اتركه فارغاً لجميع المعاملات)",
+  "search_user": "بحث المستخدم",
+  "show_all": "عرض الكل",
+  "transaction_id": "رقم المعاملة",
+  "user_id": "رقم المستخدم",
+  "amount": "المبلغ",
+  "date": "التاريخ",
+  "type": "النوع",
+  "no_transactions_available": "لا توجد معاملات متاحة."
 }

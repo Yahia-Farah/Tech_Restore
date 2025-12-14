@@ -596,7 +596,7 @@ abstract class AppLocalizations {
   /// No description provided for @date.
   ///
   /// In en, this message translates to:
-  /// **'Date'**
+  /// **'DATE'**
   String get date;
 
   /// No description provided for @service_type.
@@ -620,7 +620,7 @@ abstract class AppLocalizations {
   /// No description provided for @amount.
   ///
   /// In en, this message translates to:
-  /// **'Amount'**
+  /// **'AMOUNT'**
   String get amount;
 
   /// No description provided for @out_for_delivery.
@@ -1774,6 +1774,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Category deleted successfully'**
   String get category_deleted_successfully;
+
+  /// No description provided for @transactions_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions Management'**
+  String get transactions_management;
+
+  /// No description provided for @view_and_monitor_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'View and monitor all payment transactions'**
+  String get view_and_monitor_transactions;
+
+  /// No description provided for @total_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Transactions'**
+  String get total_transactions;
+
+  /// No description provided for @total_revenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Revenue'**
+  String get total_revenue;
+
+  /// No description provided for @search_by_user_id.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by User ID (leave empty for all transactions)'**
+  String get search_by_user_id;
+
+  /// No description provided for @search_user.
+  ///
+  /// In en, this message translates to:
+  /// **'Search User'**
+  String get search_user;
+
+  /// No description provided for @show_all.
+  ///
+  /// In en, this message translates to:
+  /// **'Show All'**
+  String get show_all;
+
+  /// No description provided for @transaction_id.
+  ///
+  /// In en, this message translates to:
+  /// **'TRANSACTION ID'**
+  String get transaction_id;
+
+  /// No description provided for @user_id.
+  ///
+  /// In en, this message translates to:
+  /// **'USER ID'**
+  String get user_id;
+
+  /// No description provided for @type.
+  ///
+  /// In en, this message translates to:
+  /// **'TYPE'**
+  String get type;
+
+  /// No description provided for @no_transactions_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions available.'**
+  String get no_transactions_available;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
