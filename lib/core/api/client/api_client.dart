@@ -12,6 +12,10 @@ import 'package:tech_restore/features/shop/data/models/products/total_elements_r
 import 'package:tech_restore/features/shop/data/models/products/product_model.dart';
 import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
 import '../../../features/admin/tabs/manage-user/data/models/user_model_response.dart';
+import '../../../features/admin/tabs/manage-user/data/models/update_user_role_request.dart';
+import '../../../features/admin/tabs/data/model/admin-states/admin_states_response.dart';
+import '../../../features/admin/tabs/data/model/categories-model/categories_model_response.dart';
+import '../../../features/admin/tabs/data/model/categories-model/categories_request.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -112,6 +116,10 @@ abstract class ApiClient {
   Future<dynamic> endChatSession(@Path('sessionId') String sessionId);
 
 
+  @GET(ApiEndPoints.getAdminStats)
+  @Extra({'auth': true})
+  Future<AdminStatesResponse> getAdminStats();
+
   @GET(ApiEndPoints.getAllOffers)
   @Extra({'auth': true})
   Future<GetAllOffersModel> getOffers(@Query('page') int page);
@@ -176,4 +184,38 @@ abstract class ApiClient {
   @GET(ApiEndPoints.totalInventoryValue)
   @Extra({'auth': true})
   Future<double> totalInventoryValue();
+
+  @PUT(ApiEndPoints.UpdateUserRole)
+  @Extra({'auth': true})
+  Future<String> updateUserRole(
+    @Path('userId') String userId,
+    @Body() UpdateUserRoleRequest request,
+  );
+
+  @PUT(ApiEndPoints.deactivateUser)
+  @Extra({'auth': true})
+  Future<String> deactivateUser(@Path('userId') String userId);
+
+  @PUT(ApiEndPoints.activateUser)
+  @Extra({'auth': true})
+  Future<String> activateUser(@Path('userId') String userId);
+
+  @GET(ApiEndPoints.getAllCategoriesAdmin)
+  @Extra({'auth': true})
+  Future<CategoriesResponse> getAllCategoriesAdmin(@Query('page') int page);
+
+  @POST(ApiEndPoints.addCategoriesAdmin)
+  @Extra({'auth': true})
+  Future<String> addCategoryAdmin(@Body() CategoriesRequest request);
+
+  @PUT(ApiEndPoints.updateCategoriesAdmin)
+  @Extra({'auth': true})
+  Future<String> updateCategoryAdmin(
+    @Path('categroyId') String categoryId,
+    @Body() CategoriesRequest request,
+  );
+
+  @DELETE(ApiEndPoints.deleteCategoriesAdmin)
+  @Extra({'auth': true})
+  Future<String> deleteCategoryAdmin(@Path('categroyId') String categoryId);
 }

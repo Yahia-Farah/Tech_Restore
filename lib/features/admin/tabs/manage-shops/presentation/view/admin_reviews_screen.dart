@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/admin_drawer.dart';
+
+import '../../../../../../core/theme/app_colors.dart';
 
 class AdminReviewsScreen extends StatefulWidget {
   const AdminReviewsScreen({super.key});
@@ -9,7 +10,6 @@ class AdminReviewsScreen extends StatefulWidget {
 }
 
 class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
-  int _selectedIndex = 1;
   String _searchQuery = "";
   final TextEditingController _searchController = TextEditingController();
 
@@ -48,11 +48,10 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
     },
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    Navigator.pop(context);
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -66,10 +65,6 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
         }).toList();
 
     return Scaffold(
-      drawer: AdminDrawerWidget(
-        onItemTapped: _onItemTapped,
-        selectedIndex: _selectedIndex,
-      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -78,7 +73,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
           children: [
             const Text(
               "Review Management",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primary),
             ),
             const SizedBox(height: 4),
             const Text(
@@ -183,3 +178,4 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
     );
   }
 }
+

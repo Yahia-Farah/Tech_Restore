@@ -4,6 +4,7 @@ import 'package:tech_restore/features/admin/tabs/manage-shops/data/models/shop_m
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/states/get_shops_states.dart';
 
+import '../../../../../../core/theme/app_colors.dart';
 import '../../../../../auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 
 class AdminRepairScreen extends StatefulWidget {
@@ -94,12 +95,12 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Repair Shop Management",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    "Stores Management",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary),
                   ),
                   const SizedBox(height: 4),
                   const Text(
-                    "Approve, suspend, and manage repair shop registrations",
+                    "Approve, suspend, and manage store registrations",
                     style: TextStyle(color: Colors.black54),
                   ),
                   const SizedBox(height: 20),
@@ -120,10 +121,11 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                "Repair Shops",
+                                "Stores",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
+                                  color: AppColors.primary
                                 ),
                               ),
                               SizedBox(
@@ -131,7 +133,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                                 child: TextField(
                                   controller: _searchController,
                                   decoration: InputDecoration(
-                                    hintText: "Search repair shops...",
+                                    hintText: "Search stores...",
                                     prefixIcon: const Icon(Icons.search),
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 12,
