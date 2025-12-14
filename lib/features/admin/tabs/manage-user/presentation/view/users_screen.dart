@@ -386,7 +386,13 @@ class _UsersScreenState extends State<UsersScreen> {
             ),
           ),
           // Status Column
-          SizedBox(width: 100, child: _buildStatusChip(status)),
+          SizedBox(
+            width: 100,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: _buildStatusChip(status),
+            ),
+          ),
           // Actions Column
           SizedBox(
             width: 200,
@@ -805,13 +811,15 @@ class _UsersScreenState extends State<UsersScreen> {
         bg = Colors.orange.withOpacity(0.2);
         text = Colors.orange;
     }
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(8),
+    return IntrinsicWidth(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+        decoration: BoxDecoration(
+          color: bg,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(status, style: TextStyle(color: text, fontSize: 12)),
       ),
-      child: Text(status, style: TextStyle(color: text, fontSize: 12)),
     );
   }
 }
