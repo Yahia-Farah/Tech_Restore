@@ -129,7 +129,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get status => 'Status';
 
   @override
-  String get actions => 'Edit / Remove';
+  String get actions => 'Actions';
 
   @override
   String get newDev => 'New';
@@ -800,4 +800,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yes_delete => 'Yes, delete';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get manage_product_categories => 'Manage product categories';
+
+  @override
+  String get total_categories => 'Total Categories';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get search_by_name => 'Search by name...';
+
+  @override
+  String get add_category => 'Add Category';
+
+  @override
+  String get no_categories_available => 'No categories available';
+
+  @override
+  String get category_details => 'Category Details';
+
+  @override
+  String get enter_category_name => 'Enter category name';
+
+  @override
+  String get create => 'Create';
 }

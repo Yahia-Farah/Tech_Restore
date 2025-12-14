@@ -41,7 +41,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: BlocBuilder<AdminStatsCubit, AdminStatsState>(
         builder: (context, state) {
           if (state is AdminStatsLoading) {

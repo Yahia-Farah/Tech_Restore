@@ -95,12 +95,12 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Repair Shop Management",
+                    "Stores Management",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary),
                   ),
                   const SizedBox(height: 4),
                   const Text(
-                    "Approve, suspend, and manage repair shop registrations",
+                    "Approve, suspend, and manage store registrations",
                     style: TextStyle(color: Colors.black54),
                   ),
                   const SizedBox(height: 20),
@@ -121,7 +121,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                "Repair Shops",
+                                "Stores",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -133,7 +133,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                                 child: TextField(
                                   controller: _searchController,
                                   decoration: InputDecoration(
-                                    hintText: "Search repair shops...",
+                                    hintText: "Search stores...",
                                     prefixIcon: const Icon(Icons.search),
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 12,

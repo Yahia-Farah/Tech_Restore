@@ -338,7 +338,7 @@ abstract class AppLocalizations {
   /// No description provided for @actions.
   ///
   /// In en, this message translates to:
-  /// **'Edit / Remove'**
+  /// **'Actions'**
   String get actions;
 
   /// No description provided for @newDev.
@@ -1672,6 +1672,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Yes, delete'**
   String get yes_delete;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @manage_product_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage product categories'**
+  String get manage_product_categories;
+
+  /// No description provided for @total_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Categories'**
+  String get total_categories;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @search_by_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name...'**
+  String get search_by_name;
+
+  /// No description provided for @add_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get add_category;
+
+  /// No description provided for @no_categories_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories available'**
+  String get no_categories_available;
+
+  /// No description provided for @category_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Details'**
+  String get category_details;
+
+  /// No description provided for @enter_category_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter category name'**
+  String get enter_category_name;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

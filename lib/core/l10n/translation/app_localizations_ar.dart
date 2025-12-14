@@ -129,7 +129,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get status => 'الحالة';
 
   @override
-  String get actions => 'تعديل / إزالة';
+  String get actions => 'الإجراءات';
 
   @override
   String get newDev => 'جديد';
@@ -800,4 +800,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get yes_delete => 'نعم، احذف';
+
+  @override
+  String get categories => 'الفئات';
+
+  @override
+  String get manage_product_categories => 'إدارة فئات المنتجات';
+
+  @override
+  String get total_categories => 'إجمالي الفئات';
+
+  @override
+  String get search => 'بحث';
+
+  @override
+  String get search_by_name => 'ابحث بالاسم...';
+
+  @override
+  String get add_category => 'إضافة فئة';
+
+  @override
+  String get no_categories_available => 'لا توجد فئات متاحة';
+
+  @override
+  String get category_details => 'تفاصيل الفئة';
+
+  @override
+  String get enter_category_name => 'أدخل اسم الفئة';
+
+  @override
+  String get create => 'إنشاء';
 }

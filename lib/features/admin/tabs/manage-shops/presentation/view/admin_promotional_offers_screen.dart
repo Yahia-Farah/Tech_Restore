@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/admin_drawer.dart';
+
+import '../../../../../../core/theme/app_colors.dart';
 
 class AdminPromotionsScreen extends StatefulWidget {
   const AdminPromotionsScreen({super.key});
@@ -9,7 +10,6 @@ class AdminPromotionsScreen extends StatefulWidget {
 }
 
 class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
-  int _selectedIndex = 1;
   String _searchQuery = "";
   final TextEditingController _searchController = TextEditingController();
 
@@ -48,11 +48,10 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
     },
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    Navigator.pop(context);
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -65,10 +64,6 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
         }).toList();
 
     return Scaffold(
-      drawer: AdminDrawerWidget(
-        onItemTapped: _onItemTapped,
-        selectedIndex: _selectedIndex,
-      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -77,7 +72,7 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
           children: [
             const Text(
               "Promotional Offers",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primary),
             ),
             const SizedBox(height: 4),
             const Text(
@@ -200,3 +195,4 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
     );
   }
 }
+

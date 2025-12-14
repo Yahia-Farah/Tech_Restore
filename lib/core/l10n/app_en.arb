@@ -267,5 +267,16 @@
   "delete_user_warning": "This action cannot be undone!",
   "yes_delete": "Yes, delete",
   "cancel": "Cancel",
-  "save": "Save"
+  "save": "Save",
+  "categories": "Categories",
+  "manage_product_categories": "Manage product categories",
+  "total_categories": "Total Categories",
+  "search": "Search",
+  "search_by_name": "Search by name...",
+  "add_category": "Add Category",
+  "no_categories_available": "No categories available",
+  "actions": "Actions",
+  "category_details": "Category Details",
+  "enter_category_name": "Enter category name",
+  "create": "Create"
 }

@@ -4,8 +4,9 @@ import 'package:tech_restore/core/config/di.dart';
 import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/view/admin_dashboard_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_repair_screen.dart';
-import 'package:tech_restore/features/admin/tabs/promotional_offers.dart';
-import 'package:tech_restore/features/admin/tabs/reviews_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_reviews_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_promotional_offers_screen.dart';
+import 'package:tech_restore/features/admin/tabs/admin_categories_screen.dart';
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
 import 'package:tech_restore/features/admin/tabs/transaction_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/view/users_screen.dart';
@@ -35,14 +36,21 @@ class _MainLayoutState extends State<AdminLayout> {
       create: (context) => getIt<GetUsersCubit>(),
       child: const UsersScreen(),
     ),
+    // Shop section: Stores (index 2)
     BlocProvider(
       create: (context) => getIt<GetShopsCubit>(),
       child: const AdminRepairScreen(),
     ),
+    // Shop section: Reviews (index 3)
+    const AdminReviewsScreen(),
+    // Shop section: Promotional Offers (index 4)
+    const AdminPromotionsScreen(),
+    // Transactions (index 5)
     AdminTransactionsScreen(),
-    AdminReviewsScreen(),
-    AdminPromotionsScreen(),
+    // Support (index 6)
     AdminSupportScreen(),
+    // Categories (index 7)
+    const AdminCategoriesScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -99,13 +107,32 @@ class _MainLayoutState extends State<AdminLayout> {
                       ),
                     ],
                   )
-                : Text(
-                    _getTitle(_selectedIndex),
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                : _selectedIndex == 7
+                    ? Row(
+                        children: [
+                          Icon(
+                            Icons.list,
+                            color: AppColors.primary[70],
+                            size: 30,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            local.categories,
+                            style: TextStyle(
+                              color: AppColors.primary[70],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Text(
+                        _getTitle(_selectedIndex),
+                        style: const TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
         backgroundColor: Colors.white,
         elevation: 1,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -155,15 +182,17 @@ class _MainLayoutState extends State<AdminLayout> {
       case 1:
         return "User";
       case 2:
-        return "Repair Shop";
+        return "Stores";
       case 3:
-        return "Transaction";
-      case 4:
         return "Reviews";
+      case 4:
+        return "Promotional Offers";
       case 5:
-        return "Promotional offers";
+        return "Transaction";
       case 6:
         return "Support";
+      case 7:
+        return "Categories";
       default:
         return "";
     }

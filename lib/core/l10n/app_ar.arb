@@ -267,5 +267,16 @@
   "delete_user_warning": "لا يمكن التراجع عن هذا الإجراء!",
   "yes_delete": "نعم، احذف",
   "cancel": "إلغاء",
-  "save": "حفظ"
+  "save": "حفظ",
+  "categories": "الفئات",
+  "manage_product_categories": "إدارة فئات المنتجات",
+  "total_categories": "إجمالي الفئات",
+  "search": "بحث",
+  "search_by_name": "ابحث بالاسم...",
+  "add_category": "إضافة فئة",
+  "no_categories_available": "لا توجد فئات متاحة",
+  "actions": "الإجراءات",
+  "category_details": "تفاصيل الفئة",
+  "enter_category_name": "أدخل اسم الفئة",
+  "create": "إنشاء"
 }
