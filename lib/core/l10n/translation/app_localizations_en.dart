@@ -830,4 +830,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get create => 'Create';
+
+  @override
+  String get edit_category => 'Edit Category';
+
+  @override
+  String get delete_category => 'Delete Category?';
+
+  @override
+  String get delete_category_warning => 'This action cannot be undone!';
+
+  @override
+  String get id_copied_to_clipboard => 'ID copied to clipboard';
+
+  @override
+  String get category_added_successfully => 'Category added successfully';
+
+  @override
+  String get category_updated_successfully => 'Category updated successfully';
+
+  @override
+  String get category_deleted_successfully => 'Category deleted successfully';
 }

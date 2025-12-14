@@ -278,5 +278,12 @@
   "actions": "Actions",
   "category_details": "Category Details",
   "enter_category_name": "Enter category name",
-  "create": "Create"
+  "create": "Create",
+  "edit_category": "Edit Category",
+  "delete_category": "Delete Category?",
+  "delete_category_warning": "This action cannot be undone!",
+  "id_copied_to_clipboard": "ID copied to clipboard",
+  "category_added_successfully": "Category added successfully",
+  "category_updated_successfully": "Category updated successfully",
+  "category_deleted_successfully": "Category deleted successfully"
 }

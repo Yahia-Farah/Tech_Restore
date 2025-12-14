@@ -20,12 +20,22 @@ import '../../features/admin/tabs/data/repo_impl/admin_repo_impl.dart' as _i737;
 import '../../features/admin/tabs/domain/repo/admin_repo.dart' as _i253;
 import '../../features/admin/tabs/domain/usecases/activate_user_usecase.dart'
     as _i839;
+import '../../features/admin/tabs/domain/usecases/add_category_usecase.dart'
+    as _i733;
 import '../../features/admin/tabs/domain/usecases/admin_states_usecase.dart'
     as _i902;
 import '../../features/admin/tabs/domain/usecases/deactivate_user_usecase.dart'
     as _i217;
+import '../../features/admin/tabs/domain/usecases/delete_category_usecase.dart'
+    as _i886;
+import '../../features/admin/tabs/domain/usecases/get_all_categories_usecase.dart'
+    as _i953;
+import '../../features/admin/tabs/domain/usecases/update_category_usecase.dart'
+    as _i982;
 import '../../features/admin/tabs/domain/usecases/update_user_role_usecase.dart'
     as _i586;
+import '../../features/admin/tabs/manage-categories/presentation/viewmodel/categories_cubit.dart'
+    as _i652;
 import '../../features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart'
     as _i80;
 import '../../features/admin/tabs/manage-shops/data/datasource/get_shops_data_source_impl.dart'
@@ -130,6 +140,20 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i217.DeactivateUserUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i586.UpdateUserRoleUseCase>(
         () => _i586.UpdateUserRoleUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i733.AddCategoryUseCase>(
+        () => _i733.AddCategoryUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i886.DeleteCategoryUseCase>(
+        () => _i886.DeleteCategoryUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i953.GetAllCategoriesUseCase>(
+        () => _i953.GetAllCategoriesUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i982.UpdateCategoryUseCase>(
+        () => _i982.UpdateCategoryUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i652.CategoriesCubit>(() => _i652.CategoriesCubit(
+          gh<_i953.GetAllCategoriesUseCase>(),
+          gh<_i733.AddCategoryUseCase>(),
+          gh<_i982.UpdateCategoryUseCase>(),
+          gh<_i886.DeleteCategoryUseCase>(),
+        ));
     gh.factory<_i80.AdminStatsCubit>(
         () => _i80.AdminStatsCubit(gh<_i902.AdminStatesUseCase>()));
     gh.lazySingleton<_i890.ProfileRepository>(

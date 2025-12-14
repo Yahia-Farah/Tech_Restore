@@ -1732,6 +1732,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create'**
   String get create;
+
+  /// No description provided for @edit_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Category'**
+  String get edit_category;
+
+  /// No description provided for @delete_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Category?'**
+  String get delete_category;
+
+  /// No description provided for @delete_category_warning.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone!'**
+  String get delete_category_warning;
+
+  /// No description provided for @id_copied_to_clipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'ID copied to clipboard'**
+  String get id_copied_to_clipboard;
+
+  /// No description provided for @category_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category added successfully'**
+  String get category_added_successfully;
+
+  /// No description provided for @category_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category updated successfully'**
+  String get category_updated_successfully;
+
+  /// No description provided for @category_deleted_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category deleted successfully'**
+  String get category_deleted_successfully;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

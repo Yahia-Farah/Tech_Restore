@@ -278,5 +278,12 @@
   "actions": "الإجراءات",
   "category_details": "تفاصيل الفئة",
   "enter_category_name": "أدخل اسم الفئة",
-  "create": "إنشاء"
+  "create": "إنشاء",
+  "edit_category": "تعديل الفئة",
+  "delete_category": "حذف الفئة؟",
+  "delete_category_warning": "لا يمكن التراجع عن هذا الإجراء!",
+  "id_copied_to_clipboard": "تم نسخ الرقم التعريفي إلى الحافظة",
+  "category_added_successfully": "تم إضافة الفئة بنجاح",
+  "category_updated_successfully": "تم تحديث الفئة بنجاح",
+  "category_deleted_successfully": "تم حذف الفئة بنجاح"
 }

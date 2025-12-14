@@ -830,4 +830,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get create => 'إنشاء';
+
+  @override
+  String get edit_category => 'تعديل الفئة';
+
+  @override
+  String get delete_category => 'حذف الفئة؟';
+
+  @override
+  String get delete_category_warning => 'لا يمكن التراجع عن هذا الإجراء!';
+
+  @override
+  String get id_copied_to_clipboard => 'تم نسخ الرقم التعريفي إلى الحافظة';
+
+  @override
+  String get category_added_successfully => 'تم إضافة الفئة بنجاح';
+
+  @override
+  String get category_updated_successfully => 'تم تحديث الفئة بنجاح';
+
+  @override
+  String get category_deleted_successfully => 'تم حذف الفئة بنجاح';
 }
