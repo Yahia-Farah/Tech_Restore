@@ -36,4 +36,5 @@ abstract class ApiEndPoints {
   static const String addCategoriesAdmin = 'admin/categories';
   static const String updateCategoriesAdmin = 'admin/categories/{categroyId}';
   static const String deleteCategoriesAdmin = 'admin/categories/{categroyId}';
+  static const String getAllTransactionAdmin = 'admin/transactions/all';
 }
