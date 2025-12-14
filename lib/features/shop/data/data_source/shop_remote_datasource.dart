@@ -5,6 +5,8 @@ import 'package:tech_restore/features/shop/data/models/products/get_all_category
 import 'package:tech_restore/features/shop/data/models/products/get_all_products_model.dart';
 import '../models/offers/offer_request.dart';
 import '../models/offers/offer_response.dart';
+import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
+import '../models/chats/chat_message_model.dart';
 
 import '../../../../core/api/client/api_client.dart';
 import '../models/products/product_model.dart';
@@ -72,5 +74,19 @@ class ShopRemoteDataSource {
 
   Future<double> totalInventoryValue() async {
     return await _apiClient.totalInventoryValue();
+  }
+
+  Future<List<ChatSessionModel>> getChatSessions() async {
+    return await _apiClient.getChatSessions();
+  }
+
+  Future<List<ChatMessageModel>> getChatMessages(String sessionId) async {
+    return await _apiClient.getChatMessages(sessionId);
+  }
+
+  // Messages are sent via WebSocket, not REST API
+
+  Future<void> endChatSession(String sessionId) async {
+    await _apiClient.endChatSession(sessionId);
   }
 }

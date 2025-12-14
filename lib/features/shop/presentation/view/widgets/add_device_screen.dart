@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/contants/app_icons.dart';
 import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
@@ -65,12 +66,16 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+            ),
             scrolledUnderElevation: 0,
             title: Text(local.add_device),
             titleTextStyle: TextStyle(
-              color: AppColors.secondary,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
+              color: AppColors.primary,
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
             ),
           ),
           body: Padding(

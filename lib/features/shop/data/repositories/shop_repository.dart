@@ -8,6 +8,8 @@ import '../models/products/add_product_request.dart';
 import '../models/products/get_all_products_model.dart';
 import '../models/products/get_all_category_model.dart';
 import '../models/products/product_model.dart';
+import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
+import '../models/chats/chat_message_model.dart';
 
 @lazySingleton
 class ShopRepository {
@@ -134,4 +136,29 @@ class ShopRepository {
     }
   }
 
+  Future<List<ChatSessionModel>> getChatSessions() async {
+    try {
+      return await _remoteDataSource.getChatSessions();
+    } catch (e) {
+      throw Exception('Failed to get chat sessions: ${e.toString()}');
+    }
+  }
+
+  Future<List<ChatMessageModel>> getChatMessages(String sessionId) async {
+    try {
+      return await _remoteDataSource.getChatMessages(sessionId);
+    } catch (e) {
+      throw Exception('Failed to get chat messages: ${e.toString()}');
+    }
+  }
+
+  // Messages are sent via WebSocket, not REST API
+
+  Future<void> endChatSession(String sessionId) async {
+    try {
+      await _remoteDataSource.endChatSession(sessionId);
+    } catch (e) {
+      throw Exception('Failed to end chat session: ${e.toString()}');
+    }
+  }
 }

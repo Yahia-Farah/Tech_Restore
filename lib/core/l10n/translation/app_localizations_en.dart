@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get app_name => 'Tech & Restore';
+  String get app_name => 'Tech Bazaar';
 
   @override
   String get dashboard => 'Dashboard';
@@ -185,6 +185,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orders_subtitle => 'You can track customer purchases from here';
+
+  @override
+  String get ordersSubtitle => 'Manage and track orders easily';
 
   @override
   String get last_orders => 'Last Orders';
@@ -422,7 +425,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get requestsCount => 'requests';
 
   @override
-  String get welcome => 'Welcome to TechRestore!';
+  String get welcome => 'Welcome to TechBazaar!';
 
   @override
   String get login => 'Log In';
@@ -729,4 +732,199 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get address => 'Address';
+
+  @override
+  String get chatWith => 'Chat with';
+
+  @override
+  String get connected => 'Connected';
+
+  @override
+  String get noMessages => 'No messages';
+
+  @override
+  String get typeMessage => 'Type a message...';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get connecting => 'Connecting... please wait';
+
+  @override
+  String get endChat => 'End Chat';
+
+  @override
+  String get chatEndedSuccessfully => 'Chat ended successfully';
+
+  @override
+  String get websocketNotConnected =>
+      'WebSocket is not connected. Please wait...';
+
+  @override
+  String get websocketDisconnected => 'WebSocket disconnected';
+
+  @override
+  String get websocketError => 'WebSocket error';
+
+  @override
+  String get websocketConnectionError => 'WebSocket connection error';
+
+  @override
+  String get websocketConnectionFailed => 'WebSocket connection failed';
+
+  @override
+  String get failedToSendMessage => 'Failed to send message';
+
+  @override
+  String get authenticationTokenRequired =>
+      'Authentication token is required for WebSocket connection';
+
+  @override
+  String get subscriptionsTitle => 'Subscription Management';
+
+  @override
+  String get subscriptionsSubtitle =>
+      'Choose your plan or renew your subscription easily';
+
+  @override
+  String get fullManagementTitle => 'Full Management';
+
+  @override
+  String get fullManagementDescription => 'Full control over store and orders';
+
+  @override
+  String get support247Title => '24/7 Support';
+
+  @override
+  String get support247Description => 'Support team available around the clock';
+
+  @override
+  String get automaticUpdatesTitle => 'Automatic Updates';
+
+  @override
+  String get automaticUpdatesDescription => 'New features always free';
+
+  @override
+  String get subscribeNow => 'Subscribe Now';
+
+  @override
+  String get subscriptionType => 'Subscription Type';
+
+  @override
+  String get subscriptionTypeCommission => 'Commission rate';
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String get months => 'months';
+
+  @override
+  String get cash => 'Cash';
+
+  @override
+  String get byCard => 'By Card';
+
+  @override
+  String get currentSubscription => 'Current Subscription';
+
+  @override
+  String get noActiveSubscription => 'No active subscription';
+
+  @override
+  String get subscriptionHistory => 'Subscription History';
+
+  @override
+  String get noPreviousSubscriptions => 'No previous subscriptions';
+
+  @override
+  String get dashboardTitle => 'Shop Control Panel';
+
+  @override
+  String get dashboardSubtitle => 'Monitor your store\'s performance easily';
+
+  @override
+  String get startDate => 'Start Date';
+
+  @override
+  String get endDate => 'End Date';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get totalSales => 'Total Sales';
+
+  @override
+  String get todaysSales => 'Today\'s Sales';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get totalOrders => 'Total Orders';
+
+  @override
+  String get todaysRepairs => 'Today\'s Repairs';
+
+  @override
+  String get totalRepairRequests => 'Repair Requests';
+
+  @override
+  String get salesTrendWeekly => 'Sales Trend (Weekly)';
+
+  @override
+  String get repairsTrendWeekly => 'Repairs Trend (Weekly)';
+
+  @override
+  String get sales => 'Sales';
+
+  @override
+  String get sunday => 'Sunday';
+
+  @override
+  String get monday => 'Monday';
+
+  @override
+  String get tuesday => 'Tuesday';
+
+  @override
+  String get wednesday => 'Wednesday';
+
+  @override
+  String get thursday => 'Thursday';
+
+  @override
+  String get friday => 'Friday';
+
+  @override
+  String get saturday => 'Saturday';
+
+  @override
+  String get searchOrders => 'Search in orders...';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get orderDate => 'Order Date';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get notification => 'Notification';
 }

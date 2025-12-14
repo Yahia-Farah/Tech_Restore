@@ -28,7 +28,7 @@ class _OffersScreenState extends State<OffersScreen> {
     context.read<OffersCubit>().getAllOffers(isRefresh: true);
     _searchController.addListener(() {
       _searchQueryNotifier.value = _searchController.text;
-      _currentPageNotifier.value = 1; // Reset to page 1 when search changes
+      _currentPageNotifier.value = 1;
     });
   }
 
@@ -216,12 +216,9 @@ class _OffersScreenState extends State<OffersScreen> {
                                         onPressed: (currentPage < totalPages || (currentPage == totalPages && !cubit.lastPage))
                                             ? () async {
                                                 if (currentPage < totalPages) {
-                                                  // Local pagination
                                                   _currentPageNotifier.value = currentPage + 1;
                                                 } else if (currentPage == totalPages && !cubit.lastPage) {
-                                                  // Fetch next page from API
                                                   await cubit.getAllOffers();
-                                                  // Move to next page after fetching
                                                   _currentPageNotifier.value = currentPage + 1;
                                                 }
                                               }
@@ -521,7 +518,7 @@ class _OffersScreenState extends State<OffersScreen> {
                 }
                 Navigator.pop(ctx);
               },
-              color: Colors.blue,
+              color: Colors.green,
               textColor: Colors.white,
               borderRadius: 12,
               width: 120,

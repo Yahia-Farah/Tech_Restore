@@ -1,5 +1,8 @@
 abstract class ApiEndPoints {
   static const String login = 'auth/login';
+  static const String chatSessions = 'chats/sessions';
+  static const String chatMessages = 'chats/{sessionId}/messages';
+  static const String endChatSession = 'chats/{sessionId}/end';
   static const String forgetPassword = 'auth/forgot-password';
   static const String resetPassword = 'auth/reset-password';
   static const String resendCode = 'auth/resend-otp';

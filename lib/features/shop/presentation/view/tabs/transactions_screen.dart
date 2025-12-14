@@ -85,7 +85,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
+              color: Colors.green.shade50,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -96,7 +96,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: Colors.green,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -183,6 +183,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
                     columns: [
                       DataColumn(label: Text(local.date)),
                       DataColumn(label: Text(local.service_type)),
@@ -272,13 +275,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   Widget _buildSummaryCard(String title, String value, Color color) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         width: 150,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withOpacity(0.8)),
         ),
         child: Column(
           children: [

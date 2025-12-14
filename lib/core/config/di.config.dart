@@ -55,6 +55,8 @@ import '../../features/auth/logout/viewmodel/logout_viewmodel.dart' as _i71;
 import '../../features/shop/data/data_source/shop_remote_datasource.dart'
     as _i622;
 import '../../features/shop/data/repositories/shop_repository.dart' as _i57;
+import '../../features/shop/presentation/viewmodel/shop_chat_cubit.dart'
+    as _i453;
 import '../../features/user/profile/data/data_sources/profile_remote_data_source_impl.dart'
     as _i904;
 import '../../features/user/profile/data/repositories/profile_repo_impl.dart'
@@ -106,6 +108,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i890.ProfileRepository(gh<_i904.ProfileRemoteDataSource>()));
     gh.lazySingleton<_i170.AuthRepository>(
         () => _i279.AuthRepositoryImpl(gh<_i24.AuthRemoteDataSource>()));
+    gh.factory<_i453.ShopChatCubit>(
+        () => _i453.ShopChatCubit(gh<_i57.ShopRepository>()));
     gh.lazySingleton<_i680.GetUserRepository>(
         () => _i680.GetUserRepository(gh<_i508.GetUserRemoteDataSource>()));
     gh.lazySingleton<_i63.GetShopsRepository>(

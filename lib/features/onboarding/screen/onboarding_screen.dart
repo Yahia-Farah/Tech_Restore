@@ -15,18 +15,18 @@ class OnboardingScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 80),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 30),
+              SizedBox(height: 50),
               Image.asset(AppImages.startScreen),
               const SizedBox(height: 30),
               Text(
                 local.welcome,
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   fontSize: 20,
                   color: AppColors.secondary,
                 ),

@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @app_name.
   ///
   /// In en, this message translates to:
-  /// **'Tech & Restore'**
+  /// **'Tech Bazaar'**
   String get app_name;
 
   /// No description provided for @dashboard.
@@ -451,6 +451,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can track customer purchases from here'**
   String get orders_subtitle;
+
+  /// No description provided for @ordersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage and track orders easily'**
+  String get ordersSubtitle;
 
   /// No description provided for @last_orders.
   ///
@@ -911,7 +917,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to TechRestore!'**
+  /// **'Welcome to TechBazaar!'**
   String get welcome;
 
   /// No description provided for @login.
@@ -1513,6 +1519,390 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Address'**
   String get address;
+
+  /// No description provided for @chatWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with'**
+  String get chatWith;
+
+  /// No description provided for @connected.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected'**
+  String get connected;
+
+  /// No description provided for @noMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages'**
+  String get noMessages;
+
+  /// No description provided for @typeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message...'**
+  String get typeMessage;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @connecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting... please wait'**
+  String get connecting;
+
+  /// No description provided for @endChat.
+  ///
+  /// In en, this message translates to:
+  /// **'End Chat'**
+  String get endChat;
+
+  /// No description provided for @chatEndedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat ended successfully'**
+  String get chatEndedSuccessfully;
+
+  /// No description provided for @websocketNotConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket is not connected. Please wait...'**
+  String get websocketNotConnected;
+
+  /// No description provided for @websocketDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket disconnected'**
+  String get websocketDisconnected;
+
+  /// No description provided for @websocketError.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket error'**
+  String get websocketError;
+
+  /// No description provided for @websocketConnectionError.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket connection error'**
+  String get websocketConnectionError;
+
+  /// No description provided for @websocketConnectionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket connection failed'**
+  String get websocketConnectionFailed;
+
+  /// No description provided for @failedToSendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to send message'**
+  String get failedToSendMessage;
+
+  /// No description provided for @authenticationTokenRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication token is required for WebSocket connection'**
+  String get authenticationTokenRequired;
+
+  /// No description provided for @subscriptionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Management'**
+  String get subscriptionsTitle;
+
+  /// No description provided for @subscriptionsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your plan or renew your subscription easily'**
+  String get subscriptionsSubtitle;
+
+  /// No description provided for @fullManagementTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Management'**
+  String get fullManagementTitle;
+
+  /// No description provided for @fullManagementDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Full control over store and orders'**
+  String get fullManagementDescription;
+
+  /// No description provided for @support247Title.
+  ///
+  /// In en, this message translates to:
+  /// **'24/7 Support'**
+  String get support247Title;
+
+  /// No description provided for @support247Description.
+  ///
+  /// In en, this message translates to:
+  /// **'Support team available around the clock'**
+  String get support247Description;
+
+  /// No description provided for @automaticUpdatesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic Updates'**
+  String get automaticUpdatesTitle;
+
+  /// No description provided for @automaticUpdatesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'New features always free'**
+  String get automaticUpdatesDescription;
+
+  /// No description provided for @subscribeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe Now'**
+  String get subscribeNow;
+
+  /// No description provided for @subscriptionType.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Type'**
+  String get subscriptionType;
+
+  /// No description provided for @subscriptionTypeCommission.
+  ///
+  /// In en, this message translates to:
+  /// **'Commission rate'**
+  String get subscriptionTypeCommission;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @months.
+  ///
+  /// In en, this message translates to:
+  /// **'months'**
+  String get months;
+
+  /// No description provided for @cash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get cash;
+
+  /// No description provided for @byCard.
+  ///
+  /// In en, this message translates to:
+  /// **'By Card'**
+  String get byCard;
+
+  /// No description provided for @currentSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Subscription'**
+  String get currentSubscription;
+
+  /// No description provided for @noActiveSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'No active subscription'**
+  String get noActiveSubscription;
+
+  /// No description provided for @subscriptionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription History'**
+  String get subscriptionHistory;
+
+  /// No description provided for @noPreviousSubscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous subscriptions'**
+  String get noPreviousSubscriptions;
+
+  /// No description provided for @dashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Control Panel'**
+  String get dashboardTitle;
+
+  /// No description provided for @dashboardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor your store\'s performance easily'**
+  String get dashboardSubtitle;
+
+  /// No description provided for @startDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get startDate;
+
+  /// No description provided for @endDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get endDate;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @totalSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Sales'**
+  String get totalSales;
+
+  /// No description provided for @todaysSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Sales'**
+  String get todaysSales;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @totalOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get totalOrders;
+
+  /// No description provided for @todaysRepairs.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Repairs'**
+  String get todaysRepairs;
+
+  /// No description provided for @totalRepairRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair Requests'**
+  String get totalRepairRequests;
+
+  /// No description provided for @salesTrendWeekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales Trend (Weekly)'**
+  String get salesTrendWeekly;
+
+  /// No description provided for @repairsTrendWeekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Repairs Trend (Weekly)'**
+  String get repairsTrendWeekly;
+
+  /// No description provided for @sales.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get sales;
+
+  /// No description provided for @sunday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday'**
+  String get sunday;
+
+  /// No description provided for @monday.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday'**
+  String get monday;
+
+  /// No description provided for @tuesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday'**
+  String get tuesday;
+
+  /// No description provided for @wednesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday'**
+  String get wednesday;
+
+  /// No description provided for @thursday.
+  ///
+  /// In en, this message translates to:
+  /// **'Thursday'**
+  String get thursday;
+
+  /// No description provided for @friday.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday'**
+  String get friday;
+
+  /// No description provided for @saturday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturday'**
+  String get saturday;
+
+  /// No description provided for @searchOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in orders...'**
+  String get searchOrders;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @orderDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Date'**
+  String get orderDate;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
 }
 
 class _AppLocalizationsDelegate

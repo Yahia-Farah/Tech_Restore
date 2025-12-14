@@ -1,3 +1,3 @@
 class AppImages {
-  static const String startScreen = "assets/images/startscreen.png";
+  static const String startScreen = "assets/images/new_logo.jpg";
 }

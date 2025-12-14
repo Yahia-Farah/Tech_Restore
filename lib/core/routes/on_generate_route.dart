@@ -134,11 +134,7 @@ class Routes {
         );
 
       default:
-        return MaterialPageRoute(
-          builder:
-              (_) =>
-                  const Scaffold(body: Center(child: Text("No route defined"))),
-        );
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
     }
   }
 }

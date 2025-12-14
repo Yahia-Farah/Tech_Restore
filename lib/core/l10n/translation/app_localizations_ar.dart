@@ -9,7 +9,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get app_name => 'Tech & Restore';
+  String get app_name => 'Tech Bazaar';
 
   @override
   String get dashboard => 'لوحة التحكم';
@@ -186,6 +186,9 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get orders_subtitle =>
       'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
+
+  @override
+  String get ordersSubtitle => 'إدارة ومتابعة الطلبات بسهولة';
 
   @override
   String get last_orders => 'آخر الطلبات';
@@ -423,7 +426,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requestsCount => 'طلبات';
 
   @override
-  String get welcome => 'مرحبًا بك في تك ريستور!';
+  String get welcome => 'مرحبًا بك في تك بازار!';
 
   @override
   String get login => 'تسجيل الدخول';
@@ -730,4 +733,196 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get address => 'العنوان';
+
+  @override
+  String get chatWith => 'محادثة مع';
+
+  @override
+  String get connected => 'متصل';
+
+  @override
+  String get noMessages => 'لا توجد رسائل';
+
+  @override
+  String get typeMessage => 'اكتب رسالة...';
+
+  @override
+  String get send => 'إرسال';
+
+  @override
+  String get connecting => 'جاري الاتصال... يرجى الانتظار';
+
+  @override
+  String get endChat => 'انهاء المحادثة';
+
+  @override
+  String get chatEndedSuccessfully => 'تم إنهاء المحادثة بنجاح';
+
+  @override
+  String get websocketNotConnected => 'WebSocket غير متصل. يرجى الانتظار...';
+
+  @override
+  String get websocketDisconnected => 'تم قطع الاتصال';
+
+  @override
+  String get websocketError => 'خطأ في الاتصال';
+
+  @override
+  String get websocketConnectionError => 'خطأ في اتصال WebSocket';
+
+  @override
+  String get websocketConnectionFailed => 'فشل الاتصال';
+
+  @override
+  String get failedToSendMessage => 'فشل إرسال الرسالة';
+
+  @override
+  String get authenticationTokenRequired => 'رمز المصادقة مطلوب للاتصال';
+
+  @override
+  String get subscriptionsTitle => 'إدارة الاشتراكات';
+
+  @override
+  String get subscriptionsSubtitle => 'اختر خطتك أو جدد اشتراكك بسهولة';
+
+  @override
+  String get fullManagementTitle => 'إدارة كاملة';
+
+  @override
+  String get fullManagementDescription => 'تحكم كامل في المتجر والطلبات';
+
+  @override
+  String get support247Title => 'دعم 24/7';
+
+  @override
+  String get support247Description => 'فريق دعم متاح على مدار الساعة';
+
+  @override
+  String get automaticUpdatesTitle => 'تحديثات تلقائية';
+
+  @override
+  String get automaticUpdatesDescription => 'ميزات جديدة دائما بدون تكلفة';
+
+  @override
+  String get subscribeNow => 'اشترك الآن';
+
+  @override
+  String get subscriptionType => 'نوع الاشتراك';
+
+  @override
+  String get subscriptionTypeCommission => 'نسبة عمولة';
+
+  @override
+  String get duration => 'المدة';
+
+  @override
+  String get months => 'أشهر';
+
+  @override
+  String get cash => 'نقدي';
+
+  @override
+  String get byCard => 'بالبطاقة';
+
+  @override
+  String get currentSubscription => 'الاشتراك الحالي';
+
+  @override
+  String get noActiveSubscription => 'لا يوجد اشتراك نشط';
+
+  @override
+  String get subscriptionHistory => 'سجل الاشتراكات';
+
+  @override
+  String get noPreviousSubscriptions => 'لا توجد اشتراكات سابقة';
+
+  @override
+  String get dashboardTitle => 'لوحة تحكم المتجر';
+
+  @override
+  String get dashboardSubtitle => 'راقب أداء متجرك بسهولة';
+
+  @override
+  String get startDate => 'تاريخ البداية';
+
+  @override
+  String get endDate => 'تاريخ النهاية';
+
+  @override
+  String get reset => 'إعادة تعيين';
+
+  @override
+  String get totalSales => 'إجمالي المبيعات';
+
+  @override
+  String get todaysSales => 'المبيعات اليوم';
+
+  @override
+  String get yesterday => 'الأمس';
+
+  @override
+  String get totalOrders => 'إجمالي الطلبات';
+
+  @override
+  String get todaysRepairs => 'التصليحات اليوم';
+
+  @override
+  String get totalRepairRequests => 'طلبات التصليح';
+
+  @override
+  String get salesTrendWeekly => 'اتجاه المبيعات (أسبوعي)';
+
+  @override
+  String get repairsTrendWeekly => 'اتجاه التصليحات (أسبوعي)';
+
+  @override
+  String get sales => 'المبيعات';
+
+  @override
+  String get sunday => 'الأحد';
+
+  @override
+  String get monday => 'الإثنين';
+
+  @override
+  String get tuesday => 'الثلاثاء';
+
+  @override
+  String get wednesday => 'الأربعاء';
+
+  @override
+  String get thursday => 'الخميس';
+
+  @override
+  String get friday => 'الجمعة';
+
+  @override
+  String get saturday => 'السبت';
+
+  @override
+  String get searchOrders => 'ابحث في الطلبات...';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get orderDate => 'تاريخ الطلب';
+
+  @override
+  String get reject => 'رفض';
+
+  @override
+  String get accept => 'قبول';
+
+  @override
+  String get details => 'تفاصيل';
+
+  @override
+  String get notification => 'إشعارات';
 }

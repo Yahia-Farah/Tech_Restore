@@ -16,6 +16,8 @@ class DrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context)!;
     return Drawer(
+      shadowColor: Colors.white,
+      surfaceTintColor: AppColors.white,
       child: Column(
         children: [
           DrawerHeader(

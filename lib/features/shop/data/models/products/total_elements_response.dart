@@ -19,10 +19,3 @@ class TotalElementsResponse {
     return _$TotalElementsResponseToJson(this);
   }
 }
-
-
-
-
-
-
-

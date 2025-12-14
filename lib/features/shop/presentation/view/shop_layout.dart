@@ -10,6 +10,7 @@ import 'package:tech_restore/features/shop/presentation/view/tabs/subscriptions_
 import 'package:tech_restore/features/shop/presentation/view/tabs/support_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/transactions_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/widgets/drawer_widget.dart';
+import 'package:tech_restore/features/shop/presentation/view/widgets/notifications_screen.dart';
 import 'package:tech_restore/features/shop/presentation/viewmodel/devices_cubit.dart';
 import '../../../../core/l10n/translation/app_localizations.dart';
 import '../../data/repositories/shop_repository.dart';
@@ -64,12 +65,13 @@ class _ShopLayoutState extends State<ShopLayout> {
             _getTitle(_selectedIndex, local),
             style: const TextStyle(
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
+              fontSize: 22,
             ),
           ),
         ),
         backgroundColor: Colors.white,
-        elevation: 1,
+        elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
         actions: [
           Stack(
@@ -80,7 +82,9 @@ class _ShopLayoutState extends State<ShopLayout> {
                   Icons.notifications_none,
                   color: Colors.black54,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const NotificationsScreen()) );
+                },
               ),
               Positioned(
                 right: 8,
@@ -131,7 +135,7 @@ class _ShopLayoutState extends State<ShopLayout> {
         return local.subs;
       case 7:
         return local.offers;
-      case 9:
+      case 8:
         return local.support;
       default:
         return "";
