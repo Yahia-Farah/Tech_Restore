@@ -316,5 +316,7 @@
   "assignment_logs": "Assignment Logs",
   "track_all_assignment_activities": "Track all assignment activities across assigners, shops, and users.",
   "no_assignment_logs_found": "No Assignment Logs Found",
-  "no_assignment_logs_description": "There are currently no assignment activities recorded in the system."
+  "no_assignment_logs_description": "There are currently no assignment activities recorded in the system.",
+  "failed_to_load_transactions": "Failed to load transactions",
+  "transactions_loaded_successfully": "Transactions loaded successfully"
 }

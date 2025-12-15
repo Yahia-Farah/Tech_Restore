@@ -1,6 +1,7 @@
 import '../../data/model/admin-states/admin_states_response.dart';
 import '../../data/model/categories-model/categories_model_response.dart';
 import '../../data/model/categories-model/categories_request.dart';
+import '../../data/model/transaction-models/transaction_admin_response.dart';
 import '../../manage-user/data/models/update_user_role_request.dart';
 
 abstract class AdminRepo {
@@ -12,4 +13,5 @@ abstract class AdminRepo {
   Future<String> addCategory(CategoriesRequest request);
   Future<String> updateCategory(String categoryId, CategoriesRequest request);
   Future<String> deleteCategory(String categoryId);
+  Future<TransactionAdminModelResponse> getAllTransactions(int page);
 }

@@ -16,6 +16,7 @@ import 'package:tech_restore/features/admin/tabs/manage-assignment-logs/presenta
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/viewmodel/categories_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/viewmodel/transactions_cubit.dart';
 import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -50,7 +51,10 @@ class _MainLayoutState extends State<AdminLayout> {
     // Shop section: Promotional Offers (index 4)
     const AdminPromotionsScreen(),
     // Transactions (index 5)
-    AdminTransactionsScreen(),
+    BlocProvider(
+      create: (context) => getIt<TransactionsCubit>(),
+      child: const AdminTransactionsScreen(),
+    ),
     // Support (index 6)
     AdminSupportScreen(),
     // Categories (index 7)

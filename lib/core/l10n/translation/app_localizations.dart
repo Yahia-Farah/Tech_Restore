@@ -1936,6 +1936,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There are currently no assignment activities recorded in the system.'**
   String get no_assignment_logs_description;
+
+  /// No description provided for @failed_to_load_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load transactions'**
+  String get failed_to_load_transactions;
+
+  /// No description provided for @transactions_loaded_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions loaded successfully'**
+  String get transactions_loaded_successfully;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

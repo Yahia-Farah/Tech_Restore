@@ -1,9 +1,11 @@
+import 'dart:developer';
 import 'package:injectable/injectable.dart';
 import 'package:tech_restore/core/api/client/api_client.dart';
 import '../../data/datasource/admin_remote_datasource.dart';
 import '../../data/model/admin-states/admin_states_response.dart';
 import '../../data/model/categories-model/categories_model_response.dart';
 import '../../data/model/categories-model/categories_request.dart';
+import '../../data/model/transaction-models/transaction_admin_response.dart';
 import '../../manage-user/data/models/update_user_role_request.dart';
 
 @LazySingleton(as: AdminRemoteDataSource)
@@ -50,5 +52,18 @@ class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
   @override
   Future<String> deleteCategory(String categoryId) async {
     return await _apiClient.deleteCategoryAdmin(categoryId);
+  }
+
+  @override
+  Future<TransactionAdminModelResponse> getAllTransactions(int page) async {
+    log('🌐 [AdminRemoteDataSourceImpl] Calling API client getAllTransactionsAdmin with page: $page');
+    try {
+      final result = await _apiClient.getAllTransactionsAdmin(page);
+      log('✅ [AdminRemoteDataSourceImpl] API client returned successfully. Total elements: ${result.totalElements}');
+      return result;
+    } catch (e, stackTrace) {
+      log('❌ [AdminRemoteDataSourceImpl] API client call failed: $e', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 }

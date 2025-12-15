@@ -316,5 +316,7 @@
   "assignment_logs": "سجلات التعيينات",
   "track_all_assignment_activities": "تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.",
   "no_assignment_logs_found": "لم يتم العثور على سجلات تعيينات",
-  "no_assignment_logs_description": "لا توجد حاليًا أنشطة تعيين مسجلة في النظام."
+  "no_assignment_logs_description": "لا توجد حاليًا أنشطة تعيين مسجلة في النظام.",
+  "failed_to_load_transactions": "فشل تحميل المعاملات",
+  "transactions_loaded_successfully": "تم تحميل المعاملات بنجاح"
 }

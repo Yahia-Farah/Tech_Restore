@@ -932,4 +932,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_assignment_logs_description => 'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
+
+  @override
+  String get failed_to_load_transactions => 'فشل تحميل المعاملات';
+
+  @override
+  String get transactions_loaded_successfully => 'تم تحميل المعاملات بنجاح';
 }

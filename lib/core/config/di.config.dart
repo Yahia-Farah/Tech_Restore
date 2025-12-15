@@ -30,6 +30,8 @@ import '../../features/admin/tabs/domain/usecases/delete_category_usecase.dart'
     as _i886;
 import '../../features/admin/tabs/domain/usecases/get_all_categories_usecase.dart'
     as _i953;
+import '../../features/admin/tabs/domain/usecases/get_all_transactions_usecase.dart'
+    as _i575;
 import '../../features/admin/tabs/domain/usecases/update_category_usecase.dart'
     as _i982;
 import '../../features/admin/tabs/domain/usecases/update_user_role_usecase.dart'
@@ -44,6 +46,8 @@ import '../../features/admin/tabs/manage-shops/data/repo/get_shops_repo.dart'
     as _i63;
 import '../../features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart'
     as _i697;
+import '../../features/admin/tabs/manage-transaction/presentation/viewmodel/transactions_cubit.dart'
+    as _i691;
 import '../../features/admin/tabs/manage-user/data/datasource/get_user_remote_data_source_impl.dart'
     as _i508;
 import '../../features/admin/tabs/manage-user/data/repo/get_user_repo_impl.dart'
@@ -148,6 +152,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i953.GetAllCategoriesUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i982.UpdateCategoryUseCase>(
         () => _i982.UpdateCategoryUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i575.GetAllTransactionsUseCase>(
+        () => _i575.GetAllTransactionsUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i652.CategoriesCubit>(() => _i652.CategoriesCubit(
           gh<_i953.GetAllCategoriesUseCase>(),
           gh<_i733.AddCategoryUseCase>(),
@@ -168,6 +174,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i48.LogoutUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i30.VerifyEmailUseCase>(
         () => _i30.VerifyEmailUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i691.TransactionsCubit>(
+        () => _i691.TransactionsCubit(gh<_i575.GetAllTransactionsUseCase>()));
     gh.factory<_i948.ForgetPasswordUseCase>(
         () => _i948.ForgetPasswordUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i474.ResetPasswordUseCase>(

@@ -932,4 +932,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_assignment_logs_description => 'There are currently no assignment activities recorded in the system.';
+
+  @override
+  String get failed_to_load_transactions => 'Failed to load transactions';
+
+  @override
+  String get transactions_loaded_successfully => 'Transactions loaded successfully';
 }
