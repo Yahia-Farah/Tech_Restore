@@ -299,7 +299,11 @@
   "reject": "رفض",
   "accept": "قبول",
   "details": "تفاصيل",
-  "notification": "إشعارات"
+  "notification": "إشعارات",
+  "notifications": "الإشعارات",
+  "noNotifications": "لا توجد إشعارات متاحة",
+  "retry": "إعادة المحاولة",
+  "message": "الرسالة",
   "address": "العنوان",
   "admin_dashboard": "لوحة تحكم المسؤول",
   "total_users": "إجمالي المستخدمين",

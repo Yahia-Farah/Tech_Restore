@@ -14,8 +14,9 @@ class ShopChatCubit extends Cubit<ShopChatState> {
   StompClient? _stompClient;
   List<ChatMessageModel> _messages = [];
   bool _isConnected = false;
-  String? _currentSessionId;
-  String? _shopEmail;
+  String? _currentUserId;
+  String? _currentShopId;
+  String? _shopId;
 
   ShopChatCubit(this._repository) : super(ShopChatInitial());
 
@@ -40,15 +41,15 @@ class ShopChatCubit extends Cubit<ShopChatState> {
     }
   }
 
-  Future<void> sendMessage(String sessionId, ChatMessageModel message, {bool useWebSocket = true}) async {
+  Future<void> sendMessage(String userId, String shopId, ChatMessageModel message, {bool useWebSocket = true}) async {
     if (_stompClient != null && _isConnected) {
-      sendStompMessage(message);
+      sendStompMessage(userId, shopId, message);
     } else {
       emit(ShopChatError('websocketNotConnected'));
     }
   }
 
-  Future<void> connectWebSocket(String sessionId) async {
+  Future<void> connectWebSocket(String userId, String shopId) async {
     try {
       await disconnectWebSocket();
       
@@ -58,8 +59,9 @@ class ShopChatCubit extends Cubit<ShopChatState> {
         throw Exception('authenticationTokenRequired');
       }
       
-      _shopEmail = 'Tech Restore Shop';
-      _currentSessionId = sessionId;
+      _currentUserId = userId;
+      _currentShopId = shopId;
+      _shopId = shopId;
       
       final baseUrl = 'http://10.0.2.2:8080';
       final wsUrl = '$baseUrl/ws';
@@ -69,7 +71,7 @@ class ShopChatCubit extends Cubit<ShopChatState> {
           url: wsUrl,
           onConnect: (StompFrame frame) {
             _isConnected = true;
-            _subscribeToTopics(sessionId);
+            _subscribeToTopics(userId, shopId);
           },
           onDisconnect: (StompFrame frame) {
             _isConnected = false;
@@ -99,48 +101,64 @@ class ShopChatCubit extends Cubit<ShopChatState> {
     }
   }
   
-  void _subscribeToTopics(String sessionId) async {
-    if (_stompClient == null || !_isConnected || _shopEmail == null) return;
+  void _subscribeToTopics(String userId, String shopId) async {
+    if (_stompClient == null || !_isConnected) return;
     
-    final token = await AuthService.getToken();
+    final topic = '/topic/chat/$userId/$shopId';
     
     _stompClient!.subscribe(
-      destination: '/topic/chat/$sessionId',
+      destination: topic,
       callback: (StompFrame frame) {
         try {
           final data = jsonDecode(frame.body!);
-          final msg = ChatMessageModel.fromJson(data);
           
-          if (!_messages.any((m) => m.id == msg.id && m.id != null)) {
-            _messages.add(msg);
-            emit(ShopMessagesLoaded(List.from(_messages)));
+          if (data['type'] == 'CHAT' && data['action'] == 'SEND') {
+            if (data['payload'] is Map) {
+              final payload = data['payload'] as Map<String, dynamic>;
+              final msg = ChatMessageModel(
+                id: payload['id']?.toString(),
+                sessionId: null,
+                userId: payload['userId']?.toString(),
+                userName: payload['userName']?.toString(),
+                shopId: payload['shopId']?.toString(),
+                shopName: payload['shopName']?.toString(),
+                message: payload['message']?.toString(),
+                sentBy: payload['sentBy']?.toString(),
+                senderId: payload['sentBy'] == 'USER' ? payload['userId']?.toString() : payload['shopId']?.toString(),
+                senderType: payload['sentBy']?.toString(),
+                senderName: payload['sentBy'] == 'USER' ? payload['userName']?.toString() : payload['shopName']?.toString(),
+                createdAt: payload['createdAt']?.toString(),
+                isRead: payload['isRead'] as bool?,
+                readAt: payload['readAt']?.toString(),
+              );
+              
+              if (!_messages.any((m) => m.id == msg.id && m.id != null)) {
+                _messages.add(msg);
+                emit(ShopMessagesLoaded(List.from(_messages)));
+              }
+            } else if (data['payload'] is String) {
+              final msg = ChatMessageModel(
+                id: null,
+                sessionId: null,
+                message: data['payload']?.toString(),
+                senderId: data['senderId']?.toString(),
+                senderType: data['senderType']?.toString(),
+                createdAt: data['timestamp']?.toString(),
+              );
+              
+              _messages.add(msg);
+              emit(ShopMessagesLoaded(List.from(_messages)));
+            }
+          } else if (data['type'] == 'ERROR') {
+            emit(ShopChatError(data['message']?.toString() ?? 'websocketError'));
           }
         } catch (e) {
         }
       },
-    );
-    
-    _stompClient!.subscribe(
-      destination: '/user/$_shopEmail/queue/chat/messages/$sessionId',
-      callback: (StompFrame frame) {
-        try {
-          final data = jsonDecode(frame.body!);
-          final msg = ChatMessageModel.fromJson(data);
-          
-          if (!_messages.any((m) => m.id == msg.id && m.id != null)) {
-            _messages.add(msg);
-            emit(ShopMessagesLoaded(List.from(_messages)));
-          }
-        } catch (e) {
-        }
-      },
-      headers: token != null ? {
-        'Authorization': 'Bearer $token',
-      } : {},
     );
   }
 
-  void sendStompMessage(ChatMessageModel message) async {
+  void sendStompMessage(String userId, String shopId, ChatMessageModel message) async {
     if (_stompClient == null || !_isConnected) {
       emit(ShopChatError('websocketNotConnected'));
       return;
@@ -150,16 +168,19 @@ class ShopChatCubit extends Cubit<ShopChatState> {
       final token = await AuthService.getToken();
       
       final messagePayload = {
-        'id': message.id,
-        'sessionId': message.sessionId,
-        'content': message.content,
-        'senderType': message.senderType ?? 'SHOP',
-        'senderName': message.senderName,
-        'createdAt': message.createdAt ?? DateTime.now().toIso8601String(),
+        'type': 'CHAT',
+        'action': 'SEND',
+        'payload': message.displayContent ?? message.content,
+        'senderId': shopId,
+        'senderType': 'SHOP',
+        'recipientId': userId,
+        'timestamp': DateTime.now().toUtc().toIso8601String(),
       };
       
+      final destination = '/app/chat/user/$userId/shop/$shopId';
+      
       _stompClient!.send(
-        destination: '/app/chat/send',
+        destination: destination,
         body: jsonEncode(messagePayload),
         headers: {
           'Authorization': 'Bearer $token',
@@ -168,11 +189,14 @@ class ShopChatCubit extends Cubit<ShopChatState> {
       
       final optimisticMessage = ChatMessageModel(
         id: message.id,
-        sessionId: message.sessionId,
-        senderId: message.senderId,
-        senderType: message.senderType ?? 'SHOP',
-        senderName: message.senderName,
-        content: message.content,
+        sessionId: null,
+        shopId: shopId,
+        sentBy: 'SHOP',
+        senderId: shopId,
+        senderType: 'SHOP',
+        senderName: message.displaySenderName ?? message.senderName,
+        message: message.displayContent ?? message.content,
+        content: message.displayContent ?? message.content,
         createdAt: message.createdAt ?? DateTime.now().toIso8601String(),
       );
       _messages.add(optimisticMessage);
@@ -188,17 +212,42 @@ class ShopChatCubit extends Cubit<ShopChatState> {
       _stompClient = null;
     }
     _isConnected = false;
-    _currentSessionId = null;
+    _currentUserId = null;
+    _currentShopId = null;
   }
 
-  Future<void> endSession(String sessionId) async {
-    emit(ShopChatLoading());
-    try {
-      await _repository.endChatSession(sessionId);
-      emit(ShopChatActionSuccess('chatEndedSuccessfully'));
-    } catch (e) {
-      emit(ShopChatError(e.toString()));
+  Future<void> endSession(String userId, String shopId, {String? sessionId}) async {
+    if (_stompClient != null && _isConnected) {
+      try {
+        final token = await AuthService.getToken();
+        
+        final endPayload = {};
+        
+        _stompClient!.send(
+          destination: '/app/chat/$userId/$shopId/end',
+          body: jsonEncode(endPayload),
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        );
+        
+        await Future.delayed(const Duration(milliseconds: 500));
+        emit(ShopChatActionSuccess('chatEndedSuccessfully'));
+      } catch (e) {
+        emit(ShopChatError(e.toString()));
+      }
+    } else {
+      emit(ShopChatLoading());
+      try {
+        if (sessionId != null) {
+          await _repository.endChatSession(sessionId);
+        }
+        emit(ShopChatActionSuccess('chatEndedSuccessfully'));
+      } catch (e) {
+        emit(ShopChatError(e.toString()));
+      }
     }
   }
 }
+
 

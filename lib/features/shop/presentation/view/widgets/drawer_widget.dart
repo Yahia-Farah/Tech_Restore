@@ -23,15 +23,7 @@ class DrawerWidget extends StatelessWidget {
           DrawerHeader(
             decoration: const BoxDecoration(color: Colors.white),
             child: Center(
-              child: Row(
-                children: [
-                  Image.asset(AppImages.startScreen, height: 100),
-                  Text(
-                    local.app_name,
-                    style: const TextStyle(color: Colors.black, fontSize: 18),
-                  ),
-                ],
-              ),
+              child: Image.asset(AppImages.startScreen, height: 250),
             ),
           ),
 

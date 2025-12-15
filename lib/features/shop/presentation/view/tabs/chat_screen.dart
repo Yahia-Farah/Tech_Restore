@@ -10,10 +10,14 @@ import '../../../data/models/chats/chat_message_model.dart';
 class ChatScreen extends StatefulWidget {
   final String sessionId;
   final String sessionName;
+  final String userId;
+  final String shopId;
 
   const ChatScreen({
     required this.sessionId,
     required this.sessionName,
+    required this.userId,
+    required this.shopId,
     super.key,
   });
 
@@ -37,7 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _connectWebSocket() async {
-    await _cubit.connectWebSocket(widget.sessionId);
+    await _cubit.connectWebSocket(widget.userId, widget.shopId);
     await Future.delayed(const Duration(milliseconds: 2000));
     if (mounted) {
       setState(() {
@@ -71,13 +75,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
     final message = ChatMessageModel(
       sessionId: widget.sessionId,
+      sentBy: 'SHOP',
       senderName: shopName,
       senderType: 'SHOP',
+      message: content,
       content: content,
       createdAt: DateTime.now().toIso8601String(),
     );
 
-    _cubit.sendMessage(widget.sessionId, message, useWebSocket: true);
+    _cubit.sendMessage(widget.userId, widget.shopId, message, useWebSocket: true);
     _messageController.clear();
     _scrollToBottom();
     
@@ -136,7 +142,8 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   bool _isShopMessage(ChatMessageModel message) {
-    return message.senderType == 'SHOP' || message.senderType == 'shop' || message.senderName == shopName;
+    final senderType = message.displaySenderType;
+    return senderType == 'SHOP' || senderType == 'shop' || message.displaySenderName == shopName;
   }
 
   String _getLocalizedMessage(String key, AppLocalizations local) {
@@ -184,7 +191,7 @@ class _ChatScreenState extends State<ChatScreen> {
         mainAxisAlignment: isShop ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          if (!isShop) _buildAvatar(message.senderName, false),
+          if (!isShop) _buildAvatar(message.displaySenderName, false),
           if (!isShop) const SizedBox(width: 8),
           Flexible(
             child: Container(
@@ -202,7 +209,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    message.senderName ?? '',
+                    message.displaySenderName ?? '',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
@@ -211,7 +218,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    message.content ?? '',
+                    message.displayContent ?? '',
                     style: TextStyle(
                       fontSize: 15,
                       color: isShop ? Colors.white : Colors.black87,
@@ -232,7 +239,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           if (isShop) const SizedBox(width: 8),
-          if (isShop) _buildAvatar(message.senderName, true),
+          if (isShop) _buildAvatar(message.displaySenderName, true),
         ],
       ),
     );
@@ -325,7 +332,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             IconButton(
               icon: const Icon(Icons.close, color: Colors.red),
-              onPressed: () => _cubit.endSession(widget.sessionId),
+              onPressed: () => _cubit.endSession(widget.userId, widget.shopId, sessionId: widget.sessionId),
               tooltip: local.endChat,
             ),
           ],

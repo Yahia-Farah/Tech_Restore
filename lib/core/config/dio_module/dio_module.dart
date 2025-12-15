@@ -42,6 +42,18 @@ abstract class DioModule {
         onError: (error, handler) async {
           if (error.response?.statusCode == 401) {
             final requestOptions = error.requestOptions;
+            final isLogoutRequest = requestOptions.path.contains('auth/logout');
+
+            if (isLogoutRequest) {
+              await AuthService.logout();
+              return handler.resolve(
+                Response(
+                  requestOptions: requestOptions,
+                  statusCode: 200,
+                  data: 'Logout successful',
+                ),
+              );
+            }
 
             if (requestOptions.extra['retry'] == true) {
               await AuthService.logout();

@@ -126,10 +126,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get quantity => 'الكمية';
 
   @override
-  String get status => 'حالة الجهاز';
+  String get status => 'الحالة';
 
   @override
-  String get actions => 'تعديل / إزالة';
+  String get actions => 'الإجراءات';
 
   @override
   String get newDev => 'جديد';
@@ -453,7 +453,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get start => 'لنبدأ';
 
   @override
-  String get name => 'الاسم الكامل';
+  String get name => 'الاسم';
 
   @override
   String get uploadPorV => 'تحميل الصور أو مقاطع الفيديو';
@@ -468,7 +468,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get username => 'اسم المستخدم';
 
   @override
-  String get phone => 'رقم الهاتف';
+  String get phone => 'الهاتف';
 
   @override
   String get signup => 'إنشاء حساب';
@@ -483,7 +483,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get addPhoto => 'إضافة صورة';
 
   @override
-  String get email => 'عنوان البريد الإلكتروني';
+  String get email => 'البريد الإلكتروني';
 
   @override
   String get password => 'كلمة المرور';
@@ -925,4 +925,183 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notification => 'إشعارات';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get noNotifications => 'لا توجد إشعارات متاحة';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get message => 'الرسالة';
+
+  @override
+  String get admin_dashboard => 'لوحة تحكم المسؤول';
+
+  @override
+  String get total_users => 'إجمالي المستخدمين';
+
+  @override
+  String get total_shops => 'إجمالي المتاجر';
+
+  @override
+  String get repair_requests => 'طلبات الإصلاح';
+
+  @override
+  String get total_orders => 'إجمالي الطلبات';
+
+  @override
+  String get count => 'العدد';
+
+  @override
+  String get real_time_platform_insights => 'رؤى المنصة في الوقت الفعلي';
+
+  @override
+  String get users => 'المستخدمون';
+
+  @override
+  String get shops => 'المتاجر';
+
+  @override
+  String get user_management => 'إدارة المستخدمين';
+
+  @override
+  String get manage_user_accounts_roles_status =>
+      'إدارة حسابات المستخدمين والأدوار والحالة';
+
+  @override
+  String get active => 'نشط';
+
+  @override
+  String get inactive => 'غير نشط';
+
+  @override
+  String get search_by_name_or_email => 'البحث بالاسم أو البريد الإلكتروني...';
+
+  @override
+  String get user_details => 'تفاصيل المستخدم';
+
+  @override
+  String get user_info => 'معلومات المستخدم';
+
+  @override
+  String get id => 'الرقم التعريفي';
+
+  @override
+  String get role => 'الدور';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String get role_updated_successfully => 'تم تحديث الدور بنجاح';
+
+  @override
+  String get role_update_failed => 'فشل تحديث الدور';
+
+  @override
+  String get user_deactivated_successfully => 'تم تعطيل المستخدم بنجاح';
+
+  @override
+  String get user_activated_successfully => 'تم تفعيل المستخدم بنجاح';
+
+  @override
+  String get user_status_update_failed => 'فشل تحديث حالة المستخدم';
+
+  @override
+  String get delete_user => 'حذف المستخدم؟';
+
+  @override
+  String get delete_user_warning => 'لا يمكن التراجع عن هذا الإجراء!';
+
+  @override
+  String get yes_delete => 'نعم، احذف';
+
+  @override
+  String get categories => 'الفئات';
+
+  @override
+  String get manage_product_categories => 'إدارة فئات المنتجات';
+
+  @override
+  String get total_categories => 'إجمالي الفئات';
+
+  @override
+  String get search => 'بحث';
+
+  @override
+  String get search_by_name => 'ابحث بالاسم...';
+
+  @override
+  String get add_category => 'إضافة فئة';
+
+  @override
+  String get no_categories_available => 'لا توجد فئات متاحة';
+
+  @override
+  String get category_details => 'تفاصيل الفئة';
+
+  @override
+  String get enter_category_name => 'أدخل اسم الفئة';
+
+  @override
+  String get create => 'إنشاء';
+
+  @override
+  String get edit_category => 'تعديل الفئة';
+
+  @override
+  String get delete_category => 'حذف الفئة؟';
+
+  @override
+  String get delete_category_warning => 'لا يمكن التراجع عن هذا الإجراء!';
+
+  @override
+  String get id_copied_to_clipboard => 'تم نسخ الرقم التعريفي إلى الحافظة';
+
+  @override
+  String get category_added_successfully => 'تم إضافة الفئة بنجاح';
+
+  @override
+  String get category_updated_successfully => 'تم تحديث الفئة بنجاح';
+
+  @override
+  String get category_deleted_successfully => 'تم حذف الفئة بنجاح';
+
+  @override
+  String get transactions_management => 'إدارة المعاملات';
+
+  @override
+  String get view_and_monitor_transactions => 'عرض ومراقبة جميع معاملات الدفع';
+
+  @override
+  String get total_transactions => 'إجمالي المعاملات';
+
+  @override
+  String get total_revenue => 'إجمالي الإيرادات';
+
+  @override
+  String get search_by_user_id =>
+      'البحث برقم المستخدم (اتركه فارغاً لجميع المعاملات)';
+
+  @override
+  String get search_user => 'بحث المستخدم';
+
+  @override
+  String get show_all => 'عرض الكل';
+
+  @override
+  String get transaction_id => 'رقم المعاملة';
+
+  @override
+  String get user_id => 'رقم المستخدم';
+
+  @override
+  String get type => 'النوع';
+
+  @override
+  String get no_transactions_available => 'لا توجد معاملات متاحة.';
 }

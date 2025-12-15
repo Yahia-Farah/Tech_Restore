@@ -7,6 +7,7 @@ import '../models/offers/offer_request.dart';
 import '../models/offers/offer_response.dart';
 import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
 import '../models/chats/chat_message_model.dart';
+import '../models/notifications/notification_model.dart';
 
 import '../../../../core/api/client/api_client.dart';
 import '../models/products/product_model.dart';
@@ -88,5 +89,13 @@ class ShopRemoteDataSource {
 
   Future<void> endChatSession(String sessionId) async {
     await _apiClient.endChatSession(sessionId);
+  }
+
+  Future<List<NotificationModel>> getAllNotifications() async {
+    return await _apiClient.getAllNotificationsShop();
+  }
+
+  Future<void> deleteNotification(String notificationId) async {
+    await _apiClient.deleteNotificationShop(notificationId);
   }
 }

@@ -241,7 +241,7 @@ class _RepairScreenState extends State<RepairScreen> {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       _currentPage == i
-                                          ? Colors.blue
+                                          ? Colors.green
                                           : Colors.grey.shade300,
                                   foregroundColor:
                                       _currentPage == i

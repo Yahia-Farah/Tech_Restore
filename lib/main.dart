@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           locale: currentLocale,
           theme: AppTheme.lightTheme,
-          initialRoute: AppRoutes.login,
+          initialRoute: AppRoutes.startScreen,
           onGenerateRoute: Routes.onGenerateRoute,
         );
       },

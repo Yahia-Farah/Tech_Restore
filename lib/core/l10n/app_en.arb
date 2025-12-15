@@ -299,7 +299,11 @@
   "reject": "Reject",
   "accept": "Accept",
   "details": "Details",
-  "notification": "Notification"
+  "notification": "Notification",
+  "notifications": "Notifications",
+  "noNotifications": "No notifications available",
+  "retry": "Retry",
+  "message": "Message",
   "admin_dashboard": "Admin Dashboard",
   "total_users": "Total Users",
   "total_shops": "Total Shops",

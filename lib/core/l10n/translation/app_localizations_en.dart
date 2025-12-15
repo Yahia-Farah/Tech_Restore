@@ -129,7 +129,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get status => 'Status';
 
   @override
-  String get actions => 'Edit / Remove';
+  String get actions => 'Actions';
 
   @override
   String get newDev => 'New';
@@ -267,7 +267,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get date => 'Date';
+  String get date => 'DATE';
 
   @override
   String get service_type => 'Service Type';
@@ -279,7 +279,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shop => 'Shop';
 
   @override
-  String get amount => 'Amount';
+  String get amount => 'AMOUNT';
 
   @override
   String get out_for_delivery => 'Out for delivery';
@@ -452,7 +452,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get start => 'Let’s Get Started';
 
   @override
-  String get name => 'Full name';
+  String get name => 'Name';
 
   @override
   String get uploadPorV => 'Upload photos or videos';
@@ -467,7 +467,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get username => 'User name';
 
   @override
-  String get phone => 'Phone Number';
+  String get phone => 'Phone';
 
   @override
   String get signup => 'Sign Up';
@@ -482,7 +482,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addPhoto => 'Add a photo';
 
   @override
-  String get email => 'Email address';
+  String get email => 'Email';
 
   @override
   String get password => 'Password';
@@ -927,4 +927,184 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notification => 'Notification';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get noNotifications => 'No notifications available';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get message => 'Message';
+
+  @override
+  String get admin_dashboard => 'Admin Dashboard';
+
+  @override
+  String get total_users => 'Total Users';
+
+  @override
+  String get total_shops => 'Total Shops';
+
+  @override
+  String get repair_requests => 'Repair Requests';
+
+  @override
+  String get total_orders => 'Total Orders';
+
+  @override
+  String get count => 'Count';
+
+  @override
+  String get real_time_platform_insights => 'Real-time platform insights';
+
+  @override
+  String get users => 'Users';
+
+  @override
+  String get shops => 'Shops';
+
+  @override
+  String get user_management => 'User Management';
+
+  @override
+  String get manage_user_accounts_roles_status =>
+      'Manage user accounts, roles, and status';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String get search_by_name_or_email => 'Search by name or email...';
+
+  @override
+  String get user_details => 'User Details';
+
+  @override
+  String get user_info => 'User Info';
+
+  @override
+  String get id => 'ID';
+
+  @override
+  String get role => 'Role';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get role_updated_successfully => 'Role updated successfully';
+
+  @override
+  String get role_update_failed => 'Failed to update role';
+
+  @override
+  String get user_deactivated_successfully => 'User deactivated successfully';
+
+  @override
+  String get user_activated_successfully => 'User activated successfully';
+
+  @override
+  String get user_status_update_failed => 'Failed to update user status';
+
+  @override
+  String get delete_user => 'Delete User?';
+
+  @override
+  String get delete_user_warning => 'This action cannot be undone!';
+
+  @override
+  String get yes_delete => 'Yes, delete';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get manage_product_categories => 'Manage product categories';
+
+  @override
+  String get total_categories => 'Total Categories';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get search_by_name => 'Search by name...';
+
+  @override
+  String get add_category => 'Add Category';
+
+  @override
+  String get no_categories_available => 'No categories available';
+
+  @override
+  String get category_details => 'Category Details';
+
+  @override
+  String get enter_category_name => 'Enter category name';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get edit_category => 'Edit Category';
+
+  @override
+  String get delete_category => 'Delete Category?';
+
+  @override
+  String get delete_category_warning => 'This action cannot be undone!';
+
+  @override
+  String get id_copied_to_clipboard => 'ID copied to clipboard';
+
+  @override
+  String get category_added_successfully => 'Category added successfully';
+
+  @override
+  String get category_updated_successfully => 'Category updated successfully';
+
+  @override
+  String get category_deleted_successfully => 'Category deleted successfully';
+
+  @override
+  String get transactions_management => 'Transactions Management';
+
+  @override
+  String get view_and_monitor_transactions =>
+      'View and monitor all payment transactions';
+
+  @override
+  String get total_transactions => 'Total Transactions';
+
+  @override
+  String get total_revenue => 'Total Revenue';
+
+  @override
+  String get search_by_user_id =>
+      'Search by User ID (leave empty for all transactions)';
+
+  @override
+  String get search_user => 'Search User';
+
+  @override
+  String get show_all => 'Show All';
+
+  @override
+  String get transaction_id => 'TRANSACTION ID';
+
+  @override
+  String get user_id => 'USER ID';
+
+  @override
+  String get type => 'TYPE';
+
+  @override
+  String get no_transactions_available => 'No transactions available.';
 }

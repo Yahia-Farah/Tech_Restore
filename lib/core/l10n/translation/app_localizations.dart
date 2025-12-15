@@ -341,7 +341,7 @@ abstract class AppLocalizations {
   /// No description provided for @actions.
   ///
   /// In en, this message translates to:
-  /// **'Edit / Remove'**
+  /// **'Actions'**
   String get actions;
 
   /// No description provided for @newDev.
@@ -605,7 +605,7 @@ abstract class AppLocalizations {
   /// No description provided for @date.
   ///
   /// In en, this message translates to:
-  /// **'Date'**
+  /// **'DATE'**
   String get date;
 
   /// No description provided for @service_type.
@@ -629,7 +629,7 @@ abstract class AppLocalizations {
   /// No description provided for @amount.
   ///
   /// In en, this message translates to:
-  /// **'Amount'**
+  /// **'AMOUNT'**
   String get amount;
 
   /// No description provided for @out_for_delivery.
@@ -971,7 +971,7 @@ abstract class AppLocalizations {
   /// No description provided for @name.
   ///
   /// In en, this message translates to:
-  /// **'Full name'**
+  /// **'Name'**
   String get name;
 
   /// No description provided for @uploadPorV.
@@ -1001,7 +1001,7 @@ abstract class AppLocalizations {
   /// No description provided for @phone.
   ///
   /// In en, this message translates to:
-  /// **'Phone Number'**
+  /// **'Phone'**
   String get phone;
 
   /// No description provided for @signup.
@@ -1031,7 +1031,7 @@ abstract class AppLocalizations {
   /// No description provided for @email.
   ///
   /// In en, this message translates to:
-  /// **'Email address'**
+  /// **'Email'**
   String get email;
 
   /// No description provided for @password.
@@ -1903,6 +1903,360 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notification'**
   String get notification;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications available'**
+  String get noNotifications;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// No description provided for @admin_dashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin Dashboard'**
+  String get admin_dashboard;
+
+  /// No description provided for @total_users.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Users'**
+  String get total_users;
+
+  /// No description provided for @total_shops.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Shops'**
+  String get total_shops;
+
+  /// No description provided for @repair_requests.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair Requests'**
+  String get repair_requests;
+
+  /// No description provided for @total_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get total_orders;
+
+  /// No description provided for @count.
+  ///
+  /// In en, this message translates to:
+  /// **'Count'**
+  String get count;
+
+  /// No description provided for @real_time_platform_insights.
+  ///
+  /// In en, this message translates to:
+  /// **'Real-time platform insights'**
+  String get real_time_platform_insights;
+
+  /// No description provided for @users.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get users;
+
+  /// No description provided for @shops.
+  ///
+  /// In en, this message translates to:
+  /// **'Shops'**
+  String get shops;
+
+  /// No description provided for @user_management.
+  ///
+  /// In en, this message translates to:
+  /// **'User Management'**
+  String get user_management;
+
+  /// No description provided for @manage_user_accounts_roles_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage user accounts, roles, and status'**
+  String get manage_user_accounts_roles_status;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @inactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get inactive;
+
+  /// No description provided for @search_by_name_or_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or email...'**
+  String get search_by_name_or_email;
+
+  /// No description provided for @user_details.
+  ///
+  /// In en, this message translates to:
+  /// **'User Details'**
+  String get user_details;
+
+  /// No description provided for @user_info.
+  ///
+  /// In en, this message translates to:
+  /// **'User Info'**
+  String get user_info;
+
+  /// No description provided for @id.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get id;
+
+  /// No description provided for @role.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get role;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @role_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Role updated successfully'**
+  String get role_updated_successfully;
+
+  /// No description provided for @role_update_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update role'**
+  String get role_update_failed;
+
+  /// No description provided for @user_deactivated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'User deactivated successfully'**
+  String get user_deactivated_successfully;
+
+  /// No description provided for @user_activated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'User activated successfully'**
+  String get user_activated_successfully;
+
+  /// No description provided for @user_status_update_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update user status'**
+  String get user_status_update_failed;
+
+  /// No description provided for @delete_user.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete User?'**
+  String get delete_user;
+
+  /// No description provided for @delete_user_warning.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone!'**
+  String get delete_user_warning;
+
+  /// No description provided for @yes_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, delete'**
+  String get yes_delete;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @manage_product_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage product categories'**
+  String get manage_product_categories;
+
+  /// No description provided for @total_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Categories'**
+  String get total_categories;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @search_by_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name...'**
+  String get search_by_name;
+
+  /// No description provided for @add_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get add_category;
+
+  /// No description provided for @no_categories_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories available'**
+  String get no_categories_available;
+
+  /// No description provided for @category_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Details'**
+  String get category_details;
+
+  /// No description provided for @enter_category_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter category name'**
+  String get enter_category_name;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
+
+  /// No description provided for @edit_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Category'**
+  String get edit_category;
+
+  /// No description provided for @delete_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Category?'**
+  String get delete_category;
+
+  /// No description provided for @delete_category_warning.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone!'**
+  String get delete_category_warning;
+
+  /// No description provided for @id_copied_to_clipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'ID copied to clipboard'**
+  String get id_copied_to_clipboard;
+
+  /// No description provided for @category_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category added successfully'**
+  String get category_added_successfully;
+
+  /// No description provided for @category_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category updated successfully'**
+  String get category_updated_successfully;
+
+  /// No description provided for @category_deleted_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category deleted successfully'**
+  String get category_deleted_successfully;
+
+  /// No description provided for @transactions_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions Management'**
+  String get transactions_management;
+
+  /// No description provided for @view_and_monitor_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'View and monitor all payment transactions'**
+  String get view_and_monitor_transactions;
+
+  /// No description provided for @total_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Transactions'**
+  String get total_transactions;
+
+  /// No description provided for @total_revenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Revenue'**
+  String get total_revenue;
+
+  /// No description provided for @search_by_user_id.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by User ID (leave empty for all transactions)'**
+  String get search_by_user_id;
+
+  /// No description provided for @search_user.
+  ///
+  /// In en, this message translates to:
+  /// **'Search User'**
+  String get search_user;
+
+  /// No description provided for @show_all.
+  ///
+  /// In en, this message translates to:
+  /// **'Show All'**
+  String get show_all;
+
+  /// No description provided for @transaction_id.
+  ///
+  /// In en, this message translates to:
+  /// **'TRANSACTION ID'**
+  String get transaction_id;
+
+  /// No description provided for @user_id.
+  ///
+  /// In en, this message translates to:
+  /// **'USER ID'**
+  String get user_id;
+
+  /// No description provided for @type.
+  ///
+  /// In en, this message translates to:
+  /// **'TYPE'**
+  String get type;
+
+  /// No description provided for @no_transactions_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions available.'**
+  String get no_transactions_available;
 }
 
 class _AppLocalizationsDelegate

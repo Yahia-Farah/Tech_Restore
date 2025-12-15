@@ -28,6 +28,7 @@ import '../../../features/auth/data/models/signupmodels/sign_up_response_model.d
 import '../../../features/shop/data/models/offers/offer_request.dart';
 import 'package:tech_restore/features/shop/data/models/chats/chat_session_model.dart' hide ChatMessageModel;
 import 'package:tech_restore/features/shop/data/models/chats/chat_message_model.dart';
+import 'package:tech_restore/features/shop/data/models/notifications/notification_model.dart';
 import '../../../features/shop/data/models/products/get_all_category_model.dart';
 import '../../../features/user/profile/data/models/profile_response.dart';
 import '../api_constants/api_end_points.dart';
@@ -108,12 +109,17 @@ abstract class ApiClient {
   @Extra({'auth': true})
   Future<List<ChatMessageModel>> getChatMessages(@Path('sessionId') String sessionId);
 
-  // Note: Messages are sent via WebSocket, not REST POST
-  // The endpoint only supports GET for retrieving messages
-
   @POST(ApiEndPoints.endChatSession)
   @Extra({'auth': true})
   Future<dynamic> endChatSession(@Path('sessionId') String sessionId);
+
+  @GET(ApiEndPoints.getAllNotificationsShop)
+  @Extra({'auth': true})
+  Future<List<NotificationModel>> getAllNotificationsShop();
+
+  @DELETE(ApiEndPoints.deleteNotificationsShop)
+  @Extra({'auth': true})
+  Future<dynamic> deleteNotificationShop(@Path('notificationId') String notificationId);
 
 
   @GET(ApiEndPoints.getAdminStats)

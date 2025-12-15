@@ -79,4 +79,3 @@ class ChatMessageModel {
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) => _$ChatMessageModelFromJson(json);
   Map<String, dynamic> toJson() => _$ChatMessageModelToJson(this);
 }
-

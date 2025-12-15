@@ -10,6 +10,7 @@ import '../models/products/get_all_category_model.dart';
 import '../models/products/product_model.dart';
 import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
 import '../models/chats/chat_message_model.dart';
+import '../models/notifications/notification_model.dart';
 
 @lazySingleton
 class ShopRepository {
@@ -159,6 +160,22 @@ class ShopRepository {
       await _remoteDataSource.endChatSession(sessionId);
     } catch (e) {
       throw Exception('Failed to end chat session: ${e.toString()}');
+    }
+  }
+
+  Future<List<NotificationModel>> getAllNotifications() async {
+    try {
+      return await _remoteDataSource.getAllNotifications();
+    } catch (e) {
+      throw Exception('Failed to get notifications: ${e.toString()}');
+    }
+  }
+
+  Future<void> deleteNotification(String notificationId) async {
+    try {
+      await _remoteDataSource.deleteNotification(notificationId);
+    } catch (e) {
+      throw Exception('Failed to delete notification: ${e.toString()}');
     }
   }
 }

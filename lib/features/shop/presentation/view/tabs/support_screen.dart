@@ -128,6 +128,8 @@ class SupportScreen extends StatelessWidget {
                                                                 sessionName:
                                                                     session
                                                                         .userName!,
+                                                                userId: session.userId!,
+                                                                shopId: session.shopId!,
                                                               ),
                                                             ),
                                                       ),
