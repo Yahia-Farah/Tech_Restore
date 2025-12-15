@@ -884,4 +884,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_transactions_available => 'لا توجد معاملات متاحة.';
+
+  @override
+  String get delivery_management => 'إدارة التوصيل';
+
+  @override
+  String get monitor_and_manage_delivery => 'مراقبة وإدارة موظفي التوصيل';
+
+  @override
+  String get total_deliveries => 'إجمالي عمليات التوصيل';
+
+  @override
+  String get approved => 'موافق عليه';
+
+  @override
+  String get suspended => 'معلق';
+
+  @override
+  String get search_by_name_email_phone => 'البحث بالاسم أو البريد الإلكتروني أو الهاتف...';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get no_deliveries_available => 'لا توجد عمليات توصيل متاحة';
+
+  @override
+  String get assigner_management => 'إدارة الموزعين';
+
+  @override
+  String get monitor_and_manage_assigners => 'مراقبة وإدارة موظفي التوزيع';
+
+  @override
+  String get total_assigners => 'إجمالي الموزعين';
+
+  @override
+  String get no_assigners_available => 'لا يوجد موزعون متاحون';
+
+  @override
+  String get assignment_logs => 'سجلات التعيينات';
+
+  @override
+  String get track_all_assignment_activities => 'تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.';
+
+  @override
+  String get no_assignment_logs_found => 'لم يتم العثور على سجلات تعيينات';
+
+  @override
+  String get no_assignment_logs_description => 'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
 }

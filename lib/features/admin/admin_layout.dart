@@ -10,6 +10,9 @@ import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/view/transaction_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/view/users_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-delivery/view/delivery_admin_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-assigner/presentation/view/admin_assigner_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-assignment-logs/presentation/view/admin_assignment_logs_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/viewmodel/categories_cubit.dart';
@@ -55,6 +58,12 @@ class _MainLayoutState extends State<AdminLayout> {
       create: (context) => getIt<CategoriesCubit>(),
       child: const AdminCategoriesScreen(),
     ),
+    // Delivery (index 8)
+    const DeliveryAdminScreen(),
+    // Assigner (index 9)
+    const AdminAssignerScreen(),
+    // Assignment Logs (index 10)
+    const AdminAssignmentLogsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -197,6 +206,12 @@ class _MainLayoutState extends State<AdminLayout> {
         return "Support";
       case 7:
         return "Categories";
+      case 8:
+        return "Delivery";
+      case 9:
+        return "Assigner";
+      case 10:
+        return "Assignment Logs";
       default:
         return "";
     }

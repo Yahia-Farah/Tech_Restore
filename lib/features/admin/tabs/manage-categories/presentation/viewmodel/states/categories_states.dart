@@ -31,3 +31,4 @@ class CategoryDeleted extends CategoriesState {
   CategoryDeleted(this.message);
 }
 
+

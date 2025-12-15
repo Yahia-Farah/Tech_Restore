@@ -884,4 +884,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_transactions_available => 'No transactions available.';
+
+  @override
+  String get delivery_management => 'Delivery Management';
+
+  @override
+  String get monitor_and_manage_delivery => 'Monitor and manage delivery personnel';
+
+  @override
+  String get total_deliveries => 'Total Deliveries';
+
+  @override
+  String get approved => 'Approved';
+
+  @override
+  String get suspended => 'Suspended';
+
+  @override
+  String get search_by_name_email_phone => 'Search by name, email, or phone...';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get no_deliveries_available => 'No deliveries available';
+
+  @override
+  String get assigner_management => 'Assigner Management';
+
+  @override
+  String get monitor_and_manage_assigners => 'Monitor and manage assigner personnel';
+
+  @override
+  String get total_assigners => 'Total Assigners';
+
+  @override
+  String get no_assigners_available => 'No assigners available';
+
+  @override
+  String get assignment_logs => 'Assignment Logs';
+
+  @override
+  String get track_all_assignment_activities => 'Track all assignment activities across assigners, shops, and users.';
+
+  @override
+  String get no_assignment_logs_found => 'No Assignment Logs Found';
+
+  @override
+  String get no_assignment_logs_description => 'There are currently no assignment activities recorded in the system.';
 }
