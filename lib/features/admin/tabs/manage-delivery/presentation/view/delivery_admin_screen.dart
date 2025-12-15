@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
-import '../../../../../core/widgets/custom_elevated_button.dart';
-import '../../../../../core/l10n/translation/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/widgets/custom_elevated_button.dart';
+import '../../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../../core/widgets/toast_helper.dart';
+import '../../../../../../core/l10n/translation/app_localizations.dart';
+import '../../../../../../core/theme/app_colors.dart';
+import '../../../data/model/delivery-model/content_delivery_admin.dart';
+import '../viewmodel/deliveries_cubit.dart';
+import '../viewmodel/states/deliveries_states.dart';
 
 class DeliveryAdminScreen extends StatefulWidget {
   const DeliveryAdminScreen({super.key});
@@ -15,14 +20,12 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
   String _searchQuery = "";
   final TextEditingController _searchController = TextEditingController();
   String _selectedFilter = "All";
-  int _totalDeliveries = 0;
-  int _pendingDeliveries = 0;
-  int _approvedDeliveries = 0;
-  List<Map<String, dynamic>> _deliveries = [];
+  int _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
+    context.read<DeliveriesCubit>().getAllDeliveries(_currentPage);
   }
 
   @override
@@ -43,7 +46,49 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: SingleChildScrollView(
+      body: BlocConsumer<DeliveriesCubit, DeliveriesState>(
+        listener: (context, state) {
+          if (state is DeliveriesError) {
+            ToastHelper.showCustomToast(
+              context,
+              text: state.message,
+              isError: true,
+            );
+          }
+        },
+        builder: (context, state) {
+          List<ContentDeliveryAdmin> deliveries = [];
+          int totalDeliveries = 0;
+          int pendingDeliveries = 0;
+          int approvedDeliveries = 0;
+
+          if (state is DeliveriesLoaded) {
+            final contentList = state.deliveries.content;
+            deliveries = contentList != null
+                ? List<ContentDeliveryAdmin>.from(contentList)
+                : <ContentDeliveryAdmin>[];
+            totalDeliveries = state.deliveries.totalElements ?? 0;
+
+            pendingDeliveries = deliveries.where((d) => d.status?.toLowerCase() == 'pending').length;
+            approvedDeliveries = deliveries.where((d) => d.status?.toLowerCase() == 'approved').length;
+          }
+
+          final filteredDeliveries = _searchQuery.isEmpty
+              ? deliveries
+              : deliveries.where((delivery) {
+                  final query = _searchQuery.toLowerCase();
+                  return (delivery.name ?? '').toLowerCase().contains(query) ||
+                         (delivery.email ?? '').toLowerCase().contains(query) ||
+                         (delivery.phone ?? '').toLowerCase().contains(query);
+                }).toList();
+
+          final statusFilteredDeliveries = _selectedFilter == "All"
+              ? filteredDeliveries
+              : filteredDeliveries.where((delivery) {
+                  return delivery.status?.toLowerCase() == _selectedFilter.toLowerCase();
+                }).toList();
+
+          return SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +127,7 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
                     icon: Icons.local_shipping,
                     iconColor: AppColors.primary[70] ?? AppColors.black,
                     label: local.total_deliveries,
-                    value: _totalDeliveries.toString(),
+                    value: totalDeliveries.toString(),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -91,7 +136,7 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
                     icon: Icons.pending_outlined,
                     iconColor: Colors.orange,
                     label: local.pending,
-                    value: _pendingDeliveries.toString(),
+                    value: pendingDeliveries.toString(),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -100,7 +145,7 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
                     icon: Icons.check_circle_outline,
                     iconColor: Colors.green,
                     label: local.approved,
-                    value: _approvedDeliveries.toString(),
+                    value: approvedDeliveries.toString(),
                   ),
                 ),
               ],
@@ -288,10 +333,18 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
                       ],
                     ),
                   ),
-                  if (_deliveries.isEmpty)
+                  if (state is DeliveriesLoading)
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(60.0),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  else if (statusFilteredDeliveries.isEmpty)
                     _buildEmptyState(local)
                   else
-                    ..._deliveries.map((delivery) {
+                    ...statusFilteredDeliveries.map((delivery) {
                       return Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -308,39 +361,39 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                delivery['id'] ?? '',
+                                delivery.id ?? '',
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
                             Expanded(
                               flex: 2,
                               child: Text(
-                                delivery['name'] ?? '',
+                                delivery.name ?? '',
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
                             Expanded(
                               flex: 2,
                               child: Text(
-                                delivery['email'] ?? '',
+                                delivery.email ?? '',
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
                             Expanded(
                               flex: 2,
                               child: Text(
-                                delivery['phone'] ?? '',
+                                delivery.phone ?? '',
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
                             Expanded(
                               flex: 1,
-                              child: _buildStatusChip(delivery['status'] ?? ''),
+                              child: _buildStatusChip(delivery.status ?? ''),
                             ),
                             Expanded(
                               flex: 1,
                               child: Text(
-                                delivery['completed'] ?? '0',
+                                (delivery.totalCompletedDeliveries ?? 0).toString(),
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
@@ -369,6 +422,8 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
             ),
           ],
         ),
+      );
+        },
       ),
     );
   }

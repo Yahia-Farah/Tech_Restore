@@ -30,8 +30,12 @@ import '../../features/admin/tabs/domain/usecases/delete_category_usecase.dart'
     as _i886;
 import '../../features/admin/tabs/domain/usecases/get_all_categories_usecase.dart'
     as _i953;
+import '../../features/admin/tabs/domain/usecases/get_all_deliveries_usecase.dart'
+    as _i411;
 import '../../features/admin/tabs/domain/usecases/get_all_transactions_usecase.dart'
     as _i575;
+import '../../features/admin/tabs/domain/usecases/get_delivery_by_id_usecase.dart'
+    as _i1055;
 import '../../features/admin/tabs/domain/usecases/update_category_usecase.dart'
     as _i982;
 import '../../features/admin/tabs/domain/usecases/update_user_role_usecase.dart'
@@ -40,6 +44,8 @@ import '../../features/admin/tabs/manage-categories/presentation/viewmodel/categ
     as _i652;
 import '../../features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart'
     as _i80;
+import '../../features/admin/tabs/manage-delivery/presentation/viewmodel/deliveries_cubit.dart'
+    as _i954;
 import '../../features/admin/tabs/manage-shops/data/datasource/get_shops_data_source_impl.dart'
     as _i392;
 import '../../features/admin/tabs/manage-shops/data/repo/get_shops_repo.dart'
@@ -154,6 +160,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i982.UpdateCategoryUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i575.GetAllTransactionsUseCase>(
         () => _i575.GetAllTransactionsUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i411.GetAllDeliveriesUseCase>(
+        () => _i411.GetAllDeliveriesUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i1055.GetDeliveryByIdUseCase>(
+        () => _i1055.GetDeliveryByIdUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i652.CategoriesCubit>(() => _i652.CategoriesCubit(
           gh<_i953.GetAllCategoriesUseCase>(),
           gh<_i733.AddCategoryUseCase>(),
@@ -174,6 +184,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i48.LogoutUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i30.VerifyEmailUseCase>(
         () => _i30.VerifyEmailUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i954.DeliveriesCubit>(() => _i954.DeliveriesCubit(
+          gh<_i411.GetAllDeliveriesUseCase>(),
+          gh<_i1055.GetDeliveryByIdUseCase>(),
+        ));
     gh.factory<_i691.TransactionsCubit>(
         () => _i691.TransactionsCubit(gh<_i575.GetAllTransactionsUseCase>()));
     gh.factory<_i948.ForgetPasswordUseCase>(

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/config/di.dart';
 import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/view/admin_dashboard_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-delivery/presentation/view/delivery_admin_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_repair_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_reviews_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_promotional_offers_screen.dart';
@@ -10,13 +11,13 @@ import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/view/transaction_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/view/users_screen.dart';
-import 'package:tech_restore/features/admin/tabs/manage-delivery/view/delivery_admin_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-assigner/presentation/view/admin_assigner_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-assignment-logs/presentation/view/admin_assignment_logs_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/viewmodel/categories_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/viewmodel/transactions_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-delivery/presentation/viewmodel/deliveries_cubit.dart';
 import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -63,7 +64,10 @@ class _MainLayoutState extends State<AdminLayout> {
       child: const AdminCategoriesScreen(),
     ),
     // Delivery (index 8)
-    const DeliveryAdminScreen(),
+    BlocProvider(
+      create: (context) => getIt<DeliveriesCubit>(),
+      child: const DeliveryAdminScreen(),
+    ),
     // Assigner (index 9)
     const AdminAssignerScreen(),
     // Assignment Logs (index 10)

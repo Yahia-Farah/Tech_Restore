@@ -29,3 +29,4 @@ class TransactionsCubit extends Cubit<TransactionsState> {
     getAllTransactions(_currentPage);
   }
 }
+

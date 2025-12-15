@@ -6,6 +6,8 @@ import '../../data/model/admin-states/admin_states_response.dart';
 import '../../data/model/categories-model/categories_model_response.dart';
 import '../../data/model/categories-model/categories_request.dart';
 import '../../data/model/transaction-models/transaction_admin_response.dart';
+import '../../data/model/delivery-model/delivery_admin_response.dart';
+import '../../data/model/delivery-model/content_delivery_admin.dart';
 import '../../manage-user/data/models/update_user_role_request.dart';
 
 @LazySingleton(as: AdminRemoteDataSource)
@@ -65,5 +67,15 @@ class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
       log('❌ [AdminRemoteDataSourceImpl] API client call failed: $e', error: e, stackTrace: stackTrace);
       rethrow;
     }
+  }
+
+  @override
+  Future<DeliveryAdminResponse> getAllDeliveries(int page) async {
+    return await _apiClient.getAllDeliveriesAdmin(page);
+  }
+
+  @override
+  Future<ContentDeliveryAdmin> getDeliveryById(String deliveryId) async {
+    return await _apiClient.getDeliveryAdminById(deliveryId);
   }
 }
