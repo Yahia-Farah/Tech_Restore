@@ -2257,6 +2257,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No transactions available.'**
   String get no_transactions_available;
+
+  /// No description provided for @delivery_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Management'**
+  String get delivery_management;
+
+  /// No description provided for @monitor_and_manage_delivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor and manage delivery personnel'**
+  String get monitor_and_manage_delivery;
+
+  /// No description provided for @total_deliveries.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Deliveries'**
+  String get total_deliveries;
+
+  /// No description provided for @approved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get approved;
+
+  /// No description provided for @suspended.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended'**
+  String get suspended;
+
+  /// No description provided for @search_by_name_email_phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name, email, or phone...'**
+  String get search_by_name_email_phone;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @no_deliveries_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No deliveries available'**
+  String get no_deliveries_available;
+
+  /// No description provided for @assigner_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigner Management'**
+  String get assigner_management;
+
+  /// No description provided for @monitor_and_manage_assigners.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor and manage assigner personnel'**
+  String get monitor_and_manage_assigners;
+
+  /// No description provided for @total_assigners.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Assigners'**
+  String get total_assigners;
+
+  /// No description provided for @no_assigners_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No assigners available'**
+  String get no_assigners_available;
+
+  /// No description provided for @assignment_logs.
+  ///
+  /// In en, this message translates to:
+  /// **'Assignment Logs'**
+  String get assignment_logs;
+
+  /// No description provided for @track_all_assignment_activities.
+  ///
+  /// In en, this message translates to:
+  /// **'Track all assignment activities across assigners, shops, and users.'**
+  String get track_all_assignment_activities;
+
+  /// No description provided for @no_assignment_logs_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No Assignment Logs Found'**
+  String get no_assignment_logs_found;
+
+  /// No description provided for @no_assignment_logs_description.
+  ///
+  /// In en, this message translates to:
+  /// **'There are currently no assignment activities recorded in the system.'**
+  String get no_assignment_logs_description;
+
+  /// No description provided for @failed_to_load_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load transactions'**
+  String get failed_to_load_transactions;
+
+  /// No description provided for @transactions_loaded_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions loaded successfully'**
+  String get transactions_loaded_successfully;
 }
 
 class _AppLocalizationsDelegate

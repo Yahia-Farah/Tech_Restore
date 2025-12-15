@@ -1,6 +1,9 @@
 import '../model/admin-states/admin_states_response.dart';
 import '../model/categories-model/categories_model_response.dart';
 import '../model/categories-model/categories_request.dart';
+import '../model/transaction-models/transaction_admin_response.dart';
+import '../model/delivery-model/delivery_admin_response.dart';
+import '../model/delivery-model/content_delivery_admin.dart';
 import '../../manage-user/data/models/update_user_role_request.dart';
 
 abstract class AdminRemoteDataSource {
@@ -12,4 +15,7 @@ abstract class AdminRemoteDataSource {
   Future<String> addCategory(CategoriesRequest request);
   Future<String> updateCategory(String categoryId, CategoriesRequest request);
   Future<String> deleteCategory(String categoryId);
+  Future<TransactionAdminModelResponse> getAllTransactions(int page);
+  Future<DeliveryAdminResponse> getAllDeliveries(int page);
+  Future<ContentDeliveryAdmin> getDeliveryById(String deliveryId);
 }

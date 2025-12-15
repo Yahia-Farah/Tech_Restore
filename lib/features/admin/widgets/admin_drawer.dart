@@ -93,6 +93,21 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
                   text: "Transactions",
                 ),
                 _buildDrawerItem(
+                  index: 8,
+                  icon: Icons.local_shipping_outlined,
+                  text: "Delivery",
+                ),
+                _buildDrawerItem(
+                  index: 9,
+                  icon: Icons.card_giftcard_outlined,
+                  text: "Assigner",
+                ),
+                _buildDrawerItem(
+                  index: 10,
+                  icon: Icons.assignment_outlined,
+                  text: "Assignment Logs",
+                ),
+                _buildDrawerItem(
                   index: 6,
                   icon: Icons.support_agent_outlined,
                   text: "Support",

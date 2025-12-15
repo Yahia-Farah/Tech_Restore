@@ -16,6 +16,9 @@ import '../../../features/admin/tabs/manage-user/data/models/update_user_role_re
 import '../../../features/admin/tabs/data/model/admin-states/admin_states_response.dart';
 import '../../../features/admin/tabs/data/model/categories-model/categories_model_response.dart';
 import '../../../features/admin/tabs/data/model/categories-model/categories_request.dart';
+import '../../../features/admin/tabs/data/model/transaction-models/transaction_admin_response.dart';
+import '../../../features/admin/tabs/data/model/delivery-model/delivery_admin_response.dart';
+import '../../../features/admin/tabs/data/model/delivery-model/content_delivery_admin.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -224,4 +227,16 @@ abstract class ApiClient {
   @DELETE(ApiEndPoints.deleteCategoriesAdmin)
   @Extra({'auth': true})
   Future<String> deleteCategoryAdmin(@Path('categroyId') String categoryId);
+
+  @GET(ApiEndPoints.getAllTransactionAdmin)
+  @Extra({'auth': true})
+  Future<TransactionAdminModelResponse> getAllTransactionsAdmin(@Query('page') int page);
+
+  @GET(ApiEndPoints.getDeliveriesAdmin)
+  @Extra({'auth': true})
+  Future<DeliveryAdminResponse> getAllDeliveriesAdmin(@Query('page') int page);
+
+  @GET(ApiEndPoints.getDeliveriesAdminById)
+  @Extra({'auth': true})
+  Future<ContentDeliveryAdmin> getDeliveryAdminById(@Path('deliveryId') String deliveryId);
 }

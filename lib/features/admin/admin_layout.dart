@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_restore/core/config/di.dart';
 import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/view/admin_dashboard_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-delivery/presentation/view/delivery_admin_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_repair_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_reviews_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_promotional_offers_screen.dart';
@@ -10,9 +11,13 @@ import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/view/transaction_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/view/users_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-assigner/presentation/view/admin_assigner_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-assignment-logs/presentation/view/admin_assignment_logs_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/viewmodel/categories_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/viewmodel/transactions_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-delivery/presentation/viewmodel/deliveries_cubit.dart';
 import 'package:tech_restore/features/admin/widgets/admin_drawer.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -47,7 +52,10 @@ class _MainLayoutState extends State<AdminLayout> {
     // Shop section: Promotional Offers (index 4)
     const AdminPromotionsScreen(),
     // Transactions (index 5)
-    AdminTransactionsScreen(),
+    BlocProvider(
+      create: (context) => getIt<TransactionsCubit>(),
+      child: const AdminTransactionsScreen(),
+    ),
     // Support (index 6)
     AdminSupportScreen(),
     // Categories (index 7)
@@ -55,6 +63,15 @@ class _MainLayoutState extends State<AdminLayout> {
       create: (context) => getIt<CategoriesCubit>(),
       child: const AdminCategoriesScreen(),
     ),
+    // Delivery (index 8)
+    BlocProvider(
+      create: (context) => getIt<DeliveriesCubit>(),
+      child: const DeliveryAdminScreen(),
+    ),
+    // Assigner (index 9)
+    const AdminAssignerScreen(),
+    // Assignment Logs (index 10)
+    const AdminAssignmentLogsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -197,6 +214,12 @@ class _MainLayoutState extends State<AdminLayout> {
         return "Support";
       case 7:
         return "Categories";
+      case 8:
+        return "Delivery";
+      case 9:
+        return "Assigner";
+      case 10:
+        return "Assignment Logs";
       default:
         return "";
     }
