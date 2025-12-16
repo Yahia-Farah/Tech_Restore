@@ -938,4 +938,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get transactions_loaded_successfully => 'Transactions loaded successfully';
+
+  @override
+  String get shops_management => 'Shops Management';
+
+  @override
+  String get manage_approve_suspend_view_shop_details => 'Manage, approve, suspend, and view shop details';
+
+  @override
+  String get filter_by_status => 'Filter by Status';
+
+  @override
+  String get all_shops => 'All Shops';
+
+  @override
+  String get approved_shops => 'Approved Shops';
+
+  @override
+  String get suspended_shops => 'Suspended Shops';
+
+  @override
+  String get shop_type => 'SHOP TYPE';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String get approve => 'Approve';
+
+  @override
+  String get no_shops_match_filters => 'No shops match your filters';
+
+  @override
+  String get shop_details => 'Shop Details';
+
+  @override
+  String get shop_information => 'Shop Information';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get data_copied_to_clipboard => 'Data copied to clipboard';
+
+  @override
+  String get suspend => 'Suspend';
+
+  @override
+  String get shop_approved_successfully => 'Shop approved successfully';
+
+  @override
+  String get shop_suspended_successfully => 'Shop suspended successfully';
+
+  @override
+  String get shop_approval_failed => 'Failed to approve shop';
+
+  @override
+  String get shop_suspension_failed => 'Failed to suspend shop';
 }

@@ -24,6 +24,8 @@ import '../../features/admin/tabs/domain/usecases/add_category_usecase.dart'
     as _i733;
 import '../../features/admin/tabs/domain/usecases/admin_states_usecase.dart'
     as _i902;
+import '../../features/admin/tabs/domain/usecases/approve_shop_usecase.dart'
+    as _i634;
 import '../../features/admin/tabs/domain/usecases/deactivate_user_usecase.dart'
     as _i217;
 import '../../features/admin/tabs/domain/usecases/delete_category_usecase.dart'
@@ -36,6 +38,8 @@ import '../../features/admin/tabs/domain/usecases/get_all_transactions_usecase.d
     as _i575;
 import '../../features/admin/tabs/domain/usecases/get_delivery_by_id_usecase.dart'
     as _i1055;
+import '../../features/admin/tabs/domain/usecases/suspend_shop_usecase.dart'
+    as _i57;
 import '../../features/admin/tabs/domain/usecases/update_category_usecase.dart'
     as _i982;
 import '../../features/admin/tabs/domain/usecases/update_user_role_usecase.dart'
@@ -212,10 +216,17 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i327.EditProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i164.ForgetPasswordCubit>(
         () => _i164.ForgetPasswordCubit(gh<_i948.ForgetPasswordUseCase>()));
-    gh.factory<_i697.GetShopsCubit>(
-        () => _i697.GetShopsCubit(gh<_i63.GetShopsRepository>()));
+    gh.factory<_i634.ApproveShopUseCase>(
+        () => _i634.ApproveShopUseCase(gh<_i63.GetShopsRepository>()));
+    gh.factory<_i57.SuspendShopUseCase>(
+        () => _i57.SuspendShopUseCase(gh<_i63.GetShopsRepository>()));
     gh.factory<_i146.LoginViewModel>(
         () => _i146.LoginViewModel(gh<_i188.LoginUseCase>()));
+    gh.factory<_i697.GetShopsCubit>(() => _i697.GetShopsCubit(
+          gh<_i63.GetShopsRepository>(),
+          gh<_i634.ApproveShopUseCase>(),
+          gh<_i57.SuspendShopUseCase>(),
+        ));
     gh.factory<_i524.GetUsersCubit>(() => _i524.GetUsersCubit(
           gh<_i680.GetUserRepository>(),
           gh<_i586.UpdateUserRoleUseCase>(),

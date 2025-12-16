@@ -31,3 +31,4 @@ class SortDeliveryAdmin {
     return _$SortDeliveryAdminToJson(this);
   }
 }
+

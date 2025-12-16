@@ -215,4 +215,12 @@ abstract class ApiClient {
   @GET(ApiEndPoints.getDeliveriesAdminById)
   @Extra({'auth': true})
   Future<ContentDeliveryAdmin> getDeliveryAdminById(@Path('deliveryId') String deliveryId);
+
+  @PUT(ApiEndPoints.approveShops)
+  @Extra({'auth': true})
+  Future<String> approveShop(@Path('shopId') String shopId);
+
+  @PUT(ApiEndPoints.suspendShops)
+  @Extra({'auth': true})
+  Future<String> suspendShop(@Path('shopId') String shopId);
 }

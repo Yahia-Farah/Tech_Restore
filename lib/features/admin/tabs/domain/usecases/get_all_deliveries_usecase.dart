@@ -12,3 +12,4 @@ class GetAllDeliveriesUseCase {
     return await _adminRepo.getAllDeliveries(page);
   }
 }
+

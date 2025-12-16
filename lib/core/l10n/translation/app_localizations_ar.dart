@@ -938,4 +938,64 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get transactions_loaded_successfully => 'تم تحميل المعاملات بنجاح';
+
+  @override
+  String get shops_management => 'إدارة المتاجر';
+
+  @override
+  String get manage_approve_suspend_view_shop_details => 'إدارة وموافقة وتعليق وعرض تفاصيل المتاجر';
+
+  @override
+  String get filter_by_status => 'تصفية حسب الحالة';
+
+  @override
+  String get all_shops => 'جميع المتاجر';
+
+  @override
+  String get approved_shops => 'المتاجر الموافق عليها';
+
+  @override
+  String get suspended_shops => 'المتاجر المعلقة';
+
+  @override
+  String get shop_type => 'نوع المتجر';
+
+  @override
+  String get view => 'عرض';
+
+  @override
+  String get approve => 'موافقة';
+
+  @override
+  String get no_shops_match_filters => 'لا توجد متاجر تطابق المرشحات';
+
+  @override
+  String get shop_details => 'تفاصيل المتجر';
+
+  @override
+  String get shop_information => 'معلومات المتجر';
+
+  @override
+  String get rating => 'التقييم';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get data_copied_to_clipboard => 'تم نسخ البيانات إلى الحافظة';
+
+  @override
+  String get suspend => 'تعليق';
+
+  @override
+  String get shop_approved_successfully => 'تمت الموافقة على المتجر بنجاح';
+
+  @override
+  String get shop_suspended_successfully => 'تم تعليق المتجر بنجاح';
+
+  @override
+  String get shop_approval_failed => 'فشل في الموافقة على المتجر';
+
+  @override
+  String get shop_suspension_failed => 'فشل في تعليق المتجر';
 }
