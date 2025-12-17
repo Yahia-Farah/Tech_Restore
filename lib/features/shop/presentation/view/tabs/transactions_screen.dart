@@ -126,6 +126,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               ),
               const SizedBox(width: 16),
               DropdownButton<String>(
+                underline: const SizedBox(),
                 value: _selectedMonth,
                 items:
                     months
