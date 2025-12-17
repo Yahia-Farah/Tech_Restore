@@ -12,6 +12,3 @@ class GetShopsRemoteDataSource {
     return await _apiClient.getShops();
   }
 }
-
-
-

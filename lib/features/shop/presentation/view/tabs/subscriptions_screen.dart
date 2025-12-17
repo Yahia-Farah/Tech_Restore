@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/theme/app_colors.dart';
 
@@ -12,10 +13,73 @@ class SubscriptionsScreen extends StatefulWidget {
 class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   String _selectedDuration = '1';
   String _selectedSubscriptionType = '1000';
-  
+  late ScrollController _scrollController;
+  Timer? _scrollTimer;
+  bool _isScrollingRight = true;
+  bool _isUserScrolling = false;
+
   String _getCurrency(AppLocalizations local) {
     final locale = Localizations.localeOf(context);
     return locale.languageCode == 'ar' ? 'ج.م' : 'EGP';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+    _startAutoScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _scrollTimer?.cancel();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+
+    if (_scrollController.position.isScrollingNotifier.value) {
+      if (!_isUserScrolling) {
+        _isUserScrolling = true;
+        _scrollTimer?.cancel();
+      }
+    } else {
+      if (_isUserScrolling) {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      }
+    }
+  }
+
+  void _startAutoScroll() {
+    _scrollTimer?.cancel();
+    _scrollTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
+      if (!_scrollController.hasClients || _isUserScrolling) return;
+
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final currentScroll = _scrollController.offset;
+
+      if (_isScrollingRight) {
+        if (currentScroll >= maxScroll) {
+          _isScrollingRight = false;
+        } else {
+          _scrollController.jumpTo(currentScroll + 2);
+        }
+      } else {
+        if (currentScroll <= 0) {
+          _isScrollingRight = true;
+        } else {
+          _scrollController.jumpTo(currentScroll - 2);
+        }
+      }
+    });
   }
 
   @override
@@ -59,7 +123,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
               borderRadius: BorderRadius.circular(6),
             ),
             child: Column(
-              crossAxisAlignment: isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 Text(
                   local.subscriptionsTitle,
@@ -72,10 +137,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                 const SizedBox(height: 8),
                 Text(
                   local.subscriptionsSubtitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black54,
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.black54),
                   textAlign: isRTL ? TextAlign.right : TextAlign.left,
                 ),
               ],
@@ -87,32 +149,56 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   }
 
   Widget _buildFeatureCards(AppLocalizations local, bool isRTL) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
-        children: [
-          _buildFeatureCard(
-            icon: Icons.storefront,
-            title: local.fullManagementTitle,
-            description: local.fullManagementDescription,
-            isRTL: isRTL,
-          ),
-          const SizedBox(width: 12),
-          _buildFeatureCard(
-            icon: Icons.headset_mic,
-            title: local.support247Title,
-            description: local.support247Description,
-            isRTL: isRTL,
-          ),
-          const SizedBox(width: 12),
-          _buildFeatureCard(
-            icon: Icons.settings,
-            title: local.automaticUpdatesTitle,
-            description: local.automaticUpdatesDescription,
-            isRTL: isRTL,
-          ),
-        ],
+    return GestureDetector(
+      onPanStart: (_) {
+        _isUserScrolling = true;
+        _scrollTimer?.cancel();
+      },
+      onPanEnd: (_) {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      },
+      onPanCancel: () {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      },
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        physics: const ClampingScrollPhysics(),
+        child: Row(
+          textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+          children: [
+            _buildFeatureCard(
+              icon: Icons.storefront,
+              title: local.fullManagementTitle,
+              description: local.fullManagementDescription,
+              isRTL: isRTL,
+            ),
+            const SizedBox(width: 12),
+            _buildFeatureCard(
+              icon: Icons.headset_mic,
+              title: local.support247Title,
+              description: local.support247Description,
+              isRTL: isRTL,
+            ),
+            const SizedBox(width: 12),
+            _buildFeatureCard(
+              icon: Icons.settings,
+              title: local.automaticUpdatesTitle,
+              description: local.automaticUpdatesDescription,
+              isRTL: isRTL,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -123,48 +209,52 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     required String description,
     required bool isRTL,
   }) {
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(
+    return Container(
+      width: 200,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
+        border: Border(left: BorderSide(color: AppColors.primary, width: 4)),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: const Color(0xFFDCFFD6),
-                borderRadius: BorderRadius.circular(8),
+      child: Column(
+        crossAxisAlignment:
+            isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment:
+                isRTL ? MainAxisAlignment.start : MainAxisAlignment.end,
+            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(icon, color: AppColors.primary, size: 22),
               ),
-              child: Icon(
-                icon,
-                color: AppColors.primary,
-                size: 26,
-              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
             ),
-            const SizedBox(height: 12),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              description,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[600],
-              ),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            description,
+            style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }
@@ -175,118 +265,139 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     final totalPrice = price * duration;
     final periodText = duration == 1 ? local.month : local.months;
 
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
+    return Container(
+      padding: const EdgeInsets.all(24.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.primary.withOpacity(0.2), width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 64,
-                height: 64,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            children: [
+              Container(
+                width: 56,
+                height: 56,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFDCFFD6),
-                  shape: BoxShape.circle,
+                  color: AppColors.primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.calendar_today,
-                  color: Color(0xFF4CAF50),
-                  size: 32,
+                  color: AppColors.primary,
+                  size: 28,
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Center(
-              child: Text(
-                local.subscribeNow,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            _buildDropdownField(
-              label: local.subscriptionType,
-              value: _formatSubscriptionType(local),
-              onTap: () => _showSubscriptionTypePicker(local, isRTL),
-              isRTL: isRTL,
-            ),
-            const SizedBox(height: 16),
-            _buildDropdownField(
-              label: local.duration,
-              value: '$duration $periodText',
-              onTap: () => _showDurationPicker(local, isRTL),
-              isRTL: isRTL,
-            ),
-            const SizedBox(height: 20),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    const Color(0xFFDCFFD6),
-                    Colors.white,
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment:
+                      isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      local.subscribeNow,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      local.subscriptionsSubtitle,
+                      style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                    ),
                   ],
                 ),
-                borderRadius: BorderRadius.circular(12),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '$totalPrice ${_getCurrency(local)}',
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4CAF50),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '$price × $duration $periodText',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                ],
+            ],
+          ),
+          const SizedBox(height: 24),
+          _buildDropdownField(
+            label: local.subscriptionType,
+            value: _formatSubscriptionType(local),
+            onTap: () => _showSubscriptionTypePicker(local, isRTL),
+            isRTL: isRTL,
+          ),
+          const SizedBox(height: 16),
+          _buildDropdownField(
+            label: local.duration,
+            value: '$duration $periodText',
+            onTap: () => _showDurationPicker(local, isRTL),
+            isRTL: isRTL,
+          ),
+          const SizedBox(height: 24),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(12),
+              border: Border(
+                left: BorderSide(color: AppColors.primary, width: 4),
               ),
             ),
-            const SizedBox(height: 20),
-            Row(
-              textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            child: Column(
+              crossAxisAlignment:
+                  isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: _buildPaymentButton(
-                    icon: Icons.monetization_on,
-                    label: local.cash,
-                    color: Colors.orange,
-                    isRTL: isRTL,
-                  ),
+                Row(
+                  mainAxisAlignment:
+                      isRTL ? MainAxisAlignment.start : MainAxisAlignment.end,
+                  textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+                  children: [
+                    Text(
+                      '$totalPrice ${_getCurrency(local)}',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _buildPaymentButton(
-                    icon: Icons.credit_card,
-                    label: local.byCard,
-                    color: Colors.purple,
-                    isRTL: isRTL,
-                  ),
+                const SizedBox(height: 8),
+                Text(
+                  '$price × $duration $periodText',
+                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 24),
+          Row(
+            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            children: [
+              Expanded(
+                child: _buildPaymentButton(
+                  icon: Icons.monetization_on,
+                  label: local.cash,
+                  color: Colors.orange,
+                  isRTL: isRTL,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildPaymentButton(
+                  icon: Icons.credit_card,
+                  label: local.byCard,
+                  color: Colors.purple,
+                  isRTL: isRTL,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -298,7 +409,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     required bool isRTL,
   }) {
     return Column(
-      crossAxisAlignment: isRTL ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+      crossAxisAlignment:
+          isRTL ? CrossAxisAlignment.start : CrossAxisAlignment.end,
       children: [
         Text(
           label,
@@ -320,23 +432,20 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
               border: Border.all(color: Colors.grey[300]!),
             ),
             child: Row(
-              mainAxisAlignment: isRTL ? MainAxisAlignment.spaceBetween : MainAxisAlignment.spaceBetween,
+              mainAxisAlignment:
+                  isRTL
+                      ? MainAxisAlignment.spaceBetween
+                      : MainAxisAlignment.spaceBetween,
               textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
               children: [
                 Expanded(
                   child: Text(
                     value,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black87,
-                    ),
+                    style: const TextStyle(fontSize: 16, color: Colors.black87),
                     textAlign: isRTL ? TextAlign.right : TextAlign.left,
                   ),
                 ),
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.grey[600],
-                ),
+                Icon(Icons.keyboard_arrow_down, color: Colors.grey[600]),
               ],
             ),
           ),
@@ -354,12 +463,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     return Container(
       height: 50,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            color,
-            color.withOpacity(0.8),
-          ],
-        ),
+        gradient: LinearGradient(colors: [color, color.withOpacity(0.8)]),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Material(
@@ -397,6 +501,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             title: local.currentSubscription,
             content: local.noActiveSubscription,
             isRTL: isRTL,
+            local: local,
           ),
         ),
         const SizedBox(width: 12),
@@ -405,6 +510,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             title: local.subscriptionHistory,
             content: local.noPreviousSubscriptions,
             isRTL: isRTL,
+            local: local,
           ),
         ),
       ],
@@ -415,38 +521,71 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     required String title,
     required String content,
     required bool isRTL,
+    AppLocalizations? local,
   }) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
+    final isCurrentSubscription =
+        local != null && title == local.currentSubscription;
+    final icon = isCurrentSubscription ? Icons.card_membership : Icons.history;
+    final color = isCurrentSubscription ? Colors.blue : Colors.purple;
+
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
+        border: Border(left: BorderSide(color: color, width: 4)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: isRTL ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Center(
-              child: Text(
-                content,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
+      child: Column(
+        crossAxisAlignment:
+            isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment:
+                isRTL ? MainAxisAlignment.start : MainAxisAlignment.end,
+            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                textAlign: TextAlign.center,
+                child: Icon(icon, color: color, size: 22),
               ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              content,
+              style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -460,70 +599,76 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     final currency = _getCurrency(local);
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              title: Text('${local.subscriptionTypeCommission} (1000 $currency / ${local.month})'),
-              onTap: () {
-                setState(() => _selectedSubscriptionType = '1000');
-                Navigator.pop(context);
-              },
+      builder:
+          (context) => Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: Text(
+                    '${local.subscriptionTypeCommission} (1000 $currency / ${local.month})',
+                  ),
+                  onTap: () {
+                    setState(() => _selectedSubscriptionType = '1000');
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    '${local.subscriptionTypeCommission} (2000 $currency / ${local.month})',
+                  ),
+                  onTap: () {
+                    setState(() => _selectedSubscriptionType = '2000');
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             ),
-            ListTile(
-              title: Text('${local.subscriptionTypeCommission} (2000 $currency / ${local.month})'),
-              onTap: () {
-                setState(() => _selectedSubscriptionType = '2000');
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
   void _showDurationPicker(AppLocalizations local, bool isRTL) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              title: Text('1 ${local.month}'),
-              onTap: () {
-                setState(() => _selectedDuration = '1');
-                Navigator.pop(context);
-              },
+      builder:
+          (context) => Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: Text('1 ${local.month}'),
+                  onTap: () {
+                    setState(() => _selectedDuration = '1');
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text('3 ${local.months}'),
+                  onTap: () {
+                    setState(() => _selectedDuration = '3');
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text('6 ${local.months}'),
+                  onTap: () {
+                    setState(() => _selectedDuration = '6');
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text('12 ${local.months}'),
+                  onTap: () {
+                    setState(() => _selectedDuration = '12');
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             ),
-            ListTile(
-              title: Text('3 ${local.months}'),
-              onTap: () {
-                setState(() => _selectedDuration = '3');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('6 ${local.months}'),
-              onTap: () {
-                setState(() => _selectedDuration = '6');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('12 ${local.months}'),
-              onTap: () {
-                setState(() => _selectedDuration = '12');
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

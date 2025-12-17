@@ -1,4 +1,3 @@
-
 import '../../../../data/model/admin-states/admin_states_response.dart';
 
 abstract class AdminStatsState {}
@@ -16,4 +15,3 @@ class AdminStatsError extends AdminStatsState {
   final String message;
   AdminStatsError(this.message);
 }
-

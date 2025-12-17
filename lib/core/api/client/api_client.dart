@@ -29,7 +29,8 @@ import '../../../features/auth/data/models/signup_shop_models/sign_up_shop_respo
 import '../../../features/auth/data/models/signupmodels/sign_up_request_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_response_model.dart';
 import '../../../features/shop/data/models/offers/offer_request.dart';
-import 'package:tech_restore/features/shop/data/models/chats/chat_session_model.dart' hide ChatMessageModel;
+import 'package:tech_restore/features/shop/data/models/chats/chat_session_model.dart'
+    hide ChatMessageModel;
 import 'package:tech_restore/features/shop/data/models/chats/chat_message_model.dart';
 import 'package:tech_restore/features/shop/data/models/notifications/notification_model.dart';
 import '../../../features/shop/data/models/products/get_all_category_model.dart';
@@ -63,7 +64,9 @@ abstract class ApiClient {
   );
 
   @POST(ApiEndPoints.login)
-  Future<HttpResponse<LoginResponseModel>> login(@Body() LoginRequestModel request);
+  Future<HttpResponse<LoginResponseModel>> login(
+    @Body() LoginRequestModel request,
+  );
 
   @POST(ApiEndPoints.forgetPassword)
   Future<String> forgetPassword(
@@ -110,7 +113,9 @@ abstract class ApiClient {
 
   @GET(ApiEndPoints.chatMessages)
   @Extra({'auth': true})
-  Future<List<ChatMessageModel>> getChatMessages(@Path('sessionId') String sessionId);
+  Future<List<ChatMessageModel>> getChatMessages(
+    @Path('sessionId') String sessionId,
+  );
 
   @POST(ApiEndPoints.endChatSession)
   @Extra({'auth': true})
@@ -122,8 +127,9 @@ abstract class ApiClient {
 
   @DELETE(ApiEndPoints.deleteNotificationsShop)
   @Extra({'auth': true})
-  Future<dynamic> deleteNotificationShop(@Path('notificationId') String notificationId);
-
+  Future<dynamic> deleteNotificationShop(
+    @Path('notificationId') String notificationId,
+  );
 
   @GET(ApiEndPoints.getAdminStats)
   @Extra({'auth': true})
@@ -230,7 +236,9 @@ abstract class ApiClient {
 
   @GET(ApiEndPoints.getAllTransactionAdmin)
   @Extra({'auth': true})
-  Future<TransactionAdminModelResponse> getAllTransactionsAdmin(@Query('page') int page);
+  Future<TransactionAdminModelResponse> getAllTransactionsAdmin(
+    @Query('page') int page,
+  );
 
   @GET(ApiEndPoints.getDeliveriesAdmin)
   @Extra({'auth': true})
@@ -238,5 +246,7 @@ abstract class ApiClient {
 
   @GET(ApiEndPoints.getDeliveriesAdminById)
   @Extra({'auth': true})
-  Future<ContentDeliveryAdmin> getDeliveryAdminById(@Path('deliveryId') String deliveryId);
+  Future<ContentDeliveryAdmin> getDeliveryAdminById(
+    @Path('deliveryId') String deliveryId,
+  );
 }

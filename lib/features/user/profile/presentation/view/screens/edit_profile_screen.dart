@@ -23,10 +23,8 @@ class EditProfileScreen extends StatelessWidget {
         if (state is EditProfileSuccess) {
           OverlayState overlayState = Overlay.of(context);
           final overlayEntry = OverlayEntry(
-            builder: (_) => CustomToast(
-              text: local.profileUpdated,
-              isError: false,
-            ),
+            builder:
+                (_) => CustomToast(text: local.profileUpdated, isError: false),
           );
           overlayState.insert(overlayEntry);
           Future.delayed(const Duration(seconds: 2), () {
@@ -37,10 +35,11 @@ class EditProfileScreen extends StatelessWidget {
         } else if (state is EditProfileError) {
           OverlayState overlayState = Overlay.of(context);
           final overlayEntry = OverlayEntry(
-            builder: (_) => CustomToast(
-              text: "${local.error}: ${state.message}",
-              isError: true,
-            ),
+            builder:
+                (_) => CustomToast(
+                  text: "${local.error}: ${state.message}",
+                  isError: true,
+                ),
           );
           overlayState.insert(overlayEntry);
           Future.delayed(const Duration(seconds: 2), () {

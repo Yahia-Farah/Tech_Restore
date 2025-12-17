@@ -55,7 +55,9 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
           Navigator.pop(context, true);
         }
         if (state is DeviceAddError) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.msg)));
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.msg)));
         }
         if (state is CategoriesLoaded) {
           setState(() {
@@ -68,7 +70,7 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
           appBar: AppBar(
             leading: IconButton(
               onPressed: () => Navigator.of(context).pop(),
-              icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+              icon: Image.asset(AppIcons.arrowBack, color: AppColors.primary),
             ),
             scrolledUnderElevation: 0,
             title: Text(local.add_device),
@@ -102,7 +104,8 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
                         child: CustomTextFormField(
                           controller: _descriptionController,
                           label: local.devices_management_desc,
-                          validator: (v) => v!.trim().isEmpty ? 'Required' : null,
+                          validator:
+                              (v) => v!.trim().isEmpty ? 'Required' : null,
                         ),
                       ),
                     ),
@@ -113,7 +116,8 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
                       keyboardType: TextInputType.number,
                       validator: (v) {
                         if (v!.trim().isEmpty) return 'Required';
-                        if (double.tryParse(v.trim()) == null) return 'Invalid number';
+                        if (double.tryParse(v.trim()) == null)
+                          return 'Invalid number';
                         return null;
                       },
                     ),
@@ -122,7 +126,11 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
                       controller: _imageUrlController,
                       label: 'Image URL',
                       keyboardType: TextInputType.url,
-                      onChanged: (val) { setState(() { _imageWarning = null; }); },
+                      onChanged: (val) {
+                        setState(() {
+                          _imageWarning = null;
+                        });
+                      },
                     ),
                     if (_imageUrlController.text.isNotEmpty)
                       Padding(
@@ -131,15 +139,30 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
                             _imageUrlController.text,
-                            height: 120, width: 140, fit: BoxFit.cover,
-                            errorBuilder: (c, e, s) => const SizedBox(height: 120, width: 140, child: Center(child: Text('Invalid/No Image'))),
+                            height: 120,
+                            width: 140,
+                            fit: BoxFit.cover,
+                            errorBuilder:
+                                (c, e, s) => const SizedBox(
+                                  height: 120,
+                                  width: 140,
+                                  child: Center(
+                                    child: Text('Invalid/No Image'),
+                                  ),
+                                ),
                           ),
                         ),
                       ),
                     if (_imageWarning != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 4),
-                        child: Text(_imageWarning!, style: const TextStyle(color: Colors.red, fontSize: 12)),
+                        child: Text(
+                          _imageWarning!,
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
@@ -148,7 +171,8 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
                       keyboardType: TextInputType.number,
                       validator: (v) {
                         if (v!.trim().isEmpty) return 'Required';
-                        if (int.tryParse(v.trim()) == null) return 'Invalid number';
+                        if (int.tryParse(v.trim()) == null)
+                          return 'Invalid number';
                         return null;
                       },
                     ),
@@ -186,12 +210,15 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                       ),
-                      items: _categories
-                          .map((category) => DropdownMenuItem<String>(
-                                value: category.id,
-                                child: Text(category.name ?? ''),
-                              ))
-                          .toList(),
+                      items:
+                          _categories
+                              .map(
+                                (category) => DropdownMenuItem<String>(
+                                  value: category.id,
+                                  child: Text(category.name ?? ''),
+                                ),
+                              )
+                              .toList(),
                       onChanged: (value) {
                         setState(() {
                           _selectedCategoryId = value;
@@ -250,23 +277,31 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
                         text: local.save,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            if (_imageUrlController.text.isNotEmpty && !_imageUrlController.text.startsWith('http')) {
+                            if (_imageUrlController.text.isNotEmpty &&
+                                !_imageUrlController.text.startsWith('http')) {
                               setState(() {
-                                _imageWarning = 'Please upload your image to an image hosting and paste a public URL.';
+                                _imageWarning =
+                                    'Please upload your image to an image hosting and paste a public URL.';
                               });
                               return;
                             }
                             final product = AddProductRequest(
                               name: _nameController.text.trim(),
                               description: _descriptionController.text.trim(),
-                              price: double.tryParse(_priceController.text.trim()),
-                              imageUrl: _imageUrlController.text.trim().isEmpty
-                                  ? null
-                                  : _imageUrlController.text.trim(),
-                              category: _selectedCategoryId != null
-                                  ? Category(id: _selectedCategoryId)
-                                  : null,
-                              stockQuantity: int.tryParse(_stockQuantityController.text.trim()),
+                              price: double.tryParse(
+                                _priceController.text.trim(),
+                              ),
+                              imageUrl:
+                                  _imageUrlController.text.trim().isEmpty
+                                      ? null
+                                      : _imageUrlController.text.trim(),
+                              category:
+                                  _selectedCategoryId != null
+                                      ? Category(id: _selectedCategoryId)
+                                      : null,
+                              stockQuantity: int.tryParse(
+                                _stockQuantityController.text.trim(),
+                              ),
                               condition: _condition,
                             );
                             context.read<DevicesCubit>().addDevice(product);
@@ -286,5 +321,3 @@ class _AddDeviceScreenState extends State<AddDeviceScreen> {
     );
   }
 }
-
-

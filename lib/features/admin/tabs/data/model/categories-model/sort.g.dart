@@ -7,13 +7,13 @@ part of 'sort.dart';
 // **************************************************************************
 
 Sort _$SortFromJson(Map<String, dynamic> json) => Sort(
-      empty: json['empty'] as bool?,
-      sorted: json['sorted'] as bool?,
-      unsorted: json['unsorted'] as bool?,
-    );
+  empty: json['empty'] as bool?,
+  sorted: json['sorted'] as bool?,
+  unsorted: json['unsorted'] as bool?,
+);
 
 Map<String, dynamic> _$SortToJson(Sort instance) => <String, dynamic>{
-      'empty': instance.empty,
-      'sorted': instance.sorted,
-      'unsorted': instance.unsorted,
-    };
+  'empty': instance.empty,
+  'sorted': instance.sorted,
+  'unsorted': instance.unsorted,
+};

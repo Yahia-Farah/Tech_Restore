@@ -36,9 +36,10 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDataSource {
     }
   }
 
-
   @override
-  Future<SignUpShopResponseModel> signUpShop(SignUpShopRequestModel request) async {
+  Future<SignUpShopResponseModel> signUpShop(
+    SignUpShopRequestModel request,
+  ) async {
     try {
       final result = await _apiClient.signUpShop(request);
       return result;
@@ -50,9 +51,10 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDataSource {
     }
   }
 
-
   @override
-  Future<SignUpShopResponseModel> signUpDelivery(SignupDeliveryRequestModel request) async {
+  Future<SignUpShopResponseModel> signUpDelivery(
+    SignupDeliveryRequestModel request,
+  ) async {
     try {
       final result = await _apiClient.signUpDelivery(request);
       return result;
@@ -65,7 +67,9 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<SignUpShopResponseModel> signUpAssigner(SignupAssignerRequestModel request) async {
+  Future<SignUpShopResponseModel> signUpAssigner(
+    SignupAssignerRequestModel request,
+  ) async {
     try {
       final result = await _apiClient.signUpAssigner(request);
       return result;

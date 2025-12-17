@@ -12,5 +12,3 @@ class AddCategoryUseCase {
     return await _adminRepo.addCategory(request);
   }
 }
-
-

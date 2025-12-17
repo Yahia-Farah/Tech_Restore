@@ -15,7 +15,7 @@ class SignupAssignerRequestModel {
   @JsonKey(name: "phone")
   final String phone;
 
-  SignupAssignerRequestModel ({
+  SignupAssignerRequestModel({
     required this.email,
     required this.password,
     required this.name,
@@ -31,5 +31,3 @@ class SignupAssignerRequestModel {
     return _$SignupAssignerRequestModelToJson(this);
   }
 }
-
-

@@ -15,6 +15,3 @@ class GetUsersError extends GetUsersState {
   final String message;
   GetUsersError(this.message);
 }
-
-
-

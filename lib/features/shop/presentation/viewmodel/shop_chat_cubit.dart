@@ -6,6 +6,7 @@ import 'package:stomp_dart_client/stomp_dart_client.dart';
 import 'package:tech_restore/features/auth/domain/services/auth_services.dart';
 import 'package:tech_restore/features/shop/data/models/chats/chat_message_model.dart';
 import 'package:tech_restore/features/shop/presentation/viewmodel/shop_chat_state.dart';
+import '../../../../core/api/api_constants/api_constants.dart';
 import '../../data/repositories/shop_repository.dart';
 
 @injectable
@@ -26,14 +27,21 @@ class ShopChatCubit extends Cubit<ShopChatState> {
       final sessions = await _repository.getChatSessions();
       emit(ShopSessionsLoaded(sessions));
     } catch (e) {
-      emit(ShopChatError(e.toString()));
+      final errorString = e.toString();
+      if (errorString.contains('404') || errorString.contains('not found')) {
+        emit(ShopSessionsLoaded([]));
+      } else {
+        emit(ShopChatError(e.toString()));
+      }
     }
   }
 
   Future<void> fetchMessages(String sessionId) async {
     emit(ShopChatLoading());
     try {
-      final List<ChatMessageModel> messages = await _repository.getChatMessages(sessionId);
+      final List<ChatMessageModel> messages = await _repository.getChatMessages(
+        sessionId,
+      );
       _messages = messages;
       emit(ShopMessagesLoaded(List.from(_messages)));
     } catch (e) {
@@ -41,7 +49,12 @@ class ShopChatCubit extends Cubit<ShopChatState> {
     }
   }
 
-  Future<void> sendMessage(String userId, String shopId, ChatMessageModel message, {bool useWebSocket = true}) async {
+  Future<void> sendMessage(
+    String userId,
+    String shopId,
+    ChatMessageModel message, {
+    bool useWebSocket = true,
+  }) async {
     if (_stompClient != null && _isConnected) {
       sendStompMessage(userId, shopId, message);
     } else {
@@ -52,20 +65,20 @@ class ShopChatCubit extends Cubit<ShopChatState> {
   Future<void> connectWebSocket(String userId, String shopId) async {
     try {
       await disconnectWebSocket();
-      
+
       final token = await AuthService.getToken();
-      
+
       if (token == null || token.isEmpty) {
         throw Exception('authenticationTokenRequired');
       }
-      
+
       _currentUserId = userId;
       _currentShopId = shopId;
       _shopId = shopId;
-      
-      final baseUrl = 'http://10.0.2.2:8080';
+
+      final baseUrl = ApiConstant.baseUrl.replaceAll('/api/', '');
       final wsUrl = '$baseUrl/ws';
-      
+
       _stompClient = StompClient(
         config: StompConfig.sockJS(
           url: wsUrl,
@@ -78,40 +91,50 @@ class ShopChatCubit extends Cubit<ShopChatState> {
           },
           onStompError: (StompFrame frame) {
             _isConnected = false;
-            emit(ShopChatError('websocketError'));
+            final errorBody = frame.body ?? '';
+            if (errorBody.contains('401') ||
+                errorBody.contains('Unauthorized') ||
+                frame.headers.containsKey('message')) {
+              final errorMsg =
+                  frame.headers['message'] ?? frame.body ?? 'Unauthorized';
+              emit(ShopChatError('websocketError: $errorMsg'));
+            } else {
+              emit(
+                ShopChatError(
+                  'websocketError: ${frame.body ?? "Unknown error"}',
+                ),
+              );
+            }
           },
           onWebSocketError: (dynamic error) {
             _isConnected = false;
-            emit(ShopChatError('websocketConnectionError'));
+            emit(
+              ShopChatError('websocketConnectionError: ${error.toString()}'),
+            );
           },
-          stompConnectHeaders: {
-            'Authorization': 'Bearer $token',
-          },
-          webSocketConnectHeaders: {
-            'Authorization': 'Bearer $token',
-          },
+          stompConnectHeaders: {'Authorization': 'Bearer $token'},
           reconnectDelay: const Duration(seconds: 5),
         ),
       );
-      
+
       _stompClient!.activate();
     } catch (e) {
-      emit(ShopChatError('websocketConnectionFailed'));
+      emit(ShopChatError('websocketConnectionFailed: ${e.toString()}'));
       _isConnected = false;
     }
   }
-  
+
   void _subscribeToTopics(String userId, String shopId) async {
     if (_stompClient == null || !_isConnected) return;
-    
+
     final topic = '/topic/chat/$userId/$shopId';
-    
+
     _stompClient!.subscribe(
       destination: topic,
       callback: (StompFrame frame) {
         try {
           final data = jsonDecode(frame.body!);
-          
+
           if (data['type'] == 'CHAT' && data['action'] == 'SEND') {
             if (data['payload'] is Map) {
               final payload = data['payload'] as Map<String, dynamic>;
@@ -124,14 +147,20 @@ class ShopChatCubit extends Cubit<ShopChatState> {
                 shopName: payload['shopName']?.toString(),
                 message: payload['message']?.toString(),
                 sentBy: payload['sentBy']?.toString(),
-                senderId: payload['sentBy'] == 'USER' ? payload['userId']?.toString() : payload['shopId']?.toString(),
+                senderId:
+                    payload['sentBy'] == 'USER'
+                        ? payload['userId']?.toString()
+                        : payload['shopId']?.toString(),
                 senderType: payload['sentBy']?.toString(),
-                senderName: payload['sentBy'] == 'USER' ? payload['userName']?.toString() : payload['shopName']?.toString(),
+                senderName:
+                    payload['sentBy'] == 'USER'
+                        ? payload['userName']?.toString()
+                        : payload['shopName']?.toString(),
                 createdAt: payload['createdAt']?.toString(),
                 isRead: payload['isRead'] as bool?,
                 readAt: payload['readAt']?.toString(),
               );
-              
+
               if (!_messages.any((m) => m.id == msg.id && m.id != null)) {
                 _messages.add(msg);
                 emit(ShopMessagesLoaded(List.from(_messages)));
@@ -145,28 +174,31 @@ class ShopChatCubit extends Cubit<ShopChatState> {
                 senderType: data['senderType']?.toString(),
                 createdAt: data['timestamp']?.toString(),
               );
-              
+
               _messages.add(msg);
               emit(ShopMessagesLoaded(List.from(_messages)));
             }
           } else if (data['type'] == 'ERROR') {
-            emit(ShopChatError(data['message']?.toString() ?? 'websocketError'));
+            emit(
+              ShopChatError(data['message']?.toString() ?? 'websocketError'),
+            );
           }
-        } catch (e) {
-        }
+        } catch (e) {}
       },
     );
   }
 
-  void sendStompMessage(String userId, String shopId, ChatMessageModel message) async {
+  void sendStompMessage(
+    String userId,
+    String shopId,
+    ChatMessageModel message,
+  ) async {
     if (_stompClient == null || !_isConnected) {
       emit(ShopChatError('websocketNotConnected'));
       return;
     }
-    
+
     try {
-      final token = await AuthService.getToken();
-      
       final messagePayload = {
         'type': 'CHAT',
         'action': 'SEND',
@@ -176,17 +208,14 @@ class ShopChatCubit extends Cubit<ShopChatState> {
         'recipientId': userId,
         'timestamp': DateTime.now().toUtc().toIso8601String(),
       };
-      
+
       final destination = '/app/chat/user/$userId/shop/$shopId';
-      
+
       _stompClient!.send(
         destination: destination,
         body: jsonEncode(messagePayload),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
       );
-      
+
       final optimisticMessage = ChatMessageModel(
         id: message.id,
         sessionId: null,
@@ -216,21 +245,20 @@ class ShopChatCubit extends Cubit<ShopChatState> {
     _currentShopId = null;
   }
 
-  Future<void> endSession(String userId, String shopId, {String? sessionId}) async {
+  Future<void> endSession(
+    String userId,
+    String shopId, {
+    String? sessionId,
+  }) async {
     if (_stompClient != null && _isConnected) {
       try {
-        final token = await AuthService.getToken();
-        
         final endPayload = {};
-        
+
         _stompClient!.send(
           destination: '/app/chat/$userId/$shopId/end',
           body: jsonEncode(endPayload),
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
         );
-        
+
         await Future.delayed(const Duration(milliseconds: 500));
         emit(ShopChatActionSuccess('chatEndedSuccessfully'));
       } catch (e) {
@@ -249,5 +277,3 @@ class ShopChatCubit extends Cubit<ShopChatState> {
     }
   }
 }
-
-

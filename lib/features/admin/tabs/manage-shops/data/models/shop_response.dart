@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/data/models/shop_model.dart';
 
 part 'shop_response.g.dart';
+
 @JsonSerializable()
 class ShopListResponse {
   final List<ShopModel>? content;

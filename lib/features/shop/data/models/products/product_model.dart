@@ -27,7 +27,7 @@ class ProductModel {
   @JsonKey(name: "deleted")
   final bool? deleted;
 
-  ProductModel ({
+  ProductModel({
     this.id,
     this.name,
     this.description,
@@ -49,5 +49,3 @@ class ProductModel {
     return _$ProductModelToJson(this);
   }
 }
-
-

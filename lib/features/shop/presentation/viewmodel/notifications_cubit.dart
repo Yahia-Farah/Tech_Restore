@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../data/repositories/shop_repository.dart';
-import '../../data/models/notifications/notification_model.dart';
 import 'notifications_state.dart';
 
 @injectable

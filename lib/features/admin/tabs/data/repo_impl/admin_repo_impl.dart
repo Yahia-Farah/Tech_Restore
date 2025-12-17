@@ -21,7 +21,10 @@ class AdminRepoImpl implements AdminRepo {
   }
 
   @override
-  Future<String> updateUserRole(String userId, UpdateUserRoleRequest request) async {
+  Future<String> updateUserRole(
+    String userId,
+    UpdateUserRoleRequest request,
+  ) async {
     return await _remoteDataSource.updateUserRole(userId, request);
   }
 
@@ -46,7 +49,10 @@ class AdminRepoImpl implements AdminRepo {
   }
 
   @override
-  Future<String> updateCategory(String categoryId, CategoriesRequest request) async {
+  Future<String> updateCategory(
+    String categoryId,
+    CategoriesRequest request,
+  ) async {
     return await _remoteDataSource.updateCategory(categoryId, request);
   }
 

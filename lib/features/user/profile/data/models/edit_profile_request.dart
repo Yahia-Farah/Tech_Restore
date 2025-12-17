@@ -13,12 +13,7 @@ class EditProfileRequest {
   @JsonKey(name: "phone")
   final String? phone;
 
-  EditProfileRequest ({
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phone,
-  });
+  EditProfileRequest({this.firstName, this.lastName, this.email, this.phone});
 
   factory EditProfileRequest.fromJson(Map<String, dynamic> json) {
     return _$EditProfileRequestFromJson(json);
@@ -28,5 +23,3 @@ class EditProfileRequest {
     return _$EditProfileRequestToJson(this);
   }
 }
-
-

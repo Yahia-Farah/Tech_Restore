@@ -3,12 +3,16 @@ import '../../domain/entites/shop_entity.dart';
 import '../../domain/usecases/shop_signup_usecase.dart';
 
 abstract class ShopRegisterState {}
+
 class ShopRegisterInitial extends ShopRegisterState {}
+
 class ShopRegisterLoading extends ShopRegisterState {}
+
 class ShopRegisterSuccess extends ShopRegisterState {
   final String message;
   ShopRegisterSuccess(this.message);
 }
+
 class ShopRegisterError extends ShopRegisterState {
   final String message;
   ShopRegisterError(this.message);

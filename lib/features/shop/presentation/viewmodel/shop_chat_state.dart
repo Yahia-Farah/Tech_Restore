@@ -4,6 +4,7 @@ import '../../data/models/chats/chat_message_model.dart';
 abstract class ShopChatState {}
 
 class ShopChatInitial extends ShopChatState {}
+
 class ShopChatLoading extends ShopChatState {}
 
 class ShopSessionsLoaded extends ShopChatState {
@@ -23,13 +24,13 @@ class ShopChatError extends ShopChatState {
 }
 
 class ShopChatActionLoading extends ShopChatState {}
+
 class ShopChatActionSuccess extends ShopChatState {
   final String message;
   ShopChatActionSuccess(this.message);
 }
+
 class ShopChatActionError extends ShopChatState {
   final String msg;
   ShopChatActionError(this.msg);
 }
-
-

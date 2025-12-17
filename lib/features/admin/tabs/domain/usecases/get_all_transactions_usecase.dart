@@ -12,4 +12,3 @@ class GetAllTransactionsUseCase {
     return await _adminRepo.getAllTransactions(page);
   }
 }
-

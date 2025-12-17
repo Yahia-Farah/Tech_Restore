@@ -33,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+          icon: Image.asset(AppIcons.arrowBack, color: AppColors.primary),
           onPressed: () => Navigator.pop(context),
         ),
         scrolledUnderElevation: 0,
@@ -85,35 +85,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.person_2_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.person_2_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _firstNameController,
                     hint: local.firstName,
                     keyboardType: TextInputType.name,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.person_2_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.person_2_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _lastNameController,
                     hint: local.lastName,
                     keyboardType: TextInputType.name,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.email_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.email_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _emailController,
                     hint: local.email,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.phone_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.phone_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _phoneController,
                     hint: local.phone,
                     keyboardType: TextInputType.phone,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.lock_outline,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.lock_outline,
+                      color: AppColors.primary,
+                    ),
                     controller: _passwordController,
                     hint: local.password,
                     keyboardType: TextInputType.visiblePassword,

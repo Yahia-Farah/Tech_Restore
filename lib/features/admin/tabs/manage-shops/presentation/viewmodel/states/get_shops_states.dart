@@ -15,6 +15,3 @@ class GetShopsError extends GetShopsState {
   final String message;
   GetShopsError(this.message);
 }
-
-
-

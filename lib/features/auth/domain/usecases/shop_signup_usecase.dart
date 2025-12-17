@@ -3,7 +3,6 @@ import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_u
 import 'package:tech_restore/features/auth/domain/entites/shop_entity.dart';
 import '../repo/auth_repo.dart';
 
-
 @injectable
 class SignUpUseCase {
   final AuthRepository _authRepository;

@@ -12,6 +12,3 @@ class GetShopsRepository {
     return await _remoteDataSource.getShops();
   }
 }
-
-
-

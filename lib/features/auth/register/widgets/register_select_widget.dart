@@ -24,15 +24,18 @@ class RegisterSelectScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+          icon: Image.asset(AppIcons.arrowBack, color: AppColors.primary),
           onPressed: () => Navigator.pop(context),
         ),
         scrolledUnderElevation: 0,
-        title: Text(local.joinUsTitle,style: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.w600,
-          color: AppColors.primary,
-        ),),
+        title: Text(
+          local.joinUsTitle,
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+            color: AppColors.primary,
+          ),
+        ),
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -41,14 +44,12 @@ class RegisterSelectScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 6,),
+              SizedBox(height: 6),
+
               /// Subtitle
               Text(
                 local.joinUsSubtitle,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey.shade600,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
               ),
 
               Expanded(
@@ -56,12 +57,13 @@ class RegisterSelectScreen extends StatelessWidget {
                   child: GridView(
                     physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.only(top: 80),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 0.95,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 0.95,
+                        ),
                     children: [
                       _roleCard(
                         icon: Icons.local_shipping_outlined,
@@ -130,15 +132,8 @@ class RegisterSelectScreen extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: iconBg,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                size: 32,
-                color: Colors.teal.shade600,
-              ),
+              decoration: BoxDecoration(color: iconBg, shape: BoxShape.circle),
+              child: Icon(icon, size: 32, color: Colors.teal.shade600),
             ),
             const SizedBox(height: 18),
             Text(

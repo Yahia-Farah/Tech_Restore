@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'shop_address.g.dart';
+
 @JsonSerializable()
 class ShopAddress {
   final String? state;

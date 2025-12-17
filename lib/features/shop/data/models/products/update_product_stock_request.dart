@@ -7,9 +7,7 @@ class UpdateProductStockRequest {
   @JsonKey(name: "newStock")
   final int newStock;
 
-  UpdateProductStockRequest ({
-    required this.newStock,
-  });
+  UpdateProductStockRequest({required this.newStock});
 
   factory UpdateProductStockRequest.fromJson(Map<String, dynamic> json) {
     return _$UpdateProductStockRequestFromJson(json);
@@ -19,5 +17,3 @@ class UpdateProductStockRequest {
     return _$UpdateProductStockRequestToJson(this);
   }
 }
-
-

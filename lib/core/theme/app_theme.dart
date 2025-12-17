@@ -12,9 +12,9 @@ class AppTheme {
       titleSpacing: 0,
       iconTheme: IconThemeData(color: AppColors.primary, size: 26),
       titleTextStyle: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.w600,
-          color: AppColors.primary,
+        fontSize: 28,
+        fontWeight: FontWeight.w600,
+        color: AppColors.primary,
       ),
     ),
     textTheme: TextTheme(

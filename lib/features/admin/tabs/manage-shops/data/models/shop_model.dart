@@ -39,7 +39,3 @@ class ShopModel {
 
   Map<String, dynamic> toJson() => _$ShopModelToJson(this);
 }
-
-
-
-

@@ -49,12 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: IndexedStack(
           index: selectedIndex,
-          children: [
-            HomeTab(),
-            Exploretab(),
-            Tracktab(),
-            AccountTab(),
-          ],
+          children: [HomeTab(), Exploretab(), Tracktab(), AccountTab()],
         ),
       ),
     );

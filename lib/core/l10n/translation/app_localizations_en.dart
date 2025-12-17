@@ -1112,7 +1112,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delivery_management => 'Delivery Management';
 
   @override
-  String get monitor_and_manage_delivery => 'Monitor and manage delivery personnel';
+  String get monitor_and_manage_delivery =>
+      'Monitor and manage delivery personnel';
 
   @override
   String get total_deliveries => 'Total Deliveries';
@@ -1127,16 +1128,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_by_name_email_phone => 'Search by name, email, or phone...';
 
   @override
-  String get all => 'All';
-
-  @override
   String get no_deliveries_available => 'No deliveries available';
 
   @override
   String get assigner_management => 'Assigner Management';
 
   @override
-  String get monitor_and_manage_assigners => 'Monitor and manage assigner personnel';
+  String get monitor_and_manage_assigners =>
+      'Monitor and manage assigner personnel';
 
   @override
   String get total_assigners => 'Total Assigners';
@@ -1148,17 +1147,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assignment_logs => 'Assignment Logs';
 
   @override
-  String get track_all_assignment_activities => 'Track all assignment activities across assigners, shops, and users.';
+  String get track_all_assignment_activities =>
+      'Track all assignment activities across assigners, shops, and users.';
 
   @override
   String get no_assignment_logs_found => 'No Assignment Logs Found';
 
   @override
-  String get no_assignment_logs_description => 'There are currently no assignment activities recorded in the system.';
+  String get no_assignment_logs_description =>
+      'There are currently no assignment activities recorded in the system.';
 
   @override
   String get failed_to_load_transactions => 'Failed to load transactions';
 
   @override
-  String get transactions_loaded_successfully => 'Transactions loaded successfully';
+  String get transactions_loaded_successfully =>
+      'Transactions loaded successfully';
 }

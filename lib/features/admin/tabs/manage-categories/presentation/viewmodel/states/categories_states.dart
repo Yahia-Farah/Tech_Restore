@@ -30,5 +30,3 @@ class CategoryDeleted extends CategoriesState {
   final String message;
   CategoryDeleted(this.message);
 }
-
-

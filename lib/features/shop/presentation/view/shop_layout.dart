@@ -123,14 +123,17 @@ class _ShopLayoutState extends State<ShopLayout> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => BlocProvider.value(
-                              value: context.read<NotificationsCubit>(),
-                              child: const NotificationsScreen(),
-                            ),
+                            builder:
+                                (_) => BlocProvider.value(
+                                  value: context.read<NotificationsCubit>(),
+                                  child: const NotificationsScreen(),
+                                ),
                           ),
                         );
                         if (context.mounted) {
-                          context.read<NotificationsCubit>().fetchNotifications();
+                          context
+                              .read<NotificationsCubit>()
+                              .fetchNotifications();
                         }
                       },
                     ),
@@ -145,8 +148,13 @@ class _ShopLayoutState extends State<ShopLayout> {
                             shape: BoxShape.circle,
                           ),
                           child: Text(
-                            notificationCount > 99 ? '99+' : notificationCount.toString(),
-                            style: const TextStyle(color: Colors.white, fontSize: 11),
+                            notificationCount > 99
+                                ? '99+'
+                                : notificationCount.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                            ),
                           ),
                         ),
                       ),
@@ -159,12 +167,18 @@ class _ShopLayoutState extends State<ShopLayout> {
           CircleAvatar(child: Text("M")),
           SizedBox(width: 10),
           Center(
-            child: Text("Mahmoud Ali", style: TextStyle(color: Colors.white,fontSize: 16)),
+            child: Text(
+              "Mahmoud Ali",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
           ),
           SizedBox(width: 20),
         ],
       ),
-      drawer: DrawerWidget(onItemTapped: _onItemTapped),
+      drawer: DrawerWidget(
+        onItemTapped: _onItemTapped,
+        selectedIndex: _selectedIndex,
+      ),
       body: IndexedStack(index: _selectedIndex, children: _screens),
     );
   }

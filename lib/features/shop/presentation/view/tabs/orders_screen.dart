@@ -13,7 +13,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
   String _selectedFilter = 'all';
   final TextEditingController _searchController = TextEditingController();
 
-  // Sample orders data
   final List<Map<String, dynamic>> orders = [
     {
       'id': 1,
@@ -203,7 +202,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             child: CustomTextFormField(
               controller: _searchController,
               hint: local.searchOrders,
-            )
+            ),
           ),
         ),
         const SizedBox(width: 12),
@@ -254,15 +253,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
         child: DataTable(
           headingRowColor: MaterialStateProperty.all(Colors.grey[100]),
           columns: [
-            DataColumn(
-              label: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('#'),
-                  Icon(Icons.swap_vert, size: 16, color: Colors.grey[600]),
-                ],
-              ),
-            ),
             DataColumn(label: Text(local.products)),
             DataColumn(label: Text(local.quantity)),
             DataColumn(label: Text(local.total)),
@@ -275,7 +265,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
               filteredOrders.map((order) {
                 return DataRow(
                   cells: [
-                    DataCell(Text(order['id'].toString())),
                     DataCell(Text(order['products'])),
                     DataCell(Text(order['quantity'].toString())),
                     DataCell(

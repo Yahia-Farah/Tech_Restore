@@ -82,7 +82,6 @@ abstract class DioModule {
       ),
     );
 
-
     return dio;
   }
 
@@ -98,9 +97,7 @@ Future<String?> _refreshToken() async {
   try {
     final response = await Dio().post(
       'http://localhost:8080/api/auth/refresh-token',
-      data: {
-        "refreshToken": refreshToken,
-      },
+      data: {"refreshToken": refreshToken},
     );
 
     return response.data["accessToken"];
@@ -108,4 +105,3 @@ Future<String?> _refreshToken() async {
     return null;
   }
 }
-

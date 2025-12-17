@@ -39,7 +39,8 @@ class ChatSessionModel {
     this.active,
   });
 
-  factory ChatSessionModel.fromJson(Map<String, dynamic> json) => _$ChatSessionModelFromJson(json);
+  factory ChatSessionModel.fromJson(Map<String, dynamic> json) =>
+      _$ChatSessionModelFromJson(json);
   Map<String, dynamic> toJson() => _$ChatSessionModelToJson(this);
 }
 
@@ -76,6 +77,7 @@ class ChatMessageModel {
     this.createdAt,
   });
 
-  factory ChatMessageModel.fromJson(Map<String, dynamic> json) => _$ChatMessageModelFromJson(json);
+  factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>
+      _$ChatMessageModelFromJson(json);
   Map<String, dynamic> toJson() => _$ChatMessageModelToJson(this);
 }

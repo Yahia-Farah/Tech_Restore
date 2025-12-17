@@ -47,9 +47,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
         },
         builder: (context, state) {
           if (state is GetShopsLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (state is GetShopsError) {
@@ -77,17 +75,19 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
 
           if (state is GetShopsLoaded) {
             final shops = state.shops.content ?? [];
-            
+
             // Filter shops based on search query
-            final filteredShops = shops.where((shop) {
-              final query = _searchQuery.toLowerCase();
-              final name = (shop.name ?? '').toLowerCase();
-              final email = (shop.email ?? '').toLowerCase();
-              final location = _getLocationString(shop.shopAddress).toLowerCase();
-              return name.contains(query) || 
-                     email.contains(query) || 
-                     location.contains(query);
-            }).toList();
+            final filteredShops =
+                shops.where((shop) {
+                  final query = _searchQuery.toLowerCase();
+                  final name = (shop.name ?? '').toLowerCase();
+                  final email = (shop.email ?? '').toLowerCase();
+                  final location =
+                      _getLocationString(shop.shopAddress).toLowerCase();
+                  return name.contains(query) ||
+                      email.contains(query) ||
+                      location.contains(query);
+                }).toList();
 
             return SingleChildScrollView(
               padding: const EdgeInsets.all(16),
@@ -96,7 +96,11 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                 children: [
                   const Text(
                     "Stores Management",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   const Text(
@@ -125,7 +129,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.primary
+                                  color: AppColors.primary,
                                 ),
                               ),
                               SizedBox(
@@ -165,13 +169,34 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                                   ),
                                   child: Row(
                                     children: const [
-                                      SizedBox(width: 160, child: Text("Shop Name")),
-                                      SizedBox(width: 160, child: Text("Email")),
-                                      SizedBox(width: 200, child: Text("Location")),
-                                      SizedBox(width: 100, child: Text("Status")),
-                                      SizedBox(width: 100, child: Text("Rating")),
-                                      SizedBox(width: 120, child: Text("Join Date")),
-                                      SizedBox(width: 100, child: Text("Action")),
+                                      SizedBox(
+                                        width: 160,
+                                        child: Text("Shop Name"),
+                                      ),
+                                      SizedBox(
+                                        width: 160,
+                                        child: Text("Email"),
+                                      ),
+                                      SizedBox(
+                                        width: 200,
+                                        child: Text("Location"),
+                                      ),
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text("Status"),
+                                      ),
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text("Rating"),
+                                      ),
+                                      SizedBox(
+                                        width: 120,
+                                        child: Text("Join Date"),
+                                      ),
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text("Action"),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -183,7 +208,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                                     child: Text('No shops found'),
                                   )
                                 else
-                                  ...filteredShops.map((shop) => _buildShopRow(shop)),
+                                  ...filteredShops.map(
+                                    (shop) => _buildShopRow(shop),
+                                  ),
                               ],
                             ),
                           ),
@@ -207,11 +234,11 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
   String _getLocationString(ShopAddress? address) {
     if (address == null) return 'N/A';
     final parts = <String>[];
-    if (address.city != null && address.city!.isNotEmpty) {
-      parts.add(address.city!);
+    if (address.city.isNotEmpty) {
+      parts.add(address.city);
     }
-    if (address.state != null && address.state!.isNotEmpty) {
-      parts.add(address.state!);
+    if (address.state.isNotEmpty) {
+      parts.add(address.state);
     }
     return parts.isEmpty ? 'N/A' : parts.join(', ');
   }
@@ -219,10 +246,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
   Widget _buildShopRow(ShopModel shop) {
     final status = _getStatus(shop);
     final location = _getLocationString(shop.shopAddress);
-    final joinDate = shop.createdAt != null 
-        ? shop.createdAt!.split('T')[0] 
-        : 'N/A';
-    
+    final joinDate =
+        shop.createdAt != null ? shop.createdAt!.split('T')[0] : 'N/A';
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       decoration: const BoxDecoration(
@@ -236,15 +262,16 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
           SizedBox(width: 100, child: _buildStatusChip(status)),
           SizedBox(
             width: 100,
-            child: shop.rating != null
-                ? Row(
-                    children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 16),
-                      const SizedBox(width: 4),
-                      Text(shop.rating!.toStringAsFixed(1)),
-                    ],
-                  )
-                : const Text("No ratings"),
+            child:
+                shop.rating != null
+                    ? Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 16),
+                        const SizedBox(width: 4),
+                        Text(shop.rating!.toStringAsFixed(1)),
+                      ],
+                    )
+                    : const Text("No ratings"),
           ),
           SizedBox(width: 120, child: Text(joinDate)),
           SizedBox(

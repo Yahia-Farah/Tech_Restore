@@ -37,10 +37,7 @@ class AccountTab extends StatelessWidget {
           title: Text(local.profile),
           centerTitle: true,
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.settings),
-            ),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
           ],
         ),
         body: BlocBuilder<ProfileCubit, ProfileState>(
@@ -159,21 +156,22 @@ class AccountTab extends StatelessWidget {
                       const SizedBox(height: 10),
 
                       Column(
-                        children: repairHistory.map((device) {
-                          return ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                device["image"]!,
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            title: Text(device["title"]!),
-                            subtitle: Text(device["date"]!),
-                          );
-                        }).toList(),
+                        children:
+                            repairHistory.map((device) {
+                              return ListTile(
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    device["image"]!,
+                                    width: 50,
+                                    height: 50,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                title: Text(device["title"]!),
+                                subtitle: Text(device["date"]!),
+                              );
+                            }).toList(),
                       ),
                       const SizedBox(height: 30),
 
@@ -186,10 +184,12 @@ class AccountTab extends StatelessWidget {
                           onPressed: () {
                             showDialog(
                               context: context,
-                              builder: (context) => BlocProvider(
-                                create: (context) => getIt<LogoutViewModel>(),
-                                child: const LogoutDialogWidget(),
-                              ),
+                              builder:
+                                  (context) => BlocProvider(
+                                    create:
+                                        (context) => getIt<LogoutViewModel>(),
+                                    child: const LogoutDialogWidget(),
+                                  ),
                             );
                           },
                         ),

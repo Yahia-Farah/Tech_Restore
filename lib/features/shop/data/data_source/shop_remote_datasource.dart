@@ -46,8 +46,10 @@ class ShopRemoteDataSource {
     await _apiClient.deleteProducts(productId);
   }
 
-  Future<ProductModel> updateProducts(String productId,
-      AddProductRequest product) async {
+  Future<ProductModel> updateProducts(
+    String productId,
+    AddProductRequest product,
+  ) async {
     return await _apiClient.updateProducts(product, productId);
   }
 

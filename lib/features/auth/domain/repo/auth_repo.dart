@@ -1,5 +1,3 @@
-import 'package:tech_restore/features/auth/data/models/signup_assigner_model/signup_assigner_request_model.dart';
-import 'package:tech_restore/features/auth/data/models/signup_delivery_models/signup_delivery_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_response_model.dart';
 import 'package:tech_restore/features/auth/domain/entites/assigner_entity.dart';
 import 'package:tech_restore/features/auth/domain/entites/delivery_entity.dart';

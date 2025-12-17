@@ -2294,12 +2294,6 @@ abstract class AppLocalizations {
   /// **'Search by name, email, or phone...'**
   String get search_by_name_email_phone;
 
-  /// No description provided for @all.
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get all;
-
   /// No description provided for @no_deliveries_available.
   ///
   /// In en, this message translates to:

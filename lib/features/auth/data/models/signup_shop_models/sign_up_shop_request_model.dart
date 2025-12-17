@@ -23,7 +23,7 @@ class SignUpShopRequestModel {
   @JsonKey(name: "rating")
   final double? rating;
 
-  SignUpShopRequestModel ({
+  SignUpShopRequestModel({
     required this.email,
     required this.password,
     required this.name,
@@ -57,7 +57,7 @@ class ShopAddress {
   @JsonKey(name: "isDefault")
   final String? isDefault;
 
-  ShopAddress ({
+  ShopAddress({
     required this.state,
     required this.city,
     required this.street,
@@ -73,5 +73,3 @@ class ShopAddress {
     return _$ShopAddressToJson(this);
   }
 }
-
-

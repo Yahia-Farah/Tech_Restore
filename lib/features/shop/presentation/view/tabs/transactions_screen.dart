@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/Widgets/custom_text_field.dart';
 import '../../../../../core/l10n/translation/app_localizations.dart';
 
 class TransactionsScreen extends StatefulWidget {
@@ -112,6 +113,18 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           // 🔹 Search + Month Filter
           Row(
             children: [
+              Expanded(
+                child: CustomTextFormField(
+                  hint: local.search_hint,
+                  onChanged: (val) {
+                    setState(() {
+                      _searchQuery = val;
+                      _currentPage = 1;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(width: 16),
               DropdownButton<String>(
                 value: _selectedMonth,
                 items:
@@ -128,24 +141,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     _selectedMonth = val!;
                   });
                 },
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: local.search_hint,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onChanged: (val) {
-                    setState(() {
-                      _searchQuery = val;
-                      _currentPage = 1;
-                    });
-                  },
-                ),
               ),
             ],
           ),
@@ -183,9 +178,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
                     columns: [
                       DataColumn(label: Text(local.date)),
                       DataColumn(label: Text(local.service_type)),
@@ -274,32 +266,41 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   }
 
   Widget _buildSummaryCard(String title, String value, Color color) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        width: 150,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.8)),
-        ),
-        child: Column(
-          children: [
-            Text(
-              title,
-              style: TextStyle(color: color, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              value,
-              style: TextStyle(
-                color: color,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+    final isRTL = Localizations.localeOf(context).languageCode == 'ar';
+    return Container(
+      width: 180,
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border(left: BorderSide(color: color, width: 4)),
+      ),
+      child: Column(
+        crossAxisAlignment:
+            isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment:
+                isRTL ? MainAxisAlignment.end : MainAxisAlignment.start,
+            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            children: [
+              Flexible(
+                child: Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(title, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+        ],
       ),
     );
   }

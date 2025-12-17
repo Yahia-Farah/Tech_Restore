@@ -38,7 +38,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+          icon: Image.asset(AppIcons.arrowBack, color: AppColors.primary),
           onPressed: () => Navigator.pop(context),
         ),
         scrolledUnderElevation: 0,
@@ -92,34 +92,49 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
-                      prefixIcon: Icon(Icons.person_2_outlined,color: AppColors.primary,),
+                      prefixIcon: Icon(
+                        Icons.person_2_outlined,
+                        color: AppColors.primary,
+                      ),
                       controller: _nameController,
                       hint: local.name,
                       keyboardType: TextInputType.name,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
-                      prefixIcon: Icon(Icons.email_outlined,color: AppColors.primary,),
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        color: AppColors.primary,
+                      ),
                       controller: _emailController,
                       hint: local.email,
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
-                      prefixIcon: Icon(Icons.comment_outlined,color: AppColors.primary,),
+                      prefixIcon: Icon(
+                        Icons.comment_outlined,
+                        color: AppColors.primary,
+                      ),
                       controller: _descriptionController,
                       hint: local.shopDescription,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
-                      prefixIcon: Icon(Icons.phone_outlined,color: AppColors.primary,),
+                      prefixIcon: Icon(
+                        Icons.phone_outlined,
+                        color: AppColors.primary,
+                      ),
                       controller: _phoneController,
                       hint: local.phone,
                       keyboardType: TextInputType.phone,
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
-                      prefixIcon: Icon(Icons.lock_outline,color: AppColors.primary,),
+                      prefixIcon: Icon(
+                        Icons.lock_outline,
+                        color: AppColors.primary,
+                      ),
                       controller: _passwordController,
                       hint: local.password,
                       keyboardType: TextInputType.visiblePassword,
@@ -131,23 +146,39 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                         children: [
                           Icon(Icons.store, color: AppColors.primary),
                           SizedBox(width: 8),
-                          Text('Select shop type', style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
+                          Text(
+                            'Select shop type',
+                            style: TextStyle(
+                              color: Colors.grey.shade600,
+                              fontSize: 16,
+                            ),
+                          ),
                         ],
                       ),
                       isExpanded: true,
                       value: _shopType.isEmpty ? null : _shopType,
-                      items: [
-                        'REPAIRER',
-                        'SELLER',
-                        'BOTH',
-                      ].map((type) => DropdownMenuItem(
-                        value: type,
-                        child: Text(type, style: TextStyle(fontSize: 16,color: AppColors.primary)),
-                      )).toList(),
+                      items:
+                          ['REPAIRER', 'SELLER', 'BOTH']
+                              .map(
+                                (type) => DropdownMenuItem(
+                                  value: type,
+                                  child: Text(
+                                    type,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColors.grey,
-                        contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 18,
+                          horizontal: 16,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -163,71 +194,90 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                     ),
                     const SizedBox(height: 20),
                     // Address Fields
-                    Row(children: [
-                      Expanded(
-                        child: CustomTextFormField(
-                          prefixIcon: Icon(Icons.location_on_outlined,color: AppColors.primary,),
-                          controller: _stateController,
-                          hint: 'State',
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomTextFormField(
+                            prefixIcon: Icon(
+                              Icons.location_on_outlined,
+                              color: AppColors.primary,
+                            ),
+                            controller: _stateController,
+                            hint: 'State',
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: CustomTextFormField(
-                          prefixIcon: Icon(Icons.location_city,color: AppColors.primary,),
-                          controller: _cityController,
-                          hint: 'City',
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: CustomTextFormField(
+                            prefixIcon: Icon(
+                              Icons.location_city,
+                              color: AppColors.primary,
+                            ),
+                            controller: _cityController,
+                            hint: 'City',
+                          ),
                         ),
-                      ),
-                    ]),
+                      ],
+                    ),
                     const SizedBox(height: 20),
-                    Row(children: [
-                      Expanded(
-                        child: CustomTextFormField(
-                          prefixIcon: Icon(Icons.edit_road,color: AppColors.primary,),
-                          controller: _streetController,
-                          hint: 'Street',
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomTextFormField(
+                            prefixIcon: Icon(
+                              Icons.edit_road,
+                              color: AppColors.primary,
+                            ),
+                            controller: _streetController,
+                            hint: 'Street',
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: CustomTextFormField(
-                          prefixIcon: Icon(Icons.home_work_outlined,color: AppColors.primary,),
-                          controller: _buildingController,
-                          hint: 'Building',
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: CustomTextFormField(
+                            prefixIcon: Icon(
+                              Icons.home_work_outlined,
+                              color: AppColors.primary,
+                            ),
+                            controller: _buildingController,
+                            hint: 'Building',
+                          ),
                         ),
-                      ),
-                    ]),
+                      ],
+                    ),
                     const SizedBox(height: 20),
                     state is ShopRegisterLoading
                         ? const Center(child: CircularProgressIndicator())
                         : SizedBox(
-                            width: double.infinity,
-                            child: CustomElevatedButton(
-                              textColor: AppColors.white,
-                              color: AppColors.primary,
-                              text: local.signup,
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  final entity = ShopEntity(
-                                    email: _emailController.text.trim(),
-                                    password: _passwordController.text.trim(),
-                                    name: _nameController.text.trim(),
-                                    description: _descriptionController.text.trim(),
-                                    phone: '+2${_phoneController.text.trim()}',
-                                    shopType: _shopType,
-                                    shopAddress: ShopAddress(
-                                      state: _stateController.text.trim(),
-                                      city: _cityController.text.trim(),
-                                      street: _streetController.text.trim(),
-                                      building: _buildingController.text.trim(),
-                                    ),
-                                  );
-                                  context.read<ShopRegisterCubit>().signUp(entity);
-                                }
-                              },
-                            ),
+                          width: double.infinity,
+                          child: CustomElevatedButton(
+                            textColor: AppColors.white,
+                            color: AppColors.primary,
+                            text: local.signup,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                final entity = ShopEntity(
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text.trim(),
+                                  name: _nameController.text.trim(),
+                                  description:
+                                      _descriptionController.text.trim(),
+                                  phone: '+2${_phoneController.text.trim()}',
+                                  shopType: _shopType,
+                                  shopAddress: ShopAddress(
+                                    state: _stateController.text.trim(),
+                                    city: _cityController.text.trim(),
+                                    street: _streetController.text.trim(),
+                                    building: _buildingController.text.trim(),
+                                  ),
+                                );
+                                context.read<ShopRegisterCubit>().signUp(
+                                  entity,
+                                );
+                              }
+                            },
                           ),
+                        ),
                   ],
                 ),
               );

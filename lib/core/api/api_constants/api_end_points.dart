@@ -41,13 +41,18 @@ abstract class ApiEndPoints {
   static const String deleteCategoriesAdmin = 'admin/categories/{categroyId}';
   static const String getAllTransactionAdmin = 'admin/transactions/all';
   static const String getAllNotificationsShop = 'notifications/shops';
-  static const String deleteNotificationsShop = 'notifications/shops/{notificationId}';
+  static const String deleteNotificationsShop =
+      'notifications/shops/{notificationId}';
   static const String getDeliveriesAdmin = 'admin/deliveries';
   static const String getDeliveriesAdminById = 'admin/deliveries/{deliveryId}';
-  static const String getDeliveriesAdminSuspended = 'admin/deliveries/suspended';
+  static const String getDeliveriesAdminSuspended =
+      'admin/deliveries/suspended';
   static const String getDeliveriesAdminPending = 'admin/deliveries/pending';
   static const String getDeliveriesAdminApproved = 'admin/deliveries/approved';
-  static const String putDeliveriesAdminSuspended = 'admin/deliveries/{deliveryId}/suspend';
-  static const String putDeliveriesAdminApproved = 'admin/deliveries/{deliveryId}/approve';
-  static const String deleteDeliveriesAdminById = 'admin/deliveries/{deliveryId}';
+  static const String putDeliveriesAdminSuspended =
+      'admin/deliveries/{deliveryId}/suspend';
+  static const String putDeliveriesAdminApproved =
+      'admin/deliveries/{deliveryId}/approve';
+  static const String deleteDeliveriesAdminById =
+      'admin/deliveries/{deliveryId}';
 }

@@ -7,12 +7,12 @@ part of 'shop_address.dart';
 // **************************************************************************
 
 ShopAddress _$ShopAddressFromJson(Map<String, dynamic> json) => ShopAddress(
-      state: json['state'] as String?,
-      city: json['city'] as String?,
-      street: json['street'] as String?,
-      building: json['building'] as String?,
-      isDefault: json['isDefault'] as String?,
-    );
+  state: json['state'] as String?,
+  city: json['city'] as String?,
+  street: json['street'] as String?,
+  building: json['building'] as String?,
+  isDefault: json['isDefault'] as String?,
+);
 
 Map<String, dynamic> _$ShopAddressToJson(ShopAddress instance) =>
     <String, dynamic>{

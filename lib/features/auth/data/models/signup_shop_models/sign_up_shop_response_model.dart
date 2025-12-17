@@ -7,9 +7,7 @@ class SignUpShopResponseModel {
   @JsonKey(name: "message")
   final String message;
 
-  SignUpShopResponseModel ({
-    required this.message,
-  });
+  SignUpShopResponseModel({required this.message});
 
   factory SignUpShopResponseModel.fromJson(Map<String, dynamic> json) {
     return _$SignUpShopResponseModelFromJson(json);
@@ -19,5 +17,3 @@ class SignUpShopResponseModel {
     return _$SignUpShopResponseModelToJson(this);
   }
 }
-
-

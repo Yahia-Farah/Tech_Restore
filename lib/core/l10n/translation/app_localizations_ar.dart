@@ -1121,10 +1121,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get suspended => 'معلق';
 
   @override
-  String get search_by_name_email_phone => 'البحث بالاسم أو البريد الإلكتروني أو الهاتف...';
-
-  @override
-  String get all => 'الكل';
+  String get search_by_name_email_phone =>
+      'البحث بالاسم أو البريد الإلكتروني أو الهاتف...';
 
   @override
   String get no_deliveries_available => 'لا توجد عمليات توصيل متاحة';
@@ -1145,13 +1143,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get assignment_logs => 'سجلات التعيينات';
 
   @override
-  String get track_all_assignment_activities => 'تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.';
+  String get track_all_assignment_activities =>
+      'تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.';
 
   @override
   String get no_assignment_logs_found => 'لم يتم العثور على سجلات تعيينات';
 
   @override
-  String get no_assignment_logs_description => 'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
+  String get no_assignment_logs_description =>
+      'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
 
   @override
   String get failed_to_load_transactions => 'فشل تحميل المعاملات';

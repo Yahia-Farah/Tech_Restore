@@ -70,26 +70,38 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     if (timestamp == null || timestamp.isEmpty) return '';
     try {
       final dateTime = DateTime.parse(timestamp);
-      
+
       if (locale.languageCode == 'ar') {
         final year = _toArabicNumerals(dateTime.year.toString());
-        final month = _toArabicNumerals(dateTime.month.toString().padLeft(2, '0'));
+        final month = _toArabicNumerals(
+          dateTime.month.toString().padLeft(2, '0'),
+        );
         final day = _toArabicNumerals(dateTime.day.toString().padLeft(2, '0'));
-        final hour = _toArabicNumerals(dateTime.hour.toString().padLeft(2, '0'));
-        final minute = _toArabicNumerals(dateTime.minute.toString().padLeft(2, '0'));
+        _toArabicNumerals(
+          dateTime.hour.toString().padLeft(2, '0'),
+        );
+        final minute = _toArabicNumerals(
+          dateTime.minute.toString().padLeft(2, '0'),
+        );
         final period = dateTime.hour >= 12 ? 'م' : 'ص';
-        final displayHour = dateTime.hour > 12 ? dateTime.hour - 12 : (dateTime.hour == 0 ? 12 : dateTime.hour);
+        final displayHour =
+            dateTime.hour > 12
+                ? dateTime.hour - 12
+                : (dateTime.hour == 0 ? 12 : dateTime.hour);
         final displayHourStr = _toArabicNumerals(displayHour.toString());
-        
+
         return '$year/$month/$day - $displayHourStr:$minute $period';
       } else {
         final year = dateTime.year;
         final month = dateTime.month.toString().padLeft(2, '0');
         final day = dateTime.day.toString().padLeft(2, '0');
-        final hour = dateTime.hour > 12 ? dateTime.hour - 12 : (dateTime.hour == 0 ? 12 : dateTime.hour);
+        final hour =
+            dateTime.hour > 12
+                ? dateTime.hour - 12
+                : (dateTime.hour == 0 ? 12 : dateTime.hour);
         final minute = dateTime.minute.toString().padLeft(2, '0');
         final period = dateTime.hour >= 12 ? 'PM' : 'AM';
-        
+
         return '$year/$month/$day - $hour:$minute $period';
       }
     } catch (e) {
@@ -237,163 +249,185 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-          backgroundColor: Colors.green,
-          elevation: 0,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
-            icon: Image.asset(AppIcons.arrowBack, color: AppColors.white),
+        backgroundColor: Colors.green,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+          icon: Image.asset(AppIcons.arrowBack, color: AppColors.white),
+        ),
+        title: Text(
+          local.notifications,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
-          title: Text(
-            local.notifications,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
         ),
       ),
       body: BlocConsumer<NotificationsCubit, NotificationsState>(
-          listener: (context, state) {
-            if (state is NotificationsError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            if (state is NotificationsLoading || state is NotificationsInitial) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        listener: (context, state) {
+          if (state is NotificationsError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is NotificationsLoading || state is NotificationsInitial) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            if (state is NotificationsError) {
+          if (state is NotificationsError) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                  const SizedBox(height: 16),
+                  Text(
+                    state.message,
+                    style: const TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<NotificationsCubit>().fetchNotifications();
+                    },
+                    child: Text(local.retry),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          if (state is NotificationsLoaded) {
+            final notifications = state.notifications;
+
+            if (notifications.isEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.error_outline, size: 64, color: Colors.red),
-                    const SizedBox(height: 16),
-                    Text(
-                      state.message,
-                      style: const TextStyle(color: Colors.red),
-                      textAlign: TextAlign.center,
+                    Icon(
+                      Icons.notifications_none,
+                      size: 64,
+                      color: Colors.grey[400],
                     ),
                     const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<NotificationsCubit>().fetchNotifications();
-                      },
-                      child: Text(local.retry),
+                    Text(
+                      local.noNotifications,
+                      style: TextStyle(color: Colors.grey[600], fontSize: 16),
                     ),
                   ],
                 ),
               );
             }
 
-            if (state is NotificationsLoaded) {
-              final notifications = state.notifications;
-
-              if (notifications.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.notifications_none, size: 64, color: Colors.grey[400]),
-                      const SizedBox(height: 16),
-                      Text(
-                        local.noNotifications,
-                        style: TextStyle(color: Colors.grey[600], fontSize: 16),
+            return RefreshIndicator(
+              onRefresh: () async {
+                await context.read<NotificationsCubit>().fetchNotifications();
+              },
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: notifications.length,
+                itemBuilder: (context, index) {
+                  final notification = notifications[index];
+                  return Dismissible(
+                    key: Key(notification.id ?? index.toString()),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      color: Colors.red,
+                      alignment:
+                          isRTL ? Alignment.centerLeft : Alignment.centerRight,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                        size: 28,
                       ),
-                    ],
-                  ),
-                );
-              }
-
-              return RefreshIndicator(
-                onRefresh: () async {
-                  await context.read<NotificationsCubit>().fetchNotifications();
-                },
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: notifications.length,
-                  itemBuilder: (context, index) {
-                    final notification = notifications[index];
-                    return Dismissible(
-                      key: Key(notification.id ?? index.toString()),
-                      direction: DismissDirection.endToStart,
-                      background: Container(
-                        color: Colors.red,
-                        alignment: isRTL ? Alignment.centerLeft : Alignment.centerRight,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: const Icon(Icons.delete, color: Colors.white, size: 28),
+                    ),
+                    onDismissed: (direction) {
+                      if (notification.id != null) {
+                        context.read<NotificationsCubit>().deleteNotification(
+                          notification.id!,
+                        );
+                      }
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 4,
+                        horizontal: 8,
                       ),
-                      onDismissed: (direction) {
-                        if (notification.id != null) {
-                          context.read<NotificationsCubit>().deleteNotification(notification.id!);
-                        }
-                      },
-                      child: Card(
-                        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                        elevation: 1,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            _showNotificationDetails(context, notification, locale, local);
-                          },
-                          borderRadius: BorderRadius.circular(12),
-                          child: ListTile(
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                            title: Text(
-                              notification.message ?? '',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          _showNotificationDetails(
+                            context,
+                            notification,
+                            locale,
+                            local,
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          title: Text(
+                            notification.message ?? '',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87,
                             ),
-                            subtitle: Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Text(
-                                _formatTime(notification.timestamp, locale),
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.grey[600],
-                                ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Text(
+                              _formatTime(notification.timestamp, locale),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey[600],
                               ),
                             ),
-                            leading: Container(
-                              width: 48,
-                              height: 48,
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade50,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Icon(
-                                Icons.notifications_active,
-                                color: Colors.green[700],
-                                size: 24,
-                              ),
+                          ),
+                          leading: Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade50,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.notifications_active,
+                              color: Colors.green[700],
+                              size: 24,
                             ),
                           ),
                         ),
                       ),
-                    );
-                  },
-                ),
-              );
-            }
+                    ),
+                  );
+                },
+              ),
+            );
+          }
 
-            return const SizedBox.shrink();
-          },
-        ),
-      );
+          return const SizedBox.shrink();
+        },
+      ),
+    );
   }
 }

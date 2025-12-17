@@ -7,9 +7,7 @@ class CategoriesRequest {
   @JsonKey(name: "name")
   final String? name;
 
-  CategoriesRequest ({
-    this.name,
-  });
+  CategoriesRequest({this.name});
 
   factory CategoriesRequest.fromJson(Map<String, dynamic> json) {
     return _$CategoriesRequestFromJson(json);
@@ -19,5 +17,3 @@ class CategoriesRequest {
     return _$CategoriesRequestToJson(this);
   }
 }
-
-

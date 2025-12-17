@@ -87,8 +87,10 @@ class DeliveryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Order $id",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            "Order $id",
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 8),
           InfoRow(icon: Icons.location_on, text: address),
           InfoRow(icon: Icons.payments_outlined, text: total),
@@ -119,11 +121,7 @@ class InfoRow extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const InfoRow({
-    super.key,
-    required this.icon,
-    required this.text,
-  });
+  const InfoRow({super.key, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {

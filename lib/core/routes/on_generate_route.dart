@@ -10,10 +10,14 @@ import 'package:tech_restore/features/user/home/screen/home_screen.dart';
 import 'package:tech_restore/features/user/profile/data/models/profile_response.dart';
 import 'package:tech_restore/features/user/profile/presentation/view/screens/edit_profile_screen.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
-import '../../features/auth/domain/usecases/sign_up_use_case.dart' as user_signup;
-import '../../features/auth/domain/usecases/shop_signup_usecase.dart' as shop_signup;
-import '../../features/auth/domain/usecases/delivery_signup_usecase.dart' as delivery_signup;
-import '../../features/auth/domain/usecases/assigner_signup_usecase.dart' as assigner_signup;
+import '../../features/auth/domain/usecases/sign_up_use_case.dart'
+    as user_signup;
+import '../../features/auth/domain/usecases/shop_signup_usecase.dart'
+    as shop_signup;
+import '../../features/auth/domain/usecases/delivery_signup_usecase.dart'
+    as delivery_signup;
+import '../../features/auth/domain/usecases/assigner_signup_usecase.dart'
+    as assigner_signup;
 import '../../features/auth/forget_password/presentation/viewmodel/forget_password_viewmodel.dart';
 import '../../features/auth/forget_password/presentation/viewmodel/reset_password_viewmodel.dart';
 import '../../features/auth/forget_password/presentation/viewmodel/verify_code_viewmodel.dart';
@@ -51,33 +55,46 @@ class Routes {
         return MaterialPageRoute(
           builder:
               (context) => BlocProvider(
-                create: (context) => RegisterCubit(getIt<user_signup.SignUpUseCase>()),
+                create:
+                    (context) =>
+                        RegisterCubit(getIt<user_signup.SignUpUseCase>()),
                 child: const RegisterScreen(),
               ),
         );
 
       case AppRoutes.shopRegister:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => ShopRegisterCubit(getIt<shop_signup.SignUpUseCase>()),
-            child: const ShopRegisterScreen(),
-          ),
+          builder:
+              (context) => BlocProvider(
+                create:
+                    (context) =>
+                        ShopRegisterCubit(getIt<shop_signup.SignUpUseCase>()),
+                child: const ShopRegisterScreen(),
+              ),
         );
 
       case AppRoutes.deliveryRegister:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => DeliveryRegisterCubit(getIt<delivery_signup.DeliverySignUpUseCase>()),
-            child: const DeliveryRegisterScreen(),
-          ),
+          builder:
+              (context) => BlocProvider(
+                create:
+                    (context) => DeliveryRegisterCubit(
+                      getIt<delivery_signup.DeliverySignUpUseCase>(),
+                    ),
+                child: const DeliveryRegisterScreen(),
+              ),
         );
 
       case AppRoutes.assignerRegister:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AssignerRegisterCubit(getIt<assigner_signup.AssignerSignupUseCase>()),
-            child: const AssignerRegisterScreen(),
-          ),
+          builder:
+              (context) => BlocProvider(
+                create:
+                    (context) => AssignerRegisterCubit(
+                      getIt<assigner_signup.AssignerSignupUseCase>(),
+                    ),
+                child: const AssignerRegisterScreen(),
+              ),
         );
 
       case AppRoutes.forgetPassword:
@@ -122,15 +139,18 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const ShopLayout());
 
       case AppRoutes.deliveryDashboard:
-        return MaterialPageRoute(builder: (_) => const DeliveryDashboardScreen());
+        return MaterialPageRoute(
+          builder: (_) => const DeliveryDashboardScreen(),
+        );
 
       case AppRoutes.editProfile:
         final user = settings.arguments as ProfileResponse;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => getIt<EditProfileCubit>()..setInitialData(user),
-            child: EditProfileScreen(user: user),
-          ),
+          builder:
+              (_) => BlocProvider(
+                create: (_) => getIt<EditProfileCubit>()..setInitialData(user),
+                child: EditProfileScreen(user: user),
+              ),
         );
 
       default:

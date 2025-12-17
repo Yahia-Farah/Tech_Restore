@@ -29,7 +29,7 @@ class OfferResponse {
   @JsonKey(name: "shopName")
   final String? shopName;
 
-  OfferResponse ({
+  OfferResponse({
     this.id,
     this.name,
     this.description,
@@ -52,5 +52,3 @@ class OfferResponse {
     return _$OfferResponseToJson(this);
   }
 }
-
-

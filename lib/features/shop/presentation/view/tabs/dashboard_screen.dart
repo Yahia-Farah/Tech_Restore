@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'dart:async';
 import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/theme/app_colors.dart';
 
@@ -10,9 +11,14 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen>
+    with SingleTickerProviderStateMixin {
   DateTime? _startDate;
   DateTime? _endDate;
+  late ScrollController _scrollController;
+  Timer? _scrollTimer;
+  bool _isScrollingRight = true;
+  bool _isUserScrolling = false;
 
   // Sample data for charts
   final List<SalesData> _salesData = [
@@ -93,6 +99,65 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+    _startAutoScroll();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+
+    if (_scrollController.position.isScrollingNotifier.value) {
+      if (!_isUserScrolling) {
+        _isUserScrolling = true;
+        _scrollTimer?.cancel();
+      }
+    } else {
+      if (_isUserScrolling) {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _scrollTimer?.cancel();
+    super.dispose();
+  }
+
+  void _startAutoScroll() {
+    _scrollTimer?.cancel();
+    _scrollTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
+      if (!_scrollController.hasClients || _isUserScrolling) return;
+
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final currentScroll = _scrollController.offset;
+
+      if (_isScrollingRight) {
+        if (currentScroll >= maxScroll) {
+          _isScrollingRight = false;
+        } else {
+          _scrollController.jumpTo(currentScroll + 2);
+        }
+      } else {
+        if (currentScroll <= 0) {
+          _isScrollingRight = true;
+        } else {
+          _scrollController.jumpTo(currentScroll - 2);
+        }
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
     final locale = Localizations.localeOf(context);
@@ -133,7 +198,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               borderRadius: BorderRadius.circular(6),
             ),
             child: Column(
-              crossAxisAlignment: isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 Text(
                   local.dashboardTitle,
@@ -146,10 +212,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 const SizedBox(height: 8),
                 Text(
                   local.dashboardSubtitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black54,
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.black54),
                   textAlign: isRTL ? TextAlign.right : TextAlign.left,
                 ),
               ],
@@ -277,32 +340,89 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildKPICards(AppLocalizations local, bool isRTL) {
     final currency = _getCurrency(local);
     final screenWidth = MediaQuery.of(context).size.width;
-    final cardWidth =
-        (screenWidth - 48 - 24) / 3; // 3 cards with 2 gaps of 12px each
+    final cardWidth = (screenWidth - 24) / 3;
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
-        children: [
-          _buildKPICard(
-            title: local.totalSales,
-            value: '0 $currency',
-            isRTL: isRTL,
-          ),
-          const SizedBox(width: 12),
-          _buildKPICard(
-            title: local.totalOrders,
-            value: '0',
-            isRTL: isRTL,
-          ),
-          const SizedBox(width: 12),
-          _buildKPICard(
-            title: local.totalRepairRequests,
-            value: '0',
-            isRTL: isRTL,
-          ),
-        ],
+    return GestureDetector(
+      onPanStart: (_) {
+        _isUserScrolling = true;
+        _scrollTimer?.cancel();
+      },
+      onPanEnd: (_) {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      },
+      onPanCancel: () {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      },
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        physics: const ClampingScrollPhysics(),
+        child: Row(
+          textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+          children: [
+            SizedBox(
+              width: cardWidth,
+              height: 130,
+              child: _buildKPICard(
+                title: local.totalSales,
+                value: '0 $currency',
+                isRTL: isRTL,
+              ),
+            ),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: cardWidth,
+              height: 130,
+              child: _buildKPICard(
+                title: local.todaysSales,
+                value: '0 $currency',
+                secondaryValue: '$currency ${local.yesterday}: 0',
+                isRTL: isRTL,
+              ),
+            ),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: cardWidth,
+              height: 130,
+              child: _buildKPICard(
+                title: local.totalOrders,
+                value: '0',
+                isRTL: isRTL,
+              ),
+            ),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: cardWidth,
+              height: 130,
+              child: _buildKPICard(
+                title: local.todaysRepairs,
+                value: '0',
+                secondaryValue: '${local.yesterday}: 0',
+                isRTL: isRTL,
+              ),
+            ),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: cardWidth,
+              height: 130,
+              child: _buildKPICard(
+                title: local.totalRepairRequests,
+                value: '0',
+                isRTL: isRTL,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -311,39 +431,58 @@ class _DashboardScreenState extends State<DashboardScreen> {
     required String title,
     required String value,
     required bool isRTL,
+    String? secondaryValue,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border(
-          left: BorderSide(color: AppColors.primary, width: 4),
-        ),
+        border: Border(left: BorderSide(color: AppColors.primary, width: 4)),
       ),
       child: Column(
         crossAxisAlignment:
             isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment:
-                isRTL ? MainAxisAlignment.start : MainAxisAlignment.end,
-            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
-            children: [
-              Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-
-            ],
+          Text(
+            title,
+            style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 8),
-          Text(title, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+          const SizedBox(height: 2),
+          Flexible(
+            child: Column(
+              crossAxisAlignment:
+                  isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: isRTL ? TextAlign.right : TextAlign.left,
+                  maxLines: 1,
+                ),
+                if (secondaryValue != null) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    secondaryValue,
+                    style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                    textAlign: isRTL ? TextAlign.right : TextAlign.left,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -434,64 +573,65 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           },
                         ),
                       ),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 40,
-                        interval: 1,
-                        getTitlesWidget: (value, meta) {
-                          if (value.toInt() >= 0 &&
-                              value.toInt() < last4DaysSales.length) {
-                            final dayIndex = last4DaysSales[value.toInt()].day;
-                            final dayName = _getDayName(dayIndex, local);
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(
-                                dayName,
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 11,
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 40,
+                          interval: 1,
+                          getTitlesWidget: (value, meta) {
+                            if (value.toInt() >= 0 &&
+                                value.toInt() < last4DaysSales.length) {
+                              final dayIndex =
+                                  last4DaysSales[value.toInt()].day;
+                              final dayName = _getDayName(dayIndex, local);
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  dayName,
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 11,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            );
-                          }
-                          return const SizedBox();
-                        },
+                              );
+                            }
+                            return const SizedBox();
+                          },
+                        ),
+                      ),
+                      leftTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      topTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
                       ),
                     ),
-                    leftTitles: const AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                    topTitles: const AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
+                    borderData: FlBorderData(show: false),
+                    lineBarsData: [
+                      LineChartBarData(
+                        spots:
+                            last4DaysSales.asMap().entries.map((entry) {
+                              return FlSpot(
+                                entry.key.toDouble(),
+                                entry.value.value.toDouble(),
+                              );
+                            }).toList(),
+                        isCurved: true,
+                        color: const Color(0xFF8DC63F),
+                        barWidth: 3,
+                        isStrokeCapRound: true,
+                        dotData: const FlDotData(show: true),
+                        belowBarData: BarAreaData(
+                          show: true,
+                          color: const Color(0xFF8DC63F).withOpacity(0.2),
+                        ),
+                      ),
+                    ],
+                    minY: 0,
+                    maxY: chartMaxY,
                   ),
-                  borderData: FlBorderData(show: false),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots:
-                          last4DaysSales.asMap().entries.map((entry) {
-                            return FlSpot(
-                              entry.key.toDouble(),
-                              entry.value.value.toDouble(),
-                            );
-                          }).toList(),
-                      isCurved: true,
-                      color: const Color(0xFF8DC63F),
-                      barWidth: 3,
-                      isStrokeCapRound: true,
-                      dotData: const FlDotData(show: true),
-                      belowBarData: BarAreaData(
-                        show: true,
-                        color: const Color(0xFF8DC63F).withOpacity(0.2),
-                      ),
-                    ),
-                  ],
-                  minY: 0,
-                  maxY: chartMaxY,
-                ),
                 ),
               ),
             ),
@@ -583,61 +723,61 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           },
                         ),
                       ),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 40,
-                        interval: 1,
-                        getTitlesWidget: (value, meta) {
-                          if (value.toInt() >= 0 &&
-                              value.toInt() < last4DaysRepairs.length) {
-                            final dayIndex =
-                                last4DaysRepairs[value.toInt()].day;
-                            final dayName = _getDayName(dayIndex, local);
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(
-                                dayName,
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 11,
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 40,
+                          interval: 1,
+                          getTitlesWidget: (value, meta) {
+                            if (value.toInt() >= 0 &&
+                                value.toInt() < last4DaysRepairs.length) {
+                              final dayIndex =
+                                  last4DaysRepairs[value.toInt()].day;
+                              final dayName = _getDayName(dayIndex, local);
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  dayName,
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 11,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            );
-                          }
-                          return const SizedBox();
-                        },
+                              );
+                            }
+                            return const SizedBox();
+                          },
+                        ),
+                      ),
+                      leftTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      topTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
                       ),
                     ),
-                    leftTitles: const AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                    topTitles: const AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                  ),
-                  borderData: FlBorderData(show: false),
-                  barGroups:
-                      last4DaysRepairs.asMap().entries.map((entry) {
-                        return BarChartGroupData(
-                          x: entry.key,
-                          barRods: [
-                            BarChartRodData(
-                              toY: entry.value.value.toDouble(),
-                              color: const Color(0xFF2EC4B6),
-                              width: 20,
-                              borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(4),
+                    borderData: FlBorderData(show: false),
+                    barGroups:
+                        last4DaysRepairs.asMap().entries.map((entry) {
+                          return BarChartGroupData(
+                            x: entry.key,
+                            barRods: [
+                              BarChartRodData(
+                                toY: entry.value.value.toDouble(),
+                                color: const Color(0xFF2EC4B6),
+                                width: 20,
+                                borderRadius: const BorderRadius.vertical(
+                                  top: Radius.circular(4),
+                                ),
                               ),
-                            ),
-                          ],
-                        );
-                      }).toList(),
-                  minY: 0,
-                  maxY: chartMaxY,
-                ),
+                            ],
+                          );
+                        }).toList(),
+                    minY: 0,
+                    maxY: chartMaxY,
+                  ),
                 ),
               ),
             ),

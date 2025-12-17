@@ -13,12 +13,9 @@ class NotificationModel {
   @JsonKey(name: 'message')
   final String? message;
 
-  NotificationModel({
-    this.id,
-    this.timestamp,
-    this.message,
-  });
+  NotificationModel({this.id, this.timestamp, this.message});
 
-  factory NotificationModel.fromJson(Map<String, dynamic> json) => _$NotificationModelFromJson(json);
+  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
+      _$NotificationModelFromJson(json);
   Map<String, dynamic> toJson() => _$NotificationModelToJson(this);
 }

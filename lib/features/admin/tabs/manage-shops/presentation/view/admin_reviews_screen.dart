@@ -73,7 +73,11 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
           children: [
             const Text(
               "Review Management",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primary),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
             ),
             const SizedBox(height: 4),
             const Text(
@@ -178,5 +182,3 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
     );
   }
 }
-
-

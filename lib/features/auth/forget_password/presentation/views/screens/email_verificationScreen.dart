@@ -45,7 +45,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               : AppBar(
                 leading: IconButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+                  icon: Image.asset(
+                    AppIcons.arrowBack,
+                    color: AppColors.primary,
+                  ),
                 ),
                 title: Text(local.password),
               ),

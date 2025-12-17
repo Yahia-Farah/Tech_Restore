@@ -19,7 +19,7 @@ class AddProductRequest {
   @JsonKey(name: "condition")
   final String? condition;
 
-  AddProductRequest ({
+  AddProductRequest({
     this.name,
     this.description,
     this.price,
@@ -43,9 +43,7 @@ class Category {
   @JsonKey(name: "id")
   final String? id;
 
-  Category ({
-    this.id,
-  });
+  Category({this.id});
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return _$CategoryFromJson(json);
@@ -55,5 +53,3 @@ class Category {
     return _$CategoryToJson(this);
   }
 }
-
-

@@ -15,10 +15,10 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
   String _searchQuery = "";
   final TextEditingController _searchController = TextEditingController();
   String _selectedFilter = "All";
-  int _totalAssigners = 0;
-  int _pendingAssigners = 0;
-  int _approvedAssigners = 0;
-  List<Map<String, dynamic>> _assigners = [];
+  final int _totalAssigners = 0;
+  final int _pendingAssigners = 0;
+  final int _approvedAssigners = 0;
+  final List<Map<String, dynamic>> _assigners = [];
 
   @override
   void initState() {
@@ -69,10 +69,7 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
             const SizedBox(height: 8),
             Text(
               local.monitor_and_manage_assigners,
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.black[40],
-              ),
+              style: TextStyle(fontSize: 14, color: AppColors.black[40]),
             ),
             const SizedBox(height: 24),
             Row(
@@ -108,10 +105,7 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
             const SizedBox(height: 20),
             Text(
               local.search,
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.hint,
-              ),
+              style: TextStyle(fontSize: 14, color: AppColors.hint),
             ),
             const SizedBox(height: 8),
             Card(
@@ -205,7 +199,10 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
                   Container(
                     width: double.infinity,
                     color: AppColors.grey,
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
                     child: Row(
                       children: [
                         Expanded(
@@ -294,7 +291,10 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
                     ..._assigners.map((assigner) {
                       return Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
+                        ),
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
@@ -350,11 +350,19 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                    icon: const Icon(Icons.edit, size: 16, color: Colors.green),
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      size: 16,
+                                      color: Colors.green,
+                                    ),
                                     onPressed: () {},
                                   ),
                                   IconButton(
-                                    icon: const Icon(Icons.delete, size: 16, color: Colors.red),
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      size: 16,
+                                      color: Colors.red,
+                                    ),
                                     onPressed: () {},
                                   ),
                                 ],
@@ -394,18 +402,11 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                color: iconColor,
-                size: 20,
-              ),
+              Icon(icon, color: iconColor, size: 20),
               const SizedBox(height: 12),
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppColors.black[40],
-                ),
+                style: TextStyle(fontSize: 12, color: AppColors.black[40]),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -429,9 +430,9 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
     String text,
     String value,
     IconData icon,
-    bool isSelected,
-    {required VoidCallback onPressed}
-  ) {
+    bool isSelected, {
+    required VoidCallback onPressed,
+  }) {
     return SizedBox(
       height: 50,
       child: CustomElevatedButton(
@@ -502,18 +503,11 @@ class _AdminAssignerScreenState extends State<AdminAssignerScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.card_giftcard,
-            size: 80,
-            color: AppColors.black[30]!,
-          ),
+          Icon(Icons.card_giftcard, size: 80, color: AppColors.black[30]!),
           const SizedBox(height: 16),
           Text(
             local.no_assigners_available,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.black[40]!,
-            ),
+            style: TextStyle(fontSize: 16, color: AppColors.black[40]!),
           ),
         ],
       ),

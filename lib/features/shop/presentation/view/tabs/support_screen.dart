@@ -61,96 +61,143 @@ class SupportScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       Expanded(
-                        child: SingleChildScrollView(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          child: Card(
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: DataTable(
-                                columns: [
-                                  DataColumn(label: Text(local.tableCustomer)),
-                                  DataColumn(label: Text(local.tableContent)),
-                                  DataColumn(label: Text(local.tableStatus)),
-                                  DataColumn(label: Text(local.tableActions)),
-                                  DataColumn(label: Text(local.tableRequestId)),
-                                ],
-                                rows:
-                                    state.sessions
-                                        .map(
-                                          (session) => DataRow(
-                                            cells: [
-                                              DataCell(
-                                                Text(session.userName ?? ""),
-                                              ),
-                                              DataCell(
-                                                Text(
-                                                  session
-                                                          .lastMessage
-                                                          ?.content ??
-                                                      "",
-                                                ),
-                                              ),
-                                              DataCell(
-                                                Text(
-                                                  session.active == true
-                                                      ? local.openStatus
-                                                      : local.resolvedStatus,
-                                                  style: TextStyle(
-                                                    color:
-                                                        session.active == true
-                                                            ? Colors.green
-                                                            : Colors.grey,
-                                                  ),
-                                                ),
-                                              ),
-                                              DataCell(
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.chat,
-                                                    color: Colors.blue,
-                                                  ),
-                                                  onPressed: () async {
-                                                    await Navigator.of(
-                                                      context,
-                                                    ).push(
-                                                      MaterialPageRoute(
-                                                        builder:
-                                                            (
-                                                              _,
-                                                            ) => BlocProvider.value(
-                                                              value:
-                                                                  BlocProvider.of<
-                                                                    ShopChatCubit
-                                                                  >(context),
-                                                              child: ChatScreen(
-                                                                sessionId:
-                                                                    session.id!,
-                                                                sessionName:
-                                                                    session
-                                                                        .userName!,
-                                                                userId: session.userId!,
-                                                                shopId: session.shopId!,
-                                                              ),
-                                                            ),
-                                                      ),
-                                                    );
-                                                    if (context.mounted) {
-                                                      context
-                                                          .read<ShopChatCubit>()
-                                                          .fetchSessions();
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                              DataCell(Text(session.id ?? "")),
-                                            ],
+                        child:
+                            state.sessions.isEmpty
+                                ? Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.chat_bubble_outline,
+                                        size: 64,
+                                        color: Colors.grey[400],
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        'No chat sessions available',
+                                        style: TextStyle(
+                                          color: Colors.grey[600],
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                : SingleChildScrollView(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  child: Card(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: DataTable(
+                                        columns: [
+                                          DataColumn(
+                                            label: Text(local.tableCustomer),
                                           ),
-                                        )
-                                        .toList(),
-                              ),
-                            ),
-                          ),
-                        ),
+                                          DataColumn(
+                                            label: Text(local.tableContent),
+                                          ),
+                                          DataColumn(
+                                            label: Text(local.tableStatus),
+                                          ),
+                                          DataColumn(
+                                            label: Text(local.tableActions),
+                                          ),
+                                          DataColumn(
+                                            label: Text(local.tableRequestId),
+                                          ),
+                                        ],
+                                        rows:
+                                            state.sessions
+                                                .map(
+                                                  (session) => DataRow(
+                                                    cells: [
+                                                      DataCell(
+                                                        Text(
+                                                          session.userName ??
+                                                              "",
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        Text(
+                                                          session
+                                                                  .lastMessage
+                                                                  ?.content ??
+                                                              "",
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        Text(
+                                                          session.active == true
+                                                              ? local.openStatus
+                                                              : local
+                                                                  .resolvedStatus,
+                                                          style: TextStyle(
+                                                            color:
+                                                                session.active ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .green
+                                                                    : Colors
+                                                                        .grey,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        IconButton(
+                                                          icon: const Icon(
+                                                            Icons.chat,
+                                                            color: Colors.blue,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await Navigator.of(
+                                                              context,
+                                                            ).push(
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (
+                                                                      _,
+                                                                    ) => BlocProvider.value(
+                                                                      value: BlocProvider.of<
+                                                                        ShopChatCubit
+                                                                      >(
+                                                                        context,
+                                                                      ),
+                                                                      child: ChatScreen(
+                                                                        sessionId:
+                                                                            session.id!,
+                                                                        sessionName:
+                                                                            session.userName!,
+                                                                        userId:
+                                                                            session.userId!,
+                                                                        shopId:
+                                                                            session.shopId!,
+                                                                      ),
+                                                                    ),
+                                                              ),
+                                                            );
+                                                            if (context
+                                                                .mounted) {
+                                                              context
+                                                                  .read<
+                                                                    ShopChatCubit
+                                                                  >()
+                                                                  .fetchSessions();
+                                                            }
+                                                          },
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        Text(session.id ?? ""),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                                .toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                       ),
                     ],
                   ),
@@ -159,8 +206,36 @@ class SupportScreen extends StatelessWidget {
             );
           }
           if (state is ShopChatError) {
-            return Center(
-              child: Text(state.msg, style: const TextStyle(color: Colors.red)),
+            return Scaffold(
+              backgroundColor: Colors.grey.shade100,
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      size: 64,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Text(
+                        state.msg,
+                        style: const TextStyle(color: Colors.red),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        context.read<ShopChatCubit>().fetchSessions();
+                      },
+                      child: Text(local.retry),
+                    ),
+                  ],
+                ),
+              ),
             );
           }
           return const SizedBox();

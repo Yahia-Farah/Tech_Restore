@@ -55,7 +55,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<SignUpShopResponseModel> signUpDelivery(DeliveryEntity delivery) async {
+  Future<SignUpShopResponseModel> signUpDelivery(
+    DeliveryEntity delivery,
+  ) async {
     final request = SignupDeliveryRequestModel(
       name: delivery.firstName,
       address: delivery.address,
@@ -69,7 +71,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<SignUpShopResponseModel> signUpAssigner(AssignerEntity delivery) async {
+  Future<SignUpShopResponseModel> signUpAssigner(
+    AssignerEntity delivery,
+  ) async {
     final request = SignupAssignerRequestModel(
       name: delivery.firstName,
       department: delivery.department,

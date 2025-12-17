@@ -15,7 +15,7 @@ class SignupDeliveryRequestModel {
   @JsonKey(name: "phone")
   final String phone;
 
-  SignupDeliveryRequestModel ({
+  SignupDeliveryRequestModel({
     required this.email,
     required this.password,
     required this.name,
@@ -31,5 +31,3 @@ class SignupDeliveryRequestModel {
     return _$SignupDeliveryRequestModelToJson(this);
   }
 }
-
-

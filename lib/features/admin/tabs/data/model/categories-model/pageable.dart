@@ -35,5 +35,3 @@ class Pageable {
     return _$PageableToJson(this);
   }
 }
-
-

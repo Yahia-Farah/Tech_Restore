@@ -33,7 +33,7 @@ class _DeliveryRegisterScreenState extends State<DeliveryRegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+          icon: Image.asset(AppIcons.arrowBack, color: AppColors.primary),
           onPressed: () => Navigator.pop(context),
         ),
         scrolledUnderElevation: 0,
@@ -57,7 +57,7 @@ class _DeliveryRegisterScreenState extends State<DeliveryRegisterScreen> {
                     email: _emailController.text.trim(),
                     isRegister: true,
                   ),
-                      (routes) => false,
+                  (routes) => false,
                 );
               } else if (state is RegisterError) {
                 ToastHelper.showCustomToast(
@@ -85,35 +85,50 @@ class _DeliveryRegisterScreenState extends State<DeliveryRegisterScreen> {
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.person_2_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.person_2_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _firstNameController,
                     hint: local.firstName,
                     keyboardType: TextInputType.name,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.home_work_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.home_work_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _addressController,
                     hint: local.address,
                     keyboardType: TextInputType.name,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.email_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.email_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _emailController,
                     hint: local.email,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.phone_outlined,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.phone_outlined,
+                      color: AppColors.primary,
+                    ),
                     controller: _phoneController,
                     hint: local.phone,
                     keyboardType: TextInputType.phone,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.lock_outline,color: AppColors.primary,),
+                    prefixIcon: Icon(
+                      Icons.lock_outline,
+                      color: AppColors.primary,
+                    ),
                     controller: _passwordController,
                     hint: local.password,
                     keyboardType: TextInputType.visiblePassword,
@@ -123,23 +138,23 @@ class _DeliveryRegisterScreenState extends State<DeliveryRegisterScreen> {
                   state is RegisterLoading
                       ? const Center(child: CircularProgressIndicator())
                       : SizedBox(
-                    width: double.infinity,
-                    child: CustomElevatedButton(
-                      textColor: AppColors.white,
-                      color: AppColors.primary,
-                      text: local.signup,
-                      onPressed: () {
-                        final user = DeliveryEntity(
-                          firstName: _firstNameController.text.trim(),
-                          address: _addressController.text.trim(),
-                          email: _emailController.text.trim(),
-                          phone: "+2${_phoneController.text.trim()}",
-                          password: _passwordController.text.trim(),
-                        );
-                        context.read<DeliveryRegisterCubit>().signUp(user);
-                      },
-                    ),
-                  ),
+                        width: double.infinity,
+                        child: CustomElevatedButton(
+                          textColor: AppColors.white,
+                          color: AppColors.primary,
+                          text: local.signup,
+                          onPressed: () {
+                            final user = DeliveryEntity(
+                              firstName: _firstNameController.text.trim(),
+                              address: _addressController.text.trim(),
+                              email: _emailController.text.trim(),
+                              phone: "+2${_phoneController.text.trim()}",
+                              password: _passwordController.text.trim(),
+                            );
+                            context.read<DeliveryRegisterCubit>().signUp(user);
+                          },
+                        ),
+                      ),
                 ],
               );
             },

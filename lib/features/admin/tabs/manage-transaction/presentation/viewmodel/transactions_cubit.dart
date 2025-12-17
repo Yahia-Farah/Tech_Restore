@@ -1,7 +1,5 @@
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-
 import '../../../domain/usecases/get_all_transactions_usecase.dart';
 import '../viewmodel/states/transactions_states.dart';
 
@@ -10,9 +8,8 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   final GetAllTransactionsUseCase _getAllTransactionsUseCase;
   int _currentPage = 0;
 
-  TransactionsCubit(
-    this._getAllTransactionsUseCase,
-  ) : super(TransactionsInitial());
+  TransactionsCubit(this._getAllTransactionsUseCase)
+    : super(TransactionsInitial());
 
   Future<void> getAllTransactions(int page) async {
     _currentPage = page;
@@ -29,4 +26,3 @@ class TransactionsCubit extends Cubit<TransactionsState> {
     getAllTransactions(_currentPage);
   }
 }
-

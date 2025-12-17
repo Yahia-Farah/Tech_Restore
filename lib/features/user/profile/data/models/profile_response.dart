@@ -25,7 +25,7 @@ class ProfileResponse {
   @JsonKey(name: "addresses")
   final List<dynamic>? addresses;
 
-  ProfileResponse ({
+  ProfileResponse({
     this.id,
     this.firstName,
     this.lastName,
@@ -46,5 +46,3 @@ class ProfileResponse {
     return _$ProfileResponseToJson(this);
   }
 }
-
-

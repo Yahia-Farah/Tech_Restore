@@ -7,19 +7,19 @@ part of 'reset_password_request_model.dart';
 // **************************************************************************
 
 ResetPasswordRequestModel _$ResetPasswordRequestModelFromJson(
-        Map<String, dynamic> json) =>
-    ResetPasswordRequestModel(
-      email: json['email'] as String,
-      otp: json['otp'] as String,
-      newPassword: json['newPassword'] as String,
-      confirmPassword: json['confirmPassword'] as String,
-    );
+  Map<String, dynamic> json,
+) => ResetPasswordRequestModel(
+  email: json['email'] as String,
+  otp: json['otp'] as String,
+  newPassword: json['newPassword'] as String,
+  confirmPassword: json['confirmPassword'] as String,
+);
 
 Map<String, dynamic> _$ResetPasswordRequestModelToJson(
-        ResetPasswordRequestModel instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'otp': instance.otp,
-      'newPassword': instance.newPassword,
-      'confirmPassword': instance.confirmPassword,
-    };
+  ResetPasswordRequestModel instance,
+) => <String, dynamic>{
+  'email': instance.email,
+  'otp': instance.otp,
+  'newPassword': instance.newPassword,
+  'confirmPassword': instance.confirmPassword,
+};

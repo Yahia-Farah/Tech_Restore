@@ -123,12 +123,8 @@ class DeliveryDashboardScreen extends StatelessWidget {
             const ActivityItem(
               text: "Order #0190a978 - DEVICE_DELIVERED (Price: 18000 EGP)",
             ),
-            const ActivityItem(
-              text: "Repair #01998ab5 - DEVICE_DELIVERED",
-            ),
-            const ActivityItem(
-              text: "Repair #01998af3 - DEVICE_DELIVERED",
-            ),
+            const ActivityItem(text: "Repair #01998ab5 - DEVICE_DELIVERED"),
+            const ActivityItem(text: "Repair #01998af3 - DEVICE_DELIVERED"),
           ],
         ),
       ),
@@ -165,7 +161,7 @@ class DashboardButton extends StatelessWidget {
               color: Colors.black12,
               blurRadius: 6,
               offset: Offset(0, 3),
-            )
+            ),
           ],
         ),
         child: Column(
@@ -176,10 +172,7 @@ class DashboardButton extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               value,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -206,18 +199,9 @@ class ActivityItem extends StatelessWidget {
         children: [
           const Icon(Icons.circle, size: 12, color: Colors.grey),
           const SizedBox(width: 10),
-          Expanded(
-            child: Text(text, style: const TextStyle(fontSize: 14)),
-          ),
+          Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
