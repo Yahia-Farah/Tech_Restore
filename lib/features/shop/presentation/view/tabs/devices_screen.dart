@@ -61,7 +61,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
         List<ProductModel> devices = cubit.devices;
         if (state is DevicesLoading ||
             (state is DevicesInitial && devices.isEmpty)) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: Colors.green));
         }
         return ValueListenableBuilder<String>(
           valueListenable: _searchQueryNotifier,
@@ -92,6 +92,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
                         ? <ProductModel>[]
                         : filteredDevices.sublist(startIndex, endIndex);
                 return RefreshIndicator(
+                  color: Colors.green,
                   onRefresh: () => cubit.getAllDevices(isRefresh: true),
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),

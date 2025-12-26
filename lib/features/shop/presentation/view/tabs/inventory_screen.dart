@@ -19,7 +19,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
   final TextEditingController _searchController = TextEditingController();
   final ValueNotifier<String> _searchQueryNotifier = ValueNotifier<String>('');
   final ValueNotifier<int> _currentPageNotifier = ValueNotifier<int>(1);
-  final int itemsPerPage = 8;
+  final int itemsPerPage = 5;
   final formatter = NumberFormat("#,##0.###");
   late ScrollController _scrollController;
   Timer? _scrollTimer;
@@ -67,36 +67,51 @@ class _InventoryScreenState extends State<InventoryScreen> {
         _scrollTimer?.cancel();
       }
     } else {
-      _isUserScrolling = false;
-      Future.delayed(const Duration(seconds: 2), () {
-        if (!_isUserScrolling && mounted && _scrollController.hasClients) {
-          _startAutoScroll();
-        }
-      });
+      if (_isUserScrolling) {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      }
     }
   }
 
   void _startAutoScroll() {
     _scrollTimer?.cancel();
-    _scrollTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
+    _scrollTimer = Timer.periodic(const Duration(milliseconds: 20), (timer) {
       if (!_scrollController.hasClients || _isUserScrolling) return;
 
       final maxScroll = _scrollController.position.maxScrollExtent;
       final currentScroll = _scrollController.offset;
 
+      if (maxScroll <= 0) return; // No scrolling needed if content fits
+
+      double targetScroll;
+      const scrollSpeed = 0.8; // Reduced speed for smoother scrolling
+
       if (_isScrollingRight) {
         if (currentScroll >= maxScroll) {
           _isScrollingRight = false;
+          targetScroll = currentScroll - scrollSpeed;
         } else {
-          _scrollController.jumpTo(currentScroll + 2);
+          targetScroll = currentScroll + scrollSpeed;
         }
       } else {
         if (currentScroll <= 0) {
           _isScrollingRight = true;
+          targetScroll = currentScroll + scrollSpeed;
         } else {
-          _scrollController.jumpTo(currentScroll - 2);
+          targetScroll = currentScroll - scrollSpeed;
         }
       }
+
+      _scrollController.animateTo(
+        targetScroll.clamp(0.0, maxScroll),
+        duration: const Duration(milliseconds: 20),
+        curve: Curves.linear,
+      );
     });
   }
 
@@ -141,12 +156,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
         int outOfStockCount = cubit.outOfStockCount;
         double totalValue = cubit.totalValue;
 
-        if (state is InventoryLoading ||
-            (state is InventoryInitial && products.isEmpty)) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
         return RefreshIndicator(
+          color: Colors.green,
           onRefresh: () async {
             cubit.searchInventory(
               query:
@@ -193,6 +204,64 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   ),
                   const SizedBox(height: 20),
 
+                  // Summary Cards - Always show, no loading state
+                  GestureDetector(
+                    onPanStart: (_) {
+                      _isUserScrolling = true;
+                      _scrollTimer?.cancel();
+                    },
+                    onPanEnd: (_) {
+                      _isUserScrolling = false;
+                      Future.delayed(const Duration(seconds: 2), () {
+                        if (!_isUserScrolling &&
+                            mounted &&
+                            _scrollController.hasClients) {
+                          _startAutoScroll();
+                        }
+                      });
+                    },
+                    onPanCancel: () {
+                      _isUserScrolling = false;
+                      Future.delayed(const Duration(seconds: 2), () {
+                        if (!_isUserScrolling &&
+                            mounted &&
+                            _scrollController.hasClients) {
+                          _startAutoScroll();
+                        }
+                      });
+                    },
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      scrollDirection: Axis.horizontal,
+                      physics: const ClampingScrollPhysics(),
+                      child: Row(
+                        children: [
+                          _buildSummaryCard(
+                            local.inventory_total_products,
+                            "$totalItems",
+                            Colors.blue,
+                          ),
+                          _buildSummaryCard(
+                            local.inventory_low_stock,
+                            "$lowStockCount",
+                            Colors.orange,
+                          ),
+                          _buildSummaryCard(
+                            "Out of stock",
+                            "$outOfStockCount",
+                            Colors.red,
+                          ),
+                          _buildSummaryCard(
+                            local.inventory_total_price,
+                            "${formatter.format(totalValue)} ${local.inventory_currency}",
+                            Colors.black,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
                   // Search
                   CustomTextFormField(
                     controller: _searchController,
@@ -200,225 +269,184 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Summary Cards
-                  BlocBuilder<InventoryCubit, InventoryState>(
-                    builder: (context, state) {
-                      if (state is InventoryStatsLoading) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      return GestureDetector(
-                        onPanStart: (_) {
-                          _isUserScrolling = true;
-                          _scrollTimer?.cancel();
-                        },
-                        onPanEnd: (_) {
-                          _isUserScrolling = false;
-                          Future.delayed(const Duration(seconds: 2), () {
-                            if (!_isUserScrolling &&
-                                mounted &&
-                                _scrollController.hasClients) {
-                              _startAutoScroll();
-                            }
-                          });
-                        },
-                        onPanCancel: () {
-                          _isUserScrolling = false;
-                          Future.delayed(const Duration(seconds: 2), () {
-                            if (!_isUserScrolling &&
-                                mounted &&
-                                _scrollController.hasClients) {
-                              _startAutoScroll();
-                            }
-                          });
-                        },
-                        child: SingleChildScrollView(
-                          controller: _scrollController,
-                          scrollDirection: Axis.horizontal,
-                          physics: const ClampingScrollPhysics(),
-                          child: Row(
-                            children: [
-                              _buildSummaryCard(
-                                local.inventory_total_products,
-                                "$totalItems",
-                                Colors.blue,
-                              ),
-                              _buildSummaryCard(
-                                local.inventory_low_stock,
-                                "$lowStockCount",
-                                Colors.orange,
-                              ),
-                              _buildSummaryCard(
-                                "Out of stock",
-                                "$outOfStockCount",
-                                Colors.red,
-                              ),
-                              _buildSummaryCard(
-                                local.inventory_total_price,
-                                "${formatter.format(totalValue)} ${local.inventory_currency}",
-                                Colors.black,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Table
-                  ValueListenableBuilder<int>(
-                    valueListenable: _currentPageNotifier,
-                    builder: (context, currentPage, _) {
-                      final totalPages =
-                          products.isEmpty
-                              ? 1
-                              : (products.length / itemsPerPage).ceil();
-                      final startIndex = (currentPage - 1) * itemsPerPage;
-                      final endIndex =
-                          (startIndex + itemsPerPage < products.length)
-                              ? startIndex + itemsPerPage
-                              : products.length;
-                      final currentProducts =
-                          products.isEmpty
-                              ? <ProductModel>[]
-                              : products.sublist(startIndex, endIndex);
-
-                      return Card(
-                        child: Column(
-                          children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: DataTable(
-                                columns: [
-                                  DataColumn(
-                                    label: Text(local.inventory_product_name),
-                                  ),
-                                  DataColumn(
-                                    label: Text(local.inventory_category),
-                                  ),
-                                  DataColumn(
-                                    label: Text(local.inventory_price),
-                                  ),
-                                  DataColumn(
-                                    label: Text(local.inventory_quantity),
-                                  ),
-                                  DataColumn(
-                                    label: Text(local.inventory_status),
-                                  ),
-                                ],
-                                rows:
-                                    currentProducts
-                                        .map(
-                                          (product) => _buildInventoryRow(
-                                            context,
-                                            product,
-                                          ),
-                                        )
-                                        .toList(),
-                              ),
-                            ),
-
-                            // Pagination
-                            if (products.isNotEmpty)
-                              Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${products.length} ${local.devices}",
-                                    ),
-                                    Row(
-                                      children: [
-                                        IconButton(
-                                          icon: const Icon(Icons.chevron_left),
-                                          onPressed:
-                                              currentPage > 1
-                                                  ? () =>
-                                                      _currentPageNotifier
-                                                              .value =
-                                                          currentPage - 1
-                                                  : null,
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.blue,
-                                            foregroundColor: Colors.white,
-                                          ),
-                                          onPressed: null,
-                                          child: Text('$currentPage'),
-                                        ),
-                                        if (currentPage < totalPages)
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 4,
-                                            ),
-                                            child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.grey.shade300,
-                                                foregroundColor: Colors.black,
-                                              ),
-                                              onPressed:
-                                                  () =>
-                                                      _currentPageNotifier
-                                                              .value =
-                                                          currentPage + 1,
-                                              child: Text('${currentPage + 1}'),
-                                            ),
-                                          ),
-                                        IconButton(
-                                          icon: const Icon(Icons.chevron_right),
-                                          onPressed:
-                                              (currentPage < totalPages ||
-                                                      (currentPage ==
-                                                              totalPages &&
-                                                          !cubit.lastPage))
-                                                  ? () async {
-                                                    if (currentPage <
-                                                        totalPages) {
-                                                      // Local pagination
-                                                      _currentPageNotifier
-                                                              .value =
-                                                          currentPage + 1;
-                                                    } else if (currentPage ==
-                                                            totalPages &&
-                                                        !cubit.lastPage) {
-                                                      // Fetch next page from API
-                                                      await cubit.searchInventory(
-                                                        query:
-                                                            _searchController
-                                                                    .text
-                                                                    .trim()
-                                                                    .isEmpty
-                                                                ? null
-                                                                : _searchController
-                                                                    .text
-                                                                    .trim(),
-                                                      );
-                                                      // Move to next page after fetching
-                                                      _currentPageNotifier
-                                                              .value =
-                                                          currentPage + 1;
-                                                    }
-                                                  }
-                                                  : null,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                  // Table with Loading State
+                  _buildTableWithPagination(local, products, state),
                   const SizedBox(height: 20),
                 ],
               ),
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTableWithPagination(
+    AppLocalizations local,
+    List<ProductModel> products,
+    InventoryState state,
+  ) {
+    final cubit = context.read<InventoryCubit>();
+
+    // Show loading only for table data, not for initial load or stats
+    if ((state is InventoryLoading && products.isEmpty) ||
+        (state is InventoryInitial && products.isEmpty)) {
+      return Card(
+        child: SizedBox(
+          height: 300,
+          child: const Center(
+            child: CircularProgressIndicator(color: Colors.green),
+          ),
+        ),
+      );
+    }
+
+    return ValueListenableBuilder<int>(
+      valueListenable: _currentPageNotifier,
+      builder: (context, currentPage, _) {
+        final totalPages =
+            products.isEmpty ? 1 : (products.length / itemsPerPage).ceil();
+        final startIndex = (currentPage - 1) * itemsPerPage;
+        final endIndex =
+            (startIndex + itemsPerPage < products.length)
+                ? startIndex + itemsPerPage
+                : products.length;
+        final currentProducts =
+            products.isEmpty
+                ? <ProductModel>[]
+                : products.sublist(startIndex, endIndex);
+
+        return Card(
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columns: [
+                    DataColumn(label: Text(local.inventory_product_name)),
+                    DataColumn(label: Text(local.inventory_category)),
+                    DataColumn(label: Text(local.inventory_price)),
+                    DataColumn(label: Text(local.inventory_quantity)),
+                    DataColumn(label: Text(local.inventory_status)),
+                  ],
+                  rows:
+                      currentProducts.isEmpty
+                          ? []
+                          : currentProducts
+                              .map(
+                                (product) =>
+                                    _buildInventoryRow(context, product),
+                              )
+                              .toList(),
+                ),
+              ),
+
+              // Empty State
+              if (products.isEmpty && state is! InventoryLoading)
+                Container(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.inventory_2_outlined,
+                        size: 64,
+                        color: Colors.grey[400],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        _searchController.text.isNotEmpty
+                            ? 'No products found matching "${_searchController.text}"'
+                            : 'No products found',
+                        style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+
+              // Pagination
+              if (products.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${products.length} ${local.devices}",
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.chevron_left),
+                            onPressed:
+                                currentPage > 1
+                                    ? () =>
+                                        _currentPageNotifier.value =
+                                            currentPage - 1
+                                    : null,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: null,
+                            child: Text('$currentPage'),
+                          ),
+                          if (currentPage < totalPages)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                              ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey.shade300,
+                                  foregroundColor: Colors.black,
+                                ),
+                                onPressed:
+                                    () =>
+                                        _currentPageNotifier.value =
+                                            currentPage + 1,
+                                child: Text('${currentPage + 1}'),
+                              ),
+                            ),
+                          IconButton(
+                            icon: const Icon(Icons.chevron_right),
+                            onPressed:
+                                (currentPage < totalPages ||
+                                        (currentPage == totalPages &&
+                                            !cubit.lastPage))
+                                    ? () async {
+                                      if (currentPage < totalPages) {
+                                        // Local pagination
+                                        _currentPageNotifier.value =
+                                            currentPage + 1;
+                                      } else if (currentPage == totalPages &&
+                                          !cubit.lastPage) {
+                                        // Fetch next page from API
+                                        await cubit.searchInventory(
+                                          query:
+                                              _searchController.text
+                                                      .trim()
+                                                      .isEmpty
+                                                  ? null
+                                                  : _searchController.text
+                                                      .trim(),
+                                        );
+                                        // Move to next page after fetching
+                                        _currentPageNotifier.value =
+                                            currentPage + 1;
+                                      }
+                                    }
+                                    : null,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              const SizedBox(height: 10),
+            ],
           ),
         );
       },
@@ -439,7 +467,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.1),
+              color: statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(status, style: TextStyle(color: statusColor)),

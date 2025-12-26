@@ -7,9 +7,13 @@ part of 'update_user_role_request.dart';
 // **************************************************************************
 
 UpdateUserRoleRequest _$UpdateUserRoleRequestFromJson(
-  Map<String, dynamic> json,
-) => UpdateUserRoleRequest(role: json['role'] as String);
+        Map<String, dynamic> json) =>
+    UpdateUserRoleRequest(
+      role: json['role'] as String,
+    );
 
 Map<String, dynamic> _$UpdateUserRoleRequestToJson(
-  UpdateUserRoleRequest instance,
-) => <String, dynamic>{'role': instance.role};
+        UpdateUserRoleRequest instance) =>
+    <String, dynamic>{
+      'role': instance.role,
+    };

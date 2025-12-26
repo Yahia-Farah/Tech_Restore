@@ -15,10 +15,10 @@ AdminStatesResponse _$AdminStatesResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$AdminStatesResponseToJson(
-  AdminStatesResponse instance,
-) => <String, dynamic>{
-  'users': instance.users,
-  'shops': instance.shops,
-  'repairs': instance.repairs,
-  'orders': instance.orders,
-};
+        AdminStatesResponse instance) =>
+    <String, dynamic>{
+      'users': instance.users,
+      'shops': instance.shops,
+      'repairs': instance.repairs,
+      'orders': instance.orders,
+    };

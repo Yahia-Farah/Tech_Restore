@@ -55,4 +55,16 @@ abstract class ApiEndPoints {
       'admin/deliveries/{deliveryId}/approve';
   static const String deleteDeliveriesAdminById =
       'admin/deliveries/{deliveryId}';
+  static const String getAllAddresses = 'shops/address';
+  static const String addAddress = 'shops/address';
+  static const String deleteAddress = 'shops/address/{id}';
+  static const String updateAddress = 'shops/address/{id}';
+  static const String getShopProfile = 'shops/{shopId}';
+  static const String updateShopProfile = 'shops/{id}';
+  static const String getAllOrders = 'shops/orders/control';
+  static const String getOrdersByStatus = 'shops/orders/control/status/{status}';
+  static const String getOrderDetails = 'shops/orders/control/{orderId}';
+  static const String acceptOrder = 'shops/orders/control/{orderId}/accept';
+  static const String rejectOrder = 'shops/orders/control/{orderId}/reject';
+  static const String updateOrderStatus = 'shops/orders/control/{orderId}/status';
 }

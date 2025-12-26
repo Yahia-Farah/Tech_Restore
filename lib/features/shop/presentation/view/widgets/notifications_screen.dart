@@ -134,7 +134,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
-                    Icons.notifications_active,
+                    Icons.notifications_active_outlined,
                     color: Colors.green[700],
                     size: 24,
                   ),
@@ -411,7 +411,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(
-                              Icons.notifications_active,
+                              Icons.notifications_active_outlined,
                               color: Colors.green[700],
                               size: 24,
                             ),

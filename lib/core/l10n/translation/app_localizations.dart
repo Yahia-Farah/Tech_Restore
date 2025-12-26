@@ -2359,6 +2359,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Transactions loaded successfully'**
   String get transactions_loaded_successfully;
+
+  /// No description provided for @addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Addresses'**
+  String get addresses;
+
+  /// No description provided for @branches_and_addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Branches and Addresses'**
+  String get branches_and_addresses;
+
+  /// No description provided for @add_new_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Address'**
+  String get add_new_address;
+
+  /// No description provided for @governorate.
+  ///
+  /// In en, this message translates to:
+  /// **'Governorate'**
+  String get governorate;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @street.
+  ///
+  /// In en, this message translates to:
+  /// **'Street'**
+  String get street;
+
+  /// No description provided for @building_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Building Number (Optional)'**
+  String get building_number;
+
+  /// No description provided for @set_as_primary.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as Primary Address'**
+  String get set_as_primary;
+
+  /// No description provided for @add_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Address'**
+  String get add_address;
+
+  /// No description provided for @shop_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Profile'**
+  String get shop_profile;
+
+  /// No description provided for @update_shop_data.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Shop Data'**
+  String get update_shop_data;
+
+  /// No description provided for @shop_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Details'**
+  String get shop_details;
+
+  /// No description provided for @shop_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Name'**
+  String get shop_name;
+
+  /// No description provided for @shop_description_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Description'**
+  String get shop_description_label;
+
+  /// No description provided for @we_fix_devices.
+  ///
+  /// In en, this message translates to:
+  /// **'We fix laptops, phones, and tablets'**
+  String get we_fix_devices;
+
+  /// No description provided for @new_password_optional.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password (Optional)'**
+  String get new_password_optional;
+
+  /// No description provided for @update_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Account'**
+  String get update_account;
+
+  /// No description provided for @active_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active_status;
+
+  /// No description provided for @verified_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get verified_status;
+
+  /// No description provided for @shop_type_both.
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get shop_type_both;
+
+  /// No description provided for @shop_information.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Information'**
+  String get shop_information;
+
+  /// No description provided for @shop_address_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Address'**
+  String get shop_address_title;
+
+  /// No description provided for @verified_shop.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified Shop'**
+  String get verified_shop;
+
+  /// No description provided for @under_review.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Review'**
+  String get under_review;
+
+  /// No description provided for @default_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Default Address'**
+  String get default_address;
+
+  /// No description provided for @not_provided.
+  ///
+  /// In en, this message translates to:
+  /// **'Not provided'**
+  String get not_provided;
+
+  /// No description provided for @no_description.
+  ///
+  /// In en, this message translates to:
+  /// **'No description'**
+  String get no_description;
+
+  /// No description provided for @not_specified.
+  ///
+  /// In en, this message translates to:
+  /// **'Not specified'**
+  String get not_specified;
+
+  /// No description provided for @edit_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get edit_profile;
+
+  /// No description provided for @profile_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profile_updated_successfully;
+
+  /// No description provided for @finish_processing.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish Processing'**
+  String get finish_processing;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
+
+  /// No description provided for @edit_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Address'**
+  String get edit_address;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @default_address_warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Setting this as the default address will remove the default status from your current default address. Do you want to continue?'**
+  String get default_address_warning;
 }
 
 class _AppLocalizationsDelegate

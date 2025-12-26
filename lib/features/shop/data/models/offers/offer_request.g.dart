@@ -7,14 +7,14 @@ part of 'offer_request.dart';
 // **************************************************************************
 
 OfferRequest _$OfferRequestFromJson(Map<String, dynamic> json) => OfferRequest(
-  name: json['name'] as String?,
-  description: json['description'] as String?,
-  discountValue: (json['discountValue'] as num?)?.toDouble(),
-  discountType: json['discountType'] as String?,
-  status: json['status'] as String?,
-  startDate: json['startDate'] as String?,
-  endDate: json['endDate'] as String?,
-);
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      discountValue: (json['discountValue'] as num?)?.toDouble(),
+      discountType: json['discountType'] as String?,
+      status: json['status'] as String?,
+      startDate: json['startDate'] as String?,
+      endDate: json['endDate'] as String?,
+    );
 
 Map<String, dynamic> _$OfferRequestToJson(OfferRequest instance) =>
     <String, dynamic>{

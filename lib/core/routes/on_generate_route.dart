@@ -6,6 +6,7 @@ import 'package:tech_restore/features/auth/login/screen/login_screen.dart';
 import 'package:tech_restore/features/auth/register/screen/register_screen.dart';
 import 'package:tech_restore/features/onboarding/screen/onboarding_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/shop_layout.dart';
+import 'package:tech_restore/features/shop/presentation/view/tabs/profile_screen.dart';
 import 'package:tech_restore/features/user/home/screen/home_screen.dart';
 import 'package:tech_restore/features/user/profile/data/models/profile_response.dart';
 import 'package:tech_restore/features/user/profile/presentation/view/screens/edit_profile_screen.dart';
@@ -33,6 +34,7 @@ import '../../features/auth/register/viewmodel/delivery_register_viewmodel.dart'
 import '../../features/auth/register/viewmodel/register_viewmodel.dart';
 import '../../features/auth/register/viewmodel/shop_register_viewmodel.dart';
 import '../../features/delivery/delivery-main.dart';
+import '../../features/shop/presentation/view/tabs/addresses_screen.dart';
 import '../../features/user/profile/presentation/viewmodel/edit_profile_cubit.dart';
 import '../config/di.dart';
 
@@ -152,6 +154,12 @@ class Routes {
                 child: EditProfileScreen(user: user),
               ),
         );
+
+      case AppRoutes.addresses:
+        return MaterialPageRoute(builder: (_) => const AddressesScreen());
+
+      case AppRoutes.shopProfile:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());

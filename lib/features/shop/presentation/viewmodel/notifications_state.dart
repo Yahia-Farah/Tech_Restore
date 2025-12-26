@@ -20,3 +20,4 @@ class NotificationDeleted extends NotificationsState {
   final String notificationId;
   NotificationDeleted(this.notificationId);
 }
+

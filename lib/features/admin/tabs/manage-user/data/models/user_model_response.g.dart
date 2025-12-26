@@ -8,11 +8,12 @@ part of 'user_model_response.dart';
 
 UserListResponse _$UserListResponseFromJson(Map<String, dynamic> json) =>
     UserListResponse(
-      content:
-          (json['content'] as List<dynamic>?)
-              ?.map((e) => UserModel.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      content: (json['content'] as List<dynamic>?)
+          ?.map((e) => UserModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$UserListResponseToJson(UserListResponse instance) =>
-    <String, dynamic>{'content': instance.content};
+    <String, dynamic>{
+      'content': instance.content,
+    };

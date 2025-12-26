@@ -36,3 +36,4 @@ class InventoryStatsError extends InventoryState {
   final String msg;
   InventoryStatsError(this.msg);
 }
+

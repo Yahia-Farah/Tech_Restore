@@ -8,11 +8,12 @@ part of 'shop_response.dart';
 
 ShopListResponse _$ShopListResponseFromJson(Map<String, dynamic> json) =>
     ShopListResponse(
-      content:
-          (json['content'] as List<dynamic>?)
-              ?.map((e) => ShopModel.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      content: (json['content'] as List<dynamic>?)
+          ?.map((e) => ShopModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ShopListResponseToJson(ShopListResponse instance) =>
-    <String, dynamic>{'content': instance.content};
+    <String, dynamic>{
+      'content': instance.content,
+    };

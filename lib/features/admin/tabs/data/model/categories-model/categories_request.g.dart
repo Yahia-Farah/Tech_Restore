@@ -7,7 +7,11 @@ part of 'categories_request.dart';
 // **************************************************************************
 
 CategoriesRequest _$CategoriesRequestFromJson(Map<String, dynamic> json) =>
-    CategoriesRequest(name: json['name'] as String?);
+    CategoriesRequest(
+      name: json['name'] as String?,
+    );
 
 Map<String, dynamic> _$CategoriesRequestToJson(CategoriesRequest instance) =>
-    <String, dynamic>{'name': instance.name};
+    <String, dynamic>{
+      'name': instance.name,
+    };

@@ -34,3 +34,4 @@ class ShopChatActionError extends ShopChatState {
   final String msg;
   ShopChatActionError(this.msg);
 }
+

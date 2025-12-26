@@ -13,4 +13,6 @@ abstract class AppRoutes {
   static const String shopRegister = "/shopRegister";
   static const String deliveryRegister = "/deliveryRegister";
   static const String assignerRegister = "/assignerRegister";
+  static const String addresses = "/addresses";
+  static const String shopProfile = "/shopProfile";
 }

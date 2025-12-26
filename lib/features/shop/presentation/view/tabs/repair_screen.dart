@@ -11,7 +11,7 @@ class RepairScreen extends StatefulWidget {
 
 class _RepairScreenState extends State<RepairScreen> {
   String _searchQuery = "";
-  String _selectedStatus = "all"; // ✅ stable default key
+  String _selectedStatus = "all";
   int _currentPage = 1;
   final int _rowsPerPage = 5;
 

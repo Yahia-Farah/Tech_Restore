@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import '../../../../../core/Widgets/custom_text_field.dart';
 import '../../../../../core/l10n/translation/app_localizations.dart';
 
@@ -11,9 +12,12 @@ class TransactionsScreen extends StatefulWidget {
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
   String _searchQuery = "";
-  String _selectedMonth = "month";
   int _currentPage = 1;
   final int _rowsPerPage = 5;
+  late ScrollController _scrollController;
+  Timer? _scrollTimer;
+  bool _isScrollingRight = true;
+  bool _isUserScrolling = false;
 
   final List<Map<String, String>> _allTransactions = [
     {
@@ -46,42 +50,98 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+    _startAutoScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _scrollTimer?.cancel();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+
+    if (_scrollController.position.isScrollingNotifier.value) {
+      if (!_isUserScrolling) {
+        _isUserScrolling = true;
+        _scrollTimer?.cancel();
+      }
+    } else {
+      if (_isUserScrolling) {
+        _isUserScrolling = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+            _startAutoScroll();
+          }
+        });
+      }
+    }
+  }
+
+  void _startAutoScroll() {
+    _scrollTimer?.cancel();
+    _scrollTimer = Timer.periodic(const Duration(milliseconds: 20), (timer) {
+      if (!_scrollController.hasClients || _isUserScrolling) return;
+
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final currentScroll = _scrollController.offset;
+
+      if (maxScroll <= 0) return;
+
+      double targetScroll;
+      const scrollSpeed = 0.8;
+
+      if (_isScrollingRight) {
+        if (currentScroll >= maxScroll) {
+          _isScrollingRight = false;
+          targetScroll = currentScroll - scrollSpeed;
+        } else {
+          targetScroll = currentScroll + scrollSpeed;
+        }
+      } else {
+        if (currentScroll <= 0) {
+          _isScrollingRight = true;
+          targetScroll = currentScroll + scrollSpeed;
+        } else {
+          targetScroll = currentScroll - scrollSpeed;
+        }
+      }
+
+      _scrollController.animateTo(
+        targetScroll.clamp(0.0, maxScroll),
+        duration: const Duration(milliseconds: 20),
+        curve: Curves.linear,
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
 
-    // 🔹 Filter search
-    final filteredTransactions =
-        _allTransactions.where((txn) {
-          return txn["device"]!.toLowerCase().contains(
-                _searchQuery.toLowerCase(),
-              ) ||
-              txn["shop"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-              txn["type"]!.toLowerCase().contains(_searchQuery.toLowerCase());
-        }).toList();
+    final filteredTransactions = _allTransactions.where((txn) {
+      return txn["device"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          txn["shop"]!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          txn["type"]!.toLowerCase().contains(_searchQuery.toLowerCase());
+    }).toList();
 
     final totalPages = (filteredTransactions.length / _rowsPerPage).ceil();
     final startIndex = (_currentPage - 1) * _rowsPerPage;
-    final endIndex = (_currentPage * _rowsPerPage).clamp(
-      0,
-      filteredTransactions.length,
-    );
+    final endIndex = (_currentPage * _rowsPerPage).clamp(0, filteredTransactions.length);
     final currentPageItems = filteredTransactions.sublist(startIndex, endIndex);
-
-    final months = [
-      {"key": "month", "label": local.month},
-      {"key": "january", "label": local.january},
-      {"key": "february", "label": local.february},
-      {"key": "march", "label": local.march},
-      {"key": "april", "label": local.april},
-      {"key": "may", "label": local.may},
-    ];
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 🔹 Header
+          // Header
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20),
@@ -110,72 +170,72 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           ),
           const SizedBox(height: 20),
 
-          // 🔹 Search + Month Filter
-          Row(
-            children: [
-              Expanded(
-                child: CustomTextFormField(
-                  hint: local.search_hint,
-                  onChanged: (val) {
-                    setState(() {
-                      _searchQuery = val;
-                      _currentPage = 1;
-                    });
-                  },
-                ),
+          // Summary Cards with Auto-Scroll
+          GestureDetector(
+            onPanStart: (_) {
+              _isUserScrolling = true;
+              _scrollTimer?.cancel();
+            },
+            onPanEnd: (_) {
+              _isUserScrolling = false;
+              Future.delayed(const Duration(seconds: 2), () {
+                if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+                  _startAutoScroll();
+                }
+              });
+            },
+            onPanCancel: () {
+              _isUserScrolling = false;
+              Future.delayed(const Duration(seconds: 2), () {
+                if (!_isUserScrolling && mounted && _scrollController.hasClients) {
+                  _startAutoScroll();
+                }
+              });
+            },
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              physics: const ClampingScrollPhysics(),
+              child: Row(
+                children: [
+                  _buildSummaryCard(
+                    local.total_profits,
+                    "2045.00 EGP",
+                    Colors.blue,
+                  ),
+                  _buildSummaryCard(
+                    "Repairs (27%)",
+                    "548.00 EGP",
+                    Colors.green,
+                  ),
+                  _buildSummaryCard(
+                    "Sales (73%)",
+                    "1497.00 EGP",
+                    Colors.orange,
+                  ),
+                ],
               ),
-              const SizedBox(width: 16),
-              DropdownButton<String>(
-                underline: const SizedBox(),
-                value: _selectedMonth,
-                items:
-                    months
-                        .map(
-                          (m) => DropdownMenuItem(
-                            value: m["key"],
-                            child: Text(m["label"]!),
-                          ),
-                        )
-                        .toList(),
-                onChanged: (val) {
-                  setState(() {
-                    _selectedMonth = val!;
-                  });
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-
-          // 🔹 Summary Cards
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                _buildSummaryCard(
-                  local.total_profits,
-                  "2045.00 EGP",
-                  Colors.blue,
-                ),
-                _buildSummaryCard(
-                  local.repairs_percent(27),
-                  "548.00 EGP",
-                  Colors.green,
-                ),
-                _buildSummaryCard(
-                  local.sales_percent(73),
-                  "1497.00 EGP",
-                  Colors.orange,
-                ),
-              ],
             ),
           ),
           const SizedBox(height: 20),
 
+          // Search
+          CustomTextFormField(
+            hint: local.search_hint,
+            onChanged: (val) {
+              setState(() {
+                _searchQuery = val;
+                _currentPage = 1;
+              });
+            },
+          ),
+          const SizedBox(height: 20),
+
+          // Table with Pagination
           Card(
             child: Column(
               children: [
-                // 🔹 Transactions Table
+                // Transactions Table
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
@@ -188,70 +248,58 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       DataColumn(label: Text(local.amount)),
                       DataColumn(label: Text(local.status)),
                     ],
-                    rows:
-                        currentPageItems
-                            .map(
-                              (txn) => _buildTransactionRow(
-                                txn["date"]!,
-                                txn["type"]!,
-                                txn["device"]!,
-                                txn["shop"]!,
-                                txn["payment"]!,
-                                txn["amount"]!,
-                                txn["status"]!,
-                                local,
-                              ),
-                            )
-                            .toList(),
+                    rows: currentPageItems.map((txn) => _buildTransactionRow(
+                      txn["date"]!,
+                      txn["type"]!,
+                      txn["device"]!,
+                      txn["shop"]!,
+                      txn["payment"]!,
+                      txn["amount"]!,
+                      txn["status"]!,
+                      local,
+                    )).toList(),
                   ),
                 ),
                 const SizedBox(height: 12),
 
-                // 🔹 Footer + Pagination
+                // Footer + Pagination
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        ("${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${filteredTransactions.length} ${local.transactions}"),
+                        "${startIndex + 1} ${local.toShow} $endIndex ${local.ofShow} ${filteredTransactions.length} ${local.transactions}",
                       ),
                       Row(
                         children: [
                           IconButton(
                             icon: const Icon(Icons.chevron_left),
-                            onPressed:
-                                _currentPage > 1
-                                    ? () => setState(() => _currentPage--)
-                                    : null,
+                            onPressed: _currentPage > 1
+                                ? () => setState(() => _currentPage--)
+                                : null,
                           ),
                           for (int i = 1; i <= totalPages; i++)
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 4,
-                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 4),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      _currentPage == i
-                                          ? Colors.blue
-                                          : Colors.grey.shade300,
-                                  foregroundColor:
-                                      _currentPage == i
-                                          ? Colors.white
-                                          : Colors.black,
+                                  backgroundColor: _currentPage == i
+                                      ? Colors.blue
+                                      : Colors.grey.shade300,
+                                  foregroundColor: _currentPage == i
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
-                                onPressed:
-                                    () => setState(() => _currentPage = i),
+                                onPressed: () => setState(() => _currentPage = i),
                                 child: Text("$i"),
                               ),
                             ),
                           IconButton(
                             icon: const Icon(Icons.chevron_right),
-                            onPressed:
-                                _currentPage < totalPages
-                                    ? () => setState(() => _currentPage++)
-                                    : null,
+                            onPressed: _currentPage < totalPages
+                                ? () => setState(() => _currentPage++)
+                                : null,
                           ),
                         ],
                       ),
@@ -278,12 +326,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         border: Border(left: BorderSide(color: color, width: 4)),
       ),
       child: Column(
-        crossAxisAlignment:
-            isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment:
-                isRTL ? MainAxisAlignment.end : MainAxisAlignment.start,
+            mainAxisAlignment: isRTL ? MainAxisAlignment.end : MainAxisAlignment.start,
             textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
             children: [
               Flexible(
@@ -300,22 +346,25 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             ],
           ),
           const SizedBox(height: 8),
-          Text(title, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+          Text(
+            title,
+            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+          ),
         ],
       ),
     );
   }
 
   DataRow _buildTransactionRow(
-    String date,
-    String type,
-    String device,
-    String shop,
-    String payment,
-    String amount,
-    String status,
-    AppLocalizations local,
-  ) {
+      String date,
+      String type,
+      String device,
+      String shop,
+      String payment,
+      String amount,
+      String status,
+      AppLocalizations local,
+      ) {
     Color statusColor;
     String statusLabel;
 
@@ -345,7 +394,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.1),
+              color: statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(statusLabel, style: TextStyle(color: statusColor)),

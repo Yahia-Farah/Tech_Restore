@@ -1158,4 +1158,114 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get transactions_loaded_successfully => 'تم تحميل المعاملات بنجاح';
+
+  @override
+  String get addresses => 'العناوين';
+
+  @override
+  String get branches_and_addresses => 'الفروع والعناوين';
+
+  @override
+  String get add_new_address => 'إضافة عنوان جديد';
+
+  @override
+  String get governorate => 'المحافظة';
+
+  @override
+  String get city => 'المدينة';
+
+  @override
+  String get street => 'الشارع';
+
+  @override
+  String get building_number => 'رقم المبنى (اختياري)';
+
+  @override
+  String get set_as_primary => 'تعيين كعنوان أساسي';
+
+  @override
+  String get add_address => 'إضافة العنوان';
+
+  @override
+  String get shop_profile => 'الملف الشخصي للمتجر';
+
+  @override
+  String get update_shop_data => 'تحديث بيانات المتجر';
+
+  @override
+  String get shop_details => 'تفاصيل المتجر';
+
+  @override
+  String get shop_name => 'اسم المتجر';
+
+  @override
+  String get shop_description_label => 'وصف المتجر';
+
+  @override
+  String get we_fix_devices =>
+      'نحن نصلح أجهزة الكمبيوتر المحمولة والهواتف والأجهزة اللوحية';
+
+  @override
+  String get new_password_optional => 'كلمة مرور جديدة (اختياري)';
+
+  @override
+  String get update_account => 'تحديث الحساب';
+
+  @override
+  String get active_status => 'نشط';
+
+  @override
+  String get verified_status => 'تم التحقق';
+
+  @override
+  String get shop_type_both => 'الاثنان معاً';
+
+  @override
+  String get shop_information => 'تفاصيل المتجر';
+
+  @override
+  String get shop_address_title => 'عنوان المتجر';
+
+  @override
+  String get verified_shop => 'متجر موثق';
+
+  @override
+  String get under_review => 'قيد المراجعة';
+
+  @override
+  String get default_address => 'العنوان الافتراضي';
+
+  @override
+  String get not_provided => 'غير متوفر';
+
+  @override
+  String get no_description => 'لا يوجد وصف';
+
+  @override
+  String get not_specified => 'غير محدد';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get profile_updated_successfully => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get finish_processing => 'انتهاء المعالجة';
+
+  @override
+  String get cancelled => 'ملغي';
+
+  @override
+  String get edit_address => 'تعديل العنوان';
+
+  @override
+  String get warning => 'تحذير';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get default_address_warning =>
+      'تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟';
 }

@@ -1163,4 +1163,113 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get transactions_loaded_successfully =>
       'Transactions loaded successfully';
+
+  @override
+  String get addresses => 'Addresses';
+
+  @override
+  String get branches_and_addresses => 'Branches and Addresses';
+
+  @override
+  String get add_new_address => 'Add New Address';
+
+  @override
+  String get governorate => 'Governorate';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get street => 'Street';
+
+  @override
+  String get building_number => 'Building Number (Optional)';
+
+  @override
+  String get set_as_primary => 'Set as Primary Address';
+
+  @override
+  String get add_address => 'Add Address';
+
+  @override
+  String get shop_profile => 'Shop Profile';
+
+  @override
+  String get update_shop_data => 'Update Shop Data';
+
+  @override
+  String get shop_details => 'Shop Details';
+
+  @override
+  String get shop_name => 'Shop Name';
+
+  @override
+  String get shop_description_label => 'Shop Description';
+
+  @override
+  String get we_fix_devices => 'We fix laptops, phones, and tablets';
+
+  @override
+  String get new_password_optional => 'New Password (Optional)';
+
+  @override
+  String get update_account => 'Update Account';
+
+  @override
+  String get active_status => 'Active';
+
+  @override
+  String get verified_status => 'Verified';
+
+  @override
+  String get shop_type_both => 'Both';
+
+  @override
+  String get shop_information => 'Shop Information';
+
+  @override
+  String get shop_address_title => 'Shop Address';
+
+  @override
+  String get verified_shop => 'Verified Shop';
+
+  @override
+  String get under_review => 'Under Review';
+
+  @override
+  String get default_address => 'Default Address';
+
+  @override
+  String get not_provided => 'Not provided';
+
+  @override
+  String get no_description => 'No description';
+
+  @override
+  String get not_specified => 'Not specified';
+
+  @override
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get profile_updated_successfully => 'Profile updated successfully';
+
+  @override
+  String get finish_processing => 'Finish Processing';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get edit_address => 'Edit Address';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get default_address_warning =>
+      'Setting this as the default address will remove the default status from your current default address. Do you want to continue?';
 }

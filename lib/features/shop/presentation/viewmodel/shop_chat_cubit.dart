@@ -277,3 +277,4 @@ class ShopChatCubit extends Cubit<ShopChatState> {
     }
   }
 }
+

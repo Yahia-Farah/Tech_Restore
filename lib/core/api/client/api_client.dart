@@ -6,6 +6,12 @@ import 'package:tech_restore/features/auth/data/models/forget_password_models/ve
 import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import 'package:tech_restore/features/shop/data/models/offers/get_all_offers_model.dart';
 import 'package:tech_restore/features/shop/data/models/offers/offer_response.dart';
+import 'package:tech_restore/features/shop/data/models/addresses/get_all_addresses_model.dart';
+import 'package:tech_restore/features/shop/data/models/addresses/address_request.dart';
+import 'package:tech_restore/features/shop/data/models/profile/shop_profile_model.dart';
+import 'package:tech_restore/features/shop/data/models/profile/update_profile_request.dart';
+import 'package:tech_restore/features/shop/data/models/orders/get_all_orders_model.dart';
+import 'package:tech_restore/features/shop/data/models/orders/order_status_request.dart';
 import 'package:tech_restore/features/shop/data/models/products/add_product_request.dart';
 import 'package:tech_restore/features/shop/data/models/products/get_all_products_model.dart';
 import 'package:tech_restore/features/shop/data/models/products/total_elements_response.dart';
@@ -248,5 +254,65 @@ abstract class ApiClient {
   @Extra({'auth': true})
   Future<ContentDeliveryAdmin> getDeliveryAdminById(
     @Path('deliveryId') String deliveryId,
+  );
+
+  @GET(ApiEndPoints.getAllAddresses)
+  @Extra({'auth': true})
+  Future<GetAllAddressesModel> getAllAddresses(@Query('page') int page);
+
+  @POST(ApiEndPoints.addAddress)
+  @Extra({'auth': true})
+  Future<String> addAddress(@Body() AddressRequest model);
+
+  @DELETE(ApiEndPoints.deleteAddress)
+  @Extra({'auth': true})
+  Future<String> deleteAddress(@Path('id') String addressId);
+
+  @PUT(ApiEndPoints.updateAddress)
+  @Extra({'auth': true})
+  Future<String> updateAddress(
+    @Body() AddressRequest model,
+    @Path('id') String addressId,
+  );
+
+  @GET(ApiEndPoints.getShopProfile)
+  @Extra({'auth': true})
+  Future<ShopProfileModel> getShopProfile(@Path('shopId') String shopId);
+
+  @PUT(ApiEndPoints.updateShopProfile)
+  @Extra({'auth': true})
+  Future<ShopProfileModel> updateShopProfile(
+    @Body() UpdateProfileRequest model,
+    @Path('id') String shopId,
+  );
+
+  @GET(ApiEndPoints.getAllOrders)
+  @Extra({'auth': true})
+  Future<GetAllOrdersModel> getAllOrders(@Query('page') int page);
+
+  @GET(ApiEndPoints.getOrdersByStatus)
+  @Extra({'auth': true})
+  Future<GetAllOrdersModel> getOrdersByStatus(
+    @Path('status') String status,
+    @Query('page') int page,
+  );
+
+  @GET(ApiEndPoints.getOrderDetails)
+  @Extra({'auth': true})
+  Future<OrderContent> getOrderDetails(@Path('orderId') String orderId);
+
+  @POST(ApiEndPoints.acceptOrder)
+  @Extra({'auth': true})
+  Future<String> acceptOrder(@Path('orderId') String orderId);
+
+  @POST(ApiEndPoints.rejectOrder)
+  @Extra({'auth': true})
+  Future<String> rejectOrder(@Path('orderId') String orderId);
+
+  @PUT(ApiEndPoints.updateOrderStatus)
+  @Extra({'auth': true})
+  Future<String> updateOrderStatus(
+    @Path('orderId') String orderId,
+    @Body() OrderStatusRequest request,
   );
 }

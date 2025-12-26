@@ -12,10 +12,9 @@ AddProductRequest _$AddProductRequestFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       price: (json['price'] as num?)?.toDouble(),
       imageUrl: json['imageUrl'] as String?,
-      category:
-          json['category'] == null
-              ? null
-              : Category.fromJson(json['category'] as Map<String, dynamic>),
+      category: json['category'] == null
+          ? null
+          : Category.fromJson(json['category'] as Map<String, dynamic>),
       stockQuantity: (json['stockQuantity'] as num?)?.toInt(),
       condition: json['condition'] as String?,
     );
@@ -31,9 +30,10 @@ Map<String, dynamic> _$AddProductRequestToJson(AddProductRequest instance) =>
       'condition': instance.condition,
     };
 
-Category _$CategoryFromJson(Map<String, dynamic> json) =>
-    Category(id: json['id'] as String?);
+Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
+      id: json['id'] as String?,
+    );
 
 Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
-  'id': instance.id,
-};
+      'id': instance.id,
+    };

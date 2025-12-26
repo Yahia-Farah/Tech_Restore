@@ -29,3 +29,4 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     }
   }
 }
+

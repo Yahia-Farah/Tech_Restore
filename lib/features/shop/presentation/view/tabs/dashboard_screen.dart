@@ -135,25 +135,32 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   void _startAutoScroll() {
     _scrollTimer?.cancel();
-    _scrollTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
+    _scrollTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
       if (!_scrollController.hasClients || _isUserScrolling) return;
 
       final maxScroll = _scrollController.position.maxScrollExtent;
       final currentScroll = _scrollController.offset;
 
+      if (maxScroll <= 0) return; // No scrolling needed if content fits
+
+      double targetScroll;
       if (_isScrollingRight) {
         if (currentScroll >= maxScroll) {
           _isScrollingRight = false;
+          targetScroll = currentScroll - 1.0;
         } else {
-          _scrollController.jumpTo(currentScroll + 2);
+          targetScroll = currentScroll + 1.0;
         }
       } else {
         if (currentScroll <= 0) {
           _isScrollingRight = true;
+          targetScroll = currentScroll + 1.0;
         } else {
-          _scrollController.jumpTo(currentScroll - 2);
+          targetScroll = currentScroll - 1.0;
         }
       }
+
+      _scrollController.jumpTo(targetScroll.clamp(0.0, maxScroll));
     });
   }
 
@@ -625,7 +632,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                         dotData: const FlDotData(show: true),
                         belowBarData: BarAreaData(
                           show: true,
-                          color: const Color(0xFF8DC63F).withOpacity(0.2),
+                          color: const Color(0xFF8DC63F).withValues(alpha: 0.2),
                         ),
                       ),
                     ],

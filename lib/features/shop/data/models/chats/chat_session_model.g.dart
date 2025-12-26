@@ -14,12 +14,10 @@ ChatSessionModel _$ChatSessionModelFromJson(Map<String, dynamic> json) =>
       shopId: json['shopId'] as String?,
       shopName: json['shopName'] as String?,
       createdAt: json['createdAt'] as String?,
-      lastMessage:
-          json['lastMessage'] == null
-              ? null
-              : ChatMessageModel.fromJson(
-                json['lastMessage'] as Map<String, dynamic>,
-              ),
+      lastMessage: json['lastMessage'] == null
+          ? null
+          : ChatMessageModel.fromJson(
+              json['lastMessage'] as Map<String, dynamic>),
       active: json['active'] as bool?,
     );
 

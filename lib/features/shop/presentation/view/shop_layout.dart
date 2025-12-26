@@ -14,12 +14,15 @@ import 'dart:async';
 import 'package:tech_restore/features/shop/presentation/view/widgets/notifications_screen.dart';
 import 'package:tech_restore/features/shop/presentation/viewmodel/devices_cubit.dart';
 import '../../../../core/l10n/translation/app_localizations.dart';
+import '../../../../core/routes/route_names.dart';
 import '../../data/repositories/shop_repository.dart';
 import '../../../../core/config/di.dart';
 import '../viewmodel/offers_cubit.dart';
 import '../viewmodel/inventory_cubit.dart';
 import '../viewmodel/notifications_cubit.dart';
 import '../viewmodel/notifications_state.dart';
+import '../viewmodel/orders_cubit.dart';
+import '../viewmodel/shop_chat_cubit.dart';
 
 class ShopLayout extends StatefulWidget {
   const ShopLayout({super.key});
@@ -33,31 +36,139 @@ class _ShopLayoutState extends State<ShopLayout> {
   Timer? _notificationsTimer;
   late NotificationsCubit _notificationsCubit;
 
-  final List<Widget> _screens = [
-    const DashboardScreen(),
-    const RepairScreen(),
-    BlocProvider(
-      create: (context) => DevicesCubit(getIt<ShopRepository>()),
-      child: const DevicesScreen(),
-    ),
-    const OrdersScreen(),
-    const TransactionsScreen(),
-    BlocProvider(
-      create: (context) => InventoryCubit(getIt<ShopRepository>()),
-      child: const InventoryScreen(),
-    ),
-    const SubscriptionsScreen(),
-    BlocProvider(
-      create: (context) => OffersCubit(getIt<ShopRepository>()),
-      child: const OffersScreen(),
-    ),
-    const SupportScreen(),
-  ];
+  // Track which screens have been initialized
+  final Set<int> _initializedScreens = {
+    0,
+  }; // Dashboard is initialized by default
+
+  // Store cubit instances to reuse them
+  DevicesCubit? _devicesCubit;
+  InventoryCubit? _inventoryCubit;
+  OffersCubit? _offersCubit;
+  OrdersCubit? _ordersCubit;
+  ShopChatCubit? _supportCubit;
+
+  // Track which screens have loaded data to avoid reloading
+  final Set<int> _dataLoadedScreens = <int>{};
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      // Initialize screen if not already initialized
+      if (!_initializedScreens.contains(index)) {
+        _initializedScreens.add(index);
+        _initializeScreen(index);
+      }
     });
+  }
+
+  void _initializeScreen(int index) {
+    switch (index) {
+      case 2: // Devices
+        if (_devicesCubit == null) {
+          _devicesCubit = DevicesCubit(getIt<ShopRepository>());
+          // Load data only once when cubit is first created
+          _loadScreenData(index);
+        }
+        break;
+      case 3: // Orders
+        if (_ordersCubit == null) {
+          _ordersCubit = OrdersCubit(getIt<ShopRepository>());
+          // Load data only once when cubit is first created
+          _loadScreenData(index);
+        }
+        break;
+      case 5: // Inventory
+        if (_inventoryCubit == null) {
+          _inventoryCubit = InventoryCubit(getIt<ShopRepository>());
+          // Load data only once when cubit is first created
+          _loadScreenData(index);
+        }
+        break;
+      case 7: // Offers
+        if (_offersCubit == null) {
+          _offersCubit = OffersCubit(getIt<ShopRepository>());
+          // Load data only once when cubit is first created
+          _loadScreenData(index);
+        }
+        break;
+      case 8: // Support
+        if (_supportCubit == null) {
+          _supportCubit = getIt<ShopChatCubit>();
+          // Load data only once when cubit is first created
+          _loadScreenData(index);
+        }
+        break;
+    }
+  }
+
+  void _loadScreenData(int index) {
+    if (_dataLoadedScreens.contains(index)) return; // Already loaded
+
+    _dataLoadedScreens.add(index);
+
+    switch (index) {
+      case 2: // Devices
+        _devicesCubit?.getAllDevices(isRefresh: true);
+        break;
+      case 3: // Orders
+        _ordersCubit?.getAllOrders(isRefresh: true);
+        break;
+      case 5: // Inventory
+        _inventoryCubit?.searchInventory(isRefresh: true);
+        _inventoryCubit?.loadInventoryStats();
+        break;
+      case 7: // Offers
+        _offersCubit?.getAllOffers(isRefresh: true);
+        break;
+      case 8: // Support
+        _supportCubit?.fetchSessions();
+        break;
+    }
+  }
+
+  List<Widget> _buildScreens() {
+    return [
+      const DashboardScreen(), // 0
+      const RepairScreen(), // 1
+      _devicesCubit !=
+              null // 2
+          ? BlocProvider.value(
+            value: _devicesCubit!,
+            child: const DevicesScreen(),
+          )
+          : const Center(child: CircularProgressIndicator()),
+      _ordersCubit !=
+              null // 3
+          ? BlocProvider.value(
+            value: _ordersCubit!,
+            child: const OrdersScreenContent(),
+          )
+          : const Center(child: CircularProgressIndicator()),
+      const TransactionsScreen(), //// 4
+      _inventoryCubit !=
+              null // 5
+          ? BlocProvider.value(
+            value: _inventoryCubit!,
+            child: const InventoryScreen(),
+          )
+          : const Center(child: CircularProgressIndicator()),
+      const SubscriptionsScreen(), // 6
+      _offersCubit !=
+              null // 7
+          ? BlocProvider.value(
+            value: _offersCubit!,
+            child: const OffersScreen(),
+          )
+          : const Center(child: CircularProgressIndicator()),
+      _supportCubit !=
+              null // 8
+          ? BlocProvider.value(
+            value: _supportCubit!,
+            child: const SupportScreenContent(),
+          )
+          : const Center(child: CircularProgressIndicator()),
+    ];
   }
 
   @override
@@ -80,6 +191,11 @@ class _ShopLayoutState extends State<ShopLayout> {
   @override
   void dispose() {
     _notificationsTimer?.cancel();
+    _devicesCubit?.close();
+    _inventoryCubit?.close();
+    _offersCubit?.close();
+    _ordersCubit?.close();
+    _supportCubit?.close();
     super.dispose();
   }
 
@@ -164,13 +280,93 @@ class _ShopLayoutState extends State<ShopLayout> {
             ),
           ),
           SizedBox(width: 15),
-          CircleAvatar(child: Text("M")),
-          SizedBox(width: 10),
-          Center(
-            child: Text(
-              "Mahmoud Ali",
-              style: TextStyle(color: Colors.white, fontSize: 16),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.person, color: Colors.white, size: 32),
+            offset: const Offset(0, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
+            elevation: 8,
+            color: Colors.white,
+            shadowColor: Colors.black26,
+            onSelected: (String value) {
+              switch (value) {
+                case 'profile':
+                  Navigator.pushNamed(context, AppRoutes.shopProfile);
+                  break;
+                case 'addresses':
+                  Navigator.pushNamed(context, AppRoutes.addresses);
+                  break;
+              }
+            },
+            itemBuilder:
+                (BuildContext context) => <PopupMenuEntry<String>>[
+                  PopupMenuItem<String>(
+                    value: 'profile',
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(
+                            Icons.person_outline,
+                            color: Colors.green,
+                            size: 20,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          local.profile,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuDivider(height: 1),
+                  PopupMenuItem<String>(
+                    value: 'addresses',
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(
+                            Icons.location_on_outlined,
+                            color: Colors.green,
+                            size: 20,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          local.address,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
           ),
           SizedBox(width: 20),
         ],
@@ -179,7 +375,7 @@ class _ShopLayoutState extends State<ShopLayout> {
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
       ),
-      body: IndexedStack(index: _selectedIndex, children: _screens),
+      body: IndexedStack(index: _selectedIndex, children: _buildScreens()),
     );
   }
 

@@ -60,7 +60,7 @@ class _OffersScreenState extends State<OffersScreen> {
         List<Content> offers = cubit.offers;
         if (state is OffersLoading ||
             (state is OffersInitial && offers.isEmpty)) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: Colors.green));
         }
 
         return ValueListenableBuilder<String>(
@@ -99,6 +99,7 @@ class _OffersScreenState extends State<OffersScreen> {
                 return Scaffold(
                   backgroundColor: Colors.grey.shade100,
                   body: RefreshIndicator(
+                    color: Colors.green,
                     onRefresh: () => cubit.getAllOffers(isRefresh: true),
                     child: Padding(
                       padding: const EdgeInsets.all(16),

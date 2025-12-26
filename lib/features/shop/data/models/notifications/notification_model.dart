@@ -19,3 +19,4 @@ class NotificationModel {
       _$NotificationModelFromJson(json);
   Map<String, dynamic> toJson() => _$NotificationModelToJson(this);
 }
+
