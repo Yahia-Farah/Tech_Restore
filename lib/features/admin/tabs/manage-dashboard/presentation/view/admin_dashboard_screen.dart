@@ -8,8 +8,6 @@ import '../../../../widgets/admin_drawer.dart';
 import '../viewmodel/admin_stats_cubit.dart';
 import '../viewmodel/states/admin_stats_states.dart';
 
-
-
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({super.key});
 
@@ -296,10 +294,7 @@ class _OverviewCard extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               value,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -329,7 +324,11 @@ class _SectionCard extends StatelessWidget {
             if (title.isNotEmpty) ...[
               Text(
                 title,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.primary),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
               ),
               const SizedBox(height: 12),
             ],
@@ -357,9 +356,14 @@ class _CountBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
-    final maxValue = [users, shops, repairs, orders].reduce((a, b) => a > b ? a : b);
+    final maxValue = [
+      users,
+      shops,
+      repairs,
+      orders,
+    ].reduce((a, b) => a > b ? a : b);
     final maxY = maxValue > 0 ? maxValue.toDouble() + 1.0 : 5.0;
-    
+
     return BarChart(
       BarChartData(
         alignment: BarChartAlignment.spaceAround,
@@ -375,22 +379,34 @@ class _CountBarChart extends StatelessWidget {
                   case 0:
                     return Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(local.users, style: const TextStyle(fontSize: 10)),
+                      child: Text(
+                        local.users,
+                        style: const TextStyle(fontSize: 10),
+                      ),
                     );
                   case 1:
                     return Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(local.shops, style: const TextStyle(fontSize: 10)),
+                      child: Text(
+                        local.shops,
+                        style: const TextStyle(fontSize: 10),
+                      ),
                     );
                   case 2:
                     return Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(local.repair_requests, style: const TextStyle(fontSize: 10)),
+                      child: Text(
+                        local.repair_requests,
+                        style: const TextStyle(fontSize: 10),
+                      ),
                     );
                   case 3:
                     return Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(local.total_orders, style: const TextStyle(fontSize: 10)),
+                      child: Text(
+                        local.total_orders,
+                        style: const TextStyle(fontSize: 10),
+                      ),
                     );
                   default:
                     return const Text('');
@@ -404,7 +420,10 @@ class _CountBarChart extends StatelessWidget {
               showTitles: true,
               reservedSize: 40,
               getTitlesWidget: (value, meta) {
-                return Text(value.toInt().toString(), style: const TextStyle(fontSize: 10));
+                return Text(
+                  value.toInt().toString(),
+                  style: const TextStyle(fontSize: 10),
+                );
               },
             ),
           ),
@@ -429,7 +448,9 @@ class _CountBarChart extends StatelessWidget {
                 toY: users.toDouble(),
                 color: Colors.green,
                 width: 20,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(4),
+                ),
               ),
             ],
           ),
@@ -440,7 +461,9 @@ class _CountBarChart extends StatelessWidget {
                 toY: shops.toDouble(),
                 color: Colors.blue,
                 width: 20,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(4),
+                ),
               ),
             ],
           ),
@@ -451,7 +474,9 @@ class _CountBarChart extends StatelessWidget {
                 toY: repairs.toDouble(),
                 color: Colors.orange,
                 width: 20,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(4),
+                ),
               ),
             ],
           ),
@@ -462,7 +487,9 @@ class _CountBarChart extends StatelessWidget {
                 toY: orders.toDouble(),
                 color: Colors.red,
                 width: 20,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(4),
+                ),
               ),
             ],
           ),
@@ -490,7 +517,7 @@ class _CountPieChart extends StatelessWidget {
     final local = AppLocalizations.of(context)!;
     final total = users + shops + repairs + orders;
     final sections = <PieChartSectionData>[];
-    
+
     if (users > 0) {
       sections.add(
         PieChartSectionData(
@@ -549,20 +576,21 @@ class _CountPieChart extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Expanded(
-            child: total > 0
-                ? PieChart(
-                    PieChartData(
-                      sections: sections,
-                      sectionsSpace: 2,
-                      centerSpaceRadius: 0,
+            child:
+                total > 0
+                    ? PieChart(
+                      PieChartData(
+                        sections: sections,
+                        sectionsSpace: 2,
+                        centerSpaceRadius: 0,
+                      ),
+                    )
+                    : Center(
+                      child: Text(
+                        local.count,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
                     ),
-                  )
-                : Center(
-                    child: Text(
-                      local.count,
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                  ),
           ),
         ],
       ),
@@ -574,10 +602,7 @@ class _LegendItem extends StatelessWidget {
   final Color color;
   final String label;
 
-  const _LegendItem({
-    required this.color,
-    required this.label,
-  });
+  const _LegendItem({required this.color, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -587,18 +612,11 @@ class _LegendItem extends StatelessWidget {
         Container(
           width: 12,
           height: 12,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 4),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 12),
-        ),
+        Text(label, style: const TextStyle(fontSize: 12)),
       ],
     );
   }
 }
-

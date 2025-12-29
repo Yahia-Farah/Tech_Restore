@@ -19,4 +19,3 @@ class AdminStatsCubit extends Cubit<AdminStatsState> {
     }
   }
 }
-

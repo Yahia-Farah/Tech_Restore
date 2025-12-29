@@ -7,9 +7,7 @@ class TotalElementsResponse {
   @JsonKey(name: "totalElements")
   final int? totalElements;
 
-  TotalElementsResponse({
-    this.totalElements,
-  });
+  TotalElementsResponse({this.totalElements});
 
   factory TotalElementsResponse.fromJson(Map<String, dynamic> json) {
     return _$TotalElementsResponseFromJson(json);
@@ -19,10 +17,4 @@ class TotalElementsResponse {
     return _$TotalElementsResponseToJson(this);
   }
 }
-
-
-
-
-
-
 

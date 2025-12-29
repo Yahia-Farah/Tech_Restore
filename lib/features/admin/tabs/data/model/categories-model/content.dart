@@ -9,10 +9,7 @@ class Content {
   @JsonKey(name: "name")
   final String? name;
 
-  Content({
-    this.id,
-    this.name,
-  });
+  Content({this.id, this.name});
 
   factory Content.fromJson(Map<String, dynamic> json) {
     return _$ContentFromJson(json);
@@ -22,6 +19,3 @@ class Content {
     return _$ContentToJson(this);
   }
 }
-
-
-

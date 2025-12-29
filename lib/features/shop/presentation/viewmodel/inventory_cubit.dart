@@ -26,14 +26,16 @@ class InventoryCubit extends Cubit<InventoryState> {
       emit(InventoryLoading());
     }
     if (lastPage && query == currentSearchQuery) return;
-    
+
     currentSearchQuery = query;
     emit(InventoryLoading());
     try {
       final result = await _repo.searchInventory(query, currentApiPage);
       lastPage = result.last ?? false;
       products.addAll(result.content ?? []);
-      emit(InventoryLoaded(List<ProductModel>.from(products), lastPage: lastPage));
+      emit(
+        InventoryLoaded(List<ProductModel>.from(products), lastPage: lastPage),
+      );
       if (!lastPage) {
         currentApiPage = (result.number ?? currentApiPage) + 1;
       }
@@ -47,20 +49,21 @@ class InventoryCubit extends Cubit<InventoryState> {
     try {
       totalItems = await _repo.totalItemsInInventory();
       totalValue = await _repo.totalInventoryValue();
-      
+
       // Get low stock and out of stock counts
       lowStockCount = await _repo.lowStockInInventory();
       outOfStockCount = await _repo.outOfStockInInventory();
-      
-      emit(InventoryStatsLoaded(
-        totalItems: totalItems,
-        lowStockCount: lowStockCount,
-        outOfStockCount: outOfStockCount,
-        totalValue: totalValue,
-      ));
+
+      emit(
+        InventoryStatsLoaded(
+          totalItems: totalItems,
+          lowStockCount: lowStockCount,
+          outOfStockCount: outOfStockCount,
+          totalValue: totalValue,
+        ),
+      );
     } catch (e) {
       emit(InventoryStatsError(e.toString()));
     }
   }
 }
-

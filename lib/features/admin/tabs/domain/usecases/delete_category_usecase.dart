@@ -11,6 +11,3 @@ class DeleteCategoryUseCase {
     return await _adminRepo.deleteCategory(categoryId);
   }
 }
-
-
-

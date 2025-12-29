@@ -13,12 +13,7 @@ class AdminStatesResponse {
   @JsonKey(name: "orders")
   final int? orders;
 
-  AdminStatesResponse ({
-    this.users,
-    this.shops,
-    this.repairs,
-    this.orders,
-  });
+  AdminStatesResponse({this.users, this.shops, this.repairs, this.orders});
 
   factory AdminStatesResponse.fromJson(Map<String, dynamic> json) {
     return _$AdminStatesResponseFromJson(json);
@@ -28,5 +23,3 @@ class AdminStatesResponse {
     return _$AdminStatesResponseToJson(this);
   }
 }
-
-

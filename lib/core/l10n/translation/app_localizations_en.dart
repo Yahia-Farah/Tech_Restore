@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get app_name => 'Tech & Restore';
+  String get app_name => 'Tech Bazaar';
 
   @override
   String get dashboard => 'Dashboard';
@@ -105,6 +105,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_hint => 'Search by device name, type, serial number...';
 
   @override
+  String get search_hint_transactions =>
+      'Search by date, shop name, payment method, amount...';
+
+  @override
   String get device_status => 'Device Status';
 
   @override
@@ -147,7 +151,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repair_requests_title => 'Repair Requests';
 
   @override
-  String get repair_requests_subtitle => 'You can view all customer repair requests, accept them, and update their status here';
+  String get repair_requests_subtitle =>
+      'You can view all customer repair requests, accept them, and update their status here';
 
   @override
   String get status_filter => 'Order Status';
@@ -184,6 +189,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orders_subtitle => 'You can track customer purchases from here';
+
+  @override
+  String get ordersSubtitle => 'Manage and track orders easily';
 
   @override
   String get last_orders => 'Last Orders';
@@ -225,7 +233,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transactions => 'Transactions';
 
   @override
-  String get transactions_subtitle => 'You can view the monthly or yearly income for repair orders and sales from here';
+  String get transactions_subtitle =>
+      'You can view the monthly or yearly income for repair orders and sales from here';
 
   @override
   String get month => 'Month';
@@ -286,7 +295,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inventory_title => 'Inventory System';
 
   @override
-  String get inventory_description => 'You can monitor the number of devices and see if a product is running low from here';
+  String get inventory_description =>
+      'You can monitor the number of devices and see if a product is running low from here';
 
   @override
   String get inventory_search => 'Search inventory...';
@@ -376,7 +386,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supportTitle => 'Support';
 
   @override
-  String get supportSubtitle => 'You can view all customer issues and inquiries here';
+  String get supportSubtitle =>
+      'You can view all customer issues and inquiries here';
 
   @override
   String get searchSupport => 'Search support requests...';
@@ -418,13 +429,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get requestsCount => 'requests';
 
   @override
-  String get welcome => 'Welcome to TechRestore!';
+  String get welcome => 'Welcome to TechBazaar!';
 
   @override
   String get login => 'Log In';
 
   @override
-  String get home => 'Home Page';
+  String get home => 'Home';
 
   @override
   String get deviceIssue => 'Device issue';
@@ -502,16 +513,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signUpQuote => 'Get your tech fixed, fast.';
 
   @override
-  String get secSignUpQuote => 'We\'ll connect you with the best local shops to get your device fixed.';
+  String get secSignUpQuote =>
+      'We\'ll connect you with the best local shops to get your device fixed.';
 
   @override
-  String get byContinuing => 'By continuing, you agree to the Terms of Use. Read our Privacy Policy.';
+  String get byContinuing =>
+      'By continuing, you agree to the Terms of Use. Read our Privacy Policy.';
 
   @override
-  String get startQuote => 'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
+  String get startQuote =>
+      'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
 
   @override
-  String get explore => 'explore';
+  String get explore => 'Explore';
 
   @override
   String get next => 'Next';
@@ -565,19 +579,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutConfirmTextCenter => 'Confirm logout!';
 
   @override
-  String get resetPasswordUnderMsg => 'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number';
+  String get resetPasswordUnderMsg =>
+      'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number';
 
   @override
   String get emailVerificationScreen => 'Email Verification';
 
   @override
-  String get emailVerificationScreenUnderMsg => 'Please enter the code that was sent to your\nemail address';
+  String get emailVerificationScreenUnderMsg =>
+      'Please enter the code that was sent to your\nemail address';
 
   @override
   String get codeReceiveMsgError => 'Didn\'t receive code?';
 
   @override
-  String get forgetPasswordUnderText => 'Please enter your email associated with\nyour account';
+  String get forgetPasswordUnderText =>
+      'Please enter your email associated with\nyour account';
 
   @override
   String get validationEmailErrorMessage => 'This email is not valid';
@@ -721,6 +738,213 @@ class AppLocalizationsEn extends AppLocalizations {
   String get address => 'Address';
 
   @override
+  String get chatWith => 'Chat with';
+
+  @override
+  String get connected => 'Connected';
+
+  @override
+  String get noMessages => 'No messages';
+
+  @override
+  String get typeMessage => 'Type a message...';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get connecting => 'Connecting... please wait';
+
+  @override
+  String get endChat => 'End Chat';
+
+  @override
+  String get chatEndedSuccessfully => 'Chat ended successfully';
+
+  @override
+  String get websocketNotConnected =>
+      'WebSocket is not connected. Please wait...';
+
+  @override
+  String get websocketDisconnected => 'WebSocket disconnected';
+
+  @override
+  String get websocketError => 'WebSocket error';
+
+  @override
+  String get websocketConnectionError => 'WebSocket connection error';
+
+  @override
+  String get websocketConnectionFailed => 'WebSocket connection failed';
+
+  @override
+  String get failedToSendMessage => 'Failed to send message';
+
+  @override
+  String get authenticationTokenRequired =>
+      'Authentication token is required for WebSocket connection';
+
+  @override
+  String get subscriptionsTitle => 'Subscription Management';
+
+  @override
+  String get subscriptionsSubtitle =>
+      'Choose your plan or renew your subscription easily';
+
+  @override
+  String get fullManagementTitle => 'Full Management';
+
+  @override
+  String get fullManagementDescription => 'Full control over store and orders';
+
+  @override
+  String get support247Title => '24/7 Support';
+
+  @override
+  String get support247Description => 'Support team available around the clock';
+
+  @override
+  String get automaticUpdatesTitle => 'Automatic Updates';
+
+  @override
+  String get automaticUpdatesDescription => 'New features always free';
+
+  @override
+  String get subscribeNow => 'Subscribe Now';
+
+  @override
+  String get subscriptionType => 'Subscription Type';
+
+  @override
+  String get subscriptionTypeCommission => 'Commission rate';
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String get months => 'months';
+
+  @override
+  String get cash => 'Cash';
+
+  @override
+  String get byCard => 'By Card';
+
+  @override
+  String get currentSubscription => 'Current Subscription';
+
+  @override
+  String get noActiveSubscription => 'No active subscription';
+
+  @override
+  String get subscriptionHistory => 'Subscription History';
+
+  @override
+  String get noPreviousSubscriptions => 'No previous subscriptions';
+
+  @override
+  String get dashboardTitle => 'Shop Control Panel';
+
+  @override
+  String get dashboardSubtitle => 'Monitor your store\'s performance easily';
+
+  @override
+  String get startDate => 'Start Date';
+
+  @override
+  String get endDate => 'End Date';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get totalSales => 'Total Sales';
+
+  @override
+  String get todaysSales => 'Today\'s Sales';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get totalOrders => 'Total Orders';
+
+  @override
+  String get todaysRepairs => 'Today\'s Repairs';
+
+  @override
+  String get totalRepairRequests => 'Repair Requests';
+
+  @override
+  String get salesTrendWeekly => 'Sales Trend (Weekly)';
+
+  @override
+  String get repairsTrendWeekly => 'Repairs Trend (Weekly)';
+
+  @override
+  String get sales => 'Sales';
+
+  @override
+  String get sunday => 'Sunday';
+
+  @override
+  String get monday => 'Monday';
+
+  @override
+  String get tuesday => 'Tuesday';
+
+  @override
+  String get wednesday => 'Wednesday';
+
+  @override
+  String get thursday => 'Thursday';
+
+  @override
+  String get friday => 'Friday';
+
+  @override
+  String get saturday => 'Saturday';
+
+  @override
+  String get searchOrders => 'Search in orders...';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get orderDate => 'Order Date';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get noNotifications => 'No notifications available';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get message => 'Message';
+
+  @override
   String get admin_dashboard => 'Admin Dashboard';
 
   @override
@@ -751,7 +975,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get user_management => 'User Management';
 
   @override
-  String get manage_user_accounts_roles_status => 'Manage user accounts, roles, and status';
+  String get manage_user_accounts_roles_status =>
+      'Manage user accounts, roles, and status';
 
   @override
   String get active => 'Active';
@@ -856,7 +1081,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transactions_management => 'Transactions Management';
 
   @override
-  String get view_and_monitor_transactions => 'View and monitor all payment transactions';
+  String get view_and_monitor_transactions =>
+      'View and monitor all payment transactions';
 
   @override
   String get total_transactions => 'Total Transactions';
@@ -865,7 +1091,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get total_revenue => 'Total Revenue';
 
   @override
-  String get search_by_user_id => 'Search by User ID (leave empty for all transactions)';
+  String get search_by_user_id =>
+      'Search by User ID (leave empty for all transactions)';
 
   @override
   String get search_user => 'Search User';
@@ -889,7 +1116,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delivery_management => 'Delivery Management';
 
   @override
-  String get monitor_and_manage_delivery => 'Monitor and manage delivery personnel';
+  String get monitor_and_manage_delivery =>
+      'Monitor and manage delivery personnel';
 
   @override
   String get total_deliveries => 'Total Deliveries';
@@ -904,16 +1132,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_by_name_email_phone => 'Search by name, email, or phone...';
 
   @override
-  String get all => 'All';
-
-  @override
   String get no_deliveries_available => 'No deliveries available';
 
   @override
   String get assigner_management => 'Assigner Management';
 
   @override
-  String get monitor_and_manage_assigners => 'Monitor and manage assigner personnel';
+  String get monitor_and_manage_assigners =>
+      'Monitor and manage assigner personnel';
 
   @override
   String get total_assigners => 'Total Assigners';
@@ -925,77 +1151,129 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assignment_logs => 'Assignment Logs';
 
   @override
-  String get track_all_assignment_activities => 'Track all assignment activities across assigners, shops, and users.';
+  String get track_all_assignment_activities =>
+      'Track all assignment activities across assigners, shops, and users.';
 
   @override
   String get no_assignment_logs_found => 'No Assignment Logs Found';
 
   @override
-  String get no_assignment_logs_description => 'There are currently no assignment activities recorded in the system.';
+  String get no_assignment_logs_description =>
+      'There are currently no assignment activities recorded in the system.';
 
   @override
   String get failed_to_load_transactions => 'Failed to load transactions';
 
   @override
-  String get transactions_loaded_successfully => 'Transactions loaded successfully';
+  String get transactions_loaded_successfully =>
+      'Transactions loaded successfully';
 
   @override
-  String get shops_management => 'Shops Management';
+  String get addresses => 'Addresses';
 
   @override
-  String get manage_approve_suspend_view_shop_details => 'Manage, approve, suspend, and view shop details';
+  String get branches_and_addresses => 'Branches and Addresses';
 
   @override
-  String get filter_by_status => 'Filter by Status';
+  String get add_new_address => 'Add New Address';
 
   @override
-  String get all_shops => 'All Shops';
+  String get governorate => 'Governorate';
 
   @override
-  String get approved_shops => 'Approved Shops';
+  String get city => 'City';
 
   @override
-  String get suspended_shops => 'Suspended Shops';
+  String get street => 'Street';
 
   @override
-  String get shop_type => 'SHOP TYPE';
+  String get building_number => 'Building Number (Optional)';
 
   @override
-  String get view => 'View';
+  String get set_as_primary => 'Set as Primary Address';
 
   @override
-  String get approve => 'Approve';
+  String get add_address => 'Add Address';
 
   @override
-  String get no_shops_match_filters => 'No shops match your filters';
+  String get shop_profile => 'Shop Profile';
+
+  @override
+  String get update_shop_data => 'Update Shop Data';
 
   @override
   String get shop_details => 'Shop Details';
 
   @override
+  String get shop_name => 'Shop Name';
+
+  @override
+  String get shop_description_label => 'Shop Description';
+
+  @override
+  String get we_fix_devices => 'We fix laptops, phones, and tablets';
+
+  @override
+  String get new_password_optional => 'New Password (Optional)';
+
+  @override
+  String get update_account => 'Update Account';
+
+  @override
+  String get active_status => 'Active';
+
+  @override
+  String get verified_status => 'Verified';
+
+  @override
+  String get shop_type_both => 'Both';
+
+  @override
   String get shop_information => 'Shop Information';
 
   @override
-  String get rating => 'Rating';
+  String get shop_address_title => 'Shop Address';
 
   @override
-  String get description => 'Description';
+  String get verified_shop => 'Verified Shop';
 
   @override
-  String get data_copied_to_clipboard => 'Data copied to clipboard';
+  String get under_review => 'Under Review';
 
   @override
-  String get suspend => 'Suspend';
+  String get default_address => 'Default Address';
 
   @override
-  String get shop_approved_successfully => 'Shop approved successfully';
+  String get not_provided => 'Not provided';
 
   @override
-  String get shop_suspended_successfully => 'Shop suspended successfully';
+  String get no_description => 'No description';
 
   @override
-  String get shop_approval_failed => 'Failed to approve shop';
+  String get not_specified => 'Not specified';
 
   @override
-  String get shop_suspension_failed => 'Failed to suspend shop';
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get profile_updated_successfully => 'Profile updated successfully';
+
+  @override
+  String get finish_processing => 'Finish Processing';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get edit_address => 'Edit Address';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get default_address_warning =>
+      'Setting this as the default address will remove the default status from your current default address. Do you want to continue?';
 }

@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,23 +84,24 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
-    Locale('en')
+    Locale('en'),
   ];
 
   /// No description provided for @app_name.
   ///
   /// In en, this message translates to:
-  /// **'Tech & Restore'**
+  /// **'Tech Bazaar'**
   String get app_name;
 
   /// No description provided for @dashboard.
@@ -287,6 +290,12 @@ abstract class AppLocalizations {
   /// **'Search by device name, type, serial number...'**
   String get search_hint;
 
+  /// No description provided for @search_hint_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by date, shop name, payment method, amount...'**
+  String get search_hint_transactions;
+
   /// No description provided for @device_status.
   ///
   /// In en, this message translates to:
@@ -448,6 +457,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can track customer purchases from here'**
   String get orders_subtitle;
+
+  /// No description provided for @ordersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage and track orders easily'**
+  String get ordersSubtitle;
 
   /// No description provided for @last_orders.
   ///
@@ -908,7 +923,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to TechRestore!'**
+  /// **'Welcome to TechBazaar!'**
   String get welcome;
 
   /// No description provided for @login.
@@ -920,7 +935,7 @@ abstract class AppLocalizations {
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
-  /// **'Home Page'**
+  /// **'Home'**
   String get home;
 
   /// No description provided for @deviceIssue.
@@ -1094,7 +1109,7 @@ abstract class AppLocalizations {
   /// No description provided for @explore.
   ///
   /// In en, this message translates to:
-  /// **'explore'**
+  /// **'Explore'**
   String get explore;
 
   /// No description provided for @next.
@@ -1511,6 +1526,414 @@ abstract class AppLocalizations {
   /// **'Address'**
   String get address;
 
+  /// No description provided for @chatWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with'**
+  String get chatWith;
+
+  /// No description provided for @connected.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected'**
+  String get connected;
+
+  /// No description provided for @noMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages'**
+  String get noMessages;
+
+  /// No description provided for @typeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message...'**
+  String get typeMessage;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @connecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting... please wait'**
+  String get connecting;
+
+  /// No description provided for @endChat.
+  ///
+  /// In en, this message translates to:
+  /// **'End Chat'**
+  String get endChat;
+
+  /// No description provided for @chatEndedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat ended successfully'**
+  String get chatEndedSuccessfully;
+
+  /// No description provided for @websocketNotConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket is not connected. Please wait...'**
+  String get websocketNotConnected;
+
+  /// No description provided for @websocketDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket disconnected'**
+  String get websocketDisconnected;
+
+  /// No description provided for @websocketError.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket error'**
+  String get websocketError;
+
+  /// No description provided for @websocketConnectionError.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket connection error'**
+  String get websocketConnectionError;
+
+  /// No description provided for @websocketConnectionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'WebSocket connection failed'**
+  String get websocketConnectionFailed;
+
+  /// No description provided for @failedToSendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to send message'**
+  String get failedToSendMessage;
+
+  /// No description provided for @authenticationTokenRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication token is required for WebSocket connection'**
+  String get authenticationTokenRequired;
+
+  /// No description provided for @subscriptionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Management'**
+  String get subscriptionsTitle;
+
+  /// No description provided for @subscriptionsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your plan or renew your subscription easily'**
+  String get subscriptionsSubtitle;
+
+  /// No description provided for @fullManagementTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Management'**
+  String get fullManagementTitle;
+
+  /// No description provided for @fullManagementDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Full control over store and orders'**
+  String get fullManagementDescription;
+
+  /// No description provided for @support247Title.
+  ///
+  /// In en, this message translates to:
+  /// **'24/7 Support'**
+  String get support247Title;
+
+  /// No description provided for @support247Description.
+  ///
+  /// In en, this message translates to:
+  /// **'Support team available around the clock'**
+  String get support247Description;
+
+  /// No description provided for @automaticUpdatesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic Updates'**
+  String get automaticUpdatesTitle;
+
+  /// No description provided for @automaticUpdatesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'New features always free'**
+  String get automaticUpdatesDescription;
+
+  /// No description provided for @subscribeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe Now'**
+  String get subscribeNow;
+
+  /// No description provided for @subscriptionType.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Type'**
+  String get subscriptionType;
+
+  /// No description provided for @subscriptionTypeCommission.
+  ///
+  /// In en, this message translates to:
+  /// **'Commission rate'**
+  String get subscriptionTypeCommission;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @months.
+  ///
+  /// In en, this message translates to:
+  /// **'months'**
+  String get months;
+
+  /// No description provided for @cash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get cash;
+
+  /// No description provided for @byCard.
+  ///
+  /// In en, this message translates to:
+  /// **'By Card'**
+  String get byCard;
+
+  /// No description provided for @currentSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Subscription'**
+  String get currentSubscription;
+
+  /// No description provided for @noActiveSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'No active subscription'**
+  String get noActiveSubscription;
+
+  /// No description provided for @subscriptionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription History'**
+  String get subscriptionHistory;
+
+  /// No description provided for @noPreviousSubscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous subscriptions'**
+  String get noPreviousSubscriptions;
+
+  /// No description provided for @dashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Control Panel'**
+  String get dashboardTitle;
+
+  /// No description provided for @dashboardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor your store\'s performance easily'**
+  String get dashboardSubtitle;
+
+  /// No description provided for @startDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get startDate;
+
+  /// No description provided for @endDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get endDate;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @totalSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Sales'**
+  String get totalSales;
+
+  /// No description provided for @todaysSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Sales'**
+  String get todaysSales;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @totalOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get totalOrders;
+
+  /// No description provided for @todaysRepairs.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Repairs'**
+  String get todaysRepairs;
+
+  /// No description provided for @totalRepairRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair Requests'**
+  String get totalRepairRequests;
+
+  /// No description provided for @salesTrendWeekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales Trend (Weekly)'**
+  String get salesTrendWeekly;
+
+  /// No description provided for @repairsTrendWeekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Repairs Trend (Weekly)'**
+  String get repairsTrendWeekly;
+
+  /// No description provided for @sales.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get sales;
+
+  /// No description provided for @sunday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday'**
+  String get sunday;
+
+  /// No description provided for @monday.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday'**
+  String get monday;
+
+  /// No description provided for @tuesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday'**
+  String get tuesday;
+
+  /// No description provided for @wednesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday'**
+  String get wednesday;
+
+  /// No description provided for @thursday.
+  ///
+  /// In en, this message translates to:
+  /// **'Thursday'**
+  String get thursday;
+
+  /// No description provided for @friday.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday'**
+  String get friday;
+
+  /// No description provided for @saturday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturday'**
+  String get saturday;
+
+  /// No description provided for @searchOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in orders...'**
+  String get searchOrders;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @orderDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Date'**
+  String get orderDate;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications available'**
+  String get noNotifications;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
   /// No description provided for @admin_dashboard.
   ///
   /// In en, this message translates to:
@@ -1877,12 +2300,6 @@ abstract class AppLocalizations {
   /// **'Search by name, email, or phone...'**
   String get search_by_name_email_phone;
 
-  /// No description provided for @all.
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get all;
-
   /// No description provided for @no_deliveries_available.
   ///
   /// In en, this message translates to:
@@ -1949,65 +2366,71 @@ abstract class AppLocalizations {
   /// **'Transactions loaded successfully'**
   String get transactions_loaded_successfully;
 
-  /// No description provided for @shops_management.
+  /// No description provided for @addresses.
   ///
   /// In en, this message translates to:
-  /// **'Shops Management'**
-  String get shops_management;
+  /// **'Addresses'**
+  String get addresses;
 
-  /// No description provided for @manage_approve_suspend_view_shop_details.
+  /// No description provided for @branches_and_addresses.
   ///
   /// In en, this message translates to:
-  /// **'Manage, approve, suspend, and view shop details'**
-  String get manage_approve_suspend_view_shop_details;
+  /// **'Branches and Addresses'**
+  String get branches_and_addresses;
 
-  /// No description provided for @filter_by_status.
+  /// No description provided for @add_new_address.
   ///
   /// In en, this message translates to:
-  /// **'Filter by Status'**
-  String get filter_by_status;
+  /// **'Add New Address'**
+  String get add_new_address;
 
-  /// No description provided for @all_shops.
+  /// No description provided for @governorate.
   ///
   /// In en, this message translates to:
-  /// **'All Shops'**
-  String get all_shops;
+  /// **'Governorate'**
+  String get governorate;
 
-  /// No description provided for @approved_shops.
+  /// No description provided for @city.
   ///
   /// In en, this message translates to:
-  /// **'Approved Shops'**
-  String get approved_shops;
+  /// **'City'**
+  String get city;
 
-  /// No description provided for @suspended_shops.
+  /// No description provided for @street.
   ///
   /// In en, this message translates to:
-  /// **'Suspended Shops'**
-  String get suspended_shops;
+  /// **'Street'**
+  String get street;
 
-  /// No description provided for @shop_type.
+  /// No description provided for @building_number.
   ///
   /// In en, this message translates to:
-  /// **'SHOP TYPE'**
-  String get shop_type;
+  /// **'Building Number (Optional)'**
+  String get building_number;
 
-  /// No description provided for @view.
+  /// No description provided for @set_as_primary.
   ///
   /// In en, this message translates to:
-  /// **'View'**
-  String get view;
+  /// **'Set as Primary Address'**
+  String get set_as_primary;
 
-  /// No description provided for @approve.
+  /// No description provided for @add_address.
   ///
   /// In en, this message translates to:
-  /// **'Approve'**
-  String get approve;
+  /// **'Add Address'**
+  String get add_address;
 
-  /// No description provided for @no_shops_match_filters.
+  /// No description provided for @shop_profile.
   ///
   /// In en, this message translates to:
-  /// **'No shops match your filters'**
-  String get no_shops_match_filters;
+  /// **'Shop Profile'**
+  String get shop_profile;
+
+  /// No description provided for @update_shop_data.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Shop Data'**
+  String get update_shop_data;
 
   /// No description provided for @shop_details.
   ///
@@ -2015,62 +2438,153 @@ abstract class AppLocalizations {
   /// **'Shop Details'**
   String get shop_details;
 
+  /// No description provided for @shop_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Name'**
+  String get shop_name;
+
+  /// No description provided for @shop_description_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Description'**
+  String get shop_description_label;
+
+  /// No description provided for @we_fix_devices.
+  ///
+  /// In en, this message translates to:
+  /// **'We fix laptops, phones, and tablets'**
+  String get we_fix_devices;
+
+  /// No description provided for @new_password_optional.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password (Optional)'**
+  String get new_password_optional;
+
+  /// No description provided for @update_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Account'**
+  String get update_account;
+
+  /// No description provided for @active_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active_status;
+
+  /// No description provided for @verified_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get verified_status;
+
+  /// No description provided for @shop_type_both.
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get shop_type_both;
+
   /// No description provided for @shop_information.
   ///
   /// In en, this message translates to:
   /// **'Shop Information'**
   String get shop_information;
 
-  /// No description provided for @rating.
+  /// No description provided for @shop_address_title.
   ///
   /// In en, this message translates to:
-  /// **'Rating'**
-  String get rating;
+  /// **'Shop Address'**
+  String get shop_address_title;
 
-  /// No description provided for @description.
+  /// No description provided for @verified_shop.
   ///
   /// In en, this message translates to:
-  /// **'Description'**
-  String get description;
+  /// **'Verified Shop'**
+  String get verified_shop;
 
-  /// No description provided for @data_copied_to_clipboard.
+  /// No description provided for @under_review.
   ///
   /// In en, this message translates to:
-  /// **'Data copied to clipboard'**
-  String get data_copied_to_clipboard;
+  /// **'Under Review'**
+  String get under_review;
 
-  /// No description provided for @suspend.
+  /// No description provided for @default_address.
   ///
   /// In en, this message translates to:
-  /// **'Suspend'**
-  String get suspend;
+  /// **'Default Address'**
+  String get default_address;
 
-  /// No description provided for @shop_approved_successfully.
+  /// No description provided for @not_provided.
   ///
   /// In en, this message translates to:
-  /// **'Shop approved successfully'**
-  String get shop_approved_successfully;
+  /// **'Not provided'**
+  String get not_provided;
 
-  /// No description provided for @shop_suspended_successfully.
+  /// No description provided for @no_description.
   ///
   /// In en, this message translates to:
-  /// **'Shop suspended successfully'**
-  String get shop_suspended_successfully;
+  /// **'No description'**
+  String get no_description;
 
-  /// No description provided for @shop_approval_failed.
+  /// No description provided for @not_specified.
   ///
   /// In en, this message translates to:
-  /// **'Failed to approve shop'**
-  String get shop_approval_failed;
+  /// **'Not specified'**
+  String get not_specified;
 
-  /// No description provided for @shop_suspension_failed.
+  /// No description provided for @edit_profile.
   ///
   /// In en, this message translates to:
-  /// **'Failed to suspend shop'**
-  String get shop_suspension_failed;
+  /// **'Edit Profile'**
+  String get edit_profile;
+
+  /// No description provided for @profile_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profile_updated_successfully;
+
+  /// No description provided for @finish_processing.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish Processing'**
+  String get finish_processing;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
+
+  /// No description provided for @edit_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Address'**
+  String get edit_address;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @default_address_warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Setting this as the default address will remove the default status from your current default address. Do you want to continue?'**
+  String get default_address_warning;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -2079,25 +2593,26 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

@@ -12,6 +12,3 @@ class GetUserRemoteDataSource {
     return await _apiClient.getUsers();
   }
 }
-
-
-

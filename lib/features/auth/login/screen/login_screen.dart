@@ -7,7 +7,6 @@ import '../../../../core/routes/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/toast_helper.dart';
-import '../../../shop/presentation/view/shop_layout.dart';
 import '../../domain/services/auth_services.dart';
 import '../../register/widgets/register_select_widget.dart';
 import '../viewmodel/login_states.dart';
@@ -53,9 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRoutes.deliveryDashboard,
-                    (route) => false,
+                (route) => false,
               );
-            }else {
+            } else {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRoutes.shopDashboard,
@@ -79,10 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
               scrolledUnderElevation: 0,
               title: Text(local.login),
               titleTextStyle: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+                color: AppColors.primary,
+              ),
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -184,10 +183,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                 builder:
                                     (context) => RegisterSelectScreen(
-                                      onDriverTap: () => Navigator.pushNamed(
-                                        context,
-                                        AppRoutes.deliveryRegister,
-                                      ),
+                                      onDriverTap:
+                                          () => Navigator.pushNamed(
+                                            context,
+                                            AppRoutes.deliveryRegister,
+                                          ),
                                       onUserTap:
                                           () => Navigator.pushNamed(
                                             context,

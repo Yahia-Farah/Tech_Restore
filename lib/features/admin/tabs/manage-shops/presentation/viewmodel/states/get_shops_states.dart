@@ -15,16 +15,3 @@ class GetShopsError extends GetShopsState {
   final String message;
   GetShopsError(this.message);
 }
-
-class ShopApproved extends GetShopsState {
-  final String message;
-  ShopApproved(this.message);
-}
-
-class ShopSuspended extends GetShopsState {
-  final String message;
-  ShopSuspended(this.message);
-}
-
-
-

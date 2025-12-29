@@ -6,7 +6,8 @@ class AdminAssignmentLogsScreen extends StatefulWidget {
   const AdminAssignmentLogsScreen({super.key});
 
   @override
-  State<AdminAssignmentLogsScreen> createState() => _AdminAssignmentLogsScreenState();
+  State<AdminAssignmentLogsScreen> createState() =>
+      _AdminAssignmentLogsScreenState();
 }
 
 class _AdminAssignmentLogsScreenState extends State<AdminAssignmentLogsScreen> {

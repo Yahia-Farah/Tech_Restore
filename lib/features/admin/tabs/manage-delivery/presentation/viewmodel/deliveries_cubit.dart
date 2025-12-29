@@ -11,10 +11,8 @@ class DeliveriesCubit extends Cubit<DeliveriesState> {
   final GetDeliveryByIdUseCase _getDeliveryByIdUseCase;
   int _currentPage = 0;
 
-  DeliveriesCubit(
-    this._getAllDeliveriesUseCase,
-    this._getDeliveryByIdUseCase,
-  ) : super(DeliveriesInitial());
+  DeliveriesCubit(this._getAllDeliveriesUseCase, this._getDeliveryByIdUseCase)
+    : super(DeliveriesInitial());
 
   Future<void> getAllDeliveries(int page) async {
     _currentPage = page;

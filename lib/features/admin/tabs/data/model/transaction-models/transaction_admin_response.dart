@@ -31,7 +31,7 @@ class TransactionAdminModelResponse {
   @JsonKey(name: "empty")
   final bool? empty;
 
-  TransactionAdminModelResponse ({
+  TransactionAdminModelResponse({
     this.totalPages,
     this.totalElements,
     this.size,
@@ -53,12 +53,3 @@ class TransactionAdminModelResponse {
     return _$TransactionAdminModelResponseToJson(this);
   }
 }
-
-
-
-
-
-
-
-
-

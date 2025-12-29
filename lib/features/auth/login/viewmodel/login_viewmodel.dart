@@ -23,6 +23,7 @@ class LoginViewModel extends Cubit<LoginStates> {
     rememberMe = boxValue;
     emit(ChangeRememberMeState());
   }
+
   Future<void> login() async {
     emit(LoginLoadingState());
 

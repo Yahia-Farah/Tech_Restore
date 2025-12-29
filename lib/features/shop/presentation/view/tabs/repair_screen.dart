@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/Widgets/custom_text_field.dart';
 import '../../../../../core/l10n/translation/app_localizations.dart';
 
 class RepairScreen extends StatefulWidget {
@@ -10,7 +11,7 @@ class RepairScreen extends StatefulWidget {
 
 class _RepairScreenState extends State<RepairScreen> {
   String _searchQuery = "";
-  String _selectedStatus = "all"; // ✅ stable default key
+  String _selectedStatus = "all";
   int _currentPage = 1;
   final int _rowsPerPage = 5;
 
@@ -114,7 +115,7 @@ class _RepairScreenState extends State<RepairScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
+              color: Colors.green.shade50,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -125,7 +126,7 @@ class _RepairScreenState extends State<RepairScreen> {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: Colors.green,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -142,18 +143,12 @@ class _RepairScreenState extends State<RepairScreen> {
           Row(
             children: [
               Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: local.search_hint,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+                child: CustomTextFormField(
+                  hint: local.search_hint,
                   onChanged: (value) {
                     setState(() {
                       _searchQuery = value;
-                      _currentPage = 1; // reset page
+                      _currentPage = 1;
                     });
                   },
                 ),
@@ -241,7 +236,7 @@ class _RepairScreenState extends State<RepairScreen> {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       _currentPage == i
-                                          ? Colors.blue
+                                          ? Colors.green
                                           : Colors.grey.shade300,
                                   foregroundColor:
                                       _currentPage == i
@@ -322,16 +317,74 @@ class _RepairScreenState extends State<RepairScreen> {
         DataCell(Text(date)),
         DataCell(
           Row(
-            children: const [
-              Icon(Icons.edit, color: Colors.blue),
-              SizedBox(width: 8),
-              Icon(Icons.timer, color: Colors.orange),
-              SizedBox(width: 8),
-              Icon(Icons.check_circle, color: Colors.green),
+            children: [
+              _buildActionButton(
+                icon: Icons.edit,
+                label: local.edit,
+                color: Colors.blue,
+                onTap: () {},
+                isRTL: Localizations.localeOf(context).languageCode == 'ar',
+              ),
+              const SizedBox(width: 8),
+              _buildActionButton(
+                icon: Icons.timer,
+                label: local.status_in_progress,
+                color: Colors.orange,
+                onTap: () {},
+                isRTL: Localizations.localeOf(context).languageCode == 'ar',
+              ),
+              const SizedBox(width: 8),
+              _buildActionButton(
+                icon: Icons.check_circle,
+                label: local.status_completed,
+                color: Colors.green,
+                onTap: () {},
+                isRTL: Localizations.localeOf(context).languageCode == 'ar',
+              ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+
+  Widget _buildActionButton({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required VoidCallback onTap,
+    required bool isRTL,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(6),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            children: [
+              Icon(icon, color: color, size: 16),
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  color: color,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

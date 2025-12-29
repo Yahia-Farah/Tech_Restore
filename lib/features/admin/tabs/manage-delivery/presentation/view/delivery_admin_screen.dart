@@ -64,365 +64,391 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
 
           if (state is DeliveriesLoaded) {
             final contentList = state.deliveries.content;
-            deliveries = contentList != null
-                ? List<ContentDeliveryAdmin>.from(contentList)
-                : <ContentDeliveryAdmin>[];
+            deliveries =
+                contentList != null
+                    ? List<ContentDeliveryAdmin>.from(contentList)
+                    : <ContentDeliveryAdmin>[];
             totalDeliveries = state.deliveries.totalElements ?? 0;
 
-            pendingDeliveries = deliveries.where((d) => d.status?.toLowerCase() == 'pending').length;
-            approvedDeliveries = deliveries.where((d) => d.status?.toLowerCase() == 'approved').length;
+            pendingDeliveries =
+                deliveries
+                    .where((d) => d.status?.toLowerCase() == 'pending')
+                    .length;
+            approvedDeliveries =
+                deliveries
+                    .where((d) => d.status?.toLowerCase() == 'approved')
+                    .length;
           }
 
-          final filteredDeliveries = _searchQuery.isEmpty
-              ? deliveries
-              : deliveries.where((delivery) {
-                  final query = _searchQuery.toLowerCase();
-                  return (delivery.name ?? '').toLowerCase().contains(query) ||
-                         (delivery.email ?? '').toLowerCase().contains(query) ||
-                         (delivery.phone ?? '').toLowerCase().contains(query);
-                }).toList();
+          final filteredDeliveries =
+              _searchQuery.isEmpty
+                  ? deliveries
+                  : deliveries.where((delivery) {
+                    final query = _searchQuery.toLowerCase();
+                    return (delivery.name ?? '').toLowerCase().contains(
+                          query,
+                        ) ||
+                        (delivery.email ?? '').toLowerCase().contains(query) ||
+                        (delivery.phone ?? '').toLowerCase().contains(query);
+                  }).toList();
 
-          final statusFilteredDeliveries = _selectedFilter == "All"
-              ? filteredDeliveries
-              : filteredDeliveries.where((delivery) {
-                  return delivery.status?.toLowerCase() == _selectedFilter.toLowerCase();
-                }).toList();
+          final statusFilteredDeliveries =
+              _selectedFilter == "All"
+                  ? filteredDeliveries
+                  : filteredDeliveries.where((delivery) {
+                    return delivery.status?.toLowerCase() ==
+                        _selectedFilter.toLowerCase();
+                  }).toList();
 
           return SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.local_shipping,
-                  color: AppColors.primary[70],
-                  size: 28,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  local.delivery_management,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary[70],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              local.monitor_and_manage_delivery,
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.black[40],
-              ),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildMetricCard(
-                    icon: Icons.local_shipping,
-                    iconColor: AppColors.primary[70] ?? AppColors.black,
-                    label: local.total_deliveries,
-                    value: totalDeliveries.toString(),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _buildMetricCard(
-                    icon: Icons.pending_outlined,
-                    iconColor: Colors.orange,
-                    label: local.pending,
-                    value: pendingDeliveries.toString(),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _buildMetricCard(
-                    icon: Icons.check_circle_outline,
-                    iconColor: Colors.green,
-                    label: local.approved,
-                    value: approvedDeliveries.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Text(
-              local.search,
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.hint,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Card(
-              color: AppColors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: AppColors.black[30]!, width: 1),
-              ),
-              elevation: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
+                Row(
                   children: [
-                    CustomTextFormField(
-                      controller: _searchController,
-                      hint: local.search_by_name_email_phone,
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: AppColors.black[30]!,
-                      ),
-                      onChanged: (val) {
-                        setState(() => _searchQuery = val);
-                      },
+                    Icon(
+                      Icons.local_shipping,
+                      color: AppColors.primary[70],
+                      size: 28,
                     ),
-                    const SizedBox(height: 12),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildFilterButton(
-                                local.all,
-                                "All",
-                                Icons.list,
-                                _selectedFilter == "All",
-                                onPressed: () => _onFilterChanged("All"),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: _buildFilterButton(
-                                local.pending,
-                                "Pending",
-                                Icons.close,
-                                _selectedFilter == "Pending",
-                                onPressed: () => _onFilterChanged("Pending"),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildFilterButton(
-                                local.approved,
-                                "Approved",
-                                Icons.check,
-                                _selectedFilter == "Approved",
-                                onPressed: () => _onFilterChanged("Approved"),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: _buildFilterButton(
-                                local.suspended,
-                                "Suspended",
-                                Icons.delete_outline,
-                                _selectedFilter == "Suspended",
-                                onPressed: () => _onFilterChanged("Suspended"),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    const SizedBox(width: 8),
+                    Text(
+                      local.delivery_management,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary[70],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Card(
-              color: AppColors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: AppColors.black[30]!, width: 1),
-              ),
-              elevation: 0,
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    color: AppColors.grey,
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                    child: Row(
+                const SizedBox(height: 8),
+                Text(
+                  local.monitor_and_manage_delivery,
+                  style: TextStyle(fontSize: 14, color: AppColors.black[40]),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildMetricCard(
+                        icon: Icons.local_shipping,
+                        iconColor: AppColors.primary[70] ?? AppColors.black,
+                        label: local.total_deliveries,
+                        value: totalDeliveries.toString(),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _buildMetricCard(
+                        icon: Icons.pending_outlined,
+                        iconColor: Colors.orange,
+                        label: local.pending,
+                        value: pendingDeliveries.toString(),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _buildMetricCard(
+                        icon: Icons.check_circle_outline,
+                        iconColor: Colors.green,
+                        label: local.approved,
+                        value: approvedDeliveries.toString(),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  local.search,
+                  style: TextStyle(fontSize: 14, color: AppColors.hint),
+                ),
+                const SizedBox(height: 8),
+                Card(
+                  color: AppColors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(color: AppColors.black[30]!, width: 1),
+                  ),
+                  elevation: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
                       children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            local.id.toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: AppColors.black[50],
-                            ),
+                        CustomTextFormField(
+                          controller: _searchController,
+                          hint: local.search_by_name_email_phone,
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: AppColors.black[30]!,
                           ),
+                          onChanged: (val) {
+                            setState(() => _searchQuery = val);
+                          },
                         ),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            local.name.toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: AppColors.black[50],
+                        const SizedBox(height: 12),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _buildFilterButton(
+                                    local.all,
+                                    "All",
+                                    Icons.list,
+                                    _selectedFilter == "All",
+                                    onPressed: () => _onFilterChanged("All"),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: _buildFilterButton(
+                                    local.pending,
+                                    "Pending",
+                                    Icons.close,
+                                    _selectedFilter == "Pending",
+                                    onPressed:
+                                        () => _onFilterChanged("Pending"),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            local.email.toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: AppColors.black[50],
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _buildFilterButton(
+                                    local.approved,
+                                    "Approved",
+                                    Icons.check,
+                                    _selectedFilter == "Approved",
+                                    onPressed:
+                                        () => _onFilterChanged("Approved"),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: _buildFilterButton(
+                                    local.suspended,
+                                    "Suspended",
+                                    Icons.delete_outline,
+                                    _selectedFilter == "Suspended",
+                                    onPressed:
+                                        () => _onFilterChanged("Suspended"),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            local.phone.toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            local.status.toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            local.completed.toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            local.actions.toUpperCase(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: AppColors.black[50],
-                            ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                  if (state is DeliveriesLoading)
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(60.0),
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  else if (statusFilteredDeliveries.isEmpty)
-                    _buildEmptyState(local)
-                  else
-                    ...statusFilteredDeliveries.map((delivery) {
-                      return Container(
+                ),
+                const SizedBox(height: 24),
+                Card(
+                  color: AppColors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(color: AppColors.black[30]!, width: 1),
+                  ),
+                  elevation: 0,
+                  child: Column(
+                    children: [
+                      Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: AppColors.black[30]!,
-                              width: 0.5,
-                            ),
-                          ),
+                        color: AppColors.grey,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
                         ),
                         child: Row(
                           children: [
                             Expanded(
                               flex: 1,
                               child: Text(
-                                delivery.id ?? '',
-                                style: const TextStyle(fontSize: 12),
+                                local.id.toUpperCase(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: AppColors.black[50],
+                                ),
                               ),
                             ),
                             Expanded(
                               flex: 2,
                               child: Text(
-                                delivery.name ?? '',
-                                style: const TextStyle(fontSize: 12),
+                                local.name.toUpperCase(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: AppColors.black[50],
+                                ),
                               ),
                             ),
                             Expanded(
                               flex: 2,
                               child: Text(
-                                delivery.email ?? '',
-                                style: const TextStyle(fontSize: 12),
+                                local.email.toUpperCase(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: AppColors.black[50],
+                                ),
                               ),
                             ),
                             Expanded(
                               flex: 2,
                               child: Text(
-                                delivery.phone ?? '',
-                                style: const TextStyle(fontSize: 12),
+                                local.phone.toUpperCase(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: AppColors.black[50],
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: _buildStatusChip(delivery.status ?? ''),
                             ),
                             Expanded(
                               flex: 1,
                               child: Text(
-                                (delivery.totalCompletedDeliveries ?? 0).toString(),
-                                style: const TextStyle(fontSize: 12),
+                                local.status.toUpperCase(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: AppColors.black[50],
+                                ),
                               ),
                             ),
                             Expanded(
                               flex: 1,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.edit, size: 16, color: Colors.green),
-                                    onPressed: () {},
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete, size: 16, color: Colors.red),
-                                    onPressed: () {},
-                                  ),
-                                ],
+                              child: Text(
+                                local.completed.toUpperCase(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: AppColors.black[50],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                local.actions.toUpperCase(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: AppColors.black[50],
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      );
-                    }).toList(),
-                ],
-              ),
+                      ),
+                      if (state is DeliveriesLoading)
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(60.0),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      else if (statusFilteredDeliveries.isEmpty)
+                        _buildEmptyState(local)
+                      else
+                        ...statusFilteredDeliveries.map((delivery) {
+                          return Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: AppColors.black[30]!,
+                                  width: 0.5,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    delivery.id ?? '',
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    delivery.name ?? '',
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    delivery.email ?? '',
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    delivery.phone ?? '',
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: _buildStatusChip(
+                                    delivery.status ?? '',
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    (delivery.totalCompletedDeliveries ?? 0)
+                                        .toString(),
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          size: 16,
+                                          color: Colors.green,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          size: 16,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          );
         },
       ),
     );
@@ -449,18 +475,11 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                color: iconColor,
-                size: 20,
-              ),
+              Icon(icon, color: iconColor, size: 20),
               const SizedBox(height: 12),
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppColors.black[40],
-                ),
+                style: TextStyle(fontSize: 12, color: AppColors.black[40]),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -484,9 +503,9 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
     String text,
     String value,
     IconData icon,
-    bool isSelected,
-    {required VoidCallback onPressed}
-  ) {
+    bool isSelected, {
+    required VoidCallback onPressed,
+  }) {
     return SizedBox(
       height: 50,
       child: CustomElevatedButton(
@@ -557,22 +576,14 @@ class _DeliveryAdminScreenState extends State<DeliveryAdminScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.local_shipping,
-            size: 80,
-            color: AppColors.black[30]!,
-          ),
+          Icon(Icons.local_shipping, size: 80, color: AppColors.black[30]!),
           const SizedBox(height: 16),
           Text(
             local.no_deliveries_available,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.black[40]!,
-            ),
+            style: TextStyle(fontSize: 16, color: AppColors.black[40]!),
           ),
         ],
       ),
     );
   }
 }
-

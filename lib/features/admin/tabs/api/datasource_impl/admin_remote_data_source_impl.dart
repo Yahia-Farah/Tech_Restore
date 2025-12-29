@@ -22,7 +22,10 @@ class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
   }
 
   @override
-  Future<String> updateUserRole(String userId, UpdateUserRoleRequest request) async {
+  Future<String> updateUserRole(
+    String userId,
+    UpdateUserRoleRequest request,
+  ) async {
     return await _apiClient.updateUserRole(userId, request);
   }
 
@@ -47,7 +50,10 @@ class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
   }
 
   @override
-  Future<String> updateCategory(String categoryId, CategoriesRequest request) async {
+  Future<String> updateCategory(
+    String categoryId,
+    CategoriesRequest request,
+  ) async {
     return await _apiClient.updateCategoryAdmin(categoryId, request);
   }
 
@@ -58,13 +64,21 @@ class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
 
   @override
   Future<TransactionAdminModelResponse> getAllTransactions(int page) async {
-    log('🌐 [AdminRemoteDataSourceImpl] Calling API client getAllTransactionsAdmin with page: $page');
+    log(
+      '🌐 [AdminRemoteDataSourceImpl] Calling API client getAllTransactionsAdmin with page: $page',
+    );
     try {
       final result = await _apiClient.getAllTransactionsAdmin(page);
-      log('✅ [AdminRemoteDataSourceImpl] API client returned successfully. Total elements: ${result.totalElements}');
+      log(
+        '✅ [AdminRemoteDataSourceImpl] API client returned successfully. Total elements: ${result.totalElements}',
+      );
       return result;
     } catch (e, stackTrace) {
-      log('❌ [AdminRemoteDataSourceImpl] API client call failed: $e', error: e, stackTrace: stackTrace);
+      log(
+        '❌ [AdminRemoteDataSourceImpl] API client call failed: $e',
+        error: e,
+        stackTrace: stackTrace,
+      );
       rethrow;
     }
   }

@@ -19,7 +19,7 @@ class OfferRequest {
   @JsonKey(name: "endDate")
   final String? endDate;
 
-  OfferRequest ({
+  OfferRequest({
     this.name,
     this.description,
     this.discountValue,
@@ -37,5 +37,3 @@ class OfferRequest {
     return _$OfferRequestToJson(this);
   }
 }
-
-

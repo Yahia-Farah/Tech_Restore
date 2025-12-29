@@ -7,15 +7,12 @@ part of 'verify_email_request_model.dart';
 // **************************************************************************
 
 VerifyEmailRequestModel _$VerifyEmailRequestModelFromJson(
-        Map<String, dynamic> json) =>
-    VerifyEmailRequestModel(
-      email: json['email'] as String,
-      optCode: json['optCode'] as String,
-    );
+  Map<String, dynamic> json,
+) => VerifyEmailRequestModel(
+  email: json['email'] as String,
+  optCode: json['optCode'] as String,
+);
 
 Map<String, dynamic> _$VerifyEmailRequestModelToJson(
-        VerifyEmailRequestModel instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'optCode': instance.optCode,
-    };
+  VerifyEmailRequestModel instance,
+) => <String, dynamic>{'email': instance.email, 'optCode': instance.optCode};

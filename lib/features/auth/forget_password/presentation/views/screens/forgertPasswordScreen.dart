@@ -42,11 +42,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+          icon: Image.asset(AppIcons.arrowBack, color: AppColors.primary),
         ),
-        title: Text(
-          local.password,
-        ),
+        title: Text(local.password),
       ),
       body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
         builder: (context, state) {

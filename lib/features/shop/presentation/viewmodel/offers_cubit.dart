@@ -40,7 +40,7 @@ class OffersCubit extends Cubit<OffersState> {
     try {
       await _repo.addOffer(req);
       emit(OffersActionSuccess('Offer added'));
-      getAllOffers(isRefresh:true);
+      getAllOffers(isRefresh: true);
     } catch (e) {
       emit(OffersActionError(e.toString()));
     }
@@ -51,7 +51,7 @@ class OffersCubit extends Cubit<OffersState> {
     try {
       await _repo.updateOffer(offerId, req);
       emit(OffersActionSuccess('Offer updated'));
-      getAllOffers(isRefresh:true);
+      getAllOffers(isRefresh: true);
     } catch (e) {
       emit(OffersActionError(e.toString()));
     }
@@ -62,7 +62,7 @@ class OffersCubit extends Cubit<OffersState> {
     try {
       await _repo.deleteOffer(offerId);
       emit(OffersActionSuccess('Offer deleted'));
-      getAllOffers(isRefresh:true);
+      getAllOffers(isRefresh: true);
     } catch (e) {
       emit(OffersActionError(e.toString()));
     }

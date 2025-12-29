@@ -42,7 +42,7 @@ class DevicesCubit extends Cubit<DevicesState> {
     try {
       await _repo.addProducts(req);
       emit(DeviceAddSuccess('Device added'));
-      getAllDevices(isRefresh:true);
+      getAllDevices(isRefresh: true);
     } catch (e) {
       emit(DeviceAddError(e.toString()));
     }
@@ -56,7 +56,9 @@ class DevicesCubit extends Cubit<DevicesState> {
       final index = devices.indexWhere((d) => d.id == productId);
       if (index != -1) {
         devices[index] = updatedProduct;
-        emit(DevicesLoaded(List<ProductModel>.from(devices), lastPage: lastPage));
+        emit(
+          DevicesLoaded(List<ProductModel>.from(devices), lastPage: lastPage),
+        );
       } else {
         // If not found, refresh the list
         getAllDevices(isRefresh: true);
@@ -72,7 +74,7 @@ class DevicesCubit extends Cubit<DevicesState> {
     try {
       await _repo.deleteProducts(productId);
       emit(DeviceAddSuccess('Device deleted'));
-      getAllDevices(isRefresh:true);
+      getAllDevices(isRefresh: true);
     } catch (e) {
       emit(DeviceAddError(e.toString()));
     }

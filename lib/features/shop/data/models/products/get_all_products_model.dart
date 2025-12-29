@@ -28,7 +28,7 @@ class GetAllProductsModel {
   @JsonKey(name: "empty")
   final bool? empty;
 
-  GetAllProductsModel ({
+  GetAllProductsModel({
     this.content,
     this.pageable,
     this.totalPages,
@@ -51,7 +51,6 @@ class GetAllProductsModel {
   }
 }
 
-
 @JsonSerializable()
 class Pageable {
   @JsonKey(name: "pageNumber")
@@ -67,7 +66,7 @@ class Pageable {
   @JsonKey(name: "unpaged")
   final bool? unpaged;
 
-  Pageable ({
+  Pageable({
     this.pageNumber,
     this.pageSize,
     this.sort,
@@ -94,11 +93,7 @@ class Sort {
   @JsonKey(name: "unsorted")
   final bool? unsorted;
 
-  Sort ({
-    this.empty,
-    this.sorted,
-    this.unsorted,
-  });
+  Sort({this.empty, this.sorted, this.unsorted});
 
   factory Sort.fromJson(Map<String, dynamic> json) {
     return _$SortFromJson(json);
@@ -108,5 +103,3 @@ class Sort {
     return _$SortToJson(this);
   }
 }
-
-

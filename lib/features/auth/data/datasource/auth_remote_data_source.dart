@@ -14,8 +14,12 @@ import '../models/signupmodels/sign_up_response_model.dart';
 abstract class AuthRemoteDataSource {
   Future<SignUpResponseModel> signUp(SignUpRequest request);
   Future<SignUpShopResponseModel> signUpShop(SignUpShopRequestModel request);
-  Future<SignUpShopResponseModel> signUpDelivery(SignupDeliveryRequestModel request);
-  Future<SignUpShopResponseModel> signUpAssigner(SignupAssignerRequestModel request);
+  Future<SignUpShopResponseModel> signUpDelivery(
+    SignupDeliveryRequestModel request,
+  );
+  Future<SignUpShopResponseModel> signUpAssigner(
+    SignupAssignerRequestModel request,
+  );
   Future<LoginResponseModel> login(LoginRequestModel request);
   Future<AuthResponse<String>> forgetPassword(
     ForgetPasswordRequestModel forgetPasswordRequestModel,

@@ -12,6 +12,3 @@ class GetUserRepository {
     return await _remoteDataSource.getUsers();
   }
 }
-
-
-

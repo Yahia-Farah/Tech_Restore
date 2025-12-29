@@ -47,11 +47,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Image.asset(AppIcons.arrowBack,color: AppColors.primary,),
+          icon: Image.asset(AppIcons.arrowBack, color: AppColors.primary),
         ),
-        title: Text(
-          local.password,
-        ),
+        title: Text(local.password),
       ),
       body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
         listener: (context, state) {

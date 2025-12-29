@@ -9,7 +9,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get app_name => 'Tech & Restore';
+  String get app_name => 'Tech Bazaar';
 
   @override
   String get dashboard => 'لوحة التحكم';
@@ -105,6 +105,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search_hint => 'ابحث باسم الجهاز، نوع الجهاز، الرقم التسلسلي...';
 
   @override
+  String get search_hint_transactions =>
+      'ابحث بالتاريخ، اسم المتجر، طريقة الدفع، المبلغ...';
+
+  @override
   String get device_status => 'حالة الجهاز';
 
   @override
@@ -147,7 +151,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get repair_requests_title => 'طلبات التصليح';
 
   @override
-  String get repair_requests_subtitle => 'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
+  String get repair_requests_subtitle =>
+      'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
 
   @override
   String get status_filter => 'حالة الطلب';
@@ -183,7 +188,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orders_title => 'طلبات الشراء';
 
   @override
-  String get orders_subtitle => 'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
+  String get orders_subtitle =>
+      'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
+
+  @override
+  String get ordersSubtitle => 'إدارة ومتابعة الطلبات بسهولة';
 
   @override
   String get last_orders => 'آخر الطلبات';
@@ -225,7 +234,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get transactions => 'العمليات';
 
   @override
-  String get transactions_subtitle => 'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
+  String get transactions_subtitle =>
+      'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
 
   @override
   String get month => 'الشهر';
@@ -286,7 +296,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get inventory_title => 'نظام الجرد';
 
   @override
-  String get inventory_description => 'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
+  String get inventory_description =>
+      'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
 
   @override
   String get inventory_search => 'ابحث في الجرد...';
@@ -376,7 +387,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get supportTitle => 'الدعم';
 
   @override
-  String get supportSubtitle => 'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
+  String get supportSubtitle =>
+      'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
 
   @override
   String get searchSupport => 'ابحث في طلبات الدعم...';
@@ -418,13 +430,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requestsCount => 'طلبات';
 
   @override
-  String get welcome => 'مرحبًا بك في تك ريستور!';
+  String get welcome => 'مرحبًا بك في تك بازار!';
 
   @override
   String get login => 'تسجيل الدخول';
 
   @override
-  String get home => 'الصفحة الرئيسية';
+  String get home => 'الرئيسية';
 
   @override
   String get deviceIssue => 'مشكلة في الجهاز';
@@ -502,13 +514,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signUpQuote => 'احصل على إصلاح لجهازك بسرعة.';
 
   @override
-  String get secSignUpQuote => 'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
+  String get secSignUpQuote =>
+      'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
 
   @override
-  String get byContinuing => 'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
+  String get byContinuing =>
+      'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
 
   @override
-  String get startQuote => 'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
+  String get startQuote =>
+      'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
 
   @override
   String get explore => 'تصفح';
@@ -565,19 +580,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get logoutConfirmTextCenter => 'تأكيد تسجيل الخروج!';
 
   @override
-  String get resetPasswordUnderMsg => 'يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل';
+  String get resetPasswordUnderMsg =>
+      'يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل';
 
   @override
   String get emailVerificationScreen => 'التحقق من البريد الإلكتروني';
 
   @override
-  String get emailVerificationScreenUnderMsg => 'يرجى إدخال الرمز الذي تم إرساله إلى\nعنوان بريدك الإلكتروني';
+  String get emailVerificationScreenUnderMsg =>
+      'يرجى إدخال الرمز الذي تم إرساله إلى\nعنوان بريدك الإلكتروني';
 
   @override
   String get codeReceiveMsgError => 'لم تستلم الرمز؟';
 
   @override
-  String get forgetPasswordUnderText => 'يرجى إدخال البريد الإلكتروني المرتبط\nبحسابك';
+  String get forgetPasswordUnderText =>
+      'يرجى إدخال البريد الإلكتروني المرتبط\nبحسابك';
 
   @override
   String get validationEmailErrorMessage => 'هذا البريد الإلكتروني غير صالح';
@@ -721,6 +739,210 @@ class AppLocalizationsAr extends AppLocalizations {
   String get address => 'العنوان';
 
   @override
+  String get chatWith => 'محادثة مع';
+
+  @override
+  String get connected => 'متصل';
+
+  @override
+  String get noMessages => 'لا توجد رسائل';
+
+  @override
+  String get typeMessage => 'اكتب رسالة...';
+
+  @override
+  String get send => 'إرسال';
+
+  @override
+  String get connecting => 'جاري الاتصال... يرجى الانتظار';
+
+  @override
+  String get endChat => 'انهاء المحادثة';
+
+  @override
+  String get chatEndedSuccessfully => 'تم إنهاء المحادثة بنجاح';
+
+  @override
+  String get websocketNotConnected => 'WebSocket غير متصل. يرجى الانتظار...';
+
+  @override
+  String get websocketDisconnected => 'تم قطع الاتصال';
+
+  @override
+  String get websocketError => 'خطأ في الاتصال';
+
+  @override
+  String get websocketConnectionError => 'خطأ في اتصال WebSocket';
+
+  @override
+  String get websocketConnectionFailed => 'فشل الاتصال';
+
+  @override
+  String get failedToSendMessage => 'فشل إرسال الرسالة';
+
+  @override
+  String get authenticationTokenRequired => 'رمز المصادقة مطلوب للاتصال';
+
+  @override
+  String get subscriptionsTitle => 'إدارة الاشتراكات';
+
+  @override
+  String get subscriptionsSubtitle => 'اختر خطتك أو جدد اشتراكك بسهولة';
+
+  @override
+  String get fullManagementTitle => 'إدارة كاملة';
+
+  @override
+  String get fullManagementDescription => 'تحكم كامل في المتجر والطلبات';
+
+  @override
+  String get support247Title => 'دعم 24/7';
+
+  @override
+  String get support247Description => 'فريق دعم متاح على مدار الساعة';
+
+  @override
+  String get automaticUpdatesTitle => 'تحديثات تلقائية';
+
+  @override
+  String get automaticUpdatesDescription => 'ميزات جديدة دائما بدون تكلفة';
+
+  @override
+  String get subscribeNow => 'اشترك الآن';
+
+  @override
+  String get subscriptionType => 'نوع الاشتراك';
+
+  @override
+  String get subscriptionTypeCommission => 'نسبة عمولة';
+
+  @override
+  String get duration => 'المدة';
+
+  @override
+  String get months => 'أشهر';
+
+  @override
+  String get cash => 'نقدي';
+
+  @override
+  String get byCard => 'بالبطاقة';
+
+  @override
+  String get currentSubscription => 'الاشتراك الحالي';
+
+  @override
+  String get noActiveSubscription => 'لا يوجد اشتراك نشط';
+
+  @override
+  String get subscriptionHistory => 'سجل الاشتراكات';
+
+  @override
+  String get noPreviousSubscriptions => 'لا توجد اشتراكات سابقة';
+
+  @override
+  String get dashboardTitle => 'لوحة تحكم المتجر';
+
+  @override
+  String get dashboardSubtitle => 'راقب أداء متجرك بسهولة';
+
+  @override
+  String get startDate => 'تاريخ البداية';
+
+  @override
+  String get endDate => 'تاريخ النهاية';
+
+  @override
+  String get reset => 'إعادة تعيين';
+
+  @override
+  String get totalSales => 'إجمالي المبيعات';
+
+  @override
+  String get todaysSales => 'المبيعات اليوم';
+
+  @override
+  String get yesterday => 'الأمس';
+
+  @override
+  String get totalOrders => 'إجمالي الطلبات';
+
+  @override
+  String get todaysRepairs => 'التصليحات اليوم';
+
+  @override
+  String get totalRepairRequests => 'طلبات التصليح';
+
+  @override
+  String get salesTrendWeekly => 'اتجاه المبيعات (أسبوعي)';
+
+  @override
+  String get repairsTrendWeekly => 'اتجاه التصليحات (أسبوعي)';
+
+  @override
+  String get sales => 'المبيعات';
+
+  @override
+  String get sunday => 'الأحد';
+
+  @override
+  String get monday => 'الإثنين';
+
+  @override
+  String get tuesday => 'الثلاثاء';
+
+  @override
+  String get wednesday => 'الأربعاء';
+
+  @override
+  String get thursday => 'الخميس';
+
+  @override
+  String get friday => 'الجمعة';
+
+  @override
+  String get saturday => 'السبت';
+
+  @override
+  String get searchOrders => 'ابحث في الطلبات...';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get orderDate => 'تاريخ الطلب';
+
+  @override
+  String get reject => 'رفض';
+
+  @override
+  String get accept => 'قبول';
+
+  @override
+  String get details => 'تفاصيل';
+
+  @override
+  String get notification => 'إشعارات';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get noNotifications => 'لا توجد إشعارات متاحة';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get message => 'الرسالة';
+
+  @override
   String get admin_dashboard => 'لوحة تحكم المسؤول';
 
   @override
@@ -751,7 +973,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get user_management => 'إدارة المستخدمين';
 
   @override
-  String get manage_user_accounts_roles_status => 'إدارة حسابات المستخدمين والأدوار والحالة';
+  String get manage_user_accounts_roles_status =>
+      'إدارة حسابات المستخدمين والأدوار والحالة';
 
   @override
   String get active => 'نشط';
@@ -865,7 +1088,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get total_revenue => 'إجمالي الإيرادات';
 
   @override
-  String get search_by_user_id => 'البحث برقم المستخدم (اتركه فارغاً لجميع المعاملات)';
+  String get search_by_user_id =>
+      'البحث برقم المستخدم (اتركه فارغاً لجميع المعاملات)';
 
   @override
   String get search_user => 'بحث المستخدم';
@@ -901,10 +1125,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get suspended => 'معلق';
 
   @override
-  String get search_by_name_email_phone => 'البحث بالاسم أو البريد الإلكتروني أو الهاتف...';
-
-  @override
-  String get all => 'الكل';
+  String get search_by_name_email_phone =>
+      'البحث بالاسم أو البريد الإلكتروني أو الهاتف...';
 
   @override
   String get no_deliveries_available => 'لا توجد عمليات توصيل متاحة';
@@ -925,13 +1147,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get assignment_logs => 'سجلات التعيينات';
 
   @override
-  String get track_all_assignment_activities => 'تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.';
+  String get track_all_assignment_activities =>
+      'تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.';
 
   @override
   String get no_assignment_logs_found => 'لم يتم العثور على سجلات تعيينات';
 
   @override
-  String get no_assignment_logs_description => 'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
+  String get no_assignment_logs_description =>
+      'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
 
   @override
   String get failed_to_load_transactions => 'فشل تحميل المعاملات';
@@ -940,62 +1164,112 @@ class AppLocalizationsAr extends AppLocalizations {
   String get transactions_loaded_successfully => 'تم تحميل المعاملات بنجاح';
 
   @override
-  String get shops_management => 'إدارة المتاجر';
+  String get addresses => 'العناوين';
 
   @override
-  String get manage_approve_suspend_view_shop_details => 'إدارة وموافقة وتعليق وعرض تفاصيل المتاجر';
+  String get branches_and_addresses => 'الفروع والعناوين';
 
   @override
-  String get filter_by_status => 'تصفية حسب الحالة';
+  String get add_new_address => 'إضافة عنوان جديد';
 
   @override
-  String get all_shops => 'جميع المتاجر';
+  String get governorate => 'المحافظة';
 
   @override
-  String get approved_shops => 'المتاجر الموافق عليها';
+  String get city => 'المدينة';
 
   @override
-  String get suspended_shops => 'المتاجر المعلقة';
+  String get street => 'الشارع';
 
   @override
-  String get shop_type => 'نوع المتجر';
+  String get building_number => 'رقم المبنى (اختياري)';
 
   @override
-  String get view => 'عرض';
+  String get set_as_primary => 'تعيين كعنوان أساسي';
 
   @override
-  String get approve => 'موافقة';
+  String get add_address => 'إضافة العنوان';
 
   @override
-  String get no_shops_match_filters => 'لا توجد متاجر تطابق المرشحات';
+  String get shop_profile => 'الملف الشخصي للمتجر';
+
+  @override
+  String get update_shop_data => 'تحديث بيانات المتجر';
 
   @override
   String get shop_details => 'تفاصيل المتجر';
 
   @override
-  String get shop_information => 'معلومات المتجر';
+  String get shop_name => 'اسم المتجر';
 
   @override
-  String get rating => 'التقييم';
+  String get shop_description_label => 'وصف المتجر';
 
   @override
-  String get description => 'الوصف';
+  String get we_fix_devices =>
+      'نحن نصلح أجهزة الكمبيوتر المحمولة والهواتف والأجهزة اللوحية';
 
   @override
-  String get data_copied_to_clipboard => 'تم نسخ البيانات إلى الحافظة';
+  String get new_password_optional => 'كلمة مرور جديدة (اختياري)';
 
   @override
-  String get suspend => 'تعليق';
+  String get update_account => 'تحديث الحساب';
 
   @override
-  String get shop_approved_successfully => 'تمت الموافقة على المتجر بنجاح';
+  String get active_status => 'نشط';
 
   @override
-  String get shop_suspended_successfully => 'تم تعليق المتجر بنجاح';
+  String get verified_status => 'تم التحقق';
 
   @override
-  String get shop_approval_failed => 'فشل في الموافقة على المتجر';
+  String get shop_type_both => 'الاثنان معاً';
 
   @override
-  String get shop_suspension_failed => 'فشل في تعليق المتجر';
+  String get shop_information => 'تفاصيل المتجر';
+
+  @override
+  String get shop_address_title => 'عنوان المتجر';
+
+  @override
+  String get verified_shop => 'متجر موثق';
+
+  @override
+  String get under_review => 'قيد المراجعة';
+
+  @override
+  String get default_address => 'العنوان الافتراضي';
+
+  @override
+  String get not_provided => 'غير متوفر';
+
+  @override
+  String get no_description => 'لا يوجد وصف';
+
+  @override
+  String get not_specified => 'غير محدد';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get profile_updated_successfully => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get finish_processing => 'انتهاء المعالجة';
+
+  @override
+  String get cancelled => 'ملغي';
+
+  @override
+  String get edit_address => 'تعديل العنوان';
+
+  @override
+  String get warning => 'تحذير';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get default_address_warning =>
+      'تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟';
 }

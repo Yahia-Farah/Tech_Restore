@@ -64,25 +64,28 @@ class RepairCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Repair $id",
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 18)),
+          Text(
+            "Repair $id",
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
           const SizedBox(height: 8),
           Text("Address: $address"),
           Text("Price: $price"),
           Text("Date: $date"),
           const SizedBox(height: 6),
-          Text("Status: $status",
-              style: const TextStyle(
-                  color: Colors.green, fontWeight: FontWeight.bold)),
+          Text(
+            "Status: $status",
+            style: const TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 12),
           ElevatedButton(
             onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF5748E6),
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF5748E6)),
             child: const Text("Update Status"),
-          )
+          ),
         ],
       ),
     );

@@ -12,7 +12,3 @@ class UpdateUserRoleUseCase {
     return await _adminRepo.updateUserRole(userId, request);
   }
 }
-
-
-
-

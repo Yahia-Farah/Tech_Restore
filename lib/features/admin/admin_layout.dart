@@ -86,74 +86,71 @@ class _MainLayoutState extends State<AdminLayout> {
     final local = AppLocalizations.of(context)!;
     final isDashboard = _selectedIndex == 0;
     final isUsersScreen = _selectedIndex == 1;
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: isDashboard
-            ? Row(
-                children: [
-                  Icon(
-                    Icons.show_chart,
-                    color: const Color(0xFF456006),
-                    size: 24,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    local.admin_dashboard,
-                    style: const TextStyle(
-                      color: Color(0xFF456006),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              )
-            : isUsersScreen
+        title:
+            isDashboard
                 ? Row(
-                    children: [
-                      Icon(
-                        Icons.people_outline,
-                        color: const Color(0xFF456006),
-                        size: 24,
+                  children: [
+                    Icon(
+                      Icons.show_chart,
+                      color: const Color(0xFF456006),
+                      size: 24,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      local.admin_dashboard,
+                      style: const TextStyle(
+                        color: Color(0xFF456006),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        local.user_management,
-                        style: const TextStyle(
-                          color: Color(0xFF456006),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                    ),
+                  ],
+                )
+                : isUsersScreen
+                ? Row(
+                  children: [
+                    Icon(
+                      Icons.people_outline,
+                      color: const Color(0xFF456006),
+                      size: 24,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      local.user_management,
+                      style: const TextStyle(
+                        color: Color(0xFF456006),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
-                    ],
-                  )
+                    ),
+                  ],
+                )
                 : _selectedIndex == 7
-                    ? Row(
-                        children: [
-                          Icon(
-                            Icons.list,
-                            color: AppColors.primary[70],
-                            size: 30,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            local.categories,
-                            style: TextStyle(
-                              color: AppColors.primary[70],
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Text(
-                        _getTitle(_selectedIndex),
-                        style: const TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                ? Row(
+                  children: [
+                    Icon(Icons.list, color: AppColors.primary[70], size: 30),
+                    const SizedBox(width: 8),
+                    Text(
+                      local.categories,
+                      style: TextStyle(
+                        color: AppColors.primary[70],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
                       ),
+                    ),
+                  ],
+                )
+                : Text(
+                  _getTitle(_selectedIndex),
+                  style: const TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
         backgroundColor: Colors.white,
         elevation: 1,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -223,32 +220,5 @@ class _MainLayoutState extends State<AdminLayout> {
       default:
         return "";
     }
-  }
-}
-
-class InventoryScreen extends StatelessWidget {
-  const InventoryScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Inventory Screen"));
-  }
-}
-
-class OffersScreen extends StatelessWidget {
-  const OffersScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("🏷️ Offers Screen"));
-  }
-}
-
-class SupportScreen extends StatelessWidget {
-  const SupportScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("💬 Support Screen"));
   }
 }

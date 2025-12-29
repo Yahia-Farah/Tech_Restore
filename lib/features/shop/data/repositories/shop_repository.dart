@@ -8,6 +8,15 @@ import '../models/products/add_product_request.dart';
 import '../models/products/get_all_products_model.dart';
 import '../models/products/get_all_category_model.dart';
 import '../models/products/product_model.dart';
+import '../models/addresses/get_all_addresses_model.dart';
+import '../models/addresses/address_request.dart';
+import '../models/profile/shop_profile_model.dart';
+import '../models/profile/update_profile_request.dart';
+import '../models/orders/get_all_orders_model.dart';
+import '../models/transactions/financial_report_model.dart';
+import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
+import '../models/chats/chat_message_model.dart';
+import '../models/notifications/notification_model.dart';
 
 @lazySingleton
 class ShopRepository {
@@ -134,4 +143,155 @@ class ShopRepository {
     }
   }
 
+  Future<List<ChatSessionModel>> getChatSessions() async {
+    try {
+      return await _remoteDataSource.getChatSessions();
+    } catch (e) {
+      throw Exception('Failed to get chat sessions: ${e.toString()}');
+    }
+  }
+
+  Future<List<ChatMessageModel>> getChatMessages(String sessionId) async {
+    try {
+      return await _remoteDataSource.getChatMessages(sessionId);
+    } catch (e) {
+      throw Exception('Failed to get chat messages: ${e.toString()}');
+    }
+  }
+
+  // Messages are sent via WebSocket, not REST API
+
+  Future<void> endChatSession(String sessionId) async {
+    try {
+      await _remoteDataSource.endChatSession(sessionId);
+    } catch (e) {
+      throw Exception('Failed to end chat session: ${e.toString()}');
+    }
+  }
+
+  Future<List<NotificationModel>> getAllNotifications() async {
+    try {
+      return await _remoteDataSource.getAllNotifications();
+    } catch (e) {
+      throw Exception('Failed to get notifications: ${e.toString()}');
+    }
+  }
+
+  Future<void> deleteNotification(String notificationId) async {
+    try {
+      await _remoteDataSource.deleteNotification(notificationId);
+    } catch (e) {
+      throw Exception('Failed to delete notification: ${e.toString()}');
+    }
+  }
+
+  Future<GetAllAddressesModel> getAllAddresses({required int page}) async {
+    try {
+      return await _remoteDataSource.getAllAddresses(page: page);
+    } catch (e) {
+      throw Exception('Failed to get addresses: ${e.toString()}');
+    }
+  }
+
+  Future<void> addAddress(AddressRequest address) async {
+    try {
+      await _remoteDataSource.addAddress(address);
+    } catch (e) {
+      throw Exception('Failed to add address: ${e.toString()}');
+    }
+  }
+
+  Future<void> deleteAddress(String addressId) async {
+    try {
+      await _remoteDataSource.deleteAddress(addressId);
+    } catch (e) {
+      throw Exception('Failed to delete address: ${e.toString()}');
+    }
+  }
+
+  Future<void> updateAddress(String addressId, AddressRequest address) async {
+    try {
+      await _remoteDataSource.updateAddress(addressId, address);
+    } catch (e) {
+      throw Exception('Failed to update address: ${e.toString()}');
+    }
+  }
+
+  Future<ShopProfileModel> getShopProfile(String shopId) async {
+    try {
+      return await _remoteDataSource.getShopProfile(shopId);
+    } catch (e) {
+      throw Exception('Failed to get shop profile: ${e.toString()}');
+    }
+  }
+
+  Future<ShopProfileModel> updateShopProfile(
+    String shopId,
+    UpdateProfileRequest request,
+  ) async {
+    try {
+      return await _remoteDataSource.updateShopProfile(shopId, request);
+    } catch (e) {
+      throw Exception('Failed to update shop profile: ${e.toString()}');
+    }
+  }
+
+  Future<GetAllOrdersModel> getAllOrders({required int page}) async {
+    try {
+      return await _remoteDataSource.getAllOrders(page: page);
+    } catch (e) {
+      throw Exception('Failed to get orders: ${e.toString()}');
+    }
+  }
+
+  Future<GetAllOrdersModel> getOrdersByStatus(
+    String status, {
+    required int page,
+  }) async {
+    try {
+      return await _remoteDataSource.getOrdersByStatus(status, page: page);
+    } catch (e) {
+      throw Exception('Failed to get orders by status: ${e.toString()}');
+    }
+  }
+
+  Future<OrderContent> getOrderDetails(String orderId) async {
+    try {
+      return await _remoteDataSource.getOrderDetails(orderId);
+    } catch (e) {
+      throw Exception('Failed to get order details: ${e.toString()}');
+    }
+  }
+
+  Future<void> acceptOrder(String orderId) async {
+    try {
+      await _remoteDataSource.acceptOrder(orderId);
+    } catch (e) {
+      throw Exception('Failed to accept order: ${e.toString()}');
+    }
+  }
+
+  Future<void> rejectOrder(String orderId) async {
+    try {
+      await _remoteDataSource.rejectOrder(orderId);
+    } catch (e) {
+      throw Exception('Failed to reject order: ${e.toString()}');
+    }
+  }
+
+  Future<void> updateOrderStatus(String orderId, String status) async {
+    try {
+      await _remoteDataSource.updateOrderStatus(orderId, status);
+    } catch (e) {
+      throw Exception('Failed to update order status: ${e.toString()}');
+    }
+  }
+
+  Future<FinancialReportModel> getFinancialReport() async {
+    try {
+      return await _remoteDataSource.getFinancialReport();
+    } catch (e) {
+      throw Exception('Failed to get financial report: ${e.toString()}');
+    }
+  }
 }

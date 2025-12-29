@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'content_transaction_admin.g.dart';
@@ -32,7 +31,7 @@ class ContentTransactionAdmin {
   @JsonKey(name: "shopId")
   final String? shopId;
 
-  ContentTransactionAdmin ({
+  ContentTransactionAdmin({
     this.id,
     this.amount,
     this.paymentMethod,

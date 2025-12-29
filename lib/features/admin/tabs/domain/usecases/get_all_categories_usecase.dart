@@ -12,6 +12,3 @@ class GetAllCategoriesUseCase {
     return await _adminRepo.getAllCategories(page);
   }
 }
-
-
-

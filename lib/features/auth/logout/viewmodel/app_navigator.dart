@@ -7,7 +7,7 @@ class AppNavigator {
   static void logoutAndNavigate() {
     navigatorKey.currentState?.pushNamedAndRemoveUntil(
       AppRoutes.login,
-          (route) => false,
+      (route) => false,
     );
   }
 }

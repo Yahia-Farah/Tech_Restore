@@ -6,6 +6,13 @@ import 'package:tech_restore/features/auth/data/models/forget_password_models/ve
 import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import 'package:tech_restore/features/shop/data/models/offers/get_all_offers_model.dart';
 import 'package:tech_restore/features/shop/data/models/offers/offer_response.dart';
+import 'package:tech_restore/features/shop/data/models/addresses/get_all_addresses_model.dart';
+import 'package:tech_restore/features/shop/data/models/addresses/address_request.dart';
+import 'package:tech_restore/features/shop/data/models/profile/shop_profile_model.dart';
+import 'package:tech_restore/features/shop/data/models/profile/update_profile_request.dart';
+import 'package:tech_restore/features/shop/data/models/orders/get_all_orders_model.dart';
+import 'package:tech_restore/features/shop/data/models/orders/order_status_request.dart';
+import 'package:tech_restore/features/shop/data/models/transactions/financial_report_model.dart';
 import 'package:tech_restore/features/shop/data/models/products/add_product_request.dart';
 import 'package:tech_restore/features/shop/data/models/products/get_all_products_model.dart';
 import 'package:tech_restore/features/shop/data/models/products/total_elements_response.dart';
@@ -29,6 +36,10 @@ import '../../../features/auth/data/models/signup_shop_models/sign_up_shop_respo
 import '../../../features/auth/data/models/signupmodels/sign_up_request_model.dart';
 import '../../../features/auth/data/models/signupmodels/sign_up_response_model.dart';
 import '../../../features/shop/data/models/offers/offer_request.dart';
+import 'package:tech_restore/features/shop/data/models/chats/chat_session_model.dart'
+    hide ChatMessageModel;
+import 'package:tech_restore/features/shop/data/models/chats/chat_message_model.dart';
+import 'package:tech_restore/features/shop/data/models/notifications/notification_model.dart';
 import '../../../features/shop/data/models/products/get_all_category_model.dart';
 import '../../../features/user/profile/data/models/profile_response.dart';
 import '../api_constants/api_end_points.dart';
@@ -60,7 +71,9 @@ abstract class ApiClient {
   );
 
   @POST(ApiEndPoints.login)
-  Future<HttpResponse<LoginResponseModel>> login(@Body() LoginRequestModel request);
+  Future<HttpResponse<LoginResponseModel>> login(
+    @Body() LoginRequestModel request,
+  );
 
   @POST(ApiEndPoints.forgetPassword)
   Future<String> forgetPassword(
@@ -100,6 +113,30 @@ abstract class ApiClient {
 
   @GET(ApiEndPoints.getAllShops)
   Future<ShopListResponse> getShops();
+
+  @GET(ApiEndPoints.chatSessions)
+  @Extra({'auth': true})
+  Future<List<ChatSessionModel>> getChatSessions();
+
+  @GET(ApiEndPoints.chatMessages)
+  @Extra({'auth': true})
+  Future<List<ChatMessageModel>> getChatMessages(
+    @Path('sessionId') String sessionId,
+  );
+
+  @POST(ApiEndPoints.endChatSession)
+  @Extra({'auth': true})
+  Future<dynamic> endChatSession(@Path('sessionId') String sessionId);
+
+  @GET(ApiEndPoints.getAllNotificationsShop)
+  @Extra({'auth': true})
+  Future<List<NotificationModel>> getAllNotificationsShop();
+
+  @DELETE(ApiEndPoints.deleteNotificationsShop)
+  @Extra({'auth': true})
+  Future<dynamic> deleteNotificationShop(
+    @Path('notificationId') String notificationId,
+  );
 
   @GET(ApiEndPoints.getAdminStats)
   @Extra({'auth': true})
@@ -206,7 +243,9 @@ abstract class ApiClient {
 
   @GET(ApiEndPoints.getAllTransactionAdmin)
   @Extra({'auth': true})
-  Future<TransactionAdminModelResponse> getAllTransactionsAdmin(@Query('page') int page);
+  Future<TransactionAdminModelResponse> getAllTransactionsAdmin(
+    @Query('page') int page,
+  );
 
   @GET(ApiEndPoints.getDeliveriesAdmin)
   @Extra({'auth': true})
@@ -223,4 +262,71 @@ abstract class ApiClient {
   @PUT(ApiEndPoints.suspendShops)
   @Extra({'auth': true})
   Future<String> suspendShop(@Path('shopId') String shopId);
+  Future<ContentDeliveryAdmin> getDeliveryAdminById(
+    @Path('deliveryId') String deliveryId,
+  );
+
+  @GET(ApiEndPoints.getAllAddresses)
+  @Extra({'auth': true})
+  Future<GetAllAddressesModel> getAllAddresses(@Query('page') int page);
+
+  @POST(ApiEndPoints.addAddress)
+  @Extra({'auth': true})
+  Future<String> addAddress(@Body() AddressRequest model);
+
+  @DELETE(ApiEndPoints.deleteAddress)
+  @Extra({'auth': true})
+  Future<String> deleteAddress(@Path('id') String addressId);
+
+  @PUT(ApiEndPoints.updateAddress)
+  @Extra({'auth': true})
+  Future<String> updateAddress(
+    @Body() AddressRequest model,
+    @Path('id') String addressId,
+  );
+
+  @GET(ApiEndPoints.getShopProfile)
+  @Extra({'auth': true})
+  Future<ShopProfileModel> getShopProfile(@Path('shopId') String shopId);
+
+  @PUT(ApiEndPoints.updateShopProfile)
+  @Extra({'auth': true})
+  Future<ShopProfileModel> updateShopProfile(
+    @Body() UpdateProfileRequest model,
+    @Path('id') String shopId,
+  );
+
+  @GET(ApiEndPoints.getAllOrders)
+  @Extra({'auth': true})
+  Future<GetAllOrdersModel> getAllOrders(@Query('page') int page);
+
+  @GET(ApiEndPoints.getOrdersByStatus)
+  @Extra({'auth': true})
+  Future<GetAllOrdersModel> getOrdersByStatus(
+    @Path('status') String status,
+    @Query('page') int page,
+  );
+
+  @GET(ApiEndPoints.getOrderDetails)
+  @Extra({'auth': true})
+  Future<OrderContent> getOrderDetails(@Path('orderId') String orderId);
+
+  @POST(ApiEndPoints.acceptOrder)
+  @Extra({'auth': true})
+  Future<String> acceptOrder(@Path('orderId') String orderId);
+
+  @POST(ApiEndPoints.rejectOrder)
+  @Extra({'auth': true})
+  Future<String> rejectOrder(@Path('orderId') String orderId);
+
+  @PUT(ApiEndPoints.updateOrderStatus)
+  @Extra({'auth': true})
+  Future<String> updateOrderStatus(
+    @Path('orderId') String orderId,
+    @Body() OrderStatusRequest request,
+  );
+
+  @GET(ApiEndPoints.getFinancialReport)
+  @Extra({'auth': true})
+  Future<FinancialReportModel> getFinancialReport();
 }

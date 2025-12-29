@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../domain/services/auth_services.dart';
@@ -15,10 +16,18 @@ class LogoutViewModel extends Cubit<LogoutStates> {
     try {
       final result = await logoutUseCase();
       await AuthService.logout();
-
       emit(LogoutSuccess(result));
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        await AuthService.logout();
+        emit(LogoutSuccess('Logout successful'));
+      } else {
+        await AuthService.logout();
+        emit(LogoutSuccess('Logout successful'));
+      }
     } catch (e) {
-      emit(LogoutError(e.toString()));
+      await AuthService.logout();
+      emit(LogoutSuccess('Logout successful'));
     }
   }
 }

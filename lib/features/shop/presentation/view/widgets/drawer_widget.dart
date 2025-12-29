@@ -9,27 +9,26 @@ import '../../../../../core/theme/app_colors.dart';
 
 class DrawerWidget extends StatelessWidget {
   final Function(int) onItemTapped;
+  final int selectedIndex;
 
-  const DrawerWidget({super.key, required this.onItemTapped});
+  const DrawerWidget({
+    super.key,
+    required this.onItemTapped,
+    required this.selectedIndex,
+  });
 
   @override
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context)!;
     return Drawer(
+      shadowColor: Colors.white,
+      surfaceTintColor: AppColors.white,
       child: Column(
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(color: Colors.white),
             child: Center(
-              child: Row(
-                children: [
-                  Image.asset(AppImages.startScreen, height: 100),
-                  Text(
-                    local.app_name,
-                    style: const TextStyle(color: Colors.black, fontSize: 18),
-                  ),
-                ],
-              ),
+              child: Image.asset(AppImages.startScreen, height: 250),
             ),
           ),
 
@@ -125,16 +124,31 @@ class DrawerWidget extends StatelessWidget {
     required int index,
     required BuildContext context,
   }) {
-    return ListTile(
-      leading: Icon(icon, color: AppColors.primary),
-      title: Text(
-        title,
-        style: const TextStyle(color: AppColors.primary, fontSize: 18),
+    final isSelected = selectedIndex == index;
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 2),
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.green.shade100 : Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
       ),
-      onTap: () {
-        onItemTapped(index);
-        Navigator.pop(context);
-      },
+      child: ListTile(
+        leading: Icon(
+          icon,
+          color: isSelected ? AppColors.primary : AppColors.primary,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: AppColors.primary,
+            fontSize: 18,
+            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+          ),
+        ),
+        onTap: () {
+          onItemTapped(index);
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }

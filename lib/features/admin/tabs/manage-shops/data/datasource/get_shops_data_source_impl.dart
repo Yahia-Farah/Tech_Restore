@@ -20,6 +20,3 @@ class GetShopsRemoteDataSource {
     return await _apiClient.suspendShop(shopId);
   }
 }
-
-
-

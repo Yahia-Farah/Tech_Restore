@@ -72,7 +72,11 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
           children: [
             const Text(
               "Promotional Offers",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.primary),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
             ),
             const SizedBox(height: 4),
             const Text(
@@ -195,6 +199,3 @@ class _AdminPromotionsScreenState extends State<AdminPromotionsScreen> {
     );
   }
 }
-
-
-

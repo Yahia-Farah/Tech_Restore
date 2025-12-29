@@ -6,7 +6,6 @@ import 'core/contants/secure_storage.dart';
 import 'core/l10n/translation/app_localizations.dart';
 import 'core/routes/on_generate_route.dart';
 import 'core/routes/route_names.dart';
-import 'core/theme/app_colors.dart';
 import 'features/auth/logout/viewmodel/app_navigator.dart';
 import 'features/localization/data/localization_preference.dart';
 import 'features/localization/localization_controller/localization_cubit.dart';
@@ -53,7 +52,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           locale: currentLocale,
           theme: AppTheme.lightTheme,
-          initialRoute: AppRoutes.login,
+          initialRoute: AppRoutes.startScreen,
           onGenerateRoute: Routes.onGenerateRoute,
         );
       },

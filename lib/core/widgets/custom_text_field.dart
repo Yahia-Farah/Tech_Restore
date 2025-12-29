@@ -16,6 +16,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool showUploadIcon;
   final String? initialText;
   final Widget? prefixIcon;
+  final TextAlign textAlign;
 
   const CustomTextFormField({
     super.key,
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatefulWidget {
     this.initialText,
     this.showUploadIcon = false,
     this.prefixIcon,
+    this.textAlign = TextAlign.start,
   });
 
   @override
@@ -68,6 +70,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       validator: widget.validator,
       onChanged: widget.onChanged,
       obscureText: isTextObscured,
+      textAlign: widget.textAlign,
       style: const TextStyle(
         color: Colors.black87,
         fontSize: 16,

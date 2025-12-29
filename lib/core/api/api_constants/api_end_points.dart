@@ -1,5 +1,8 @@
 abstract class ApiEndPoints {
   static const String login = 'auth/login';
+  static const String chatSessions = 'chats/sessions';
+  static const String chatMessages = 'chats/{sessionId}/messages';
+  static const String endChatSession = 'chats/{sessionId}/end';
   static const String forgetPassword = 'auth/forgot-password';
   static const String resetPassword = 'auth/reset-password';
   static const String resendCode = 'auth/resend-otp';
@@ -39,14 +42,34 @@ abstract class ApiEndPoints {
   static const String updateCategoriesAdmin = 'admin/categories/{categroyId}';
   static const String deleteCategoriesAdmin = 'admin/categories/{categroyId}';
   static const String getAllTransactionAdmin = 'admin/transactions/all';
+  static const String getAllNotificationsShop = 'notifications/shops';
+  static const String deleteNotificationsShop =
+      'notifications/shops/{notificationId}';
   static const String getDeliveriesAdmin = 'admin/deliveries';
   static const String getDeliveriesAdminById = 'admin/deliveries/{deliveryId}';
-  static const String getDeliveriesAdminSuspended = 'admin/deliveries/suspended';
+  static const String getDeliveriesAdminSuspended =
+      'admin/deliveries/suspended';
   static const String getDeliveriesAdminPending = 'admin/deliveries/pending';
   static const String getDeliveriesAdminApproved = 'admin/deliveries/approved';
-  static const String putDeliveriesAdminSuspended = 'admin/deliveries/{deliveryId}/suspend';
-  static const String putDeliveriesAdminApproved = 'admin/deliveries/{deliveryId}/approve';
-  static const String deleteDeliveriesAdminById = 'admin/deliveries/{deliveryId}';
-
-
+  static const String putDeliveriesAdminSuspended =
+      'admin/deliveries/{deliveryId}/suspend';
+  static const String putDeliveriesAdminApproved =
+      'admin/deliveries/{deliveryId}/approve';
+  static const String deleteDeliveriesAdminById =
+      'admin/deliveries/{deliveryId}';
+  static const String getAllAddresses = 'shops/address';
+  static const String addAddress = 'shops/address';
+  static const String deleteAddress = 'shops/address/{id}';
+  static const String updateAddress = 'shops/address/{id}';
+  static const String getShopProfile = 'shops/{shopId}';
+  static const String updateShopProfile = 'shops/{id}';
+  static const String getAllOrders = 'shops/orders/control';
+  static const String getOrdersByStatus =
+      'shops/orders/control/status/{status}';
+  static const String getOrderDetails = 'shops/orders/control/{orderId}';
+  static const String acceptOrder = 'shops/orders/control/{orderId}/accept';
+  static const String rejectOrder = 'shops/orders/control/{orderId}/reject';
+  static const String updateOrderStatus =
+      'shops/orders/control/{orderId}/status';
+  static const String getFinancialReport = 'shops/payments/financial-report';
 }

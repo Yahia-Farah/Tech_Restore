@@ -11,11 +11,7 @@ class Sort {
   @JsonKey(name: "unsorted")
   final bool? unsorted;
 
-  Sort({
-    this.empty,
-    this.sorted,
-    this.unsorted,
-  });
+  Sort({this.empty, this.sorted, this.unsorted});
 
   factory Sort.fromJson(Map<String, dynamic> json) {
     return _$SortFromJson(json);
@@ -25,6 +21,3 @@ class Sort {
     return _$SortToJson(this);
   }
 }
-
-
-

@@ -20,6 +20,3 @@ class GetShopsRepository {
     return await _remoteDataSource.suspendShop(shopId);
   }
 }
-
-
-

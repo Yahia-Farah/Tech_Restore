@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'sort_transaction.g.dart';
@@ -16,7 +15,7 @@ class SortTransaction {
   @JsonKey(name: "ignoreCase")
   final bool? ignoreCase;
 
-  SortTransaction ({
+  SortTransaction({
     this.direction,
     this.nullHandling,
     this.ascending,

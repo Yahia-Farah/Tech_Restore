@@ -47,23 +47,9 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
       child: Column(
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(color: AppColors.white),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage(AppImages.appIcon),
-                ),
-                const SizedBox(width: 10),
-                const Text(
-                  "Tech & Restore",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.black,
-                  ),
-                ),
-              ],
+            decoration: const BoxDecoration(color: Colors.white),
+            child: Center(
+              child: Image.asset(AppImages.startScreen, height: 250),
             ),
           ),
 
@@ -143,12 +129,9 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
 
   Widget _buildExpandableShopSection() {
     final isShopSelected = _isShopItemSelected(widget.selectedIndex);
-    
+
     return ExpansionTile(
-      leading: Icon(
-        Icons.shopping_bag_outlined,
-        color: AppColors.primary[70],
-      ),
+      leading: Icon(Icons.shopping_bag_outlined, color: AppColors.primary[70]),
       title: Text(
         "Shop",
         style: TextStyle(
@@ -164,16 +147,8 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
         });
       },
       children: [
-        _buildShopSubItem(
-          index: 2,
-          icon: Icons.store_outlined,
-          text: "Stores",
-        ),
-        _buildShopSubItem(
-          index: 3,
-          icon: Icons.star_border,
-          text: "Reviews",
-        ),
+        _buildShopSubItem(index: 2, icon: Icons.store_outlined, text: "Stores"),
+        _buildShopSubItem(index: 3, icon: Icons.star_border, text: "Reviews"),
         _buildShopSubItem(
           index: 4,
           icon: Icons.local_offer_outlined,
@@ -193,11 +168,7 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0),
       child: ListTile(
-        leading: Icon(
-          icon,
-          color: AppColors.primary[70],
-          size: 20,
-        ),
+        leading: Icon(icon, color: AppColors.primary[70], size: 20),
         title: Text(
           text,
           style: TextStyle(

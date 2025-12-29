@@ -60,8 +60,10 @@ class AvailableOrderCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Order $id",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            "Order $id",
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 8),
           InfoRow(icon: Icons.location_on, text: address1),
           InfoRow(icon: Icons.location_on, text: address2),

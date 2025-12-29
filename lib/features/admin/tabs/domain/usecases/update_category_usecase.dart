@@ -12,6 +12,3 @@ class UpdateCategoryUseCase {
     return await _adminRepo.updateCategory(categoryId, request);
   }
 }
-
-
-
