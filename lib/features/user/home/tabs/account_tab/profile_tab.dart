@@ -10,21 +10,8 @@ import '../../../../auth/logout/views/logout_widget.dart';
 import '../../../profile/presentation/viewmodel/profile_cubit.dart';
 import '../../../profile/presentation/viewmodel/states/profile_states.dart';
 
-class AccountTab extends StatelessWidget {
-  AccountTab({super.key});
-
-  final List<Map<String, String>> repairHistory = [
-    {
-      "title": "Macbook Pro",
-      "date": "March 2024",
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
-    },
-    {
-      "title": "Macbook Air",
-      "date": "June 2019",
-      "image": "https://images.unsplash.com/photo-1509395176047-4a66953fd231",
-    },
-  ];
+class ProfileTab extends StatelessWidget {
+  const ProfileTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +21,16 @@ class AccountTab extends StatelessWidget {
       create: (context) => getIt<ProfileCubit>()..getUserProfile(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(local.profile),
+          backgroundColor: AppColors.primary,
+          title: Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Text(
+              local.profile,
+              style: TextStyle(color: AppColors.white),
+            ),
+          ),
           centerTitle: true,
-          actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-          ],
+          automaticallyImplyLeading: false,
         ),
         body: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (context, state) {
@@ -88,13 +80,13 @@ class AccountTab extends StatelessWidget {
                       Text(
                         user.email ?? "",
                         style: TextStyle(
-                          color: AppColors.black.withOpacity(0.6),
+                          color: AppColors.black.withValues(alpha: 0.6),
                         ),
                       ),
                       Text(
                         user.phone ?? "",
                         style: TextStyle(
-                          color: AppColors.black.withOpacity(0.6),
+                          color: AppColors.black.withValues(alpha: 0.6),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -133,45 +125,41 @@ class AccountTab extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
 
-                      ListTile(
-                        leading: const Icon(Icons.email),
-                        title: Text("${local.email}: ${user.email ?? ''}"),
+                      // Navigation Options
+                      _buildNavigationOption(
+                        context,
+                        icon: Icons.shopping_bag_outlined,
+                        title: local.orders,
+                        subtitle: 'View your order history',
+                        onTap:
+                            () => Navigator.pushNamed(
+                              context,
+                              AppRoutes.userOrders,
+                            ),
                       ),
-                      ListTile(
-                        leading: const Icon(Icons.phone),
-                        title: Text("${local.phone}: ${user.phone ?? ''}"),
+                      const SizedBox(height: 12),
+                      _buildNavigationOption(
+                        context,
+                        icon: Icons.build_outlined,
+                        title: local.repair,
+                        subtitle: 'Track your repair requests',
+                        onTap:
+                            () => Navigator.pushNamed(
+                              context,
+                              AppRoutes.userRepairs,
+                            ),
                       ),
-                      const Divider(height: 30),
-
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          local.repair,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-
-                      Column(
-                        children:
-                            repairHistory.map((device) {
-                              return ListTile(
-                                leading: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                    device["image"]!,
-                                    width: 50,
-                                    height: 50,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                title: Text(device["title"]!),
-                                subtitle: Text(device["date"]!),
-                              );
-                            }).toList(),
+                      const SizedBox(height: 12),
+                      _buildNavigationOption(
+                        context,
+                        icon: Icons.location_on_outlined,
+                        title: local.addresses,
+                        subtitle: 'Manage your delivery addresses',
+                        onTap:
+                            () => Navigator.pushNamed(
+                              context,
+                              AppRoutes.userAddresses,
+                            ),
                       ),
                       const SizedBox(height: 30),
 
@@ -202,6 +190,66 @@ class AccountTab extends StatelessWidget {
 
             return const Center(child: CircularProgressIndicator());
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavigationOption(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: AppColors.primary, size: 24),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
+          ],
         ),
       ),
     );

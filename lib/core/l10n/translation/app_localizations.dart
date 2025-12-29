@@ -290,6 +290,12 @@ abstract class AppLocalizations {
   /// **'Search by device name, type, serial number...'**
   String get search_hint;
 
+  /// No description provided for @search_hint_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by date, shop name, payment method, amount...'**
+  String get search_hint_transactions;
+
   /// No description provided for @device_status.
   ///
   /// In en, this message translates to:
@@ -929,7 +935,7 @@ abstract class AppLocalizations {
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
-  /// **'Home Page'**
+  /// **'Home'**
   String get home;
 
   /// No description provided for @deviceIssue.
@@ -1103,7 +1109,7 @@ abstract class AppLocalizations {
   /// No description provided for @explore.
   ///
   /// In en, this message translates to:
-  /// **'explore'**
+  /// **'Explore'**
   String get explore;
 
   /// No description provided for @next.

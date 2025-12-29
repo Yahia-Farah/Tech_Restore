@@ -9,6 +9,7 @@ import 'package:tech_restore/features/shop/data/models/profile/shop_profile_mode
 import 'package:tech_restore/features/shop/data/models/profile/update_profile_request.dart';
 import 'package:tech_restore/features/shop/data/models/orders/get_all_orders_model.dart';
 import 'package:tech_restore/features/shop/data/models/orders/order_status_request.dart';
+import 'package:tech_restore/features/shop/data/models/transactions/financial_report_model.dart';
 import '../models/offers/offer_request.dart';
 import '../models/offers/offer_response.dart';
 import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
@@ -127,7 +128,10 @@ class ShopRemoteDataSource {
     return await _apiClient.getShopProfile(shopId);
   }
 
-  Future<ShopProfileModel> updateShopProfile(String shopId, UpdateProfileRequest request) async {
+  Future<ShopProfileModel> updateShopProfile(
+    String shopId,
+    UpdateProfileRequest request,
+  ) async {
     return await _apiClient.updateShopProfile(request, shopId);
   }
 
@@ -135,7 +139,10 @@ class ShopRemoteDataSource {
     return await _apiClient.getAllOrders(page);
   }
 
-  Future<GetAllOrdersModel> getOrdersByStatus(String status, {required int page}) async {
+  Future<GetAllOrdersModel> getOrdersByStatus(
+    String status, {
+    required int page,
+  }) async {
     return await _apiClient.getOrdersByStatus(status, page);
   }
 
@@ -154,5 +161,9 @@ class ShopRemoteDataSource {
   Future<void> updateOrderStatus(String orderId, String status) async {
     final request = OrderStatusRequest(status: status);
     await _apiClient.updateOrderStatus(orderId, request);
+  }
+
+  Future<FinancialReportModel> getFinancialReport() async {
+    return await _apiClient.getFinancialReport();
   }
 }

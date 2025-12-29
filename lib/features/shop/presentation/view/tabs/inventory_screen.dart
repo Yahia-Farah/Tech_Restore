@@ -61,57 +61,52 @@ class _InventoryScreenState extends State<InventoryScreen> {
   void _onScroll() {
     if (!_scrollController.hasClients) return;
 
+    // Detect user interaction
     if (_scrollController.position.isScrollingNotifier.value) {
       if (!_isUserScrolling) {
         _isUserScrolling = true;
         _scrollTimer?.cancel();
-      }
-    } else {
-      if (_isUserScrolling) {
-        _isUserScrolling = false;
-        Future.delayed(const Duration(seconds: 2), () {
-          if (!_isUserScrolling && mounted && _scrollController.hasClients) {
-            _startAutoScroll();
-          }
-        });
       }
     }
   }
 
   void _startAutoScroll() {
     _scrollTimer?.cancel();
-    _scrollTimer = Timer.periodic(const Duration(milliseconds: 20), (timer) {
-      if (!_scrollController.hasClients || _isUserScrolling) return;
 
-      final maxScroll = _scrollController.position.maxScrollExtent;
-      final currentScroll = _scrollController.offset;
+    // Add a small delay before starting auto-scroll
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (!mounted || !_scrollController.hasClients) return;
 
-      if (maxScroll <= 0) return; // No scrolling needed if content fits
+      _scrollTimer = Timer.periodic(const Duration(milliseconds: 30), (timer) {
+        if (!_scrollController.hasClients || _isUserScrolling || !mounted)
+          return;
 
-      double targetScroll;
-      const scrollSpeed = 0.8; // Reduced speed for smoother scrolling
+        final maxScroll = _scrollController.position.maxScrollExtent;
+        final currentScroll = _scrollController.offset;
 
-      if (_isScrollingRight) {
-        if (currentScroll >= maxScroll) {
-          _isScrollingRight = false;
-          targetScroll = currentScroll - scrollSpeed;
+        if (maxScroll <= 0) return; // No scrolling needed if content fits
+
+        double targetScroll;
+        const scrollSpeed = 1.0;
+
+        if (_isScrollingRight) {
+          if (currentScroll >= maxScroll) {
+            _isScrollingRight = false;
+            targetScroll = currentScroll - scrollSpeed;
+          } else {
+            targetScroll = currentScroll + scrollSpeed;
+          }
         } else {
-          targetScroll = currentScroll + scrollSpeed;
+          if (currentScroll <= 0) {
+            _isScrollingRight = true;
+            targetScroll = currentScroll + scrollSpeed;
+          } else {
+            targetScroll = currentScroll - scrollSpeed;
+          }
         }
-      } else {
-        if (currentScroll <= 0) {
-          _isScrollingRight = true;
-          targetScroll = currentScroll + scrollSpeed;
-        } else {
-          targetScroll = currentScroll - scrollSpeed;
-        }
-      }
 
-      _scrollController.animateTo(
-        targetScroll.clamp(0.0, maxScroll),
-        duration: const Duration(milliseconds: 20),
-        curve: Curves.linear,
-      );
+        _scrollController.jumpTo(targetScroll.clamp(0.0, maxScroll));
+      });
     });
   }
 
@@ -212,7 +207,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                     },
                     onPanEnd: (_) {
                       _isUserScrolling = false;
-                      Future.delayed(const Duration(seconds: 2), () {
+                      Future.delayed(const Duration(seconds: 3), () {
                         if (!_isUserScrolling &&
                             mounted &&
                             _scrollController.hasClients) {
@@ -222,7 +217,18 @@ class _InventoryScreenState extends State<InventoryScreen> {
                     },
                     onPanCancel: () {
                       _isUserScrolling = false;
-                      Future.delayed(const Duration(seconds: 2), () {
+                      Future.delayed(const Duration(seconds: 3), () {
+                        if (!_isUserScrolling &&
+                            mounted &&
+                            _scrollController.hasClients) {
+                          _startAutoScroll();
+                        }
+                      });
+                    },
+                    onTap: () {
+                      _isUserScrolling = true;
+                      _scrollTimer?.cancel();
+                      Future.delayed(const Duration(seconds: 3), () {
                         if (!_isUserScrolling &&
                             mounted &&
                             _scrollController.hasClients) {

@@ -105,6 +105,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_hint => 'Search by device name, type, serial number...';
 
   @override
+  String get search_hint_transactions =>
+      'Search by date, shop name, payment method, amount...';
+
+  @override
   String get device_status => 'Device Status';
 
   @override
@@ -431,7 +435,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Log In';
 
   @override
-  String get home => 'Home Page';
+  String get home => 'Home';
 
   @override
   String get deviceIssue => 'Device issue';
@@ -521,7 +525,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
 
   @override
-  String get explore => 'explore';
+  String get explore => 'Explore';
 
   @override
   String get next => 'Next';

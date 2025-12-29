@@ -56,7 +56,7 @@ class EditProfileScreen extends StatelessWidget {
             backgroundColor: AppColors.white,
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.arrow_back_ios, color: AppColors.black),
+              icon: const Icon(Icons.arrow_back_ios, color: AppColors.primary),
             ),
             title: Text(
               local.editProfileTitle,

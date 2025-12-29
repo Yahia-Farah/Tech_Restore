@@ -13,6 +13,7 @@ import '../models/addresses/address_request.dart';
 import '../models/profile/shop_profile_model.dart';
 import '../models/profile/update_profile_request.dart';
 import '../models/orders/get_all_orders_model.dart';
+import '../models/transactions/financial_report_model.dart';
 import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
 import '../models/chats/chat_message_model.dart';
 import '../models/notifications/notification_model.dart';
@@ -224,7 +225,10 @@ class ShopRepository {
     }
   }
 
-  Future<ShopProfileModel> updateShopProfile(String shopId, UpdateProfileRequest request) async {
+  Future<ShopProfileModel> updateShopProfile(
+    String shopId,
+    UpdateProfileRequest request,
+  ) async {
     try {
       return await _remoteDataSource.updateShopProfile(shopId, request);
     } catch (e) {
@@ -240,7 +244,10 @@ class ShopRepository {
     }
   }
 
-  Future<GetAllOrdersModel> getOrdersByStatus(String status, {required int page}) async {
+  Future<GetAllOrdersModel> getOrdersByStatus(
+    String status, {
+    required int page,
+  }) async {
     try {
       return await _remoteDataSource.getOrdersByStatus(status, page: page);
     } catch (e) {
@@ -277,6 +284,14 @@ class ShopRepository {
       await _remoteDataSource.updateOrderStatus(orderId, status);
     } catch (e) {
       throw Exception('Failed to update order status: ${e.toString()}');
+    }
+  }
+
+  Future<FinancialReportModel> getFinancialReport() async {
+    try {
+      return await _remoteDataSource.getFinancialReport();
+    } catch (e) {
+      throw Exception('Failed to get financial report: ${e.toString()}');
     }
   }
 }

@@ -12,6 +12,7 @@ import 'package:tech_restore/features/shop/data/models/profile/shop_profile_mode
 import 'package:tech_restore/features/shop/data/models/profile/update_profile_request.dart';
 import 'package:tech_restore/features/shop/data/models/orders/get_all_orders_model.dart';
 import 'package:tech_restore/features/shop/data/models/orders/order_status_request.dart';
+import 'package:tech_restore/features/shop/data/models/transactions/financial_report_model.dart';
 import 'package:tech_restore/features/shop/data/models/products/add_product_request.dart';
 import 'package:tech_restore/features/shop/data/models/products/get_all_products_model.dart';
 import 'package:tech_restore/features/shop/data/models/products/total_elements_response.dart';
@@ -315,4 +316,8 @@ abstract class ApiClient {
     @Path('orderId') String orderId,
     @Body() OrderStatusRequest request,
   );
+
+  @GET(ApiEndPoints.getFinancialReport)
+  @Extra({'auth': true})
+  Future<FinancialReportModel> getFinancialReport();
 }

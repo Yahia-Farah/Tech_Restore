@@ -18,7 +18,7 @@ class IssueDescriptionPage extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Cancel", style: TextStyle(color: Colors.blue)),
+            child: Text("Cancel", style: TextStyle(color: Colors.green)),
           ),
         ],
       ),
@@ -27,7 +27,7 @@ class IssueDescriptionPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 📝 Text Area
+            // Text Area
             TextField(
               controller: _controller,
               maxLines: 5,
@@ -40,7 +40,7 @@ class IssueDescriptionPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
 
-            // 📸 Upload section
+            //  Upload section
             Text(
               "Upload photos or videos",
               style: TextStyle(color: Colors.grey.shade700),
@@ -55,13 +55,13 @@ class IssueDescriptionPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    child: Text("Next"),
+                    child: Text("Next",style: TextStyle(color: Colors.white)),
                   ),
                 ),
                 SizedBox(width: 10),

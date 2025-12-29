@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tech_restore/core/l10n/translation/app_localizations.dart';
 import '../../../../../core/theme/app_colors.dart';
-import 'device_issue.dart';
+import '../../../../../core/routes/route_names.dart';
 
 class CreateOrder extends StatelessWidget {
   const CreateOrder({super.key});
@@ -46,12 +46,7 @@ class CreateOrder extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DeviceIssueScreen(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, AppRoutes.deviceIssue);
                     },
                     child: Container(
                       decoration: BoxDecoration(

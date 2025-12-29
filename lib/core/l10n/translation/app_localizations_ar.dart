@@ -105,6 +105,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search_hint => 'ابحث باسم الجهاز، نوع الجهاز، الرقم التسلسلي...';
 
   @override
+  String get search_hint_transactions =>
+      'ابحث بالتاريخ، اسم المتجر، طريقة الدفع، المبلغ...';
+
+  @override
   String get device_status => 'حالة الجهاز';
 
   @override
@@ -432,7 +436,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
-  String get home => 'الصفحة الرئيسية';
+  String get home => 'الرئيسية';
 
   @override
   String get deviceIssue => 'مشكلة في الجهاز';

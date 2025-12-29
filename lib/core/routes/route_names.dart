@@ -15,4 +15,17 @@ abstract class AppRoutes {
   static const String assignerRegister = "/assignerRegister";
   static const String addresses = "/addresses";
   static const String shopProfile = "/shopProfile";
+  static const String userOrders = "/userOrders";
+  static const String userRepairs = "/userRepairs";
+  static const String userAddresses = "/userAddresses";
+  static const String createOrder = "/createOrder";
+  static const String deviceIssue = "/deviceIssue";
+  static const String issueDescription = "/issueDescription";
+  static const String offers = "/offers";
+  static const String visitShop = "/visitShop";
+  static const String allDevices = "/allDevices";
+  static const String allReviews = "/allReviews";
+  static const String chatList = "/chatList";
+  static const String chat = "/chat";
+  static const String cart = "/cart";
 }
