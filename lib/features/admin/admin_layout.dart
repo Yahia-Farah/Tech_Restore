@@ -13,6 +13,10 @@ import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/view/users_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-assigner/presentation/view/admin_assigner_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-assignment-logs/presentation/view/admin_assignment_logs_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-subscription/presentation/view/admin_subscription_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-products/presentation/view/admin_products_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-repair-requests/presentation/view/admin_repair_requests_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-offers/presentation/view/admin_offers_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-reviews/presentation/viewmodel/get_reviews_cubit.dart';
@@ -35,10 +39,12 @@ class _MainLayoutState extends State<AdminLayout> {
   int _selectedIndex = 0;
 
   List<Widget> get _screens => [
+    // Dashboard (index 0)
     BlocProvider(
       create: (context) => getIt<AdminStatsCubit>(),
       child: const AdminDashboardScreen(),
     ),
+    // Users (index 1)
     BlocProvider(
       create: (context) => getIt<GetUsersCubit>(),
       child: const UsersScreen(),
@@ -48,34 +54,34 @@ class _MainLayoutState extends State<AdminLayout> {
       create: (context) => getIt<GetShopsCubit>(),
       child: const AdminRepairScreen(),
     ),
-    // Shop section: Reviews (index 3)
+    // Shop section: Subscription (index 3)
+    const AdminSubscriptionScreen(),
+    // Shop section: Products (index 4)
+    const AdminProductsScreen(),
+    // Shop section: Repair Requests (index 5)
+    const AdminRepairRequestsScreen(),
+    // Shop section: Offers (index 6)
+    const AdminOffersScreen(),
+    // Shop section: Reviews (index 7)
     BlocProvider(
       create: (context) => getIt<GetReviewsCubit>(),
       child: const AdminReviewsScreen(),
     ),
-    // Shop section: Promotional Offers (index 4)
-    const AdminPromotionsScreen(),
-    // Transactions (index 5)
-    BlocProvider(
-      create: (context) => getIt<TransactionsCubit>(),
-      child: const AdminTransactionsScreen(),
-    ),
-    // Support (index 6)
-    AdminSupportScreen(),
-    // Categories (index 7)
+    // Categories (index 8)
     BlocProvider(
       create: (context) => getIt<CategoriesCubit>(),
       child: const AdminCategoriesScreen(),
     ),
-    // Delivery (index 8)
+    // Transactions (index 9)
+    BlocProvider(
+      create: (context) => getIt<TransactionsCubit>(),
+      child: const AdminTransactionsScreen(),
+    ),
+    // Delivery (index 10)
     BlocProvider(
       create: (context) => getIt<DeliveriesCubit>(),
       child: const DeliveryAdminScreen(),
     ),
-    // Assigner (index 9)
-    const AdminAssignerScreen(),
-    // Assignment Logs (index 10)
-    const AdminAssignmentLogsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -133,7 +139,7 @@ class _MainLayoutState extends State<AdminLayout> {
                     ),
                   ],
                 )
-                : _selectedIndex == 7
+                : _selectedIndex == 8
                 ? Row(
                   children: [
                     Icon(Icons.list, color: AppColors.primary[70], size: 30),
@@ -198,29 +204,30 @@ class _MainLayoutState extends State<AdminLayout> {
   }
 
   String _getTitle(int index) {
+    final local = AppLocalizations.of(context)!;
     switch (index) {
       case 0:
-        return "Dashboard";
+        return local.dashboard;
       case 1:
-        return "User";
+        return local.users;
       case 2:
-        return "Stores";
+        return local.stores;
       case 3:
-        return "Reviews";
+        return local.subscription;
       case 4:
-        return "Promotional Offers";
+        return local.products;
       case 5:
-        return "Transaction";
+        return local.repair_requests;
       case 6:
-        return "Support";
+        return local.offers;
       case 7:
-        return "Categories";
+        return local.reviews;
       case 8:
-        return "Delivery";
+        return local.categories;
       case 9:
-        return "Assigner";
+        return local.transactions;
       case 10:
-        return "Assignment Logs";
+        return "Delivery"; // TODO: Add to localization
       default:
         return "";
     }

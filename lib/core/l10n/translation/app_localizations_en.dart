@@ -1352,4 +1352,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get guest_role => 'GUEST';
+
+  @override
+  String get subscription_management => 'Subscription Management';
+
+  @override
+  String get monitor_and_manage_subscriptions => 'Monitor and manage subscription plans';
+
+  @override
+  String get total_subscriptions => 'Total Subscriptions';
+
+  @override
+  String get expired => 'Expired';
+
+  @override
+  String get search_subscriptions => 'Search subscriptions...';
+
+  @override
+  String get no_subscriptions_available => 'No subscriptions available';
+
+  @override
+  String get products_management => 'Products Management';
+
+  @override
+  String get monitor_and_manage_products => 'Monitor and manage shop products';
+
+  @override
+  String get total_products => 'Total Products';
+
+  @override
+  String get in_stock => 'In Stock';
+
+  @override
+  String get out_of_stock => 'Out of Stock';
+
+  @override
+  String get search_products => 'Search products...';
+
+  @override
+  String get no_products_available => 'No products available';
+
+  @override
+  String get repair_requests_management => 'Repair Requests Management';
+
+  @override
+  String get search_repair_requests => 'Search repair requests...';
+
+  @override
+  String get no_repair_requests_available => 'No repair requests available';
+
+  @override
+  String get offers_management => 'Offers Management';
+
+  @override
+  String get total_offers => 'Total Offers';
+
+  @override
+  String get no_offers_available => 'No offers available';
+
+  @override
+  String get stores => 'Stores';
+
+  @override
+  String get subscription => 'Subscription';
+
+  @override
+  String get reviews => 'Reviews';
 }

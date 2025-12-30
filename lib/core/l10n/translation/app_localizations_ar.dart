@@ -1352,4 +1352,70 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get guest_role => 'ضيف';
+
+  @override
+  String get subscription_management => 'إدارة الاشتراكات';
+
+  @override
+  String get monitor_and_manage_subscriptions => 'مراقبة وإدارة خطط الاشتراك';
+
+  @override
+  String get total_subscriptions => 'إجمالي الاشتراكات';
+
+  @override
+  String get expired => 'منتهية الصلاحية';
+
+  @override
+  String get search_subscriptions => 'البحث في الاشتراكات...';
+
+  @override
+  String get no_subscriptions_available => 'لا توجد اشتراكات متاحة';
+
+  @override
+  String get products_management => 'إدارة المنتجات';
+
+  @override
+  String get monitor_and_manage_products => 'مراقبة وإدارة منتجات المتاجر';
+
+  @override
+  String get total_products => 'إجمالي المنتجات';
+
+  @override
+  String get in_stock => 'متوفر';
+
+  @override
+  String get out_of_stock => 'غير متوفر';
+
+  @override
+  String get search_products => 'البحث في المنتجات...';
+
+  @override
+  String get no_products_available => 'لا توجد منتجات متاحة';
+
+  @override
+  String get repair_requests_management => 'إدارة طلبات الإصلاح';
+
+  @override
+  String get search_repair_requests => 'البحث في طلبات الإصلاح...';
+
+  @override
+  String get no_repair_requests_available => 'لا توجد طلبات إصلاح متاحة';
+
+  @override
+  String get offers_management => 'إدارة العروض';
+
+  @override
+  String get total_offers => 'إجمالي العروض';
+
+  @override
+  String get no_offers_available => 'لا توجد عروض متاحة';
+
+  @override
+  String get stores => 'المتاجر';
+
+  @override
+  String get subscription => 'الاشتراك';
+
+  @override
+  String get reviews => 'التقييمات';
 }

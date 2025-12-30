@@ -25,7 +25,7 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
   bool _isShopExpanded = true;
 
   bool _isShopItemSelected(int index) {
-    return index >= 2 && index <= 4;
+    return index >= 2 && index <= 7;
   }
 
   @override
@@ -60,43 +60,28 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
                 _buildDrawerItem(
                   index: 0,
                   icon: Icons.dashboard_outlined,
-                  text: "Dashboard",
+                  text: local.dashboard,
                 ),
                 _buildDrawerItem(
                   index: 1,
                   icon: Icons.people_alt_outlined,
-                  text: "Users",
+                  text: local.users,
                 ),
                 _buildExpandableShopSection(),
                 _buildDrawerItem(
-                  index: 7,
-                  icon: Icons.list,
-                  text: "Categories",
-                ),
-                _buildDrawerItem(
-                  index: 5,
-                  icon: Icons.attach_money_outlined,
-                  text: "Transactions",
-                ),
-                _buildDrawerItem(
                   index: 8,
-                  icon: Icons.local_shipping_outlined,
-                  text: "Delivery",
+                  icon: Icons.list,
+                  text: local.categories,
                 ),
                 _buildDrawerItem(
                   index: 9,
-                  icon: Icons.card_giftcard_outlined,
-                  text: "Assigner",
+                  icon: Icons.attach_money_outlined,
+                  text: local.transactions,
                 ),
                 _buildDrawerItem(
                   index: 10,
-                  icon: Icons.assignment_outlined,
-                  text: "Assignment Logs",
-                ),
-                _buildDrawerItem(
-                  index: 6,
-                  icon: Icons.support_agent_outlined,
-                  text: "Support",
+                  icon: Icons.local_shipping_outlined,
+                  text: "Delivery", // TODO: Add to localization
                 ),
               ],
             ),
@@ -129,11 +114,12 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
 
   Widget _buildExpandableShopSection() {
     final isShopSelected = _isShopItemSelected(widget.selectedIndex);
+    var local = AppLocalizations.of(context)!;
 
     return ExpansionTile(
       leading: Icon(Icons.shopping_bag_outlined, color: AppColors.primary[70]),
       title: Text(
-        "Shop",
+        local.shop,
         style: TextStyle(
           color: isShopSelected ? AppColors.primary : AppColors.black,
           fontSize: 16,
@@ -147,13 +133,12 @@ class _AdminDrawerWidgetState extends State<AdminDrawerWidget> {
         });
       },
       children: [
-        _buildShopSubItem(index: 2, icon: Icons.store_outlined, text: "Stores"),
-        _buildShopSubItem(index: 3, icon: Icons.star_border, text: "Reviews"),
-        _buildShopSubItem(
-          index: 4,
-          icon: Icons.local_offer_outlined,
-          text: "Promotional Offers",
-        ),
+        _buildShopSubItem(index: 2, icon: Icons.store_outlined, text: local.stores),
+        _buildShopSubItem(index: 3, icon: Icons.subscriptions_outlined, text: local.subscription),
+        _buildShopSubItem(index: 4, icon: Icons.inventory_outlined, text: local.products),
+        _buildShopSubItem(index: 5, icon: Icons.build_outlined, text: local.repair_requests),
+        _buildShopSubItem(index: 6, icon: Icons.local_offer_outlined, text: local.offers),
+        _buildShopSubItem(index: 7, icon: Icons.star_border, text: local.reviews),
       ],
     );
   }

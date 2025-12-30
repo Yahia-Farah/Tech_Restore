@@ -2776,6 +2776,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'GUEST'**
   String get guest_role;
+
+  /// No description provided for @subscription_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Management'**
+  String get subscription_management;
+
+  /// No description provided for @monitor_and_manage_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor and manage subscription plans'**
+  String get monitor_and_manage_subscriptions;
+
+  /// No description provided for @total_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Subscriptions'**
+  String get total_subscriptions;
+
+  /// No description provided for @expired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get expired;
+
+  /// No description provided for @search_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Search subscriptions...'**
+  String get search_subscriptions;
+
+  /// No description provided for @no_subscriptions_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No subscriptions available'**
+  String get no_subscriptions_available;
+
+  /// No description provided for @products_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Products Management'**
+  String get products_management;
+
+  /// No description provided for @monitor_and_manage_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor and manage shop products'**
+  String get monitor_and_manage_products;
+
+  /// No description provided for @total_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Products'**
+  String get total_products;
+
+  /// No description provided for @in_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'In Stock'**
+  String get in_stock;
+
+  /// No description provided for @out_of_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'Out of Stock'**
+  String get out_of_stock;
+
+  /// No description provided for @search_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products...'**
+  String get search_products;
+
+  /// No description provided for @no_products_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No products available'**
+  String get no_products_available;
+
+  /// No description provided for @repair_requests_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair Requests Management'**
+  String get repair_requests_management;
+
+  /// No description provided for @search_repair_requests.
+  ///
+  /// In en, this message translates to:
+  /// **'Search repair requests...'**
+  String get search_repair_requests;
+
+  /// No description provided for @no_repair_requests_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No repair requests available'**
+  String get no_repair_requests_available;
+
+  /// No description provided for @offers_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers Management'**
+  String get offers_management;
+
+  /// No description provided for @total_offers.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Offers'**
+  String get total_offers;
+
+  /// No description provided for @no_offers_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No offers available'**
+  String get no_offers_available;
+
+  /// No description provided for @stores.
+  ///
+  /// In en, this message translates to:
+  /// **'Stores'**
+  String get stores;
+
+  /// No description provided for @subscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get subscription;
+
+  /// No description provided for @reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get reviews;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
