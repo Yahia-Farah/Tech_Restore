@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tech_restore/features/admin/tabs/manage-reviews/data/models/review_model.dart';
+import 'package:tech_restore/features/admin/tabs/manage-reviews/presentation/viewmodel/get_reviews_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-reviews/presentation/viewmodel/states/get_reviews_states.dart';
 
 import '../../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../../core/theme/app_colors.dart';
@@ -15,48 +19,15 @@ class AdminReviewsScreen extends StatefulWidget {
 }
 
 class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
-  String _searchQuery = "";
   final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
   Set<String> _loadingReviews = {}; // Track loading state per review
 
-  final List<Map<String, dynamic>> _reviews = [
-    {
-      "id": "1",
-      "customer": "John Doe",
-      "shop": "Mobile Masters",
-      "rating": 5,
-      "comment": "Excellent service! Fixed my phone quickly.",
-      "date": "2024-01-20",
-      "status": "Positive",
-    },
-    {
-      "id": "2",
-      "customer": "Jane Smith",
-      "shop": "TechFix Pro",
-      "rating": 1,
-      "comment": "Terrible service! They broke my phone.",
-      "date": "2024-01-19",
-      "status": "Negative",
-    },
-    {
-      "id": "3",
-      "customer": "Mike Johnson",
-      "shop": "Device Doctor",
-      "rating": 4,
-      "comment": "Good service, reasonable prices.",
-      "date": "2024-01-18",
-      "status": "Positive",
-    },
-    {
-      "id": "4",
-      "customer": "Sarah Wilson",
-      "shop": "Quick Repair Hub",
-      "rating": 2,
-      "comment": "This place is a scam! They overcharged me.",
-      "date": "2024-01-17",
-      "status": "Negative",
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetReviewsCubit>().getAllReviews();
+  }
 
   @override
   void dispose() {
@@ -67,94 +38,157 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final filteredReviews = _getFilteredReviews();
-
+    
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header
-            Row(
-              children: [
-                Icon(
-                  Icons.rate_review,
-                  color: AppColors.primary,
-                  size: 28,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  "Review Management",
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Text(
-              "Monitor and manage customer feedback",
-              style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 14,
+      body: BlocConsumer<GetReviewsCubit, GetReviewsState>(
+        listener: (context, state) {
+          if (state is GetReviewsError) {
+            _loadingReviews.clear(); // Clear loading state on error
+            _showErrorToast(state.message);
+          }
+          if (state is ReviewDeleted) {
+            _loadingReviews.clear(); // Clear loading state on success
+            _showSuccessToast(l10n.review_deleted_successfully);
+          }
+        },
+        builder: (context, state) {
+          if (state is GetReviewsLoading) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primary,
               ),
-            ),
-            const SizedBox(height: 24),
+            );
+          }
 
-            // Stats Cards
-            _buildStatsCards(l10n),
-            const SizedBox(height: 24),
+          if (state is GetReviewsError) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.error_outline, 
+                    size: 64, 
+                    color: Colors.red,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    '${l10n.error}: ${state.message}',
+                    style: const TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomElevatedButton(
+                    text: l10n.retry,
+                    onPressed: () {
+                      context.read<GetReviewsCubit>().getAllReviews();
+                    },
+                    width: 120,
+                    height: 40,
+                  ),
+                ],
+              ),
+            );
+          }
 
-            // Search
-            _buildSearchField(l10n),
-            const SizedBox(height: 20),
+          if (state is GetReviewsLoaded) {
+            final reviews = state.reviews.content ?? [];
+            final filteredReviews = _getFilteredReviews(reviews);
 
-            // Reviews Table
-            _buildReviewsTable(filteredReviews, l10n),
-          ],
-        ),
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Header
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.rate_review,
+                        color: AppColors.primary,
+                        size: 28,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        l10n.review_management,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    l10n.monitor_and_manage_customer_feedback,
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Stats Cards
+                  _buildStatsCards(reviews, l10n),
+                  const SizedBox(height: 24),
+
+                  // Search
+                  _buildSearchField(l10n),
+                  const SizedBox(height: 20),
+
+                  // Reviews Table
+                  _buildReviewsTable(filteredReviews, l10n),
+                ],
+              ),
+            );
+          }
+
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
 
-  List<Map<String, dynamic>> _getFilteredReviews() {
-    return _reviews.where((review) {
+  // Helper methods
+  List<ReviewModel> _getFilteredReviews(List<ReviewModel> reviews) {
+    return reviews.where((review) {
       final query = _searchQuery.toLowerCase();
-      return review["customer"].toLowerCase().contains(query) ||
-          review["shop"].toLowerCase().contains(query) ||
-          review["comment"].toLowerCase().contains(query);
+      final customerName = (review.customerName ?? '').toLowerCase();
+      final shopName = (review.shopName ?? '').toLowerCase();
+      final comment = (review.comment ?? '').toLowerCase();
+      
+      return customerName.contains(query) ||
+          shopName.contains(query) ||
+          comment.contains(query);
     }).toList();
   }
 
-  Widget _buildStatsCards(AppLocalizations l10n) {
-    final totalReviews = _reviews.length;
-    final approvedReviews = _reviews.where((r) => r["status"] == "Positive").length;
-    final flaggedReviews = _reviews.where((r) => r["status"] == "Negative").length;
+  Widget _buildStatsCards(List<ReviewModel> reviews, AppLocalizations l10n) {
+    final totalReviews = reviews.length;
+    final approvedReviews = reviews.where((r) => r.isApproved == true).length;
+    final flaggedReviews = reviews.where((r) => r.isFlagged == true).length;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
           _buildStatCard(
-            title: "Total Reviews",
+            title: l10n.total_reviews,
             count: totalReviews.toString(),
             icon: Icons.rate_review,
             color: AppColors.primary,
           ),
           const SizedBox(width: 16),
           _buildStatCard(
-            title: "Approved",
+            title: l10n.approved,
             count: approvedReviews.toString(),
             icon: Icons.check_circle,
             color: Colors.green,
           ),
           const SizedBox(width: 16),
           _buildStatCard(
-            title: "Flagged",
+            title: l10n.flagged,
             count: flaggedReviews.toString(),
             icon: Icons.flag,
             color: Colors.red,
@@ -235,7 +269,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
   Widget _buildSearchField(AppLocalizations l10n) {
     return CustomTextFormField(
       controller: _searchController,
-      hint: "Search by customer, shop, or comment...",
+      hint: l10n.search_by_customer_shop_or_comment,
       prefixIcon: const Icon(Icons.search, color: Colors.grey),
       onChanged: (value) {
         setState(() => _searchQuery = value);
@@ -243,7 +277,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
     );
   }
 
-  Widget _buildReviewsTable(List<Map<String, dynamic>> reviews, AppLocalizations l10n) {
+  Widget _buildReviewsTable(List<ReviewModel> reviews, AppLocalizations l10n) {
     if (reviews.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(40),
@@ -269,7 +303,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                "No reviews available",
+                l10n.no_reviews_available,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 16,
@@ -309,7 +343,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                       SizedBox(
                         width: 120,
                         child: Text(
-                          "ID",
+                          l10n.id.toUpperCase(),
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.grey[700],
@@ -321,7 +355,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                       SizedBox(
                         width: 120,
                         child: Text(
-                          "RATING",
+                          l10n.rating.toUpperCase(),
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.grey[700],
@@ -333,7 +367,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                       SizedBox(
                         width: 300,
                         child: Text(
-                          "COMMENT",
+                          l10n.comment.toUpperCase(),
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.grey[700],
@@ -345,7 +379,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                       SizedBox(
                         width: 120,
                         child: Text(
-                          "DATE",
+                          l10n.date.toUpperCase(),
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.grey[700],
@@ -357,7 +391,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                       SizedBox(
                         width: 300,
                         child: Text(
-                          "ACTIONS",
+                          l10n.actions.toUpperCase(),
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.grey[700],
@@ -381,8 +415,8 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
     );
   }
 
-  Widget _buildReviewRow(Map<String, dynamic> review, AppLocalizations l10n) {
-    final reviewId = review["id"] ?? '';
+  Widget _buildReviewRow(ReviewModel review, AppLocalizations l10n) {
+    final reviewId = review.id ?? '';
     final isReviewLoading = _loadingReviews.contains(reviewId);
 
     return Container(
@@ -398,7 +432,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
           SizedBox(
             width: 120,
             child: Text(
-              review["id"] ?? 'N/A',
+              review.id?.substring(0, 8) ?? 'N/A',
               style: const TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 14,
@@ -411,13 +445,13 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
           // Rating
           SizedBox(
             width: 120,
-            child: _buildStarRating(review["rating"]),
+            child: _buildStarRating(review.rating ?? 0),
           ),
           // Comment
           SizedBox(
             width: 300,
             child: Text(
-              review["comment"] ?? 'N/A',
+              review.comment ?? 'N/A',
               style: const TextStyle(
                 fontSize: 14,
                 color: Colors.black87,
@@ -430,7 +464,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
           SizedBox(
             width: 120,
             child: Text(
-              review["date"] ?? 'N/A',
+              _formatDate(review.createdAt) ?? 'N/A',
               style: const TextStyle(
                 fontSize: 14,
                 color: Colors.black87,
@@ -464,39 +498,9 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                     ),
                   ),
                 ),
-                // Approve Button
-                Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  child: ElevatedButton.icon(
-                    onPressed: isReviewLoading ? null : () => _approveReview(reviewId),
-                    icon: isReviewLoading 
-                        ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : const Icon(Icons.check, size: 16),
-                    label: Text(l10n.approve),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                      minimumSize: Size.zero,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
-                // Flag Button
+                // Delete Button
                 ElevatedButton.icon(
-                  onPressed: isReviewLoading ? null : () => _flagReview(reviewId),
+                  onPressed: isReviewLoading ? null : () => _deleteReview(reviewId),
                   icon: isReviewLoading 
                       ? const SizedBox(
                           width: 16,
@@ -506,10 +510,10 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           ),
                         )
-                      : const Icon(Icons.flag, size: 16),
-                  label: const Text("Flag"),
+                      : const Icon(Icons.delete, size: 16),
+                  label: Text(l10n.delete),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                     elevation: 0,
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -529,7 +533,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
     );
   }
 
-  void _showReviewDetails(Map<String, dynamic> review, AppLocalizations l10n) {
+  void _showReviewDetails(ReviewModel review, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -558,7 +562,7 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                 child: Row(
                   children: [
                     Text(
-                      "Review Details",
+                      l10n.review_details,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -587,17 +591,17 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildDetailItem("Customer", review["customer"] ?? 'N/A'),
+                        _buildDetailItem(l10n.customer, review.customerName ?? 'N/A'),
                         const SizedBox(height: 16),
-                        _buildDetailItem("Shop", review["shop"] ?? 'N/A'),
+                        _buildDetailItem(l10n.shop, review.shopName ?? 'N/A'),
                         const SizedBox(height: 16),
-                        _buildDetailItem("Rating", "${review["rating"] ?? 0}/5"),
+                        _buildDetailItem(l10n.rating, "${review.rating ?? 0}/5"),
                         const SizedBox(height: 16),
-                        _buildDetailItem("Comment", review["comment"] ?? 'N/A'),
+                        _buildDetailItem(l10n.comment, review.comment ?? 'N/A'),
                         const SizedBox(height: 16),
-                        _buildDetailItem("Date", review["date"] ?? 'N/A'),
+                        _buildDetailItem(l10n.date, _formatDate(review.createdAt) ?? 'N/A'),
                         const SizedBox(height: 16),
-                        _buildDetailItem("Status", review["status"] ?? 'N/A'),
+                        _buildDetailItem(l10n.status, _getReviewStatus(review)),
                       ],
                     ),
                   ),
@@ -644,36 +648,34 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
     );
   }
 
-  void _approveReview(String reviewId) {
+  void _deleteReview(String reviewId) {
     if (reviewId.isEmpty) return;
     
     setState(() {
       _loadingReviews.add(reviewId);
     });
     
-    // Simulate API call
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _loadingReviews.remove(reviewId);
-      });
-      _showSuccessToast("Review approved successfully");
-    });
+    context.read<GetReviewsCubit>().deleteReview(reviewId);
   }
 
-  void _flagReview(String reviewId) {
-    if (reviewId.isEmpty) return;
-    
-    setState(() {
-      _loadingReviews.add(reviewId);
-    });
-    
-    // Simulate API call
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _loadingReviews.remove(reviewId);
-      });
-      _showSuccessToast("Review flagged successfully");
-    });
+  String _formatDate(String? dateString) {
+    if (dateString == null) return 'N/A';
+    try {
+      final date = DateTime.parse(dateString);
+      return '${date.day}/${date.month}/${date.year}';
+    } catch (e) {
+      return dateString;
+    }
+  }
+
+  String _getReviewStatus(ReviewModel review) {
+    if (review.isFlagged == true) {
+      return 'Flagged';
+    } else if (review.isApproved == true) {
+      return 'Approved';
+    } else {
+      return 'Pending';
+    }
   }
 
   void _showSuccessToast(String message) {
@@ -725,42 +727,6 @@ class _AdminReviewsScreenState extends State<AdminReviewsScreen> {
           size: 18,
         );
       }),
-    );
-  }
-
-  // ===== Status Chip =====
-  Widget _buildStatusChip(String status) {
-    Color bg;
-    Color text;
-    switch (status) {
-      case "Positive":
-        bg = Colors.green[100]!;
-        text = Colors.green[700]!;
-        break;
-      case "Negative":
-        bg = Colors.red[100]!;
-        text = Colors.red[700]!;
-        break;
-      default:
-        bg = Colors.grey[100]!;
-        text = Colors.grey[700]!;
-    }
-    return IntrinsicWidth(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: bg,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Text(
-          status,
-          style: TextStyle(
-            color: text,
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
     );
   }
 }

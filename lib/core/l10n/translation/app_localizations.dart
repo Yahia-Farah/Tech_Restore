@@ -2686,6 +2686,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to suspend shop'**
   String get shop_suspension_failed;
+
+  /// No description provided for @review_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Review Management'**
+  String get review_management;
+
+  /// No description provided for @monitor_and_manage_customer_feedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor and manage customer feedback'**
+  String get monitor_and_manage_customer_feedback;
+
+  /// No description provided for @total_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Reviews'**
+  String get total_reviews;
+
+  /// No description provided for @flagged.
+  ///
+  /// In en, this message translates to:
+  /// **'Flagged'**
+  String get flagged;
+
+  /// No description provided for @search_by_customer_shop_or_comment.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by customer, shop, or comment...'**
+  String get search_by_customer_shop_or_comment;
+
+  /// No description provided for @all_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'All Reviews'**
+  String get all_reviews;
+
+  /// No description provided for @flagged_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Flagged Reviews'**
+  String get flagged_reviews;
+
+  /// No description provided for @comment.
+  ///
+  /// In en, this message translates to:
+  /// **'comment'**
+  String get comment;
+
+  /// No description provided for @no_reviews_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews available'**
+  String get no_reviews_available;
+
+  /// No description provided for @review_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Review Details'**
+  String get review_details;
+
+  /// No description provided for @review_deleted_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Review deleted successfully'**
+  String get review_deleted_successfully;
+
+  /// No description provided for @user_role.
+  ///
+  /// In en, this message translates to:
+  /// **'USER'**
+  String get user_role;
+
+  /// No description provided for @admin_role.
+  ///
+  /// In en, this message translates to:
+  /// **'ADMIN'**
+  String get admin_role;
+
+  /// No description provided for @shop_owner_role.
+  ///
+  /// In en, this message translates to:
+  /// **'SHOP_OWNER'**
+  String get shop_owner_role;
+
+  /// No description provided for @guest_role.
+  ///
+  /// In en, this message translates to:
+  /// **'GUEST'**
+  String get guest_role;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

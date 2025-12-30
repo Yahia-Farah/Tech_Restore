@@ -1307,4 +1307,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shop_suspension_failed => 'Failed to suspend shop';
+
+  @override
+  String get review_management => 'Review Management';
+
+  @override
+  String get monitor_and_manage_customer_feedback => 'Monitor and manage customer feedback';
+
+  @override
+  String get total_reviews => 'Total Reviews';
+
+  @override
+  String get flagged => 'Flagged';
+
+  @override
+  String get search_by_customer_shop_or_comment => 'Search by customer, shop, or comment...';
+
+  @override
+  String get all_reviews => 'All Reviews';
+
+  @override
+  String get flagged_reviews => 'Flagged Reviews';
+
+  @override
+  String get comment => 'comment';
+
+  @override
+  String get no_reviews_available => 'No reviews available';
+
+  @override
+  String get review_details => 'Review Details';
+
+  @override
+  String get review_deleted_successfully => 'Review deleted successfully';
+
+  @override
+  String get user_role => 'USER';
+
+  @override
+  String get admin_role => 'ADMIN';
+
+  @override
+  String get shop_owner_role => 'SHOP_OWNER';
+
+  @override
+  String get guest_role => 'GUEST';
 }

@@ -72,4 +72,6 @@ abstract class ApiEndPoints {
   static const String updateOrderStatus =
       'shops/orders/control/{orderId}/status';
   static const String getFinancialReport = 'shops/payments/financial-report';
+  static const String getAllReviews = 'admin/reviews';
+  static const String deleteReview = 'admin/reviews/{reviewId}';
 }

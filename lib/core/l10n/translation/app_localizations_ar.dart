@@ -1307,4 +1307,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shop_suspension_failed => 'فشل في تعليق المتجر';
+
+  @override
+  String get review_management => 'إدارة التقييمات';
+
+  @override
+  String get monitor_and_manage_customer_feedback => 'مراقبة وإدارة تعليقات العملاء';
+
+  @override
+  String get total_reviews => 'إجمالي التقييمات';
+
+  @override
+  String get flagged => 'مبلغ عنها';
+
+  @override
+  String get search_by_customer_shop_or_comment => 'البحث بالعميل أو المتجر أو التعليق...';
+
+  @override
+  String get all_reviews => 'All Reviews';
+
+  @override
+  String get flagged_reviews => 'Flagged Reviews';
+
+  @override
+  String get comment => 'تعليق';
+
+  @override
+  String get no_reviews_available => 'لا توجد تقييمات متاحة';
+
+  @override
+  String get review_details => 'تفاصيل التقييم';
+
+  @override
+  String get review_deleted_successfully => 'تم حذف التقييم بنجاح';
+
+  @override
+  String get user_role => 'مستخدم';
+
+  @override
+  String get admin_role => 'مدير';
+
+  @override
+  String get shop_owner_role => 'صاحب متجر';
+
+  @override
+  String get guest_role => 'ضيف';
 }

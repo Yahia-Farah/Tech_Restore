@@ -453,5 +453,20 @@
   "filter_by_status": "Filter by Status",
   "no_shops_match_filters": "No shops match your filters",
   "not_specified": "Not specified",
-  "data_copied_to_clipboard": "Data copied to clipboard"
+  "data_copied_to_clipboard": "Data copied to clipboard",
+  "review_management": "Review Management",
+  "monitor_and_manage_customer_feedback": "Monitor and manage customer feedback",
+  "total_reviews": "Total Reviews",
+  "flagged": "Flagged",
+  "search_by_customer_shop_or_comment": "Search by customer, shop, or comment...",
+  "all_reviews": "All Reviews",
+  "flagged_reviews": "Flagged Reviews",
+  "comment": "comment",
+  "no_reviews_available": "No reviews available",
+  "review_details": "Review Details",
+  "review_deleted_successfully": "Review deleted successfully",
+  "user_role": "USER",
+  "admin_role": "ADMIN", 
+  "shop_owner_role": "SHOP_OWNER",
+  "guest_role": "GUEST"
 }

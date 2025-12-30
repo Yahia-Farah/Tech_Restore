@@ -5,7 +5,7 @@ import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/v
 import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_stats_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-delivery/presentation/view/delivery_admin_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_repair_screen.dart';
-import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_reviews_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-reviews/presentation/view/admin_reviews_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_promotional_offers_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/view/admin_categories_screen.dart';
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
@@ -15,6 +15,7 @@ import 'package:tech_restore/features/admin/tabs/manage-assigner/presentation/vi
 import 'package:tech_restore/features/admin/tabs/manage-assignment-logs/presentation/view/admin_assignment_logs_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart';
+import 'package:tech_restore/features/admin/tabs/manage-reviews/presentation/viewmodel/get_reviews_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/viewmodel/categories_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/viewmodel/transactions_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-delivery/presentation/viewmodel/deliveries_cubit.dart';
@@ -48,7 +49,10 @@ class _MainLayoutState extends State<AdminLayout> {
       child: const AdminRepairScreen(),
     ),
     // Shop section: Reviews (index 3)
-    const AdminReviewsScreen(),
+    BlocProvider(
+      create: (context) => getIt<GetReviewsCubit>(),
+      child: const AdminReviewsScreen(),
+    ),
     // Shop section: Promotional Offers (index 4)
     const AdminPromotionsScreen(),
     // Transactions (index 5)

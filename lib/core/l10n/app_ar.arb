@@ -412,6 +412,7 @@
   "shop_suspended_successfully": "تم تعليق المتجر بنجاح",
   "shop_approval_failed": "فشل في الموافقة على المتجر",
   "shop_suspension_failed": "فشل في تعليق المتجر",
+  "comment": "تعليق",
   "addresses": "العناوين",
   "branches_and_addresses": "الفروع والعناوين",
   "add_new_address": "إضافة عنوان جديد",
@@ -455,5 +456,17 @@
   "suspended_shops": "المتاجر المعلقة", 
   "filter_by_status": "تصفية حسب الحالة",
   "no_shops_match_filters": "لا توجد متاجر تطابق المرشحات",
-  "data_copied_to_clipboard": "تم نسخ البيانات إلى الحافظة"
+  "data_copied_to_clipboard": "تم نسخ البيانات إلى الحافظة",
+  "review_management": "إدارة التقييمات",
+  "monitor_and_manage_customer_feedback": "مراقبة وإدارة تعليقات العملاء",
+  "total_reviews": "إجمالي التقييمات",
+  "flagged": "مبلغ عنها",
+  "search_by_customer_shop_or_comment": "البحث بالعميل أو المتجر أو التعليق...",
+  "no_reviews_available": "لا توجد تقييمات متاحة",
+  "review_details": "تفاصيل التقييم",
+  "review_deleted_successfully": "تم حذف التقييم بنجاح",
+  "user_role": "مستخدم",
+  "admin_role": "مدير",
+  "shop_owner_role": "صاحب متجر",
+  "guest_role": "ضيف"
 }

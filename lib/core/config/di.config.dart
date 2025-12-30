@@ -50,6 +50,14 @@ import '../../features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_
     as _i80;
 import '../../features/admin/tabs/manage-delivery/presentation/viewmodel/deliveries_cubit.dart'
     as _i954;
+import '../../features/admin/tabs/manage-reviews/data/datasource/get_reviews_data_source_impl.dart'
+    as _i456;
+import '../../features/admin/tabs/manage-reviews/data/repo/get_reviews_repo.dart'
+    as _i764;
+import '../../features/admin/tabs/manage-reviews/domain/usecases/delete_review_usecase.dart'
+    as _i45;
+import '../../features/admin/tabs/manage-reviews/presentation/viewmodel/get_reviews_cubit.dart'
+    as _i381;
 import '../../features/admin/tabs/manage-shops/data/datasource/get_shops_data_source_impl.dart'
     as _i392;
 import '../../features/admin/tabs/manage-shops/data/repo/get_shops_repo.dart'
@@ -138,6 +146,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i504.AuthRemoteDatasourceImpl(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i532.AdminRemoteDataSource>(
         () => _i702.AdminRemoteDataSourceImpl(gh<_i364.ApiClient>()));
+    gh.lazySingleton<_i456.GetReviewsRemoteDataSource>(
+        () => _i456.GetReviewsRemoteDataSource(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i392.GetShopsRemoteDataSource>(
         () => _i392.GetShopsRemoteDataSource(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i508.GetUserRemoteDataSource>(
@@ -196,6 +206,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i680.GetUserRepository(gh<_i508.GetUserRemoteDataSource>()));
     gh.lazySingleton<_i63.GetShopsRepository>(
         () => _i63.GetShopsRepository(gh<_i392.GetShopsRemoteDataSource>()));
+    gh.lazySingleton<_i764.GetReviewsRepository>(() =>
+        _i764.GetReviewsRepository(gh<_i456.GetReviewsRemoteDataSource>()));
     gh.factory<_i48.LogoutUseCase>(
         () => _i48.LogoutUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i30.VerifyEmailUseCase>(
@@ -222,6 +234,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i80.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i1037.SignUpUseCase>(
         () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i45.DeleteReviewUseCase>(
+        () => _i45.DeleteReviewUseCase(gh<_i764.GetReviewsRepository>()));
     gh.factory<_i327.EditProfileCubit>(
         () => _i327.EditProfileCubit(gh<_i890.ProfileRepository>()));
     gh.factory<_i1061.ProfileCubit>(
@@ -250,6 +264,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i215.VerifyCodeCubit>(() => _i215.VerifyCodeCubit(
           gh<_i294.VerifyCodeUseCase>(),
           gh<_i30.VerifyEmailUseCase>(),
+        ));
+    gh.factory<_i381.GetReviewsCubit>(() => _i381.GetReviewsCubit(
+          gh<_i764.GetReviewsRepository>(),
+          gh<_i45.DeleteReviewUseCase>(),
         ));
     return this;
   }
