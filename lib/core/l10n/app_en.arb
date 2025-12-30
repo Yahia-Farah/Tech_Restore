@@ -424,8 +424,7 @@
   "edit_address": "Edit Address",
   "warning": "Warning",
   "confirm": "Confirm",
-  "default_address_warning": "Setting this as the default address will remove the default status from your current default address. Do you want to continue?"
-  "transactions_loaded_successfully": "Transactions loaded successfully",
+  "default_address_warning": "Setting this as the default address will remove the default status from your current default address. Do you want to continue?",
   "shops_management": "Shops Management",
   "manage_approve_suspend_view_shop_details": "Manage, approve, suspend, and view shop details",
   "total_shops": "Total Shops",
@@ -447,5 +446,12 @@
   "shop_approved_successfully": "Shop approved successfully",
   "shop_suspended_successfully": "Shop suspended successfully",
   "shop_approval_failed": "Failed to approve shop",
-  "shop_suspension_failed": "Failed to suspend shop"
+  "shop_suspension_failed": "Failed to suspend shop",
+  "all_shops": "All Shops",
+  "approved_shops": "Approved Shops", 
+  "suspended_shops": "Suspended Shops",
+  "filter_by_status": "Filter by Status",
+  "no_shops_match_filters": "No shops match your filters",
+  "not_specified": "Not specified",
+  "data_copied_to_clipboard": "Data copied to clipboard"
 }

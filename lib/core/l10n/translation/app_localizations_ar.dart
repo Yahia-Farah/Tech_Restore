@@ -105,8 +105,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search_hint => 'ابحث باسم الجهاز، نوع الجهاز، الرقم التسلسلي...';
 
   @override
-  String get search_hint_transactions =>
-      'ابحث بالتاريخ، اسم المتجر، طريقة الدفع، المبلغ...';
+  String get search_hint_transactions => 'ابحث بالتاريخ، اسم المتجر، طريقة الدفع، المبلغ...';
 
   @override
   String get device_status => 'حالة الجهاز';
@@ -151,8 +150,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get repair_requests_title => 'طلبات التصليح';
 
   @override
-  String get repair_requests_subtitle =>
-      'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
+  String get repair_requests_subtitle => 'يمكنك رؤية جميع طلبات التصليح الخاصة بالعملاء و قبولها و تعديل حالة الطلب من هنا';
 
   @override
   String get status_filter => 'حالة الطلب';
@@ -188,8 +186,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orders_title => 'طلبات الشراء';
 
   @override
-  String get orders_subtitle =>
-      'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
+  String get orders_subtitle => 'يمكنك متابعة عمليات الشراء التي قام بها العميل من هنا';
 
   @override
   String get ordersSubtitle => 'إدارة ومتابعة الطلبات بسهولة';
@@ -234,8 +231,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get transactions => 'العمليات';
 
   @override
-  String get transactions_subtitle =>
-      'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
+  String get transactions_subtitle => 'يمكنك رؤية الدخل الشهري أو السنوي لطلبات التصليح والمبيعات من هنا';
 
   @override
   String get month => 'الشهر';
@@ -296,8 +292,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get inventory_title => 'نظام الجرد';
 
   @override
-  String get inventory_description =>
-      'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
+  String get inventory_description => 'يمكنك متابعة عدد الأجهزة ورؤية إن كان هناك نقص في منتج ما من هنا';
 
   @override
   String get inventory_search => 'ابحث في الجرد...';
@@ -387,8 +382,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get supportTitle => 'الدعم';
 
   @override
-  String get supportSubtitle =>
-      'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
+  String get supportSubtitle => 'يمكنك الاطلاع على جميع مشاكل واستفسارات العميل من هنا';
 
   @override
   String get searchSupport => 'ابحث في طلبات الدعم...';
@@ -514,16 +508,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signUpQuote => 'احصل على إصلاح لجهازك بسرعة.';
 
   @override
-  String get secSignUpQuote =>
-      'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
+  String get secSignUpQuote => 'سنوصلك بأفضل محلات الصيانة المحلية لإصلاح جهازك.';
 
   @override
-  String get byContinuing =>
-      'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
+  String get byContinuing => 'بالمتابعة، فإنك توافق على شروط الاستخدام. اقرأ سياسة الخصوصية الخاصة بنا.';
 
   @override
-  String get startQuote =>
-      'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
+  String get startQuote => 'حلّك الشامل لجميع مشاكل التقنية! من الشاشات المكسورة إلى الحواسيب البطيئة، سنوصلك بخدمات إصلاح موثوقة. دعنا نعيد أجهزتك إلى حالتها الممتازة! اضغط للبدء.';
 
   @override
   String get explore => 'تصفح';
@@ -580,22 +571,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get logoutConfirmTextCenter => 'تأكيد تسجيل الخروج!';
 
   @override
-  String get resetPasswordUnderMsg =>
-      'يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل';
+  String get resetPasswordUnderMsg => 'يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل';
 
   @override
   String get emailVerificationScreen => 'التحقق من البريد الإلكتروني';
 
   @override
-  String get emailVerificationScreenUnderMsg =>
-      'يرجى إدخال الرمز الذي تم إرساله إلى\nعنوان بريدك الإلكتروني';
+  String get emailVerificationScreenUnderMsg => 'يرجى إدخال الرمز الذي تم إرساله إلى\nعنوان بريدك الإلكتروني';
 
   @override
   String get codeReceiveMsgError => 'لم تستلم الرمز؟';
 
   @override
-  String get forgetPasswordUnderText =>
-      'يرجى إدخال البريد الإلكتروني المرتبط\nبحسابك';
+  String get forgetPasswordUnderText => 'يرجى إدخال البريد الإلكتروني المرتبط\nبحسابك';
 
   @override
   String get validationEmailErrorMessage => 'هذا البريد الإلكتروني غير صالح';
@@ -973,8 +961,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get user_management => 'إدارة المستخدمين';
 
   @override
-  String get manage_user_accounts_roles_status =>
-      'إدارة حسابات المستخدمين والأدوار والحالة';
+  String get manage_user_accounts_roles_status => 'إدارة حسابات المستخدمين والأدوار والحالة';
 
   @override
   String get active => 'نشط';
@@ -1088,8 +1075,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get total_revenue => 'إجمالي الإيرادات';
 
   @override
-  String get search_by_user_id =>
-      'البحث برقم المستخدم (اتركه فارغاً لجميع المعاملات)';
+  String get search_by_user_id => 'البحث برقم المستخدم (اتركه فارغاً لجميع المعاملات)';
 
   @override
   String get search_user => 'بحث المستخدم';
@@ -1125,8 +1111,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get suspended => 'معلق';
 
   @override
-  String get search_by_name_email_phone =>
-      'البحث بالاسم أو البريد الإلكتروني أو الهاتف...';
+  String get search_by_name_email_phone => 'البحث بالاسم أو البريد الإلكتروني أو الهاتف...';
 
   @override
   String get no_deliveries_available => 'لا توجد عمليات توصيل متاحة';
@@ -1147,15 +1132,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get assignment_logs => 'سجلات التعيينات';
 
   @override
-  String get track_all_assignment_activities =>
-      'تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.';
+  String get track_all_assignment_activities => 'تتبع جميع أنشطة التعيين عبر الموزعين والمتاجر والمستخدمين.';
 
   @override
   String get no_assignment_logs_found => 'لم يتم العثور على سجلات تعيينات';
 
   @override
-  String get no_assignment_logs_description =>
-      'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
+  String get no_assignment_logs_description => 'لا توجد حاليًا أنشطة تعيين مسجلة في النظام.';
 
   @override
   String get failed_to_load_transactions => 'فشل تحميل المعاملات';
@@ -1206,8 +1189,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shop_description_label => 'وصف المتجر';
 
   @override
-  String get we_fix_devices =>
-      'نحن نصلح أجهزة الكمبيوتر المحمولة والهواتف والأجهزة اللوحية';
+  String get we_fix_devices => 'نحن نصلح أجهزة الكمبيوتر المحمولة والهواتف والأجهزة اللوحية';
 
   @override
   String get new_password_optional => 'كلمة مرور جديدة (اختياري)';
@@ -1270,6 +1252,59 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirm => 'تأكيد';
 
   @override
-  String get default_address_warning =>
-      'تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟';
+  String get default_address_warning => 'تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟';
+
+  @override
+  String get shops_management => 'إدارة المتاجر';
+
+  @override
+  String get manage_approve_suspend_view_shop_details => 'إدارة وموافقة وتعليق وعرض تفاصيل المتاجر';
+
+  @override
+  String get filter_by_status => 'تصفية حسب الحالة';
+
+  @override
+  String get all_shops => 'جميع المتاجر';
+
+  @override
+  String get approved_shops => 'المتاجر الموافق عليها';
+
+  @override
+  String get suspended_shops => 'المتاجر المعلقة';
+
+  @override
+  String get shop_type => 'نوع المتجر';
+
+  @override
+  String get view => 'عرض';
+
+  @override
+  String get approve => 'موافقة';
+
+  @override
+  String get no_shops_match_filters => 'لا توجد متاجر تطابق المرشحات';
+
+  @override
+  String get rating => 'التقييم';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get data_copied_to_clipboard => 'تم نسخ البيانات إلى الحافظة';
+
+  @override
+  String get suspend => 'تعليق';
+
+  @override
+  String get shop_approved_successfully => 'تمت الموافقة على المتجر بنجاح';
+
+  @override
+  String get shop_suspended_successfully => 'تم تعليق المتجر بنجاح';
+
+  @override
+  String get shop_approval_failed => 'فشل في الموافقة على المتجر';
+
+  @override
+  String get shop_suspension_failed => 'فشل في تعليق المتجر';
 }

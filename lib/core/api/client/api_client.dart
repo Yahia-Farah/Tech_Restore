@@ -259,12 +259,6 @@ abstract class ApiClient {
   @Extra({'auth': true})
   Future<String> approveShop(@Path('shopId') String shopId);
 
-  @PUT(ApiEndPoints.suspendShops)
-  @Extra({'auth': true})
-  Future<String> suspendShop(@Path('shopId') String shopId);
-  Future<ContentDeliveryAdmin> getDeliveryAdminById(
-    @Path('deliveryId') String deliveryId,
-  );
 
   @GET(ApiEndPoints.getAllAddresses)
   @Extra({'auth': true})
@@ -329,4 +323,8 @@ abstract class ApiClient {
   @GET(ApiEndPoints.getFinancialReport)
   @Extra({'auth': true})
   Future<FinancialReportModel> getFinancialReport();
+
+  @PUT(ApiEndPoints.suspendShops)
+  @Extra({'auth': true})
+  Future<String> suspendShop(@Path('shopId') String shopId);
 }

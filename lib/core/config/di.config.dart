@@ -164,16 +164,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i886.DeleteCategoryUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i953.GetAllCategoriesUseCase>(
         () => _i953.GetAllCategoriesUseCase(gh<_i253.AdminRepo>()));
-    gh.factory<_i982.UpdateCategoryUseCase>(
-        () => _i982.UpdateCategoryUseCase(gh<_i253.AdminRepo>()));
-    gh.factory<_i586.UpdateUserRoleUseCase>(
-        () => _i586.UpdateUserRoleUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i411.GetAllDeliveriesUseCase>(
         () => _i411.GetAllDeliveriesUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i575.GetAllTransactionsUseCase>(
         () => _i575.GetAllTransactionsUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i1055.GetDeliveryByIdUseCase>(
         () => _i1055.GetDeliveryByIdUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i982.UpdateCategoryUseCase>(
+        () => _i982.UpdateCategoryUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i586.UpdateUserRoleUseCase>(
+        () => _i586.UpdateUserRoleUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i652.CategoriesCubit>(() => _i652.CategoriesCubit(
           gh<_i953.GetAllCategoriesUseCase>(),
           gh<_i733.AddCategoryUseCase>(),
@@ -186,10 +186,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i890.ProfileRepository(gh<_i904.ProfileRemoteDataSource>()));
     gh.lazySingleton<_i170.AuthRepository>(
         () => _i279.AuthRepositoryImpl(gh<_i24.AuthRemoteDataSource>()));
-    gh.factory<_i453.ShopChatCubit>(
-        () => _i453.ShopChatCubit(gh<_i57.ShopRepository>()));
     gh.factory<_i335.NotificationsCubit>(
         () => _i335.NotificationsCubit(gh<_i57.ShopRepository>()));
+    gh.factory<_i453.ShopChatCubit>(
+        () => _i453.ShopChatCubit(gh<_i57.ShopRepository>()));
     gh.factory<_i225.TransactionsCubit>(
         () => _i225.TransactionsCubit(gh<_i57.ShopRepository>()));
     gh.lazySingleton<_i680.GetUserRepository>(

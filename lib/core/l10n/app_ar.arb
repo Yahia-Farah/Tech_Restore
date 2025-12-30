@@ -411,8 +411,7 @@
   "shop_approved_successfully": "تمت الموافقة على المتجر بنجاح",
   "shop_suspended_successfully": "تم تعليق المتجر بنجاح",
   "shop_approval_failed": "فشل في الموافقة على المتجر",
-  "shop_suspension_failed": "فشل في تعليق المتجر"
-  "transactions_loaded_successfully": "تم تحميل المعاملات بنجاح",
+  "shop_suspension_failed": "فشل في تعليق المتجر",
   "addresses": "العناوين",
   "branches_and_addresses": "الفروع والعناوين",
   "add_new_address": "إضافة عنوان جديد",
@@ -448,5 +447,13 @@
   "edit_address": "تعديل العنوان",
   "warning": "تحذير",
   "confirm": "تأكيد",
-  "default_address_warning": "تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟"
+  "default_address_warning": "تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟",
+  "shop_approval_failed": "فشل في الموافقة على المتجر",
+  "shop_suspension_failed": "فشل في تعليق المتجر",
+  "all_shops": "جميع المتاجر",
+  "approved_shops": "المتاجر الموافق عليها",
+  "suspended_shops": "المتاجر المعلقة", 
+  "filter_by_status": "تصفية حسب الحالة",
+  "no_shops_match_filters": "لا توجد متاجر تطابق المرشحات",
+  "data_copied_to_clipboard": "تم نسخ البيانات إلى الحافظة"
 }

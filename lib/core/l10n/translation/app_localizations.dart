@@ -62,8 +62,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,18 +82,17 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
-    Locale('en'),
+    Locale('en')
   ];
 
   /// No description provided for @app_name.
@@ -2581,10 +2578,117 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Setting this as the default address will remove the default status from your current default address. Do you want to continue?'**
   String get default_address_warning;
+
+  /// No description provided for @shops_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Shops Management'**
+  String get shops_management;
+
+  /// No description provided for @manage_approve_suspend_view_shop_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage, approve, suspend, and view shop details'**
+  String get manage_approve_suspend_view_shop_details;
+
+  /// No description provided for @filter_by_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Status'**
+  String get filter_by_status;
+
+  /// No description provided for @all_shops.
+  ///
+  /// In en, this message translates to:
+  /// **'All Shops'**
+  String get all_shops;
+
+  /// No description provided for @approved_shops.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved Shops'**
+  String get approved_shops;
+
+  /// No description provided for @suspended_shops.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspended Shops'**
+  String get suspended_shops;
+
+  /// No description provided for @shop_type.
+  ///
+  /// In en, this message translates to:
+  /// **'SHOP TYPE'**
+  String get shop_type;
+
+  /// No description provided for @view.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view;
+
+  /// No description provided for @approve.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approve;
+
+  /// No description provided for @no_shops_match_filters.
+  ///
+  /// In en, this message translates to:
+  /// **'No shops match your filters'**
+  String get no_shops_match_filters;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @data_copied_to_clipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Data copied to clipboard'**
+  String get data_copied_to_clipboard;
+
+  /// No description provided for @suspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend'**
+  String get suspend;
+
+  /// No description provided for @shop_approved_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop approved successfully'**
+  String get shop_approved_successfully;
+
+  /// No description provided for @shop_suspended_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop suspended successfully'**
+  String get shop_suspended_successfully;
+
+  /// No description provided for @shop_approval_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to approve shop'**
+  String get shop_approval_failed;
+
+  /// No description provided for @shop_suspension_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to suspend shop'**
+  String get shop_suspension_failed;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -2593,26 +2697,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar':
-      return AppLocalizationsAr();
-    case 'en':
-      return AppLocalizationsEn();
+    case 'ar': return AppLocalizationsAr();
+    case 'en': return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

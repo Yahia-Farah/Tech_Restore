@@ -226,97 +226,126 @@ class _UsersScreenState extends State<UsersScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Single horizontal scroll for entire table
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: MediaQuery.of(context).size.width - 32,
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                // Table Header
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Table Header
+                              Container(
+                                color: AppColors.primary.withOpacity(0.1),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                  horizontal: 16,
+                                ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 180,
+                                      child: Text(
+                                        local.id,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    SizedBox(
+                                      width: 150,
+                                      child: Text(
+                                        local.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    SizedBox(
+                                      width: 200,
+                                      child: Text(
+                                        local.email,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    SizedBox(
+                                      width: 140,
+                                      child: Text(
+                                        local.role,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        local.status,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    SizedBox(
+                                      width: 220,
+                                      child: Text(
+                                        local.actions,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              // Table Body - All rows in one scrollable container
+                              if (paginatedUsers.isEmpty)
                                 Container(
-                                  color: Colors.grey[100],
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                    horizontal: 8,
-                                  ),
-                                  child: Row(
-                                    children: const [
-                                      SizedBox(
-                                        width: 200,
-                                        child: Text(
-                                          "ID",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
+                                  padding: const EdgeInsets.all(40),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.people_outline,
+                                        size: 64,
+                                        color: Colors.grey[400],
                                       ),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Text(
-                                          "NAME",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 220,
-                                        child: Text(
-                                          "EMAIL",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 180,
-                                        child: Text(
-                                          "ROLE",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(
-                                          "STATUS",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 200,
-                                        child: Text(
-                                          "ACTIONS",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        'No users found',
+                                        style: TextStyle(
+                                          color: Colors.grey[600],
+                                          fontSize: 16,
                                         ),
                                       ),
                                     ],
                                   ),
+                                )
+                              else
+                                Column(
+                                  children: paginatedUsers.map((user) => _buildUserRow(user, local)).toList(),
                                 ),
-                                // Paginated Users rows
-                                if (paginatedUsers.isEmpty)
-                                  const Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Text('No users found'),
-                                  )
-                                else
-                                  ...paginatedUsers.map(
-                                    (user) => _buildUserRow(user),
-                                  ),
-                              ],
-                            ),
+                            ],
                           ),
                         ),
                         // Pagination
-                        if (totalPages > 1) _buildPagination(totalPages),
+                        if (totalPages > 1) _buildPagination(totalPages, local),
                       ],
                     ),
                   ),
@@ -331,9 +360,9 @@ class _UsersScreenState extends State<UsersScreen> {
     );
   }
 
-  Widget _buildUserRow(UserModel user) {
+  Widget _buildUserRow(UserModel user, AppLocalizations local) {
     final fullName = '${user.firstName ?? ''} ${user.lastName ?? ''}'.trim();
-    final status = (user.activate ?? false) ? "Active" : "Inactive";
+    final status = (user.activate ?? false) ? local.active : local.inactive;
     final userId = user.id ?? '';
     final originalRole = _getValidRole(user.role);
     final currentRole = _getValidRole(_selectedRoles[userId] ?? user.role);
@@ -449,7 +478,7 @@ class _UsersScreenState extends State<UsersScreen> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.save,
+                        local.save,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 11,
@@ -561,7 +590,7 @@ class _UsersScreenState extends State<UsersScreen> {
     );
   }
 
-  Widget _buildPagination(int totalPages) {
+  Widget _buildPagination(int totalPages, AppLocalizations local) {
     return Container(
       padding: const EdgeInsets.all(16),
       child: Row(
