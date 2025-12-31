@@ -207,7 +207,7 @@ abstract class ApiClient {
   @Extra({'auth': true})
   Future<double> totalInventoryValue();
 
-  @PUT(ApiEndPoints.UpdateUserRole)
+  @PUT(ApiEndPoints.updateUserRole)
   @Extra({'auth': true})
   Future<String> updateUserRole(
     @Path('userId') String userId,
@@ -320,4 +320,91 @@ abstract class ApiClient {
   @GET(ApiEndPoints.getFinancialReport)
   @Extra({'auth': true})
   Future<FinancialReportModel> getFinancialReport();
+
+  // User Addresses
+  @GET(ApiEndPoints.getUserAddresses)
+  @Extra({'auth': true})
+  Future<dynamic> getUserAddresses();
+
+  @POST(ApiEndPoints.addUserAddress)
+  @Extra({'auth': true})
+  Future<dynamic> addUserAddress(@Body() dynamic request);
+
+  @PUT(ApiEndPoints.updateUserAddress)
+  @Extra({'auth': true})
+  Future<dynamic> updateUserAddress(
+    @Path('addressId') String addressId,
+    @Body() dynamic request,
+  );
+
+  @DELETE(ApiEndPoints.deleteUserAddress)
+  @Extra({'auth': true})
+  Future<dynamic> deleteUserAddress(@Path('addressId') String addressId);
+
+  // User Orders
+  @GET(ApiEndPoints.getUserOrders)
+  @Extra({'auth': true})
+  Future<dynamic> getUserOrders();
+
+  @DELETE(ApiEndPoints.cancelUserOrder)
+  @Extra({'auth': true})
+  Future<dynamic> cancelUserOrder(@Path('orderId') String orderId);
+
+  // User Explore
+  @GET(ApiEndPoints.getAllShopsUser)
+  @Extra({'auth': true})
+  Future<dynamic> getAllShopsUser(@Query('page') int page);
+
+  @GET(ApiEndPoints.getAllDevices)
+  @Extra({'auth': true})
+  Future<dynamic> getAllDevices(@Query('page') int page);
+
+  @GET(ApiEndPoints.getCategories)
+  @Extra({'auth': true})
+  Future<dynamic> getCategories(@Query('page') int page);
+
+  @GET(ApiEndPoints.getShopById)
+  @Extra({'auth': true})
+  Future<dynamic> getShopById(@Path('shopId') String shopId);
+
+  @GET(ApiEndPoints.getProductsByShop)
+  @Extra({'auth': true})
+  Future<dynamic> getProductsByShop(
+    @Path('shopId') String shopId,
+    @Query('page') int page,
+  );
+
+  @GET(ApiEndPoints.getProductsByShopAndCategory)
+  @Extra({'auth': true})
+  Future<dynamic> getProductsByShopAndCategory(
+    @Path('shopId') String shopId,
+    @Path('categoryId') String categoryId,
+    @Query('page') int page,
+  );
+
+  // Reviews
+  @GET(ApiEndPoints.getShopReviews)
+  @Extra({'auth': true})
+  Future<dynamic> getShopReviews(
+    @Path('shopId') String shopId,
+    @Query('page') int page,
+  );
+
+  @POST(ApiEndPoints.addReview)
+  @Extra({'auth': true})
+  Future<dynamic> addReview(
+    @Path('shopId') String shopId,
+    @Body() dynamic request,
+  );
+
+  @PUT(ApiEndPoints.updateReview)
+  @Extra({'auth': true})
+  Future<dynamic> updateReview(
+    @Path('id') String reviewId,
+    @Body() dynamic request,
+  );
+
+  @DELETE(ApiEndPoints.deleteReview)
+  @Extra({'auth': true})
+  Future<dynamic> deleteReview(@Path('id') String reviewId);
 }

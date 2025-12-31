@@ -1,46 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/routes/route_names.dart';
+import '../../../../../core/config/di.dart';
+import '../viewmodel/user_chat_cubit.dart';
+import '../viewmodel/user_chat_state.dart';
 
 class ChatListScreen extends StatelessWidget {
-  const ChatListScreen({super.key});
+  final Map<String, dynamic>? arguments;
+
+  const ChatListScreen({super.key, this.arguments});
 
   @override
   Widget build(BuildContext context) {
-    final chats = [
-      {
-        "name": "TechFix Pro",
-        "lastMessage": "Your device is ready for pickup!",
-        "time": "2:30 PM",
-        "unreadCount": 2,
-        "avatar": "T",
-        "isOnline": true,
-      },
-      {
-        "name": "Mobile Masters",
-        "lastMessage": "Thank you for choosing our service",
-        "time": "1:15 PM",
-        "unreadCount": 0,
-        "avatar": "M",
-        "isOnline": false,
-      },
-      {
-        "name": "Laptop Clinic",
-        "lastMessage": "We have received your repair request",
-        "time": "Yesterday",
-        "unreadCount": 1,
-        "avatar": "L",
-        "isOnline": true,
-      },
-      {
-        "name": "Gaming Hub",
-        "lastMessage": "Your PlayStation repair is complete",
-        "time": "Yesterday",
-        "unreadCount": 0,
-        "avatar": "G",
-        "isOnline": false,
-      },
-    ];
+    return BlocProvider(
+      create: (context) => getIt<UserChatCubit>()..fetchMyChatSessions(),
+      child: ChatListScreenContent(arguments: arguments),
+    );
+  }
+}
+
+class ChatListScreenContent extends StatelessWidget {
+  final Map<String, dynamic>? arguments;
+
+  const ChatListScreenContent({super.key, this.arguments});
+
+  @override
+  Widget build(BuildContext context) {
+    final String? shopId = arguments?['shopId'];
+    final String? userId = arguments?['userId'];
+    final bool isShopSpecific = shopId != null && userId != null;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
@@ -52,7 +41,7 @@ class ChatListScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         ),
         title: Text(
-          "Messages",
+          isShopSpecific ? "Shop Messages" : "Messages",
           style: TextStyle(
             color: AppColors.primary,
             fontSize: 24,
@@ -61,8 +50,10 @@ class ChatListScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search, color: AppColors.primary),
+            onPressed: () {
+              context.read<UserChatCubit>().fetchMyChatSessions();
+            },
+            icon: Icon(Icons.refresh, color: AppColors.primary),
           ),
         ],
       ),
@@ -92,29 +83,105 @@ class ChatListScreen extends StatelessWidget {
 
           // Chat List
           Expanded(
-            child:
-                chats.isEmpty
-                    ? _buildEmptyState()
-                    : ListView.builder(
-                      itemCount: chats.length,
-                      itemBuilder: (context, index) {
-                        return _buildChatItem(context, chats[index]);
-                      },
+            child: BlocBuilder<UserChatCubit, UserChatState>(
+              builder: (context, state) {
+                if (state is UserChatLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (state is UserChatError) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.error_outline, size: 64, color: Colors.red),
+                        const SizedBox(height: 16),
+                        Text(
+                          state.message,
+                          style: const TextStyle(color: Colors.red),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.read<UserChatCubit>().fetchMyChatSessions();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                          ),
+                          child: const Text(
+                            "Retry",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
+                  );
+                }
+
+                if (state is UserChatSessionsLoaded) {
+                  // Filter sessions by shopId if we're in shop-specific mode
+                  final filteredSessions =
+                      isShopSpecific
+                          ? state.sessions
+                              .where((session) => session.shopId == shopId)
+                              .toList()
+                          : state.sessions;
+
+                  if (filteredSessions.isEmpty) {
+                    return _buildEmptyState(
+                      context,
+                      isShopSpecific,
+                      shopId,
+                      userId,
+                    );
+                  }
+
+                  return ListView.builder(
+                    itemCount: filteredSessions.length,
+                    itemBuilder: (context, index) {
+                      final session = filteredSessions[index];
+                      return _buildChatItem(context, session);
+                    },
+                  );
+                }
+
+                return _buildEmptyState(
+                  context,
+                  isShopSpecific,
+                  shopId,
+                  userId,
+                );
+              },
+            ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showStartChatDialog(context);
-        },
-        backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add_comment, color: Colors.white),
-      ),
+      floatingActionButton:
+          isShopSpecific
+              ? FloatingActionButton(
+                onPressed: () {
+                  _startNewChatWithShop(context, shopId, userId);
+                },
+                backgroundColor: AppColors.primary,
+                child: const Icon(Icons.add_comment, color: Colors.white),
+              )
+              : FloatingActionButton(
+                onPressed: () {
+                  _showStartChatDialog(context);
+                },
+                backgroundColor: AppColors.primary,
+                child: const Icon(Icons.add_comment, color: Colors.white),
+              ),
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(
+    BuildContext context, [
+    bool isShopSpecific = false,
+    String? shopId,
+    String? userId,
+  ]) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +201,9 @@ class ChatListScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            "No conversations yet",
+            isShopSpecific
+                ? "No conversations with this shop yet"
+                : "No conversations yet",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -143,12 +212,20 @@ class ChatListScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "Start a new conversation or browse shops",
+            isShopSpecific
+                ? "Start a new conversation with this shop"
+                : "Start a new conversation or browse shops",
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
           ),
           const SizedBox(height: 24),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (isShopSpecific && shopId != null && userId != null) {
+                _startNewChatWithShop(context, shopId, userId);
+              } else {
+                _showStartChatDialog(context);
+              }
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
@@ -157,9 +234,9 @@ class ChatListScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
             ),
-            child: const Text(
-              "Start New Chat",
-              style: TextStyle(fontWeight: FontWeight.w600),
+            child: Text(
+              isShopSpecific ? "Start Chat with Shop" : "Start New Chat",
+              style: const TextStyle(fontWeight: FontWeight.w600),
             ),
           ),
         ],
@@ -167,7 +244,7 @@ class ChatListScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildChatItem(BuildContext context, Map<String, dynamic> chat) {
+  Widget _buildChatItem(BuildContext context, dynamic session) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       decoration: BoxDecoration(
@@ -189,7 +266,7 @@ class ChatListScreen extends StatelessWidget {
               backgroundColor: AppColors.primary,
               radius: 28,
               child: Text(
-                chat["avatar"],
+                session.shopName?.substring(0, 1).toUpperCase() ?? "S",
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -197,7 +274,7 @@ class ChatListScreen extends StatelessWidget {
                 ),
               ),
             ),
-            if (chat["isOnline"])
+            if (session.active == true)
               Positioned(
                 bottom: 0,
                 right: 0,
@@ -214,13 +291,13 @@ class ChatListScreen extends StatelessWidget {
           ],
         ),
         title: Text(
-          chat["name"],
+          session.shopName ?? "Unknown Shop",
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 4),
           child: Text(
-            chat["lastMessage"],
+            session.lastMessage?.message ?? "No messages yet",
             style: TextStyle(color: Colors.grey[600], fontSize: 14),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -231,34 +308,102 @@ class ChatListScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              chat["time"],
+              _formatTime(session.lastMessage?.createdAt),
               style: TextStyle(color: Colors.grey[500], fontSize: 12),
             ),
-            if (chat["unreadCount"] > 0) ...[
-              const SizedBox(height: 4),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  chat["unreadCount"].toString(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
+            const SizedBox(height: 4),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: session.active == true ? Colors.green : Colors.grey,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                session.active == true ? "Active" : "Closed",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ],
+            ),
           ],
         ),
         onTap: () {
-          Navigator.pushNamed(context, AppRoutes.chat, arguments: chat);
+          Navigator.pushNamed(
+            context,
+            AppRoutes.chat,
+            arguments: {
+              "sessionId": session.id,
+              "shopId": session.shopId,
+              "userId": session.userId,
+              "shopName": session.shopName,
+              "userName": session.userName,
+              "active": session.active,
+            },
+          );
         },
       ),
     );
+  }
+
+  String _formatTime(String? dateTimeString) {
+    if (dateTimeString == null || dateTimeString.isEmpty) return '';
+    try {
+      final dateTime = DateTime.parse(dateTimeString);
+      final now = DateTime.now();
+      final difference = now.difference(dateTime);
+
+      if (difference.inDays > 0) {
+        return '${difference.inDays}d ago';
+      } else if (difference.inHours > 0) {
+        return '${difference.inHours}h ago';
+      } else if (difference.inMinutes > 0) {
+        return '${difference.inMinutes}m ago';
+      } else {
+        return 'Just now';
+      }
+    } catch (e) {
+      return dateTimeString.length > 16
+          ? dateTimeString.substring(11, 16)
+          : dateTimeString;
+    }
+  }
+
+  void _startNewChatWithShop(
+    BuildContext context,
+    String? shopId,
+    String? userId,
+  ) async {
+    if (shopId == null || userId == null) return;
+
+    try {
+      // Get shop name from explore cubit if available, or use a default
+      String shopName = "Shop";
+
+      // Navigate directly to chat screen to start a new session
+      Navigator.pushNamed(
+        context,
+        AppRoutes.chat,
+        arguments: {
+          "sessionId": null, // New session
+          "shopId": shopId,
+          "userId": userId,
+          "shopName": shopName,
+          "userName": "User",
+          "active": true,
+        },
+      );
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Failed to start chat: $e"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   void _showStartChatDialog(BuildContext context) {

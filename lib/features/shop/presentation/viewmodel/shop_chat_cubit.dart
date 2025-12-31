@@ -30,6 +30,14 @@ class ShopChatCubit extends Cubit<ShopChatState> {
       final errorString = e.toString();
       if (errorString.contains('404') || errorString.contains('not found')) {
         emit(ShopSessionsLoaded([]));
+      } else if (errorString.contains('500') ||
+          errorString.contains('RUNTIME_ERROR')) {
+        // Handle backend data issues gracefully
+        emit(
+          ShopChatError(
+            'Backend data issue detected. Please contact support or try again later.',
+          ),
+        );
       } else {
         emit(ShopChatError(e.toString()));
       }
@@ -45,7 +53,18 @@ class ShopChatCubit extends Cubit<ShopChatState> {
       _messages = messages;
       emit(ShopMessagesLoaded(List.from(_messages)));
     } catch (e) {
-      emit(ShopChatError(e.toString()));
+      final errorString = e.toString();
+      if (errorString.contains('500') ||
+          errorString.contains('RUNTIME_ERROR')) {
+        // Handle backend data issues gracefully
+        emit(
+          ShopChatError(
+            'Backend data issue detected. Please contact support or try again later.',
+          ),
+        );
+      } else {
+        emit(ShopChatError(e.toString()));
+      }
     }
   }
 
@@ -277,4 +296,3 @@ class ShopChatCubit extends Cubit<ShopChatState> {
     }
   }
 }
-

@@ -105,8 +105,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_hint => 'Search by device name, type, serial number...';
 
   @override
-  String get search_hint_transactions =>
-      'Search by date, shop name, payment method, amount...';
+  String get search_hint_transactions => 'Search by date, shop name, payment method, amount...';
 
   @override
   String get device_status => 'Device Status';
@@ -151,8 +150,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repair_requests_title => 'Repair Requests';
 
   @override
-  String get repair_requests_subtitle =>
-      'You can view all customer repair requests, accept them, and update their status here';
+  String get repair_requests_subtitle => 'You can view all customer repair requests, accept them, and update their status here';
 
   @override
   String get status_filter => 'Order Status';
@@ -233,8 +231,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transactions => 'Transactions';
 
   @override
-  String get transactions_subtitle =>
-      'You can view the monthly or yearly income for repair orders and sales from here';
+  String get transactions_subtitle => 'You can view the monthly or yearly income for repair orders and sales from here';
 
   @override
   String get month => 'Month';
@@ -295,8 +292,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inventory_title => 'Inventory System';
 
   @override
-  String get inventory_description =>
-      'You can monitor the number of devices and see if a product is running low from here';
+  String get inventory_description => 'You can monitor the number of devices and see if a product is running low from here';
 
   @override
   String get inventory_search => 'Search inventory...';
@@ -386,8 +382,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supportTitle => 'Support';
 
   @override
-  String get supportSubtitle =>
-      'You can view all customer issues and inquiries here';
+  String get supportSubtitle => 'You can view all customer issues and inquiries here';
 
   @override
   String get searchSupport => 'Search support requests...';
@@ -513,16 +508,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signUpQuote => 'Get your tech fixed, fast.';
 
   @override
-  String get secSignUpQuote =>
-      'We\'ll connect you with the best local shops to get your device fixed.';
+  String get secSignUpQuote => 'We\'ll connect you with the best local shops to get your device fixed.';
 
   @override
-  String get byContinuing =>
-      'By continuing, you agree to the Terms of Use. Read our Privacy Policy.';
+  String get byContinuing => 'By continuing, you agree to the Terms of Use. Read our Privacy Policy.';
 
   @override
-  String get startQuote =>
-      'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
+  String get startQuote => 'Your one-stop solution for all tech mishaps. From broken screens to sluggish laptops, we\'ll connect you to reliable repair services. Let\'s get your devices back to their prime! Tap to begin.';
 
   @override
   String get explore => 'Explore';
@@ -579,22 +571,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutConfirmTextCenter => 'Confirm logout!';
 
   @override
-  String get resetPasswordUnderMsg =>
-      'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number';
+  String get resetPasswordUnderMsg => 'Password must not be empty and must contain at least 6 characters with one uppercase letter and one number';
 
   @override
   String get emailVerificationScreen => 'Email Verification';
 
   @override
-  String get emailVerificationScreenUnderMsg =>
-      'Please enter the code that was sent to your\nemail address';
+  String get emailVerificationScreenUnderMsg => 'Please enter the code that was sent to your\nemail address';
 
   @override
   String get codeReceiveMsgError => 'Didn\'t receive code?';
 
   @override
-  String get forgetPasswordUnderText =>
-      'Please enter your email associated with\nyour account';
+  String get forgetPasswordUnderText => 'Please enter your email associated with\nyour account';
 
   @override
   String get validationEmailErrorMessage => 'This email is not valid';
@@ -762,8 +751,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatEndedSuccessfully => 'Chat ended successfully';
 
   @override
-  String get websocketNotConnected =>
-      'WebSocket is not connected. Please wait...';
+  String get websocketNotConnected => 'WebSocket is not connected. Please wait...';
 
   @override
   String get websocketDisconnected => 'WebSocket disconnected';
@@ -781,15 +769,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failedToSendMessage => 'Failed to send message';
 
   @override
-  String get authenticationTokenRequired =>
-      'Authentication token is required for WebSocket connection';
+  String get authenticationTokenRequired => 'Authentication token is required for WebSocket connection';
 
   @override
   String get subscriptionsTitle => 'Subscription Management';
 
   @override
-  String get subscriptionsSubtitle =>
-      'Choose your plan or renew your subscription easily';
+  String get subscriptionsSubtitle => 'Choose your plan or renew your subscription easily';
 
   @override
   String get fullManagementTitle => 'Full Management';
@@ -975,8 +961,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get user_management => 'User Management';
 
   @override
-  String get manage_user_accounts_roles_status =>
-      'Manage user accounts, roles, and status';
+  String get manage_user_accounts_roles_status => 'Manage user accounts, roles, and status';
 
   @override
   String get active => 'Active';
@@ -1081,8 +1066,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transactions_management => 'Transactions Management';
 
   @override
-  String get view_and_monitor_transactions =>
-      'View and monitor all payment transactions';
+  String get view_and_monitor_transactions => 'View and monitor all payment transactions';
 
   @override
   String get total_transactions => 'Total Transactions';
@@ -1091,8 +1075,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get total_revenue => 'Total Revenue';
 
   @override
-  String get search_by_user_id =>
-      'Search by User ID (leave empty for all transactions)';
+  String get search_by_user_id => 'Search by User ID (leave empty for all transactions)';
 
   @override
   String get search_user => 'Search User';
@@ -1116,8 +1099,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delivery_management => 'Delivery Management';
 
   @override
-  String get monitor_and_manage_delivery =>
-      'Monitor and manage delivery personnel';
+  String get monitor_and_manage_delivery => 'Monitor and manage delivery personnel';
 
   @override
   String get total_deliveries => 'Total Deliveries';
@@ -1138,8 +1120,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assigner_management => 'Assigner Management';
 
   @override
-  String get monitor_and_manage_assigners =>
-      'Monitor and manage assigner personnel';
+  String get monitor_and_manage_assigners => 'Monitor and manage assigner personnel';
 
   @override
   String get total_assigners => 'Total Assigners';
@@ -1151,22 +1132,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assignment_logs => 'Assignment Logs';
 
   @override
-  String get track_all_assignment_activities =>
-      'Track all assignment activities across assigners, shops, and users.';
+  String get track_all_assignment_activities => 'Track all assignment activities across assigners, shops, and users.';
 
   @override
   String get no_assignment_logs_found => 'No Assignment Logs Found';
 
   @override
-  String get no_assignment_logs_description =>
-      'There are currently no assignment activities recorded in the system.';
+  String get no_assignment_logs_description => 'There are currently no assignment activities recorded in the system.';
 
   @override
   String get failed_to_load_transactions => 'Failed to load transactions';
 
   @override
-  String get transactions_loaded_successfully =>
-      'Transactions loaded successfully';
+  String get transactions_loaded_successfully => 'Transactions loaded successfully';
 
   @override
   String get addresses => 'Addresses';
@@ -1274,6 +1252,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirm => 'Confirm';
 
   @override
-  String get default_address_warning =>
-      'Setting this as the default address will remove the default status from your current default address. Do you want to continue?';
+  String get default_address_warning => 'Setting this as the default address will remove the default status from your current default address. Do you want to continue?';
+
+  @override
+  String get my_addresses => 'My Addresses';
+
+  @override
+  String get delete_address => 'Delete Address';
+
+  @override
+  String get address_title => 'Address Title';
+
+  @override
+  String get address_title_hint => 'e.g., Home, Office, etc.';
+
+  @override
+  String get full_address => 'Full Address';
+
+  @override
+  String get full_address_hint => 'Street, Building, Apartment';
+
+  @override
+  String get city_state => 'City, State';
+
+  @override
+  String get city_state_hint => 'e.g., Cairo, Egypt';
+
+  @override
+  String get special_instructions => 'Special Instructions (Optional)';
+
+  @override
+  String get special_instructions_hint => 'Delivery notes, landmarks, etc.';
+
+  @override
+  String get save_address => 'Save Address';
+
+  @override
+  String get update_address => 'Update Address';
+
+  @override
+  String get delete_address_confirmation => 'Are you sure you want to delete this address? This action cannot be undone.';
+
+  @override
+  String get address_added_successfully => 'Address added successfully';
+
+  @override
+  String get address_updated_successfully => 'Address updated successfully';
+
+  @override
+  String get address_deleted_successfully => 'Address deleted successfully';
+
+  @override
+  String get no_addresses_found => 'No addresses found';
+
+  @override
+  String get failed_to_load_addresses => 'Failed to load addresses';
+
+  @override
+  String get failed_to_add_address => 'Failed to add address';
+
+  @override
+  String get failed_to_update_address => 'Failed to update address';
+
+  @override
+  String get failed_to_delete_address => 'Failed to delete address';
 }

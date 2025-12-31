@@ -8,10 +8,11 @@ import 'package:tech_restore/features/onboarding/screen/onboarding_screen.dart';
 import 'package:tech_restore/features/shop/presentation/view/shop_layout.dart';
 import 'package:tech_restore/features/shop/presentation/view/tabs/profile_screen.dart';
 import 'package:tech_restore/features/user/addresses/presentation/view/user_addresses_screen.dart';
+import 'package:tech_restore/features/user/addresses/presentation/viewmodel/user_addresses_cubit.dart';
 import 'package:tech_restore/features/user/home/screen/home_screen.dart';
-import 'package:tech_restore/features/user/home/tabs/home_tab/create_order.dart';
+import 'package:tech_restore/features/user/home/tabs/home_tab/device_type_screen.dart';
 import 'package:tech_restore/features/user/home/tabs/home_tab/device_issue.dart';
-import 'package:tech_restore/features/user/home/tabs/home_tab/issue_description_page.dart';
+import 'package:tech_restore/features/user/home/tabs/home_tab/shop_selection.dart';
 import 'package:tech_restore/features/user/offers/presentation/view/offers_screen.dart';
 import 'package:tech_restore/features/user/shop/presentation/view/visit_shop_screen.dart';
 import 'package:tech_restore/features/user/shop/presentation/view/all_devices_screen.dart';
@@ -181,34 +182,53 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const UserRepairsScreen());
 
       case AppRoutes.userAddresses:
-        return MaterialPageRoute(builder: (_) => const UserAddressesScreen());
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) =>
+                        getIt<UserAddressesCubit>()..getUserAddresses(),
+                child: const UserAddressesScreen(),
+              ),
+        );
 
       case AppRoutes.createOrder:
-        return MaterialPageRoute(builder: (_) => const CreateOrder());
+        return MaterialPageRoute(builder: (_) => const DeviceTypeScreen());
 
       case AppRoutes.deviceIssue:
         return MaterialPageRoute(builder: (_) => const DeviceIssueScreen());
 
-      case AppRoutes.issueDescription:
-        return MaterialPageRoute(builder: (_) => IssueDescriptionPage());
+      case AppRoutes.shopSelection:
+        return MaterialPageRoute(
+          builder: (_) => const SelectRepairShopScreen(),
+        );
 
       case AppRoutes.offers:
         return MaterialPageRoute(builder: (_) => const OffersScreen());
 
       case AppRoutes.visitShop:
-        final shop = settings.arguments as Map<String, dynamic>;
-        return MaterialPageRoute(builder: (_) => VisitShopScreen(shop: shop));
+        final shopId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => VisitShopScreen(shopId: shopId),
+        );
 
       case AppRoutes.allDevices:
-        final shop = settings.arguments as Map<String, dynamic>;
-        return MaterialPageRoute(builder: (_) => AllDevicesScreen(shop: shop));
+        final shopId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => AllDevicesScreen(shopId: shopId),
+        );
 
       case AppRoutes.allReviews:
-        final shop = settings.arguments as Map<String, dynamic>;
-        return MaterialPageRoute(builder: (_) => AllReviewsScreen(shop: shop));
+        final shopId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => AllReviewsScreen(shopId: shopId),
+        );
 
       case AppRoutes.chatList:
-        return MaterialPageRoute(builder: (_) => const ChatListScreen());
+        final arguments = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (_) => ChatListScreen(arguments: arguments),
+        );
 
       case AppRoutes.chat:
         final chat = settings.arguments as Map<String, dynamic>;

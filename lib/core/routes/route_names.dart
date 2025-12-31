@@ -18,9 +18,9 @@ abstract class AppRoutes {
   static const String userOrders = "/userOrders";
   static const String userRepairs = "/userRepairs";
   static const String userAddresses = "/userAddresses";
-  static const String createOrder = "/createOrder";
+  static const String createOrder = "/deviceType";
   static const String deviceIssue = "/deviceIssue";
-  static const String issueDescription = "/issueDescription";
+  static const String shopSelection = "/shopSelection";
   static const String offers = "/offers";
   static const String visitShop = "/visitShop";
   static const String allDevices = "/allDevices";

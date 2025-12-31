@@ -1,59 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import '../../../../../core/config/di.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../data/models/chat_message_model.dart';
+import '../viewmodel/user_chat_cubit.dart';
+import '../viewmodel/user_chat_state.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   final Map<String, dynamic> chat;
 
   const ChatScreen({super.key, required this.chat});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  Widget build(BuildContext context) {
+    // Provide the cubit and initialize it
+    return BlocProvider(
+      create: (context) {
+        final cubit = getIt<UserChatCubit>();
+        final userId = chat['userId'];
+        final shopId = chat['shopId'];
+
+        if (userId != null && shopId != null) {
+          cubit.connectWebSocket(userId, shopId);
+          cubit.fetchMessages(userId, shopId);
+        }
+        return cubit;
+      },
+      child: ChatScreenContent(chat: chat),
+    );
+  }
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class ChatScreenContent extends StatefulWidget {
+  final Map<String, dynamic> chat;
+
+  const ChatScreenContent({super.key, required this.chat});
+
+  @override
+  State<ChatScreenContent> createState() => _ChatScreenContentState();
+}
+
+class _ChatScreenContentState extends State<ChatScreenContent> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  late String _userId;
+  late String _shopId;
 
-  List<Map<String, dynamic>> messages = [
-    {
-      "text": "Hello! How can I help you today?",
-      "isMe": false,
-      "time": "2:25 PM",
-      "type": "text",
-    },
-    {
-      "text": "Hi, I need to repair my iPhone screen",
-      "isMe": true,
-      "time": "2:26 PM",
-      "type": "text",
-    },
-    {
-      "text": "Sure! Can you tell me what model iPhone you have?",
-      "isMe": false,
-      "time": "2:27 PM",
-      "type": "text",
-    },
-    {"text": "iPhone 13 Pro", "isMe": true, "time": "2:28 PM", "type": "text"},
-    {
-      "text":
-          "Perfect! We can fix that for you. The repair will cost 299 EGP and take about 2 hours. Would you like to schedule an appointment?",
-      "isMe": false,
-      "time": "2:29 PM",
-      "type": "text",
-    },
-    {
-      "text": "Yes, that sounds good. When can I bring it in?",
-      "isMe": true,
-      "time": "2:30 PM",
-      "type": "text",
-    },
-    {
-      "text": "Your device is ready for pickup!",
-      "isMe": false,
-      "time": "2:30 PM",
-      "type": "text",
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _userId = widget.chat['userId'] ?? '';
+    _shopId = widget.chat['shopId'] ?? '';
+  }
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
+    }
+  }
+
+  void _sendMessage() {
+    final text = _messageController.text.trim();
+    if (text.isNotEmpty) {
+      final message = ChatMessageModel(
+        userId: _userId,
+        shopId: _shopId,
+        message: text,
+        sentBy: 'USER',
+        createdAt: DateTime.now().toIso8601String(),
+        userName: widget.chat['userName'],
+        shopName: widget.chat['shopName'],
+      );
+
+      context.read<UserChatCubit>().sendMessage(_userId, _shopId, message);
+      _messageController.clear();
+      _scrollToBottom();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +111,16 @@ class _ChatScreenState extends State<ChatScreen> {
                   backgroundColor: AppColors.primary,
                   radius: 20,
                   child: Text(
-                    widget.chat["avatar"],
+                    (widget.chat["shopName"] ?? "S")
+                        .substring(0, 1)
+                        .toUpperCase(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                if (widget.chat["isOnline"])
+                if (widget.chat["active"] == true)
                   Positioned(
                     bottom: 0,
                     right: 0,
@@ -103,7 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.chat["name"],
+                    widget.chat["shopName"] ?? "Shop",
                     style: TextStyle(
                       color: AppColors.primary,
                       fontSize: 16,
@@ -111,10 +150,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                   Text(
-                    widget.chat["isOnline"] ? "Online" : "Offline",
+                    widget.chat["active"] == true ? "Active" : "Closed",
                     style: TextStyle(
                       color:
-                          widget.chat["isOnline"] ? Colors.green : Colors.grey,
+                          widget.chat["active"] == true
+                              ? Colors.green
+                              : Colors.grey,
                       fontSize: 12,
                     ),
                   ),
@@ -126,10 +167,6 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.phone, color: AppColors.primary),
-          ),
-          IconButton(
-            onPressed: () {},
             icon: Icon(Icons.more_vert, color: AppColors.primary),
           ),
         ],
@@ -138,12 +175,63 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           // Messages List
           Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(16),
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                return _buildMessageBubble(messages[index]);
+            child: BlocConsumer<UserChatCubit, UserChatState>(
+              listener: (context, state) {
+                if (state is UserChatMessageReceived ||
+                    state is UserChatMessageSent ||
+                    state is UserChatMessagesLoaded) {
+                  _scrollToBottom();
+                }
+                if (state is UserChatError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+              buildWhen:
+                  (previous, current) =>
+                      current is UserChatMessagesLoaded ||
+                      current is UserChatLoading,
+              builder: (context, state) {
+                if (state is UserChatLoading &&
+                    state is! UserChatMessagesLoaded) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                // Retrieve messages from the cubit's state if possible
+                // Note: The cubit emits UserChatMessagesLoaded with the full list
+                List<ChatMessageModel> messages = [];
+                if (state is UserChatMessagesLoaded) {
+                  messages = state.messages;
+                } else if (context.read<UserChatCubit>().state
+                    is UserChatMessagesLoaded) {
+                  messages =
+                      (context.read<UserChatCubit>().state
+                              as UserChatMessagesLoaded)
+                          .messages;
+                }
+
+                if (messages.isEmpty && state is! UserChatLoading) {
+                  return Center(
+                    child: Text(
+                      "No messages yet. Say hello!",
+                      style: TextStyle(color: Colors.grey[400]),
+                    ),
+                  );
+                }
+
+                return ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.all(16),
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    final message = messages[index];
+                    return _buildMessageBubble(message);
+                  },
+                );
               },
             ),
           ),
@@ -189,6 +277,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     maxLines: null,
                     textCapitalization: TextCapitalization.sentences,
+                    onSubmitted: (_) => _sendMessage(),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -210,8 +299,15 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _buildMessageBubble(Map<String, dynamic> message) {
-    final isMe = message["isMe"];
+  Widget _buildMessageBubble(ChatMessageModel message) {
+    final bool isMe = message.sentBy == 'USER';
+    final timeStr =
+        message.createdAt != null
+            ? DateFormat(
+              'h:mm a',
+            ).format(DateTime.parse(message.createdAt!).toLocal())
+            : '';
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
@@ -223,7 +319,7 @@ class _ChatScreenState extends State<ChatScreen> {
               backgroundColor: AppColors.primary,
               radius: 16,
               child: Text(
-                widget.chat["avatar"],
+                (message.shopName ?? "S").substring(0, 1).toUpperCase(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -256,7 +352,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    message["text"],
+                    message.message ?? "",
                     style: TextStyle(
                       color: isMe ? Colors.white : Colors.black87,
                       fontSize: 14,
@@ -265,7 +361,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    message["time"],
+                    timeStr,
                     style: TextStyle(
                       color: isMe ? Colors.white70 : Colors.grey[500],
                       fontSize: 11,
@@ -286,33 +382,6 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
     );
-  }
-
-  void _sendMessage() {
-    if (_messageController.text.trim().isNotEmpty) {
-      setState(() {
-        messages.add({
-          "text": _messageController.text.trim(),
-          "isMe": true,
-          "time": TimeOfDay.now().format(context),
-          "type": "text",
-        });
-      });
-      _messageController.clear();
-      _scrollToBottom();
-    }
-  }
-
-  void _scrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
-      }
-    });
   }
 
   void _showAttachmentOptions() {
@@ -398,12 +467,5 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _messageController.dispose();
-    _scrollController.dispose();
-    super.dispose();
   }
 }

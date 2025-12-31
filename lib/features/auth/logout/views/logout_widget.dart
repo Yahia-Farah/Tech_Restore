@@ -68,7 +68,7 @@ class LogoutDialogWidget extends StatelessWidget {
                       height: 40,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: Colors.red,
+                        color: Colors.green,
                       ),
                     )
                     : CustomElevatedButton(

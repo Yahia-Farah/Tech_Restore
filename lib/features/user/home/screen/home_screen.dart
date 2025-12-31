@@ -5,9 +5,9 @@ import '../../../../../core/config/di.dart';
 import '../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../core/routes/route_names.dart';
 import '../../profile/presentation/viewmodel/profile_cubit.dart';
-import '../tabs/account_tab/profile_tab.dart';
 import '../tabs/explore_tab/explore_tab.dart';
 import '../tabs/home_tab/home_tab.dart';
+import '../tabs/profile_tab/profile_tab.dart';
 import '../tabs/track_tab/track_tab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: BottomAppBar(
           shape: const CircularNotchedRectangle(),
-          notchMargin: 10,
+          notchMargin: 8,
           color: Colors.white,
           elevation: 0,
           child: Container(
@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   label: local.explore,
                   index: 1,
                 ),
-                const SizedBox(width: 50), // Space for FAB
+                const SizedBox(width: 60), // Space for FAB
                 _buildNavItem(
                   icon: Icons.local_shipping_outlined,
                   activeIcon: Icons.local_shipping,
@@ -176,8 +176,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: Container(
-        width: 65,
-        height: 65,
+        width: 70,
+        height: 70,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
@@ -192,8 +192,8 @@ class _HomeScreenState extends State<HomeScreen> {
               offset: const Offset(0, 8),
             ),
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 10,
+              color: Colors.black.withValues(alpha: 0.15),
+              blurRadius: 15,
               offset: const Offset(0, 4),
             ),
           ],
@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            borderRadius: BorderRadius.circular(32.5),
+            borderRadius: BorderRadius.circular(35),
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.cart);
             },
@@ -211,32 +211,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(
                     Icons.shopping_cart_outlined,
                     color: Colors.white,
-                    size: 28,
+                    size: 30,
                   ),
                 ),
                 // Cart badge
                 Positioned(
-                  right: 12,
-                  top: 12,
+                  right: 10,
+                  top: 10,
                   child: Container(
-                    padding: const EdgeInsets.all(4),
+                    width: 20,
+                    height: 20,
                     decoration: BoxDecoration(
                       color: Colors.red,
-                      borderRadius: BorderRadius.circular(10),
+                      shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 2),
                     ),
-                    constraints: const BoxConstraints(
-                      minWidth: 20,
-                      minHeight: 20,
-                    ),
-                    child: const Text(
-                      '2',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
+                    child: const Center(
+                      child: Text(
+                        '2',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),

@@ -35,7 +35,7 @@ class ProfileTab extends StatelessWidget {
         body: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (context, state) {
             if (state is ProfileLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(color: AppColors.primary,));
             }
 
             if (state is ProfileError) {
@@ -51,6 +51,7 @@ class ProfileTab extends StatelessWidget {
               final user = state.profile;
 
               return RefreshIndicator(
+                color: AppColors.primary,
                 onRefresh: () async {
                   context.read<ProfileCubit>().getUserProfile();
                 },

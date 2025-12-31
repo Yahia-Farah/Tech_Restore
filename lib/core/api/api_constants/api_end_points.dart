@@ -1,8 +1,8 @@
 abstract class ApiEndPoints {
   static const String login = 'auth/login';
-  static const String chatSessions = 'chats/sessions';
-  static const String chatMessages = 'chats/{sessionId}/messages';
-  static const String endChatSession = 'chats/{sessionId}/end';
+  static const String chatSessions = 'chats/shop/sessions';
+  static const String chatMessages = 'chats/shop/{sessionId}/messages';
+  static const String endChatSession = 'chats/shop/{sessionId}/end';
   static const String forgetPassword = 'auth/forgot-password';
   static const String resetPassword = 'auth/reset-password';
   static const String resendCode = 'auth/resend-otp';
@@ -34,7 +34,7 @@ abstract class ApiEndPoints {
   static const String getAdminStats = 'admin/stats';
   static const String deactivateUser = 'admin/users/{userId}/deactivate';
   static const String activateUser = 'admin/users/{userId}/activate';
-  static const String UpdateUserRole = 'admin/users/{userId}';
+  static const String updateUserRole = 'admin/users/{userId}';
   static const String getAllCategoriesAdmin = 'admin/categories';
   static const String addCategoriesAdmin = 'admin/categories';
   static const String updateCategoriesAdmin = 'admin/categories/{categroyId}';
@@ -70,4 +70,37 @@ abstract class ApiEndPoints {
   static const String updateOrderStatus =
       'shops/orders/control/{orderId}/status';
   static const String getFinancialReport = 'shops/payments/financial-report';
+
+  static const String getMyChatSessions = 'chats/my/sessions';
+  static const String getChatMessages = 'chats';
+  static const String markMessagesAsRead = 'chats';
+  static const String closeChatSession = 'chats';
+  static const String getUnreadMessageCount = 'chats';
+
+  static const String getShopChatSessions = 'chats/shop/sessions';
+
+  // User Addresses
+  static const String getUserAddresses = 'users/addresses';
+  static const String addUserAddress = 'users/addresses';
+  static const String updateUserAddress = 'users/addresses/{addressId}';
+  static const String deleteUserAddress = 'users/addresses/{addressId}';
+
+  // User Orders
+  static const String getUserOrders = 'users/orders';
+  static const String cancelUserOrder = 'users/orders/{orderId}/cancel';
+
+  // User Explore
+  static const String getAllShopsUser = 'users/shops/all';
+  static const String getAllDevices = 'products';
+  static const String getCategories = 'categories';
+  static const String getShopById = 'shops/{shopId}';
+  static const String getProductsByShop = 'products/shop/{shopId}';
+  static const String getProductsByShopAndCategory =
+      'products/{shopId}/{categoryId}';
+
+  // Reviews
+  static const String getShopReviews = 'reviews/{shopId}/reviews';
+  static const String addReview = 'reviews/{shopId}';
+  static const String updateReview = 'reviews/{id}';
+  static const String deleteReview = 'reviews/cancel/{id}';
 }

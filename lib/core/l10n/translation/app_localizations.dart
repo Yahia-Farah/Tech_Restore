@@ -62,8 +62,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,18 +82,17 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
-    Locale('en'),
+    Locale('en')
   ];
 
   /// No description provided for @app_name.
@@ -2581,10 +2578,135 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Setting this as the default address will remove the default status from your current default address. Do you want to continue?'**
   String get default_address_warning;
+
+  /// No description provided for @my_addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'My Addresses'**
+  String get my_addresses;
+
+  /// No description provided for @delete_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Address'**
+  String get delete_address;
+
+  /// No description provided for @address_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Address Title'**
+  String get address_title;
+
+  /// No description provided for @address_title_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Home, Office, etc.'**
+  String get address_title_hint;
+
+  /// No description provided for @full_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Address'**
+  String get full_address;
+
+  /// No description provided for @full_address_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Street, Building, Apartment'**
+  String get full_address_hint;
+
+  /// No description provided for @city_state.
+  ///
+  /// In en, this message translates to:
+  /// **'City, State'**
+  String get city_state;
+
+  /// No description provided for @city_state_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Cairo, Egypt'**
+  String get city_state_hint;
+
+  /// No description provided for @special_instructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Special Instructions (Optional)'**
+  String get special_instructions;
+
+  /// No description provided for @special_instructions_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery notes, landmarks, etc.'**
+  String get special_instructions_hint;
+
+  /// No description provided for @save_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Address'**
+  String get save_address;
+
+  /// No description provided for @update_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Address'**
+  String get update_address;
+
+  /// No description provided for @delete_address_confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this address? This action cannot be undone.'**
+  String get delete_address_confirmation;
+
+  /// No description provided for @address_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address added successfully'**
+  String get address_added_successfully;
+
+  /// No description provided for @address_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address updated successfully'**
+  String get address_updated_successfully;
+
+  /// No description provided for @address_deleted_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address deleted successfully'**
+  String get address_deleted_successfully;
+
+  /// No description provided for @no_addresses_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No addresses found'**
+  String get no_addresses_found;
+
+  /// No description provided for @failed_to_load_addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load addresses'**
+  String get failed_to_load_addresses;
+
+  /// No description provided for @failed_to_add_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add address'**
+  String get failed_to_add_address;
+
+  /// No description provided for @failed_to_update_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update address'**
+  String get failed_to_update_address;
+
+  /// No description provided for @failed_to_delete_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete address'**
+  String get failed_to_delete_address;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -2593,26 +2715,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar':
-      return AppLocalizationsAr();
-    case 'en':
-      return AppLocalizationsEn();
+    case 'ar': return AppLocalizationsAr();
+    case 'en': return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }
