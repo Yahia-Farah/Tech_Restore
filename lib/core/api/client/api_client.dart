@@ -27,6 +27,7 @@ import '../../../features/admin/tabs/data/model/categories-model/categories_requ
 import '../../../features/admin/tabs/data/model/transaction-models/transaction_admin_response.dart';
 import '../../../features/admin/tabs/data/model/delivery-model/delivery_admin_response.dart';
 import '../../../features/admin/tabs/data/model/delivery-model/content_delivery_admin.dart';
+import '../../../features/admin/tabs/data/model/subscription-model/subscription_response.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -336,4 +337,12 @@ abstract class ApiClient {
   @DELETE(ApiEndPoints.deleteReview)
   @Extra({'auth': true})
   Future<String> deleteReview(@Path('reviewId') String reviewId);
+
+  @GET(ApiEndPoints.subscriptionWithPayment)
+  @Extra({'auth': true})
+  Future<SubscriptionResponse> getAllSubscriptions(@Query('page') int page);
+
+  @GET(ApiEndPoints.cashPending)
+  @Extra({'auth': true})
+  Future<SubscriptionResponse> getPendingCashSubscriptions(@Query('page') int page);
 }

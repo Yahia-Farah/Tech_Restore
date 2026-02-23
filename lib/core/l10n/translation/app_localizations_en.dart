@@ -1445,4 +1445,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pending_cash_payments_only => 'Pending Cash Payments Only';
+
+  @override
+  String get view_details => 'View Details';
 }

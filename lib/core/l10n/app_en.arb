@@ -502,5 +502,6 @@
   "shop_name": "Shop Name",
   "method": "Method",
   "no_subscriptions_found": "No subscriptions found",
-  "pending_cash_payments_only": "Pending Cash Payments Only"
+  "pending_cash_payments_only": "Pending Cash Payments Only",
+  "view_details": "View Details"
 }

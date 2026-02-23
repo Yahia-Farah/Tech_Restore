@@ -2962,6 +2962,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pending Cash Payments Only'**
   String get pending_cash_payments_only;
+
+  /// No description provided for @view_details.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get view_details;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

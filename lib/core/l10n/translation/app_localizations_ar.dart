@@ -1445,4 +1445,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pending_cash_payments_only => 'المدفوعات النقدية المعلقة فقط';
+
+  @override
+  String get view_details => 'عرض التفاصيل';
 }

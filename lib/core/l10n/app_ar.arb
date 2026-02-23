@@ -502,5 +502,6 @@
   "shop_name": "اسم المتجر",
   "method": "الطريقة",
   "no_subscriptions_found": "لم يتم العثور على اشتراكات",
-  "pending_cash_payments_only": "المدفوعات النقدية المعلقة فقط"
+  "pending_cash_payments_only": "المدفوعات النقدية المعلقة فقط",
+  "view_details": "عرض التفاصيل"
 }

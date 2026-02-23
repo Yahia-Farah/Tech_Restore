@@ -34,10 +34,14 @@ import '../../features/admin/tabs/domain/usecases/get_all_categories_usecase.dar
     as _i953;
 import '../../features/admin/tabs/domain/usecases/get_all_deliveries_usecase.dart'
     as _i411;
+import '../../features/admin/tabs/domain/usecases/get_all_subscriptions_usecase.dart'
+    as _i653;
 import '../../features/admin/tabs/domain/usecases/get_all_transactions_usecase.dart'
     as _i575;
 import '../../features/admin/tabs/domain/usecases/get_delivery_by_id_usecase.dart'
     as _i1055;
+import '../../features/admin/tabs/domain/usecases/get_pending_cash_subscriptions_usecase.dart'
+    as _i842;
 import '../../features/admin/tabs/domain/usecases/suspend_shop_usecase.dart'
     as _i57;
 import '../../features/admin/tabs/domain/usecases/update_category_usecase.dart'
@@ -64,6 +68,8 @@ import '../../features/admin/tabs/manage-shops/data/repo/get_shops_repo.dart'
     as _i63;
 import '../../features/admin/tabs/manage-shops/presentation/viewmodel/get_shops_cubit.dart'
     as _i697;
+import '../../features/admin/tabs/manage-subscription/presentation/viewmodel/subscription_cubit.dart'
+    as _i58;
 import '../../features/admin/tabs/manage-transaction/presentation/viewmodel/transactions_cubit.dart'
     as _i691;
 import '../../features/admin/tabs/manage-user/data/datasource/get_user_remote_data_source_impl.dart'
@@ -184,6 +190,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i982.UpdateCategoryUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i586.UpdateUserRoleUseCase>(
         () => _i586.UpdateUserRoleUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i653.GetAllSubscriptionsUseCase>(
+        () => _i653.GetAllSubscriptionsUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i842.GetPendingCashSubscriptionsUseCase>(
+        () => _i842.GetPendingCashSubscriptionsUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i652.CategoriesCubit>(() => _i652.CategoriesCubit(
           gh<_i953.GetAllCategoriesUseCase>(),
           gh<_i733.AddCategoryUseCase>(),
@@ -234,6 +244,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i80.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i1037.SignUpUseCase>(
         () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i58.SubscriptionCubit>(() => _i58.SubscriptionCubit(
+          gh<_i653.GetAllSubscriptionsUseCase>(),
+          gh<_i842.GetPendingCashSubscriptionsUseCase>(),
+        ));
     gh.factory<_i45.DeleteReviewUseCase>(
         () => _i45.DeleteReviewUseCase(gh<_i764.GetReviewsRepository>()));
     gh.factory<_i327.EditProfileCubit>(
