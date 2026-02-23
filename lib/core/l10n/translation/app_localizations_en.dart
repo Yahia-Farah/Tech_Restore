@@ -1418,4 +1418,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviews => 'Reviews';
+
+  @override
+  String get pending_payments => 'Pending Payments';
+
+  @override
+  String get pending_cash_payments => 'Pending Cash Payments';
+
+  @override
+  String get all_subscriptions => 'All Subscriptions';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get search_by_shop_id_name_email => 'Search by Shop ID, Name, or Email...';
+
+  @override
+  String get shop_id => 'Shop ID';
+
+  @override
+  String get method => 'Method';
+
+  @override
+  String get no_subscriptions_found => 'No subscriptions found';
+
+  @override
+  String get pending_cash_payments_only => 'Pending Cash Payments Only';
 }

@@ -492,5 +492,15 @@
   "stores": "المتاجر",
   "subscription": "الاشتراك",
   "repair_requests": "طلبات الإصلاح",
-  "reviews": "التقييمات"
+  "reviews": "التقييمات",
+  "pending_payments": "المدفوعات المعلقة",
+  "pending_cash_payments": "المدفوعات النقدية المعلقة",
+  "all_subscriptions": "جميع الاشتراكات",
+  "refresh": "تحديث",
+  "search_by_shop_id_name_email": "البحث برقم المتجر أو الاسم أو البريد الإلكتروني...",
+  "shop_id": "رقم المتجر",
+  "shop_name": "اسم المتجر",
+  "method": "الطريقة",
+  "no_subscriptions_found": "لم يتم العثور على اشتراكات",
+  "pending_cash_payments_only": "المدفوعات النقدية المعلقة فقط"
 }

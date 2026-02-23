@@ -492,5 +492,15 @@
   "stores": "Stores",
   "subscription": "Subscription",
   "repair_requests": "Repair Requests",
-  "reviews": "Reviews"
+  "reviews": "Reviews",
+  "pending_payments": "Pending Payments",
+  "pending_cash_payments": "Pending Cash Payments",
+  "all_subscriptions": "All Subscriptions",
+  "refresh": "Refresh",
+  "search_by_shop_id_name_email": "Search by Shop ID, Name, or Email...",
+  "shop_id": "Shop ID",
+  "shop_name": "Shop Name",
+  "method": "Method",
+  "no_subscriptions_found": "No subscriptions found",
+  "pending_cash_payments_only": "Pending Cash Payments Only"
 }

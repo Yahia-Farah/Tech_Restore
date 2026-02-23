@@ -1418,4 +1418,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reviews => 'التقييمات';
+
+  @override
+  String get pending_payments => 'المدفوعات المعلقة';
+
+  @override
+  String get pending_cash_payments => 'المدفوعات النقدية المعلقة';
+
+  @override
+  String get all_subscriptions => 'جميع الاشتراكات';
+
+  @override
+  String get refresh => 'تحديث';
+
+  @override
+  String get search_by_shop_id_name_email => 'البحث برقم المتجر أو الاسم أو البريد الإلكتروني...';
+
+  @override
+  String get shop_id => 'رقم المتجر';
+
+  @override
+  String get method => 'الطريقة';
+
+  @override
+  String get no_subscriptions_found => 'لم يتم العثور على اشتراكات';
+
+  @override
+  String get pending_cash_payments_only => 'المدفوعات النقدية المعلقة فقط';
 }

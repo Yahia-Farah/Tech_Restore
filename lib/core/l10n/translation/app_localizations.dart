@@ -2908,6 +2908,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reviews'**
   String get reviews;
+
+  /// No description provided for @pending_payments.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Payments'**
+  String get pending_payments;
+
+  /// No description provided for @pending_cash_payments.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Cash Payments'**
+  String get pending_cash_payments;
+
+  /// No description provided for @all_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'All Subscriptions'**
+  String get all_subscriptions;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @search_by_shop_id_name_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by Shop ID, Name, or Email...'**
+  String get search_by_shop_id_name_email;
+
+  /// No description provided for @shop_id.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop ID'**
+  String get shop_id;
+
+  /// No description provided for @method.
+  ///
+  /// In en, this message translates to:
+  /// **'Method'**
+  String get method;
+
+  /// No description provided for @no_subscriptions_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No subscriptions found'**
+  String get no_subscriptions_found;
+
+  /// No description provided for @pending_cash_payments_only.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Cash Payments Only'**
+  String get pending_cash_payments_only;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
