@@ -2968,6 +2968,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Details'**
   String get view_details;
+
+  /// No description provided for @offer_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer Name'**
+  String get offer_name;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
+  /// No description provided for @start_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get start_date;
+
+  /// No description provided for @end_date.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get end_date;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

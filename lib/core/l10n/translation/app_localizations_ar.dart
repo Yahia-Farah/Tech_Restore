@@ -1448,4 +1448,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get view_details => 'عرض التفاصيل';
+
+  @override
+  String get offer_name => 'اسم العرض';
+
+  @override
+  String get discount => 'الخصم';
+
+  @override
+  String get start_date => 'تاريخ البدء';
+
+  @override
+  String get end_date => 'تاريخ الانتهاء';
 }

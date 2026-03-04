@@ -30,6 +30,8 @@ import '../../features/admin/tabs/domain/usecases/deactivate_user_usecase.dart'
     as _i217;
 import '../../features/admin/tabs/domain/usecases/delete_category_usecase.dart'
     as _i886;
+import '../../features/admin/tabs/domain/usecases/get_admin_offers_usecase.dart'
+    as _i41;
 import '../../features/admin/tabs/domain/usecases/get_all_categories_usecase.dart'
     as _i953;
 import '../../features/admin/tabs/domain/usecases/get_all_deliveries_usecase.dart'
@@ -54,6 +56,8 @@ import '../../features/admin/tabs/manage-dashboard/presentation/viewmodel/admin_
     as _i80;
 import '../../features/admin/tabs/manage-delivery/presentation/viewmodel/deliveries_cubit.dart'
     as _i954;
+import '../../features/admin/tabs/manage-offers/presentation/viewmodel/admin_offers_cubit.dart'
+    as _i471;
 import '../../features/admin/tabs/manage-reviews/data/datasource/get_reviews_data_source_impl.dart'
     as _i456;
 import '../../features/admin/tabs/manage-reviews/data/repo/get_reviews_repo.dart'
@@ -194,6 +198,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i653.GetAllSubscriptionsUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i842.GetPendingCashSubscriptionsUseCase>(
         () => _i842.GetPendingCashSubscriptionsUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i41.GetAdminOffersUseCase>(
+        () => _i41.GetAdminOffersUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i652.CategoriesCubit>(() => _i652.CategoriesCubit(
           gh<_i953.GetAllCategoriesUseCase>(),
           gh<_i733.AddCategoryUseCase>(),
@@ -206,6 +212,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i890.ProfileRepository(gh<_i904.ProfileRemoteDataSource>()));
     gh.lazySingleton<_i170.AuthRepository>(
         () => _i279.AuthRepositoryImpl(gh<_i24.AuthRemoteDataSource>()));
+    gh.factory<_i471.AdminOffersCubit>(
+        () => _i471.AdminOffersCubit(gh<_i41.GetAdminOffersUseCase>()));
     gh.factory<_i335.NotificationsCubit>(
         () => _i335.NotificationsCubit(gh<_i57.ShopRepository>()));
     gh.factory<_i453.ShopChatCubit>(

@@ -503,5 +503,9 @@
   "method": "الطريقة",
   "no_subscriptions_found": "لم يتم العثور على اشتراكات",
   "pending_cash_payments_only": "المدفوعات النقدية المعلقة فقط",
-  "view_details": "عرض التفاصيل"
+  "view_details": "عرض التفاصيل",
+  "offer_name": "اسم العرض",
+  "discount": "الخصم",
+  "start_date": "تاريخ البدء",
+  "end_date": "تاريخ الانتهاء"
 }

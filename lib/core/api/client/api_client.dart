@@ -28,6 +28,7 @@ import '../../../features/admin/tabs/data/model/transaction-models/transaction_a
 import '../../../features/admin/tabs/data/model/delivery-model/delivery_admin_response.dart';
 import '../../../features/admin/tabs/data/model/delivery-model/content_delivery_admin.dart';
 import '../../../features/admin/tabs/data/model/subscription-model/subscription_response.dart';
+import '../../../features/admin/tabs/manage-offers/data/models/offer_page_model.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -345,4 +346,8 @@ abstract class ApiClient {
   @GET(ApiEndPoints.cashPending)
   @Extra({'auth': true})
   Future<SubscriptionResponse> getPendingCashSubscriptions(@Query('page') int page);
+
+  @GET(ApiEndPoints.adminOffers)
+  @Extra({'auth': true})
+  Future<OfferPageModel> getAdminOffers(@Query('page') int page);
 }

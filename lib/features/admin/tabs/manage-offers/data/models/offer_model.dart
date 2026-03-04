@@ -5,43 +5,29 @@ part 'offer_model.g.dart';
 @JsonSerializable()
 class OfferModel {
   final String? id;
-  final String? shopId;
-  final String? shopName;
-  final String? title;
+  final String? name;
   final String? description;
-  final String? offerType;
-  final double? discountPercentage;
-  final double? discountAmount;
-  final double? minOrderAmount;
+  final double? discountValue;
+  final String? discountType;
   final String? startDate;
   final String? endDate;
-  final bool? isActive;
-  final int? usageLimit;
-  final int? usedCount;
-  final List<String>? applicableProducts;
-  final List<String>? applicableCategories;
-  final String? promoCode;
+  final String? status;
+  final String? shopId;
+  final String? shopName;
   final String? createdAt;
   final String? updatedAt;
 
   OfferModel({
     this.id,
-    this.shopId,
-    this.shopName,
-    this.title,
+    this.name,
     this.description,
-    this.offerType,
-    this.discountPercentage,
-    this.discountAmount,
-    this.minOrderAmount,
+    this.discountValue,
+    this.discountType,
     this.startDate,
     this.endDate,
-    this.isActive,
-    this.usageLimit,
-    this.usedCount,
-    this.applicableProducts,
-    this.applicableCategories,
-    this.promoCode,
+    this.status,
+    this.shopId,
+    this.shopName,
     this.createdAt,
     this.updatedAt,
   });

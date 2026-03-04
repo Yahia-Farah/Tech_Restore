@@ -503,5 +503,9 @@
   "method": "Method",
   "no_subscriptions_found": "No subscriptions found",
   "pending_cash_payments_only": "Pending Cash Payments Only",
-  "view_details": "View Details"
+  "view_details": "View Details",
+  "offer_name": "Offer Name",
+  "discount": "Discount",
+  "start_date": "Start Date",
+  "end_date": "End Date"
 }

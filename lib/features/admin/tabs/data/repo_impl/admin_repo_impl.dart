@@ -8,6 +8,7 @@ import '../model/transaction-models/transaction_admin_response.dart';
 import '../model/delivery-model/delivery_admin_response.dart';
 import '../model/delivery-model/content_delivery_admin.dart';
 import '../model/subscription-model/subscription_response.dart';
+import '../../manage-offers/data/models/offer_page_model.dart';
 import '../../manage-user/data/models/update_user_role_request.dart';
 
 @Injectable(as: AdminRepo)
@@ -85,5 +86,10 @@ class AdminRepoImpl implements AdminRepo {
   @override
   Future<SubscriptionResponse> getPendingCashSubscriptions(int page) async {
     return await _remoteDataSource.getPendingCashSubscriptions(page);
+  }
+
+  @override
+  Future<OfferPageModel> getAdminOffers(int page) async {
+    return await _remoteDataSource.getAdminOffers(page);
   }
 }

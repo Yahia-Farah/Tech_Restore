@@ -1448,4 +1448,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get view_details => 'View Details';
+
+  @override
+  String get offer_name => 'Offer Name';
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get start_date => 'Start Date';
+
+  @override
+  String get end_date => 'End Date';
 }
