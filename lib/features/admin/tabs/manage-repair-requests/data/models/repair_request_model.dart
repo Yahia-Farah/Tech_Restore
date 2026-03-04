@@ -1,53 +1,56 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'repair_request_content.dart';
+import 'repair_request_sort.dart';
+import 'repair_request_pageable.dart';
 
 part 'repair_request_model.g.dart';
 
 @JsonSerializable()
 class RepairRequestModel {
-  final String? id;
-  final String? customerId;
-  final String? customerName;
-  final String? customerPhone;
-  final String? shopId;
-  final String? shopName;
-  final String? deviceType;
-  final String? deviceModel;
-  final String? issueDescription;
-  final String? status;
-  final double? estimatedCost;
-  final double? finalCost;
-  final String? priority;
-  final List<String>? images;
-  final String? notes;
-  final String? assignedTechnician;
-  final String? createdAt;
-  final String? updatedAt;
-  final String? completedAt;
+  @JsonKey(name: "totalElements")
+  final int? totalElements;
+  @JsonKey(name: "totalPages")
+  final int? totalPages;
+  @JsonKey(name: "first")
+  final bool? first;
+  @JsonKey(name: "last")
+  final bool? last;
+  @JsonKey(name: "size")
+  final int? size;
+  @JsonKey(name: "content")
+  final List<RepairRequestContent>? content;
+  @JsonKey(name: "number")
+  final int? number;
+  @JsonKey(name: "sort")
+  final List<RepairRequestSort>? sort;
+  @JsonKey(name: "numberOfElements")
+  final int? numberOfElements;
+  @JsonKey(name: "pageable")
+  final RepairRequestPageable? pageable;
+  @JsonKey(name: "empty")
+  final bool? empty;
 
   RepairRequestModel({
-    this.id,
-    this.customerId,
-    this.customerName,
-    this.customerPhone,
-    this.shopId,
-    this.shopName,
-    this.deviceType,
-    this.deviceModel,
-    this.issueDescription,
-    this.status,
-    this.estimatedCost,
-    this.finalCost,
-    this.priority,
-    this.images,
-    this.notes,
-    this.assignedTechnician,
-    this.createdAt,
-    this.updatedAt,
-    this.completedAt,
+    this.totalElements,
+    this.totalPages,
+    this.first,
+    this.last,
+    this.size,
+    this.content,
+    this.number,
+    this.sort,
+    this.numberOfElements,
+    this.pageable,
+    this.empty,
   });
 
-  factory RepairRequestModel.fromJson(Map<String, dynamic> json) =>
-      _$RepairRequestModelFromJson(json);
+  factory RepairRequestModel.fromJson(Map<String, dynamic> json) {
+    return _$RepairRequestModelFromJson(json);
+  }
 
-  Map<String, dynamic> toJson() => _$RepairRequestModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$RepairRequestModelToJson(this);
+  }
 }
+
+

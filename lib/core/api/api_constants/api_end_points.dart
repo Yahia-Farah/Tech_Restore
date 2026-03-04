@@ -76,5 +76,7 @@ abstract class ApiEndPoints {
   static const String deleteReview = 'admin/reviews/{reviewId}';
   static const String subscriptionWithPayment = "admin/subscriptions/subscriptions-with-payment";
   static const String cashPending = "admin/subscriptions/cash/pending";
-  static const String adminOffers = "/admin/offers";
+  static const String adminOffers = "admin/offers";
+  static const String adminRepairRequests = "admin/repair-requests";
+  static const String adminRepairRequestsByStatus = "admin/repair-requests/status/{status}";
 }

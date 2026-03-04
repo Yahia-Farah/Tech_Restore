@@ -17,6 +17,7 @@ import 'package:tech_restore/features/admin/tabs/manage-subscription/presentatio
 import 'package:tech_restore/features/admin/tabs/manage-subscription/presentation/viewmodel/subscription_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-products/presentation/view/admin_products_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-repair-requests/presentation/view/admin_repair_requests_screen.dart';
+import 'package:tech_restore/features/admin/tabs/manage-repair-requests/presentation/viewmodel/repair_requests_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-offers/presentation/view/admin_offers_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-offers/presentation/viewmodel/admin_offers_cubit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-user/presentation/viewmodel/get_users_cubit.dart';
@@ -64,7 +65,10 @@ class _MainLayoutState extends State<AdminLayout> {
     // Shop section: Products (index 4)
     const AdminProductsScreen(),
     // Shop section: Repair Requests (index 5)
-    const AdminRepairRequestsScreen(),
+    BlocProvider(
+      create: (context) => getIt<RepairRequestsCubit>(),
+      child: const AdminRepairRequestsScreen(),
+    ),
     // Shop section: Offers (index 6)
     BlocProvider(
       create: (context) => getIt<AdminOffersCubit>(),

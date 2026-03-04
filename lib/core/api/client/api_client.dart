@@ -29,6 +29,7 @@ import '../../../features/admin/tabs/data/model/delivery-model/delivery_admin_re
 import '../../../features/admin/tabs/data/model/delivery-model/content_delivery_admin.dart';
 import '../../../features/admin/tabs/data/model/subscription-model/subscription_response.dart';
 import '../../../features/admin/tabs/manage-offers/data/models/offer_page_model.dart';
+import '../../../features/admin/tabs/manage-repair-requests/data/models/repair_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -350,4 +351,15 @@ abstract class ApiClient {
   @GET(ApiEndPoints.adminOffers)
   @Extra({'auth': true})
   Future<OfferPageModel> getAdminOffers(@Query('page') int page);
+
+  @GET(ApiEndPoints.adminRepairRequests)
+  @Extra({'auth': true})
+  Future<RepairRequestModel> getAdminRepairRequests(@Query('page') int page);
+
+  @GET(ApiEndPoints.adminRepairRequestsByStatus)
+  @Extra({'auth': true})
+  Future<RepairRequestModel> getAdminRepairRequestsByStatus(
+    @Path('status') String status,
+    @Query('page') int page,
+  );
 }

@@ -32,6 +32,10 @@ import '../../features/admin/tabs/domain/usecases/delete_category_usecase.dart'
     as _i886;
 import '../../features/admin/tabs/domain/usecases/get_admin_offers_usecase.dart'
     as _i41;
+import '../../features/admin/tabs/domain/usecases/get_admin_repair_requests_by_status_usecase.dart'
+    as _i699;
+import '../../features/admin/tabs/domain/usecases/get_admin_repair_requests_usecase.dart'
+    as _i122;
 import '../../features/admin/tabs/domain/usecases/get_all_categories_usecase.dart'
     as _i953;
 import '../../features/admin/tabs/domain/usecases/get_all_deliveries_usecase.dart'
@@ -58,6 +62,20 @@ import '../../features/admin/tabs/manage-delivery/presentation/viewmodel/deliver
     as _i954;
 import '../../features/admin/tabs/manage-offers/presentation/viewmodel/admin_offers_cubit.dart'
     as _i471;
+import '../../features/admin/tabs/manage-repair-requests/data/datasource/repair_requests_remote_datasource.dart'
+    as _i311;
+import '../../features/admin/tabs/manage-repair-requests/data/datasource/repair_requests_remote_datasource_impl.dart'
+    as _i1006;
+import '../../features/admin/tabs/manage-repair-requests/data/repo/repair_requests_repo.dart'
+    as _i565;
+import '../../features/admin/tabs/manage-repair-requests/data/repo/repair_requests_repo_impl.dart'
+    as _i150;
+import '../../features/admin/tabs/manage-repair-requests/domain/usecases/get_all_repair_requests_usecase.dart'
+    as _i99;
+import '../../features/admin/tabs/manage-repair-requests/domain/usecases/get_repair_requests_by_status_usecase.dart'
+    as _i641;
+import '../../features/admin/tabs/manage-repair-requests/presentation/viewmodel/repair_requests_cubit.dart'
+    as _i502;
 import '../../features/admin/tabs/manage-reviews/data/datasource/get_reviews_data_source_impl.dart'
     as _i456;
 import '../../features/admin/tabs/manage-reviews/data/repo/get_reviews_repo.dart'
@@ -170,8 +188,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i341.ResetPasswordCubit(gh<_i364.ApiClient>()));
     gh.factory<_i253.AdminRepo>(
         () => _i737.AdminRepoImpl(gh<_i532.AdminRemoteDataSource>()));
+    gh.lazySingleton<_i311.RepairRequestsRemoteDataSource>(
+        () => _i1006.RepairRequestsRemoteDataSourceImpl(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i57.ShopRepository>(
         () => _i57.ShopRepository(gh<_i622.ShopRemoteDataSource>()));
+    gh.factory<_i565.RepairRequestsRepo>(() => _i150.RepairRequestsRepoImpl(
+        gh<_i311.RepairRequestsRemoteDataSource>()));
     gh.factory<_i839.ActivateUserUseCase>(
         () => _i839.ActivateUserUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i733.AddCategoryUseCase>(
@@ -200,6 +222,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i842.GetPendingCashSubscriptionsUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i41.GetAdminOffersUseCase>(
         () => _i41.GetAdminOffersUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i699.GetAdminRepairRequestsByStatusUseCase>(() =>
+        _i699.GetAdminRepairRequestsByStatusUseCase(gh<_i253.AdminRepo>()));
+    gh.factory<_i122.GetAdminRepairRequestsUseCase>(
+        () => _i122.GetAdminRepairRequestsUseCase(gh<_i253.AdminRepo>()));
     gh.factory<_i652.CategoriesCubit>(() => _i652.CategoriesCubit(
           gh<_i953.GetAllCategoriesUseCase>(),
           gh<_i733.AddCategoryUseCase>(),
@@ -252,6 +278,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i80.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i1037.SignUpUseCase>(
         () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
+    gh.factory<_i99.GetAllRepairRequestsUseCase>(
+        () => _i99.GetAllRepairRequestsUseCase(gh<_i565.RepairRequestsRepo>()));
+    gh.factory<_i641.GetRepairRequestsByStatusUseCase>(() =>
+        _i641.GetRepairRequestsByStatusUseCase(gh<_i565.RepairRequestsRepo>()));
     gh.factory<_i58.SubscriptionCubit>(() => _i58.SubscriptionCubit(
           gh<_i653.GetAllSubscriptionsUseCase>(),
           gh<_i842.GetPendingCashSubscriptionsUseCase>(),
@@ -274,6 +304,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i63.GetShopsRepository>(),
           gh<_i634.ApproveShopUseCase>(),
           gh<_i57.SuspendShopUseCase>(),
+        ));
+    gh.factory<_i502.RepairRequestsCubit>(() => _i502.RepairRequestsCubit(
+          gh<_i99.GetAllRepairRequestsUseCase>(),
+          gh<_i641.GetRepairRequestsByStatusUseCase>(),
         ));
     gh.factory<_i524.GetUsersCubit>(() => _i524.GetUsersCubit(
           gh<_i680.GetUserRepository>(),

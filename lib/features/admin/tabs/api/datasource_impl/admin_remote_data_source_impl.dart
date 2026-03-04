@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tech_restore/core/api/client/api_client.dart';
+import '../../../../../core/errors/failure.dart';
 import '../../data/datasource/admin_remote_datasource.dart';
 import '../../data/model/admin-states/admin_states_response.dart';
 import '../../data/model/categories-model/categories_model_response.dart';
@@ -10,13 +13,36 @@ import '../../data/model/delivery-model/delivery_admin_response.dart';
 import '../../data/model/delivery-model/content_delivery_admin.dart';
 import '../../data/model/subscription-model/subscription_response.dart';
 import '../../manage-offers/data/models/offer_page_model.dart';
+import '../../manage-repair-requests/data/models/repair_request_model.dart';
 import '../../manage-user/data/models/update_user_role_request.dart';
 
 @LazySingleton(as: AdminRemoteDataSource)
 class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
   final ApiClient _apiClient;
 
+
   AdminRemoteDataSourceImpl(this._apiClient);
+
+  String _extractApiMessage(DioException e) {
+    final data = e.response?.data;
+    if (data is Map) {
+      return data['error'] ??
+          data['message'] ??
+          ServerFailure.fromDio(e).errorMessage;
+    }
+    if (data is String) {
+      try {
+        final decoded = json.decode(data);
+        if (decoded is Map) {
+          return decoded['error'] ??
+              decoded['message'] ??
+              ServerFailure.fromDio(e).errorMessage;
+        }
+      } catch (_) {}
+    }
+    return ServerFailure.fromDio(e).errorMessage;
+  }
+
 
   @override
   Future<AdminStatesResponse> getAdminStats() async {
@@ -108,5 +134,15 @@ class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
   @override
   Future<OfferPageModel> getAdminOffers(int page) async {
     return await _apiClient.getAdminOffers(page);
+  }
+
+  @override
+  Future<RepairRequestModel> getAdminRepairRequests(int page) async {
+    return await _apiClient.getAdminRepairRequests(page);
+  }
+
+  @override
+  Future<RepairRequestModel> getAdminRepairRequestsByStatus(String status, int page) async {
+    return await _apiClient.getAdminRepairRequestsByStatus(status, page);
   }
 }
