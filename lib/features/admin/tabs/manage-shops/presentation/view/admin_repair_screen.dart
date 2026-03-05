@@ -184,6 +184,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
     final totalShops = shops.length;
     final approvedShops = shops.where((s) => _getStatus(s) == "Approved").length;
     final suspendedShops = shops.where((s) => _getStatus(s) == "Suspended").length;
+    final pendingShops = shops.where((s) => _getStatus(s) == "Pending").length;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -208,6 +209,13 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
             count: suspendedShops.toString(),
             icon: Icons.block,
             color: Colors.red,
+          ),
+          const SizedBox(width: 16),
+          _buildStatCard(
+            title: l10n.pending,
+            count: pendingShops.toString(),
+            icon: Icons.hourglass_empty,
+            color: Colors.orange,
           ),
         ],
       ),
@@ -487,18 +495,16 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 120,
-                        child: Text(
-                          l10n.status.toUpperCase(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey[700],
-                            fontSize: 12,
-                            letterSpacing: 0.5,
-                          ),
+                      Text(
+                        l10n.status.toUpperCase(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[700],
+                          fontSize: 12,
+                          letterSpacing: 0.5,
                         ),
                       ),
+                      const SizedBox(width: 20),
                       SizedBox(
                         width: 140,
                         child: Text(
@@ -512,7 +518,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                         ),
                       ),
                       SizedBox(
-                        width: 480, // Updated to match actions column width
+                        width: 380,
                         child: Text(
                           l10n.actions.toUpperCase(),
                           style: TextStyle(
@@ -601,10 +607,8 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
             ),
           ),
           // Status
-          SizedBox(
-            width: 120,
-            child: _buildStatusChip(status),
-          ),
+          _buildStatusChip(status),
+          const SizedBox(width: 20),
           // Shop Type
           SizedBox(
             width: 140,
@@ -619,10 +623,10 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
           ),
           // Actions
           SizedBox(
-            width: 480, // Increased width to accommodate new button
+            width: 380,
             child: Row(
               children: [
-                // View Button
+                // View Button - Always visible
                 Container(
                   margin: const EdgeInsets.only(right: 8),
                   child: ElevatedButton.icon(
@@ -643,38 +647,41 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                     ),
                   ),
                 ),
-                // Approve Button - Always visible
-                Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  child: ElevatedButton.icon(
-                    onPressed: isShopLoading ? null : () => _approveShop(shopId),
-                    icon: isShopLoading 
-                        ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : const Icon(Icons.check, size: 16),
-                    label: Text(l10n.approve),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                      minimumSize: Size.zero,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                // Conditional buttons based on status
+                if (status == "Pending" || status == "Suspended") ...[
+                  // Approve Button for Pending and Suspended shops
+                  Container(
+                    margin: const EdgeInsets.only(right: 8),
+                    child: ElevatedButton.icon(
+                      onPressed: isShopLoading ? null : () => _approveShop(shopId),
+                      icon: isShopLoading 
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            )
+                          : const Icon(Icons.check, size: 16),
+                      label: Text(l10n.approve),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                // Conditional Suspend Button
+                ],
                 if (status == "Approved") ...[
+                  // Suspend Button for Approved shops only
                   ElevatedButton.icon(
                     onPressed: isShopLoading ? null : () => _suspendShop(shopId),
                     icon: isShopLoading 
@@ -686,7 +693,7 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Icon(Icons.close, size: 16),
+                        : const Icon(Icons.block, size: 16),
                     label: Text(l10n.suspend),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
@@ -1305,13 +1312,16 @@ Updated: ${shop.updatedAt ?? 'N/A'}
   }
 
   String _getStatus(ShopModel shop) {
+    // Suspended takes priority - if activate is false, shop is suspended
     if (shop.activate == false) {
       return "Suspended";
-    } else if (shop.verified == true) {
-      return "Approved";
-    } else {
-      return "Pending";
     }
+    // If active and verified, it's approved
+    if (shop.verified == true) {
+      return "Approved";
+    }
+    // If active but not verified, it's pending approval
+    return "Pending";
   }
 
   Widget _buildStatusChip(String status) {

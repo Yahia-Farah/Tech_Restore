@@ -6,7 +6,6 @@ import 'package:tech_restore/features/admin/tabs/manage-dashboard/presentation/v
 import 'package:tech_restore/features/admin/tabs/manage-delivery/presentation/view/delivery_admin_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_repair_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-reviews/presentation/view/admin_reviews_screen.dart';
-import 'package:tech_restore/features/admin/tabs/manage-shops/presentation/view/admin_promotional_offers_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-categories/presentation/view/admin_categories_screen.dart';
 import 'package:tech_restore/features/admin/tabs/support_screen.dart';
 import 'package:tech_restore/features/admin/tabs/manage-transaction/presentation/view/transaction_screen.dart';
