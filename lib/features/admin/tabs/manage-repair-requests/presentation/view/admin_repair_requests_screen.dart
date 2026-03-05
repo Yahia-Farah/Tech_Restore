@@ -402,6 +402,45 @@ class _AdminRepairRequestsScreenState extends State<AdminRepairRequestsScreen> {
     if (state is RepairRequestsSuccess) {
       final requests = state.repairRequests.content ?? [];
       
+      // Check if there are no requests at all (not just filtered out)
+      if (requests.isEmpty) {
+        return Container(
+          padding: const EdgeInsets.all(40),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                Icon(
+                  Icons.build_outlined,
+                  size: 64,
+                  color: Colors.grey[400],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  l10n.no_repair_requests_available,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+      
       // Filter by search query
       final filteredRequests = requests.where((request) {
         if (_searchQuery.isEmpty) return true;
@@ -471,13 +510,13 @@ class _AdminRepairRequestsScreenState extends State<AdminRepairRequestsScreen> {
                 headingRowColor: MaterialStateProperty.all(AppColors.grey.withOpacity(0.3)),
                 columns: [
                   DataColumn(label: Text(l10n.shop_name)),
-                  const DataColumn(label: Text('Device Category')),
+                  DataColumn(label: Text(l10n.device_category)),
                   DataColumn(label: Text(l10n.description)),
                   DataColumn(label: Text(l10n.price)),
                   DataColumn(label: Text(l10n.status)),
-                  const DataColumn(label: Text('Delivery Method')),
-                  const DataColumn(label: Text('Payment Method')),
-                  const DataColumn(label: Text('Confirmed')),
+                  DataColumn(label: Text(l10n.delivery_method)),
+                  DataColumn(label: Text(l10n.payment_method)),
+                  DataColumn(label: Text(l10n.confirmed)),
                 ],
                 rows: filteredRequests.map((request) {
                   return DataRow(

@@ -507,5 +507,8 @@
   "offer_name": "اسم العرض",
   "discount": "الخصم",
   "start_date": "تاريخ البدء",
-  "end_date": "تاريخ الانتهاء"
+  "end_date": "تاريخ الانتهاء",
+  "device_category": "فئة الجهاز",
+  "delivery_method": "طريقة التوصيل",
+  "confirmed": "مؤكد"
 }

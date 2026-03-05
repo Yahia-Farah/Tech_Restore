@@ -1460,4 +1460,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get end_date => 'End Date';
+
+  @override
+  String get device_category => 'Device Category';
+
+  @override
+  String get delivery_method => 'Delivery Method';
+
+  @override
+  String get confirmed => 'Confirmed';
 }

@@ -1460,4 +1460,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get end_date => 'تاريخ الانتهاء';
+
+  @override
+  String get device_category => 'فئة الجهاز';
+
+  @override
+  String get delivery_method => 'طريقة التوصيل';
+
+  @override
+  String get confirmed => 'مؤكد';
 }

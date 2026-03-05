@@ -8,19 +8,20 @@ part of 'repair_request_model.dart';
 
 RepairRequestModel _$RepairRequestModelFromJson(Map<String, dynamic> json) =>
     RepairRequestModel(
-      totalElements: (json['totalElements'] as num?)?.toInt(),
       totalPages: (json['totalPages'] as num?)?.toInt(),
+      totalElements: (json['totalElements'] as num?)?.toInt(),
       first: json['first'] as bool?,
       last: json['last'] as bool?,
+      numberOfElements: (json['numberOfElements'] as num?)?.toInt(),
       size: (json['size'] as num?)?.toInt(),
       content: (json['content'] as List<dynamic>?)
           ?.map((e) => RepairRequestContent.fromJson(e as Map<String, dynamic>))
           .toList(),
       number: (json['number'] as num?)?.toInt(),
-      sort: (json['sort'] as List<dynamic>?)
-          ?.map((e) => RepairRequestSort.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      numberOfElements: (json['numberOfElements'] as num?)?.toInt(),
+      sort: json['sort'] == null
+          ? null
+          : RepairRequestSortInfo.fromJson(
+              json['sort'] as Map<String, dynamic>),
       pageable: json['pageable'] == null
           ? null
           : RepairRequestPageable.fromJson(
@@ -30,15 +31,15 @@ RepairRequestModel _$RepairRequestModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$RepairRequestModelToJson(RepairRequestModel instance) =>
     <String, dynamic>{
-      'totalElements': instance.totalElements,
       'totalPages': instance.totalPages,
+      'totalElements': instance.totalElements,
       'first': instance.first,
       'last': instance.last,
+      'numberOfElements': instance.numberOfElements,
       'size': instance.size,
       'content': instance.content,
       'number': instance.number,
       'sort': instance.sort,
-      'numberOfElements': instance.numberOfElements,
       'pageable': instance.pageable,
       'empty': instance.empty,
     };

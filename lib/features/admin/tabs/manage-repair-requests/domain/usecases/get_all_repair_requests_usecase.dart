@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import '../../data/models/repair_request_model.dart';
-import '../../data/repo/repair_requests_repo.dart';
+import '../repo/repair_requests_repo.dart';
 
 @injectable
 class GetAllRepairRequestsUseCase {

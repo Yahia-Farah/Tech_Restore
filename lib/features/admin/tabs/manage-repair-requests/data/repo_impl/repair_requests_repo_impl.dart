@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
+import '../../domain/repo/repair_requests_repo.dart';
 import '../datasource/repair_requests_remote_datasource.dart';
 import '../models/repair_request_model.dart';
-import 'repair_requests_repo.dart';
 
 @Injectable(as: RepairRequestsRepo)
 class RepairRequestsRepoImpl implements RepairRequestsRepo {

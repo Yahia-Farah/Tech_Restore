@@ -2992,6 +2992,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'End Date'**
   String get end_date;
+
+  /// No description provided for @device_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Device Category'**
+  String get device_category;
+
+  /// No description provided for @delivery_method.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Method'**
+  String get delivery_method;
+
+  /// No description provided for @confirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get confirmed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

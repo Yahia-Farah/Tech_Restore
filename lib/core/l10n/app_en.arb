@@ -507,5 +507,8 @@
   "offer_name": "Offer Name",
   "discount": "Discount",
   "start_date": "Start Date",
-  "end_date": "End Date"
+  "end_date": "End Date",
+  "device_category": "Device Category",
+  "delivery_method": "Delivery Method",
+  "confirmed": "Confirmed"
 }
