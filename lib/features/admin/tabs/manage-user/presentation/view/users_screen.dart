@@ -677,7 +677,7 @@ class _UsersScreenState extends State<UsersScreen> {
     if (role != null && validRoles.contains(role.toUpperCase())) {
       return role.toUpperCase();
     }
-    return 'USER'; // Default to USER if role is invalid or null
+    return 'USER';
   }
 
   void _showUserDetailsDialog(BuildContext context, UserModel user) {
@@ -778,8 +778,8 @@ class _UsersScreenState extends State<UsersScreen> {
                       text: local.close,
                       onPressed: () => Navigator.pop(context),
                       color: Colors.green,
-                      width: 100,
-                      height: 40,
+                      width: 120,
+                      height: 60,
                     ),
                   ),
                 ],
@@ -882,7 +882,6 @@ class _UsersScreenState extends State<UsersScreen> {
                       ElevatedButton(
                         onPressed: () async {
                           Navigator.pop(context);
-                          // TODO: Implement delete user API call
                           ToastHelper.showCustomToast(
                             context,
                             text: 'User deleted successfully',

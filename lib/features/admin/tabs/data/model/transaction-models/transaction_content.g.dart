@@ -1,14 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'content_transaction_admin.dart';
+part of 'transaction_content.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ContentTransactionAdmin _$ContentTransactionAdminFromJson(
-        Map<String, dynamic> json) =>
-    ContentTransactionAdmin(
+TransactionContent _$TransactionContentFromJson(Map<String, dynamic> json) =>
+    TransactionContent(
       id: json['id'] as String?,
       amount: (json['amount'] as num?)?.toInt(),
       paymentMethod: json['paymentMethod'] as String?,
@@ -24,8 +23,7 @@ ContentTransactionAdmin _$ContentTransactionAdminFromJson(
       shopId: json['shopId'] as String?,
     );
 
-Map<String, dynamic> _$ContentTransactionAdminToJson(
-        ContentTransactionAdmin instance) =>
+Map<String, dynamic> _$TransactionContentToJson(TransactionContent instance) =>
     <String, dynamic>{
       'id': instance.id,
       'amount': instance.amount,

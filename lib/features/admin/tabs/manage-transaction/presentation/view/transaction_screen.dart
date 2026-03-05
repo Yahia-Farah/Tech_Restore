@@ -6,7 +6,7 @@ import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../../../core/widgets/toast_helper.dart';
 import '../../../../../../core/l10n/translation/app_localizations.dart';
-import '../../../data/model/transaction-models/content_transaction_admin.dart';
+import '../../../data/model/transaction-models/transaction_content.dart';
 import '../viewmodel/transactions_cubit.dart';
 import '../viewmodel/states/transactions_states.dart';
 
@@ -40,19 +40,27 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
 
   void _searchByUserId() {
     final userId = _searchController.text.trim();
-    if (userId.isEmpty) {
-      context.read<TransactionsCubit>().getAllTransactions(0);
-    } else {
-      context.read<TransactionsCubit>().getAllTransactions(0);
-    }
+    setState(() {
+      _searchQuery = userId;
+      _currentPage = 0;
+    });
+    context.read<TransactionsCubit>().getAllTransactions(_currentPage);
   }
 
   void _showAllTransactions() {
     setState(() {
       _searchQuery = "";
       _searchController.clear();
+      _currentPage = 0;
     });
-    context.read<TransactionsCubit>().getAllTransactions(0);
+    context.read<TransactionsCubit>().getAllTransactions(_currentPage);
+  }
+
+  void _loadPage(int page) {
+    setState(() {
+      _currentPage = page;
+    });
+    context.read<TransactionsCubit>().getAllTransactions(page);
   }
 
   @override
@@ -72,7 +80,7 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
           }
         },
         builder: (context, state) {
-          List<ContentTransactionAdmin> transactions = [];
+          List<TransactionContent> transactions = [];
           int totalTransactions = 0;
           double totalRevenue = 0.0;
 
@@ -80,8 +88,8 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
             final contentList = state.transactions.content;
             transactions =
                 contentList != null
-                    ? List<ContentTransactionAdmin>.from(contentList)
-                    : <ContentTransactionAdmin>[];
+                    ? List<TransactionContent>.from(contentList)
+                    : <TransactionContent>[];
             totalTransactions = state.transactions.totalElements ?? 0;
 
             totalRevenue = transactions.fold(0.0, (sum, transaction) {
@@ -432,11 +440,49 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
                     ],
                   ),
                 ),
+                // Pagination
+                if (state is TransactionsLoaded && (state.transactions.totalPages ?? 0) > 1)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: _buildPagination(
+                      state.transactions.totalPages ?? 0,
+                      local,
+                    ),
+                  ),
               ],
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildPagination(int totalPages, AppLocalizations local) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: _currentPage > 0
+              ? () => _loadPage(_currentPage - 1)
+              : null,
+          icon: const Icon(Icons.chevron_left),
+          color: AppColors.primary[70],
+        ),
+        Text(
+          '${_currentPage + 1} / $totalPages',
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        IconButton(
+          onPressed: _currentPage < totalPages - 1
+              ? () => _loadPage(_currentPage + 1)
+              : null,
+          icon: const Icon(Icons.chevron_right),
+          color: AppColors.primary[70],
+        ),
+      ],
     );
   }
 

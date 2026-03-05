@@ -101,13 +101,20 @@ class AdminRemoteDataSourceImpl implements AdminRemoteDataSource {
         '✅ [AdminRemoteDataSourceImpl] API client returned successfully. Total elements: ${result.totalElements}',
       );
       return result;
+    } on DioException catch (e) {
+      log(
+        '❌ [AdminRemoteDataSourceImpl] DioException: ${e.message}',
+      );
+      log('Response status: ${e.response?.statusCode}');
+      log('Response data: ${e.response?.data}');
+      throw Exception(_extractApiMessage(e));
     } catch (e, stackTrace) {
       log(
-        '❌ [AdminRemoteDataSourceImpl] API client call failed: $e',
+        '❌ [AdminRemoteDataSourceImpl] Unexpected error: $e',
         error: e,
         stackTrace: stackTrace,
       );
-      rethrow;
+      throw Exception('Failed to load transactions. Please try again later.');
     }
   }
 

@@ -1,31 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pagable_admin.dart';
+part of 'transaction_pageable.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PageableAdminTransaction _$PageableAdminTransactionFromJson(
-        Map<String, dynamic> json) =>
-    PageableAdminTransaction(
+TransactionPageable _$TransactionPageableFromJson(Map<String, dynamic> json) =>
+    TransactionPageable(
+      paged: json['paged'] as bool?,
       offset: (json['offset'] as num?)?.toInt(),
       sort: (json['sort'] as List<dynamic>?)
-          ?.map((e) => SortTransaction.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TransactionSort.fromJson(e as Map<String, dynamic>))
           .toList(),
-      paged: json['paged'] as bool?,
-      pageSize: (json['pageSize'] as num?)?.toInt(),
       pageNumber: (json['pageNumber'] as num?)?.toInt(),
+      pageSize: (json['pageSize'] as num?)?.toInt(),
       unpaged: json['unpaged'] as bool?,
     );
 
-Map<String, dynamic> _$PageableAdminTransactionToJson(
-        PageableAdminTransaction instance) =>
+Map<String, dynamic> _$TransactionPageableToJson(
+        TransactionPageable instance) =>
     <String, dynamic>{
+      'paged': instance.paged,
       'offset': instance.offset,
       'sort': instance.sort,
-      'paged': instance.paged,
-      'pageSize': instance.pageSize,
       'pageNumber': instance.pageNumber,
+      'pageSize': instance.pageSize,
       'unpaged': instance.unpaged,
     };

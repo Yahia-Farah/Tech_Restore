@@ -11,22 +11,21 @@ TransactionAdminModelResponse _$TransactionAdminModelResponseFromJson(
     TransactionAdminModelResponse(
       totalPages: (json['totalPages'] as num?)?.toInt(),
       totalElements: (json['totalElements'] as num?)?.toInt(),
+      first: json['first'] as bool?,
+      last: json['last'] as bool?,
+      numberOfElements: (json['numberOfElements'] as num?)?.toInt(),
       size: (json['size'] as num?)?.toInt(),
       content: (json['content'] as List<dynamic>?)
-          ?.map((e) =>
-              ContentTransactionAdmin.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TransactionContent.fromJson(e as Map<String, dynamic>))
           .toList(),
       number: (json['number'] as num?)?.toInt(),
       sort: (json['sort'] as List<dynamic>?)
-          ?.map((e) => SortTransaction.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TransactionSort.fromJson(e as Map<String, dynamic>))
           .toList(),
-      numberOfElements: (json['numberOfElements'] as num?)?.toInt(),
       pageable: json['pageable'] == null
           ? null
-          : PageableAdminTransaction.fromJson(
+          : TransactionPageable.fromJson(
               json['pageable'] as Map<String, dynamic>),
-      first: json['first'] as bool?,
-      last: json['last'] as bool?,
       empty: json['empty'] as bool?,
     );
 
@@ -35,13 +34,13 @@ Map<String, dynamic> _$TransactionAdminModelResponseToJson(
     <String, dynamic>{
       'totalPages': instance.totalPages,
       'totalElements': instance.totalElements,
+      'first': instance.first,
+      'last': instance.last,
+      'numberOfElements': instance.numberOfElements,
       'size': instance.size,
       'content': instance.content,
       'number': instance.number,
       'sort': instance.sort,
-      'numberOfElements': instance.numberOfElements,
       'pageable': instance.pageable,
-      'first': instance.first,
-      'last': instance.last,
       'empty': instance.empty,
     };

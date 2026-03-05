@@ -176,36 +176,6 @@ class _MainLayoutState extends State<AdminLayout> {
         backgroundColor: Colors.white,
         elevation: 1,
         iconTheme: const IconThemeData(color: Colors.black),
-        actions: [
-          Stack(
-            children: [
-              IconButton(
-                iconSize: 32,
-                icon: const Icon(
-                  Icons.notifications_none,
-                  color: AppColors.primary,
-                ),
-                onPressed: () {},
-              ),
-              Positioned(
-                right: 8,
-                top: 3,
-                child: Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Text(
-                    "3",
-                    style: TextStyle(color: Colors.white, fontSize: 11),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(width: 10),
-        ],
       ),
       drawer: AdminDrawerWidget(
         onItemTapped: _onItemTapped,

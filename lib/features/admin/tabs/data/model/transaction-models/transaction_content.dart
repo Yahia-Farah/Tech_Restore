@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'content_transaction_admin.g.dart';
+part 'transaction_content.g.dart';
 
 @JsonSerializable()
-class ContentTransactionAdmin {
+class TransactionContent {
   @JsonKey(name: "id")
   final String? id;
   @JsonKey(name: "amount")
@@ -31,7 +31,7 @@ class ContentTransactionAdmin {
   @JsonKey(name: "shopId")
   final String? shopId;
 
-  ContentTransactionAdmin({
+  TransactionContent({
     this.id,
     this.amount,
     this.paymentMethod,
@@ -47,11 +47,11 @@ class ContentTransactionAdmin {
     this.shopId,
   });
 
-  factory ContentTransactionAdmin.fromJson(Map<String, dynamic> json) {
-    return _$ContentTransactionAdminFromJson(json);
+  factory TransactionContent.fromJson(Map<String, dynamic> json) {
+    return _$TransactionContentFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$ContentTransactionAdminToJson(this);
+    return _$TransactionContentToJson(this);
   }
 }
