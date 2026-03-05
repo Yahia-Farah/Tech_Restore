@@ -228,46 +228,7 @@ class _AdminRepairRequestsScreenState extends State<AdminRepairRequestsScreen> {
                   setState(() => _searchQuery = value);
                 },
               ),
-              const SizedBox(height: 12),
-              // Filter dropdown - full width
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                decoration: BoxDecoration(
-                  color: AppColors.grey,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: _statusFilter,
-                    hint: Text(l10n.status_filter),
-                    isExpanded: true,
-                    items: [
-                      DropdownMenuItem(
-                        value: "all",
-                        child: Text(l10n.all),
-                      ),
-                      DropdownMenuItem(
-                        value: "pending",
-                        child: Text(l10n.pending),
-                      ),
-                      DropdownMenuItem(
-                        value: "in_progress",
-                        child: Text(l10n.status_in_progress),
-                      ),
-                      DropdownMenuItem(
-                        value: "completed",
-                        child: Text(l10n.completed),
-                      ),
-                    ],
-                    onChanged: (value) {
-                      setState(() => _statusFilter = value ?? "all");
-                      _currentPage = 0;
-                      _loadData();
-                    },
-                  ),
-                ),
-              ),
+              const SizedBox(height: 12), // Filter dropdown - full width
             ],
           );
         } else {
