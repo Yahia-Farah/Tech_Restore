@@ -11,3 +11,4 @@ class SuspendShopUseCase {
     return await _repository.suspendShop(shopId);
   }
 }
+

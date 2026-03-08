@@ -448,11 +448,11 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
     }
 
     return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      elevation: 2,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 2,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -772,9 +772,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                     color: Colors.white,
                   ),
                   child: SingleChildScrollView(
-                    child: Column(
+                      child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                        children: [
                         // Shop Information Header with Copy Button
                         Container(
                           padding: const EdgeInsets.all(16),
@@ -839,9 +839,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
                         
                         // Timestamps
                         _buildTimestamps(shop, l10n),
-                      ],
-                    ),
-                  ),
+                                    ],
+                                  ),
+                                ),
                 ),
               ),
               // Footer
@@ -879,9 +879,9 @@ class _AdminRepairScreenState extends State<AdminRepairScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
+              ),
+            );
+          }
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(
@@ -1347,8 +1347,8 @@ Updated: ${shop.updatedAt ?? 'N/A'}
     return IntrinsicWidth(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: bg,
+      decoration: BoxDecoration(
+        color: bg,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Text(

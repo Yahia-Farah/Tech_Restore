@@ -436,7 +436,7 @@ class _AdminTransactionsScreenState extends State<AdminTransactionsScreen> {
                               ],
                             ),
                           );
-                        }).toList(),
+                        }),
                     ],
                   ),
                 ),

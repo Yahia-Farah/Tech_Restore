@@ -11,3 +11,4 @@ class ApproveShopUseCase {
     return await _repository.approveShop(shopId);
   }
 }
+

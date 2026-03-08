@@ -11,3 +11,4 @@ class DeactivateUserUseCase {
     return await _adminRepo.deactivateUser(userId);
   }
 }
+
