@@ -91,6 +91,8 @@ import '../../features/auth/logout/viewmodel/logout_viewmodel.dart' as _i71;
 import '../../features/shop/data/data_source/shop_remote_datasource.dart'
     as _i622;
 import '../../features/shop/data/repositories/shop_repository.dart' as _i57;
+import '../../features/shop/presentation/viewmodel/dashboard_cubit.dart'
+    as _i799;
 import '../../features/shop/presentation/viewmodel/notifications_cubit.dart'
     as _i335;
 import '../../features/shop/presentation/viewmodel/shop_chat_cubit.dart'
@@ -115,6 +117,12 @@ import '../../features/user/explore/data/repositories/user_explore_repository.da
     as _i625;
 import '../../features/user/explore/presentation/viewmodel/user_explore_cubit.dart'
     as _i81;
+import '../../features/user/home/data/data_source/home_remote_datasource.dart'
+    as _i181;
+import '../../features/user/home/data/repositories/home_repository.dart'
+    as _i584;
+import '../../features/user/home/presentation/viewmodel/device_type_cubit.dart'
+    as _i897;
 import '../../features/user/orders/data/data_source/user_orders_remote_datasource.dart'
     as _i893;
 import '../../features/user/orders/data/repositories/user_orders_repository.dart'
@@ -152,6 +160,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => dioModule.dio(gh<String>(instanceName: 'baseurl')));
     gh.factory<_i336.UserChatRemoteDataSource>(
         () => _i336.UserChatRemoteDataSourceImpl(gh<_i361.Dio>()));
+    gh.lazySingleton<_i181.HomeRemoteDataSource>(
+        () => _i181.HomeRemoteDataSource(gh<_i361.Dio>()));
     gh.factory<_i364.ApiClient>(() => _i364.ApiClient(
           gh<_i361.Dio>(),
           baseUrl: gh<String>(instanceName: 'baseurl'),
@@ -219,11 +229,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i80.AdminStatsCubit(gh<_i902.AdminStatesUseCase>()));
     gh.lazySingleton<_i890.ProfileRepository>(
         () => _i890.ProfileRepository(gh<_i904.ProfileRemoteDataSource>()));
+    gh.factory<_i584.HomeRepository>(
+        () => _i584.HomeRepository(gh<_i181.HomeRemoteDataSource>()));
     gh.lazySingleton<_i170.AuthRepository>(
         () => _i279.AuthRepositoryImpl(gh<_i24.AuthRemoteDataSource>()));
     gh.factory<_i625.UserExploreRepository>(() =>
         _i625.UserExploreRepositoryImpl(
             gh<_i874.UserExploreRemoteDataSource>()));
+    gh.factory<_i799.DashboardCubit>(
+        () => _i799.DashboardCubit(gh<_i57.ShopRepository>()));
     gh.factory<_i335.NotificationsCubit>(
         () => _i335.NotificationsCubit(gh<_i57.ShopRepository>()));
     gh.factory<_i453.ShopChatCubit>(
@@ -238,6 +252,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i63.GetShopsRepository(gh<_i392.GetShopsRemoteDataSource>()));
     gh.factory<_i518.UserOrdersCubit>(
         () => _i518.UserOrdersCubit(gh<_i961.UserOrdersRepository>()));
+    gh.factory<_i897.DeviceTypeCubit>(
+        () => _i897.DeviceTypeCubit(gh<_i584.HomeRepository>()));
     gh.factory<_i48.LogoutUseCase>(
         () => _i48.LogoutUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i30.VerifyEmailUseCase>(

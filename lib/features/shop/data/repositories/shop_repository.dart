@@ -17,6 +17,8 @@ import '../models/transactions/financial_report_model.dart';
 import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
 import '../models/chats/chat_message_model.dart';
 import '../models/notifications/notification_model.dart';
+import '../models/dashboard/date_range_request.dart';
+import '../models/dashboard/dashboard_stats_model.dart';
 
 @lazySingleton
 class ShopRepository {
@@ -292,6 +294,47 @@ class ShopRepository {
       return await _remoteDataSource.getFinancialReport();
     } catch (e) {
       throw Exception('Failed to get financial report: ${e.toString()}');
+    }
+  }
+
+  // Dashboard
+  Future<int> getDashboardRepairsTotal() async {
+    try {
+      return await _remoteDataSource.getDashboardRepairsTotal();
+    } catch (e) {
+      throw Exception('Failed to get dashboard repairs total: ${e.toString()}');
+    }
+  }
+
+  Future<int> getDashboardSalesTotal(DateRangeRequest request) async {
+    try {
+      return await _remoteDataSource.getDashboardSalesTotal(request);
+    } catch (e) {
+      throw Exception('Failed to get dashboard sales total: ${e.toString()}');
+    }
+  }
+
+  Future<int> getDashboardOrdersTotal(DateRangeRequest request) async {
+    try {
+      return await _remoteDataSource.getDashboardOrdersTotal(request);
+    } catch (e) {
+      throw Exception('Failed to get dashboard orders total: ${e.toString()}');
+    }
+  }
+
+  Future<DashboardStatsModel> getDashboardSalesStats() async {
+    try {
+      return await _remoteDataSource.getDashboardSalesStats();
+    } catch (e) {
+      throw Exception('Failed to get dashboard sales stats: ${e.toString()}');
+    }
+  }
+
+  Future<DashboardStatsModel> getDashboardRepairsStats() async {
+    try {
+      return await _remoteDataSource.getDashboardRepairsStats();
+    } catch (e) {
+      throw Exception('Failed to get dashboard repairs stats: ${e.toString()}');
     }
   }
 }

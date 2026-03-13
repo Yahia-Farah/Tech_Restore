@@ -17,6 +17,8 @@ import 'package:tech_restore/features/shop/data/models/products/add_product_requ
 import 'package:tech_restore/features/shop/data/models/products/get_all_products_model.dart';
 import 'package:tech_restore/features/shop/data/models/products/total_elements_response.dart';
 import 'package:tech_restore/features/shop/data/models/products/product_model.dart';
+import 'package:tech_restore/features/shop/data/models/dashboard/date_range_request.dart';
+import 'package:tech_restore/features/shop/data/models/dashboard/dashboard_stats_model.dart';
 import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
 import '../../../features/admin/tabs/manage-user/data/models/user_model_response.dart';
 import '../../../features/admin/tabs/manage-user/data/models/update_user_role_request.dart';
@@ -320,6 +322,27 @@ abstract class ApiClient {
   @GET(ApiEndPoints.getFinancialReport)
   @Extra({'auth': true})
   Future<FinancialReportModel> getFinancialReport();
+
+  // Dashboard
+  @GET(ApiEndPoints.getDashboardRepairsTotal)
+  @Extra({'auth': true})
+  Future<int> getDashboardRepairsTotal();
+
+  @POST(ApiEndPoints.getDashboardSalesTotal)
+  @Extra({'auth': true})
+  Future<int> getDashboardSalesTotal(@Body() DateRangeRequest request);
+
+  @POST(ApiEndPoints.getDashboardOrdersTotal)
+  @Extra({'auth': true})
+  Future<int> getDashboardOrdersTotal(@Body() DateRangeRequest request);
+
+  @GET(ApiEndPoints.getDashboardSalesStats)
+  @Extra({'auth': true})
+  Future<DashboardStatsModel> getDashboardSalesStats();
+
+  @GET(ApiEndPoints.getDashboardRepairsStats)
+  @Extra({'auth': true})
+  Future<DashboardStatsModel> getDashboardRepairsStats();
 
   // User Addresses
   @GET(ApiEndPoints.getUserAddresses)

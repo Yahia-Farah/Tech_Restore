@@ -10,6 +10,8 @@ import 'package:tech_restore/features/shop/data/models/profile/update_profile_re
 import 'package:tech_restore/features/shop/data/models/orders/get_all_orders_model.dart';
 import 'package:tech_restore/features/shop/data/models/orders/order_status_request.dart';
 import 'package:tech_restore/features/shop/data/models/transactions/financial_report_model.dart';
+import 'package:tech_restore/features/shop/data/models/dashboard/date_range_request.dart';
+import 'package:tech_restore/features/shop/data/models/dashboard/dashboard_stats_model.dart';
 import '../models/offers/offer_request.dart';
 import '../models/offers/offer_response.dart';
 import '../models/chats/chat_session_model.dart' hide ChatMessageModel;
@@ -165,5 +167,26 @@ class ShopRemoteDataSource {
 
   Future<FinancialReportModel> getFinancialReport() async {
     return await _apiClient.getFinancialReport();
+  }
+
+  // Dashboard
+  Future<int> getDashboardRepairsTotal() async {
+    return await _apiClient.getDashboardRepairsTotal();
+  }
+
+  Future<int> getDashboardSalesTotal(DateRangeRequest request) async {
+    return await _apiClient.getDashboardSalesTotal(request);
+  }
+
+  Future<int> getDashboardOrdersTotal(DateRangeRequest request) async {
+    return await _apiClient.getDashboardOrdersTotal(request);
+  }
+
+  Future<DashboardStatsModel> getDashboardSalesStats() async {
+    return await _apiClient.getDashboardSalesStats();
+  }
+
+  Future<DashboardStatsModel> getDashboardRepairsStats() async {
+    return await _apiClient.getDashboardRepairsStats();
   }
 }

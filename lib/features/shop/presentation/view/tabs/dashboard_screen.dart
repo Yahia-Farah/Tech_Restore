@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:async';
 import '../../../../../core/l10n/translation/app_localizations.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/config/di.dart';
+import '../../../data/repositories/shop_repository.dart';
+import '../../viewmodel/dashboard_cubit.dart';
+import '../../viewmodel/dashboard_state.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create:
+          (context) =>
+              DashboardCubit(getIt<ShopRepository>())..loadDashboardData(),
+      child: const DashboardScreenContent(),
+    );
+  }
 }
 
-class _DashboardScreenState extends State<DashboardScreen>
+class DashboardScreenContent extends StatefulWidget {
+  const DashboardScreenContent({super.key});
+
+  @override
+  State<DashboardScreenContent> createState() => _DashboardScreenContentState();
+}
+
+class _DashboardScreenContentState extends State<DashboardScreenContent>
     with SingleTickerProviderStateMixin {
   DateTime? _startDate;
   DateTime? _endDate;
@@ -19,27 +38,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   Timer? _scrollTimer;
   bool _isScrollingRight = true;
   bool _isUserScrolling = false;
-
-  // Sample data for charts
-  final List<SalesData> _salesData = [
-    SalesData(day: 0, value: 2500),
-    SalesData(day: 1, value: 1500),
-    SalesData(day: 2, value: 10000),
-    SalesData(day: 3, value: 4000),
-    SalesData(day: 4, value: 5000),
-    SalesData(day: 5, value: 3800),
-    SalesData(day: 6, value: 4200),
-  ];
-
-  final List<RepairData> _repairData = [
-    RepairData(day: 0, value: 11),
-    RepairData(day: 1, value: 19),
-    RepairData(day: 2, value: 15),
-    RepairData(day: 3, value: 22),
-    RepairData(day: 4, value: 18),
-    RepairData(day: 5, value: 14),
-    RepairData(day: 6, value: 20),
-  ];
 
   String _getCurrency(AppLocalizations local) {
     final locale = Localizations.localeOf(context);
@@ -67,8 +65,8 @@ class _DashboardScreenState extends State<DashboardScreen>
     }
   }
 
-  Future<void> _selectDate(BuildContext context, bool isStartDate) async {
-    final DateTime? picked = await showDatePicker(
+  Future<void> _selectDateTime(BuildContext context, bool isStartDate) async {
+    final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate:
           isStartDate
@@ -77,25 +75,36 @@ class _DashboardScreenState extends State<DashboardScreen>
       firstDate: DateTime(2020),
       lastDate: DateTime(2030),
     );
-    if (picked != null) {
-      setState(() {
-        if (isStartDate) {
-          _startDate = picked;
-        } else {
-          _endDate = picked;
-        }
-      });
+
+    if (pickedDate != null && mounted) {
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: 0, minute: 0),
+      );
+
+      if (pickedTime != null && mounted) {
+        final DateTime selectedDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+
+        setState(() {
+          if (isStartDate) {
+            _startDate = selectedDateTime;
+          } else {
+            _endDate = selectedDateTime;
+          }
+        });
+      }
     }
   }
 
-  String _formatDate(DateTime? date, AppLocalizations local) {
-    if (date == null) return 'dd/mm/yyyy --:--';
-    final locale = Localizations.localeOf(context);
-    if (locale.languageCode == 'ar') {
-      return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year} --:--';
-    } else {
-      return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year} --:--';
-    }
+  String _formatDateTime(DateTime? date, AppLocalizations local) {
+    if (date == null) return 'dd/mm/yyyy HH:mm';
+    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -172,22 +181,70 @@ class _DashboardScreenState extends State<DashboardScreen>
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(local, isRTL),
-              const SizedBox(height: 24),
-              _buildDateFilter(local, isRTL),
-              const SizedBox(height: 24),
-              _buildKPICards(local, isRTL),
-              const SizedBox(height: 24),
-              _buildCharts(local, isRTL),
-            ],
-          ),
-        ),
+      body: BlocBuilder<DashboardCubit, DashboardState>(
+        builder: (context, state) {
+          return RefreshIndicator(
+            onRefresh:
+                () => context.read<DashboardCubit>().refreshDashboard(
+                  startDate: _startDate,
+                  endDate: _endDate,
+                ),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeader(local, isRTL),
+                    const SizedBox(height: 24),
+                    _buildDateFilter(local, isRTL),
+                    const SizedBox(height: 24),
+                    if (state is DashboardLoading)
+                      const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(32.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    else if (state is DashboardError)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(32.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                state.message,
+                                style: const TextStyle(color: Colors.red),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed:
+                                    () => context
+                                        .read<DashboardCubit>()
+                                        .loadDashboardData(
+                                          startDate: _startDate,
+                                          endDate: _endDate,
+                                        ),
+                                child: const Text('Retry'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    else if (state is DashboardLoaded) ...[
+                      _buildKPICards(local, isRTL, state),
+                      const SizedBox(height: 24),
+                      _buildCharts(local, isRTL, state),
+                    ] else
+                      _buildKPICards(local, isRTL, null),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -231,61 +288,103 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   Widget _buildDateFilter(AppLocalizations local, bool isRTL) {
-    return Row(
-      textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+    return Column(
       children: [
-        Expanded(
-          child: _buildDateField(
-            label: local.endDate,
-            date: _endDate,
-            onTap: () => _selectDate(context, false),
-            isRTL: isRTL,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _buildDateField(
-            label: local.startDate,
-            date: _startDate,
-            onTap: () => _selectDate(context, true),
-            isRTL: isRTL,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Padding(
-          padding: const EdgeInsets.only(top: 30.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(8),
+        Row(
+          textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+          children: [
+            Expanded(
+              child: _buildDateField(
+                label: local.endDate,
+                date: _endDate,
+                onTap: () => _selectDateTime(context, false),
+                isRTL: isRTL,
+              ),
             ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    _startDate = null;
-                    _endDate = null;
-                  });
-                },
-                borderRadius: BorderRadius.circular(8),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 14,
-                  ),
-                  child: Text(
-                    local.reset,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildDateField(
+                label: local.startDate,
+                date: _startDate,
+                onTap: () => _selectDateTime(context, true),
+                isRTL: isRTL,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      if (_startDate != null && _endDate != null) {
+                        context.read<DashboardCubit>().loadDashboardData(
+                          startDate: _startDate,
+                          endDate: _endDate,
+                        );
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(8),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      child: Text(
+                        'Apply',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _startDate = null;
+                        _endDate = null;
+                      });
+                      context.read<DashboardCubit>().loadDashboardData();
+                    },
+                    borderRadius: BorderRadius.circular(8),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      child: Text(
+                        local.reset,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -327,7 +426,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               children: [
                 Expanded(
                   child: Text(
-                    _formatDate(date, local),
+                    _formatDateTime(date, local),
                     style: TextStyle(
                       fontSize: 14,
                       color: date == null ? Colors.grey[400] : Colors.black87,
@@ -344,7 +443,11 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  Widget _buildKPICards(AppLocalizations local, bool isRTL) {
+  Widget _buildKPICards(
+    AppLocalizations local,
+    bool isRTL,
+    DashboardLoaded? state,
+  ) {
     final currency = _getCurrency(local);
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = (screenWidth - 24) / 3;
@@ -382,7 +485,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               height: 130,
               child: _buildKPICard(
                 title: local.totalSales,
-                value: '0 $currency',
+                value: '${state?.totalSales ?? 0} $currency',
                 isRTL: isRTL,
               ),
             ),
@@ -392,8 +495,9 @@ class _DashboardScreenState extends State<DashboardScreen>
               height: 130,
               child: _buildKPICard(
                 title: local.todaysSales,
-                value: '0 $currency',
-                secondaryValue: '$currency ${local.yesterday}: 0',
+                value: '${state?.salesStats.totalSales ?? 0} $currency',
+                secondaryValue:
+                    '$currency ${local.yesterday}: ${state?.salesStats.previousDaySales ?? 0}',
                 isRTL: isRTL,
               ),
             ),
@@ -403,7 +507,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               height: 130,
               child: _buildKPICard(
                 title: local.totalOrders,
-                value: '0',
+                value: '${state?.totalOrders ?? 0}',
                 isRTL: isRTL,
               ),
             ),
@@ -413,8 +517,9 @@ class _DashboardScreenState extends State<DashboardScreen>
               height: 130,
               child: _buildKPICard(
                 title: local.todaysRepairs,
-                value: '0',
-                secondaryValue: '${local.yesterday}: 0',
+                value: '${state?.repairsStats.totalSales ?? 0}',
+                secondaryValue:
+                    '${local.yesterday}: ${state?.repairsStats.previousDaySales ?? 0}',
                 isRTL: isRTL,
               ),
             ),
@@ -424,7 +529,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               height: 130,
               child: _buildKPICard(
                 title: local.totalRepairRequests,
-                value: '0',
+                value: '${state?.totalRepairs ?? 0}',
                 isRTL: isRTL,
               ),
             ),
@@ -495,16 +600,20 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  Widget _buildCharts(AppLocalizations local, bool isRTL) {
+  Widget _buildCharts(
+    AppLocalizations local,
+    bool isRTL,
+    DashboardLoaded state,
+  ) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 600;
 
     if (isSmallScreen) {
       return Column(
         children: [
-          _buildSalesChart(local, isRTL),
+          _buildSalesChart(local, isRTL, state),
           const SizedBox(height: 12),
-          _buildRepairsChart(local, isRTL),
+          _buildRepairsChart(local, isRTL, state),
         ],
       );
     }
@@ -512,19 +621,53 @@ class _DashboardScreenState extends State<DashboardScreen>
     return Row(
       textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
       children: [
-        Expanded(child: _buildSalesChart(local, isRTL)),
+        Expanded(child: _buildSalesChart(local, isRTL, state)),
         const SizedBox(width: 12),
-        Expanded(child: _buildRepairsChart(local, isRTL)),
+        Expanded(child: _buildRepairsChart(local, isRTL, state)),
       ],
     );
   }
 
-  Widget _buildSalesChart(AppLocalizations local, bool isRTL) {
-    final last4DaysSales = _salesData.sublist(_salesData.length - 4);
-    final maxSalesValue = last4DaysSales
-        .map((e) => e.value)
+  Widget _buildSalesChart(
+    AppLocalizations local,
+    bool isRTL,
+    DashboardLoaded state,
+  ) {
+    // Use real data from API
+    final chartData = state.salesChartData;
+
+    if (chartData.isEmpty) {
+      return Card(
+        color: AppColors.white,
+        elevation: 1,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(
+                local.salesTrendWeekly,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 50),
+              const Text('No data available'),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final maxSalesValue = chartData
+        .map((e) => e.totalSales)
         .reduce((a, b) => a > b ? a : b);
-    final chartMaxY = ((maxSalesValue / 1000).ceil() * 1000).toDouble();
+    final chartMaxY =
+        maxSalesValue > 0
+            ? ((maxSalesValue / 1000).ceil() * 1000).toDouble()
+            : 100.0;
 
     return Card(
       color: AppColors.white,
@@ -587,9 +730,14 @@ class _DashboardScreenState extends State<DashboardScreen>
                           interval: 1,
                           getTitlesWidget: (value, meta) {
                             if (value.toInt() >= 0 &&
-                                value.toInt() < last4DaysSales.length) {
-                              final dayIndex =
-                                  last4DaysSales[value.toInt()].day;
+                                value.toInt() < chartData.length) {
+                              // Calculate day index (0=Sunday, 6=Saturday)
+                              final now = DateTime.now();
+                              final daysAgo = 3 - value.toInt();
+                              final date = now.subtract(
+                                Duration(days: daysAgo),
+                              );
+                              final dayIndex = date.weekday % 7;
                               final dayName = _getDayName(dayIndex, local);
                               return Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
@@ -619,10 +767,10 @@ class _DashboardScreenState extends State<DashboardScreen>
                     lineBarsData: [
                       LineChartBarData(
                         spots:
-                            last4DaysSales.asMap().entries.map((entry) {
+                            chartData.asMap().entries.map((entry) {
                               return FlSpot(
                                 entry.key.toDouble(),
-                                entry.value.value.toDouble(),
+                                entry.value.totalSales.toDouble(),
                               );
                             }).toList(),
                         isCurved: true,
@@ -669,12 +817,46 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  Widget _buildRepairsChart(AppLocalizations local, bool isRTL) {
-    final last4DaysRepairs = _repairData.sublist(_repairData.length - 4);
-    final maxRepairsValue = last4DaysRepairs
-        .map((e) => e.value)
+  Widget _buildRepairsChart(
+    AppLocalizations local,
+    bool isRTL,
+    DashboardLoaded state,
+  ) {
+    // Use real data from API
+    final chartData = state.repairsChartData;
+
+    if (chartData.isEmpty) {
+      return Card(
+        color: AppColors.white,
+        elevation: 1,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(
+                local.repairsTrendWeekly,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 50),
+              const Text('No data available'),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final maxRepairsValue = chartData
+        .map((e) => e.totalSales)
         .reduce((a, b) => a > b ? a : b);
-    final chartMaxY = ((maxRepairsValue / 5).ceil() * 5).toDouble();
+    final chartMaxY =
+        maxRepairsValue > 0
+            ? ((maxRepairsValue / 5).ceil() * 5).toDouble()
+            : 10.0;
 
     return Card(
       color: AppColors.white,
@@ -737,9 +919,14 @@ class _DashboardScreenState extends State<DashboardScreen>
                           interval: 1,
                           getTitlesWidget: (value, meta) {
                             if (value.toInt() >= 0 &&
-                                value.toInt() < last4DaysRepairs.length) {
-                              final dayIndex =
-                                  last4DaysRepairs[value.toInt()].day;
+                                value.toInt() < chartData.length) {
+                              // Calculate day index (0=Sunday, 6=Saturday)
+                              final now = DateTime.now();
+                              final daysAgo = 3 - value.toInt();
+                              final date = now.subtract(
+                                Duration(days: daysAgo),
+                              );
+                              final dayIndex = date.weekday % 7;
                               final dayName = _getDayName(dayIndex, local);
                               return Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
@@ -767,12 +954,12 @@ class _DashboardScreenState extends State<DashboardScreen>
                     ),
                     borderData: FlBorderData(show: false),
                     barGroups:
-                        last4DaysRepairs.asMap().entries.map((entry) {
+                        chartData.asMap().entries.map((entry) {
                           return BarChartGroupData(
                             x: entry.key,
                             barRods: [
                               BarChartRodData(
-                                toY: entry.value.value.toDouble(),
+                                toY: entry.value.totalSales.toDouble(),
                                 color: const Color(0xFF2EC4B6),
                                 width: 20,
                                 borderRadius: const BorderRadius.vertical(
@@ -788,23 +975,30 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ),
             ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment:
+                  isRTL ? MainAxisAlignment.start : MainAxisAlignment.end,
+              textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+              children: [
+                Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF2EC4B6),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  local.totalRepairRequests,
+                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-class SalesData {
-  final int day;
-  final int value;
-
-  SalesData({required this.day, required this.value});
-}
-
-class RepairData {
-  final int day;
-  final int value;
-
-  RepairData({required this.day, required this.value});
 }

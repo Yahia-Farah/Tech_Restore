@@ -71,6 +71,15 @@ abstract class ApiEndPoints {
       'shops/orders/control/{orderId}/status';
   static const String getFinancialReport = 'shops/payments/financial-report';
 
+  // Dashboard
+  static const String getDashboardRepairsTotal =
+      'shops/dashboard/repairs/total';
+  static const String getDashboardSalesTotal = 'shops/dashboard/sales/total';
+  static const String getDashboardOrdersTotal = 'shops/dashboard/orders/total';
+  static const String getDashboardSalesStats = 'shops/dashboard/sales/stats';
+  static const String getDashboardRepairsStats =
+      'shops/dashboard/repairs/stats';
+
   static const String getMyChatSessions = 'chats/my/sessions';
   static const String getChatMessages = 'chats';
   static const String markMessagesAsRead = 'chats';
@@ -93,6 +102,7 @@ abstract class ApiEndPoints {
   static const String getAllShopsUser = 'users/shops/all';
   static const String getAllDevices = 'products';
   static const String getCategories = 'categories';
+  static const String getCategoriesPageable = 'categories';
   static const String getShopById = 'shops/{shopId}';
   static const String getProductsByShop = 'products/shop/{shopId}';
   static const String getProductsByShopAndCategory =
