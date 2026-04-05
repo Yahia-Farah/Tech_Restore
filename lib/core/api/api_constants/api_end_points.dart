@@ -108,6 +108,13 @@ abstract class ApiEndPoints {
   static const String getProductsByShopAndCategory =
       'products/{shopId}/{categoryId}';
 
+  // Cart
+  static const String getCart = 'cart';
+  static const String addCartItem = 'cart/items';
+  static const String updateCartItem = 'cart/items/{itemId}';
+  static const String removeCartItem = 'cart/items/{itemId}';
+  static const String clearCart = 'cart';
+
   // Reviews
   static const String getShopReviews = 'reviews/{shopId}/reviews';
   static const String addReview = 'reviews/{shopId}';

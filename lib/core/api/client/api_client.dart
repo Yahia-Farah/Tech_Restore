@@ -44,6 +44,8 @@ import 'package:tech_restore/features/shop/data/models/chats/chat_message_model.
 import 'package:tech_restore/features/shop/data/models/notifications/notification_model.dart';
 import '../../../features/shop/data/models/products/get_all_category_model.dart';
 import '../../../features/user/profile/data/models/profile_response.dart';
+import '../../../features/user/cart/data/models/cart_model.dart';
+import '../../../features/user/cart/data/models/add_cart_item_request.dart';
 import '../api_constants/api_end_points.dart';
 
 part 'api_client.g.dart';
@@ -430,4 +432,38 @@ abstract class ApiClient {
   @DELETE(ApiEndPoints.deleteReview)
   @Extra({'auth': true})
   Future<dynamic> deleteReview(@Path('id') String reviewId);
+
+  // Cart
+  @GET(ApiEndPoints.getCart)
+  @Extra({'auth': true})
+  Future<CartModel> getCart(@Query('page') int page, @Query('size') int size);
+
+  @POST(ApiEndPoints.addCartItem)
+  @Extra({'auth': true})
+  Future<CartModel> addCartItem(
+    @Body() AddCartItemRequest request,
+    @Query('page') int page,
+    @Query('size') int size,
+  );
+
+  @PUT(ApiEndPoints.updateCartItem)
+  @Extra({'auth': true})
+  Future<CartModel> updateCartItem(
+    @Path('itemId') String itemId,
+    @Body() AddCartItemRequest request,
+    @Query('page') int page,
+    @Query('size') int size,
+  );
+
+  @DELETE(ApiEndPoints.removeCartItem)
+  @Extra({'auth': true})
+  Future<CartModel> removeCartItem(
+    @Path('itemId') String itemId,
+    @Query('page') int page,
+    @Query('size') int size,
+  );
+
+  @DELETE(ApiEndPoints.clearCart)
+  @Extra({'auth': true})
+  Future<void> clearCart();
 }

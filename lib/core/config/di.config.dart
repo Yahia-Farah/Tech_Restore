@@ -105,6 +105,12 @@ import '../../features/user/addresses/data/repositories/user_addresses_repositor
     as _i912;
 import '../../features/user/addresses/presentation/viewmodel/user_addresses_cubit.dart'
     as _i593;
+import '../../features/user/cart/data/data_source/cart_remote_datasource.dart'
+    as _i950;
+import '../../features/user/cart/data/repositories/cart_repository.dart'
+    as _i676;
+import '../../features/user/cart/presentation/viewmodel/cart_cubit.dart'
+    as _i519;
 import '../../features/user/chat/data/data_source/user_chat_remote_datasource.dart'
     as _i336;
 import '../../features/user/chat/data/repositories/user_chat_repository.dart'
@@ -188,6 +194,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i874.UserExploreRemoteDataSourceImpl(gh<_i364.ApiClient>()));
     gh.factory<_i366.UserAddressesRemoteDataSource>(
         () => _i366.UserAddressesRemoteDataSourceImpl(gh<_i364.ApiClient>()));
+    gh.factory<_i950.CartRemoteDataSource>(
+        () => _i950.CartRemoteDataSourceImpl(gh<_i364.ApiClient>()));
     gh.lazySingleton<_i57.ShopRepository>(
         () => _i57.ShopRepository(gh<_i622.ShopRemoteDataSource>()));
     gh.factory<_i365.UserChatRepository>(() =>
@@ -246,6 +254,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i225.TransactionsCubit(gh<_i57.ShopRepository>()));
     gh.factory<_i961.UserOrdersRepository>(() =>
         _i961.UserOrdersRepositoryImpl(gh<_i893.UserOrdersRemoteDataSource>()));
+    gh.factory<_i676.CartRepository>(
+        () => _i676.CartRepositoryImpl(gh<_i950.CartRemoteDataSource>()));
     gh.lazySingleton<_i680.GetUserRepository>(
         () => _i680.GetUserRepository(gh<_i508.GetUserRemoteDataSource>()));
     gh.lazySingleton<_i63.GetShopsRepository>(
@@ -282,6 +292,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1037.SignUpUseCase(gh<_i170.AuthRepository>()));
     gh.factory<_i593.UserAddressesCubit>(
         () => _i593.UserAddressesCubit(gh<_i912.UserAddressesRepository>()));
+    gh.factory<_i519.CartCubit>(
+        () => _i519.CartCubit(gh<_i676.CartRepository>()));
     gh.factory<_i81.UserExploreCubit>(
         () => _i81.UserExploreCubit(gh<_i625.UserExploreRepository>()));
     gh.factory<_i327.EditProfileCubit>(

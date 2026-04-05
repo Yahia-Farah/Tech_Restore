@@ -8,6 +8,8 @@ import '../../../explore/presentation/viewmodel/user_explore_state.dart';
 import '../../../explore/data/models/shop_model.dart';
 import '../../../explore/data/models/device_model.dart';
 import '../../../explore/data/models/category_model.dart';
+import '../../../cart/presentation/viewmodel/cart_cubit.dart';
+import '../../../cart/presentation/viewmodel/cart_state.dart';
 
 class Exploretab extends StatefulWidget {
   const Exploretab({super.key});
@@ -22,14 +24,17 @@ class _ExploretabState extends State<Exploretab>
   String? _selectedCategory;
   String? _selectedCondition;
   late UserExploreCubit _cubit;
+  late CartCubit _cartCubit;
   final TextEditingController _shopsSearchController = TextEditingController();
-  final TextEditingController _devicesSearchController = TextEditingController();
+  final TextEditingController _devicesSearchController =
+      TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _cubit = getIt<UserExploreCubit>();
+    _cartCubit = getIt<CartCubit>();
 
     // Load initial data for the first tab (shops)
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -66,25 +71,28 @@ class _ExploretabState extends State<Exploretab>
     // Filter by search query
     final searchQuery = _devicesSearchController.text.toLowerCase();
     if (searchQuery.isNotEmpty) {
-      filtered = filtered.where((device) {
-        return device.name.toLowerCase().contains(searchQuery) ||
-            device.description.toLowerCase().contains(searchQuery) ||
-            device.categoryName.toLowerCase().contains(searchQuery);
-      }).toList();
+      filtered =
+          filtered.where((device) {
+            return device.name.toLowerCase().contains(searchQuery) ||
+                device.description.toLowerCase().contains(searchQuery) ||
+                device.categoryName.toLowerCase().contains(searchQuery);
+          }).toList();
     }
 
     // Filter by category
     if (_selectedCategory != null && _selectedCategory != 'All') {
-      filtered = filtered.where((device) {
-        return device.categoryName == _selectedCategory;
-      }).toList();
+      filtered =
+          filtered.where((device) {
+            return device.categoryName == _selectedCategory;
+          }).toList();
     }
 
     // Filter by condition
     if (_selectedCondition != null && _selectedCondition != 'All') {
-      filtered = filtered.where((device) {
-        return device.condition == _selectedCondition;
-      }).toList();
+      filtered =
+          filtered.where((device) {
+            return device.condition == _selectedCondition;
+          }).toList();
     }
 
     return filtered;
@@ -102,42 +110,71 @@ class _ExploretabState extends State<Exploretab>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _cubit,
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF8FAF9),
-        appBar: AppBar(
-          title: const Text(
-            "Explore",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-              color: Colors.white,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: _cubit),
+        BlocProvider.value(value: _cartCubit),
+      ],
+      child: BlocListener<CartCubit, CartState>(
+        bloc: _cartCubit,
+        listener: (context, state) {
+          if (state is CartItemAdded) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('Item added to cart!'),
+                backgroundColor: AppColors.primary,
+                duration: const Duration(seconds: 2),
+                action: SnackBarAction(
+                  label: 'View Cart',
+                  textColor: Colors.white,
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.cart),
+                ),
+              ),
+            );
+          } else if (state is CartError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        child: Scaffold(
+          backgroundColor: const Color(0xFFF8FAF9),
+          appBar: AppBar(
+            title: const Text(
+              "Explore",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            ),
+            centerTitle: true,
+            backgroundColor: AppColors.primary,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            bottom: TabBar(
+              controller: _tabController,
+              indicatorColor: Colors.white,
+              indicatorWeight: 3,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white70,
+              labelStyle: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+              tabs: const [
+                Tab(icon: Icon(Icons.store), text: "Shops"),
+                Tab(icon: Icon(Icons.devices), text: "Devices"),
+              ],
             ),
           ),
-          centerTitle: true,
-          backgroundColor: AppColors.primary,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          bottom: TabBar(
+          body: TabBarView(
             controller: _tabController,
-            indicatorColor: Colors.white,
-            indicatorWeight: 3,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.white70,
-            labelStyle: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
-            tabs: const [
-              Tab(icon: Icon(Icons.store), text: "Shops"),
-              Tab(icon: Icon(Icons.devices), text: "Devices"),
-            ],
+            children: [_buildShopsTab(), _buildDevicesTab()],
           ),
-        ),
-        body: TabBarView(
-          controller: _tabController,
-          children: [_buildShopsTab(), _buildDevicesTab()],
         ),
       ),
     );
@@ -287,7 +324,8 @@ class _ExploretabState extends State<Exploretab>
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: filteredDevices.length + (isLoadingMore ? 2 : 0),
+                      itemCount:
+                          filteredDevices.length + (isLoadingMore ? 2 : 0),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -297,7 +335,9 @@ class _ExploretabState extends State<Exploretab>
                           ),
                       itemBuilder: (context, index) {
                         if (index >= filteredDevices.length) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
                         }
                         return _buildDeviceCard(filteredDevices[index]);
                       },
@@ -420,7 +460,10 @@ class _ExploretabState extends State<Exploretab>
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           hint: Text("Category", style: TextStyle(color: Colors.grey[600])),
-          value: categoryNames.contains(_selectedCategory) ? _selectedCategory : null,
+          value:
+              categoryNames.contains(_selectedCategory)
+                  ? _selectedCategory
+                  : null,
           isExpanded: true,
           items:
               categoryNames
@@ -705,45 +748,48 @@ class _ExploretabState extends State<Exploretab>
                   SizedBox(
                     width: double.infinity,
                     height: 32,
-                    child: ElevatedButton(
-                      onPressed:
-                          device.stock > 0
-                              ? () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      "${device.name} added to cart!",
+                    child: BlocBuilder<CartCubit, CartState>(
+                      builder: (context, cartState) {
+                        final isAdding =
+                            cartState is CartItemAdding &&
+                            cartState.productId == device.id;
+                        return ElevatedButton(
+                          onPressed:
+                              device.stock > 0 && !isAdding
+                                  ? () => _showAddToCartDialog(context, device)
+                                  : null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                device.stock > 0
+                                    ? AppColors.primary
+                                    : Colors.grey,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                          ),
+                          child:
+                              isAdding
+                                  ? const SizedBox(
+                                    width: 14,
+                                    height: 14,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: Colors.white,
                                     ),
-                                    duration: const Duration(seconds: 2),
-                                    action: SnackBarAction(
-                                      label: "View Cart",
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                          context,
-                                          AppRoutes.cart,
-                                        );
-                                      },
+                                  )
+                                  : Text(
+                                    device.stock > 0
+                                        ? "Buy Now"
+                                        : "Out of Stock",
+                                    style: const TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                );
-                              }
-                              : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            device.stock > 0 ? AppColors.primary : Colors.grey,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                      ),
-                      child: Text(
-                        device.stock > 0 ? "Buy Now" : "Out of Stock",
-                        style: const TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -752,6 +798,96 @@ class _ExploretabState extends State<Exploretab>
           ),
         ],
       ),
+    );
+  }
+
+  void _showAddToCartDialog(BuildContext context, DeviceModel device) {
+    int quantity = 1;
+    showDialog(
+      context: context,
+      builder:
+          (dialogContext) => StatefulBuilder(
+            builder:
+                (dialogContext, setDialogState) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  title: Text(
+                    device.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '${device.price.toStringAsFixed(2)} EGP',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed:
+                                quantity > 1
+                                    ? () => setDialogState(() => quantity--)
+                                    : null,
+                            icon: const Icon(Icons.remove_circle_outline),
+                            color: AppColors.primary,
+                          ),
+                          Container(
+                            width: 48,
+                            alignment: Alignment.center,
+                            child: Text(
+                              '$quantity',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed:
+                                quantity < device.stock
+                                    ? () => setDialogState(() => quantity++)
+                                    : null,
+                            icon: const Icon(Icons.add_circle_outline),
+                            color: AppColors.primary,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        'Stock: ${device.stock}',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(dialogContext),
+                      child: const Text('Cancel'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(dialogContext);
+                        _cartCubit.addItem(device.id, quantity);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Text('Add to Cart'),
+                    ),
+                  ],
+                ),
+          ),
     );
   }
 }
