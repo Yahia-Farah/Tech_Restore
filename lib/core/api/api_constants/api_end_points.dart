@@ -31,6 +31,8 @@ abstract class ApiEndPoints {
   static const String totalInventoryValue = 'shop/inventory/total-value';
   static const String exportInventoryData = 'shop/inventory/export';
   static const String getAllShops = 'admin/shops';
+  static const String approveShops = 'admin/shops/{shopId}/approve';
+  static const String suspendShops = 'admin/shops/{shopId}/suspend';
   static const String getAdminStats = 'admin/stats';
   static const String deactivateUser = 'admin/users/{userId}/deactivate';
   static const String activateUser = 'admin/users/{userId}/activate';
@@ -70,6 +72,13 @@ abstract class ApiEndPoints {
   static const String updateOrderStatus =
       'shops/orders/control/{orderId}/status';
   static const String getFinancialReport = 'shops/payments/financial-report';
+  static const String getAllReviews = 'admin/reviews';
+  static const String deleteReview = 'admin/reviews/{reviewId}';
+  static const String subscriptionWithPayment = "admin/subscriptions/subscriptions-with-payment";
+  static const String cashPending = "admin/subscriptions/cash/pending";
+  static const String adminOffers = "admin/offers";
+  static const String adminRepairRequests = "admin/repair-requests";
+  static const String adminRepairRequestsByStatus = "admin/repair-requests/status/{status}";
 
   // Dashboard
   static const String getDashboardRepairsTotal =

@@ -69,3 +69,4 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     }
   }
 }
+

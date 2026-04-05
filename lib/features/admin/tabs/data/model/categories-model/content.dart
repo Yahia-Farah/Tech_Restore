@@ -19,3 +19,4 @@ class Content {
     return _$ContentToJson(this);
   }
 }
+

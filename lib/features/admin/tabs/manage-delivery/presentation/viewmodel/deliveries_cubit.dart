@@ -39,3 +39,5 @@ class DeliveriesCubit extends Cubit<DeliveriesState> {
     getAllDeliveries(_currentPage);
   }
 }
+
+

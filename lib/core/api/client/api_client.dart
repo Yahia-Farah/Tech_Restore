@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tech_restore/features/admin/tabs/manage-shops/data/models/shop_response.dart';
+import 'package:tech_restore/features/admin/tabs/manage-reviews/data/models/review_response.dart';
 import 'package:tech_restore/features/auth/data/models/forget_password_models/verify_email_request_model.dart';
 import 'package:tech_restore/features/auth/data/models/signup_shop_models/sign_up_shop_request_model.dart';
 import 'package:tech_restore/features/shop/data/models/offers/get_all_offers_model.dart';
@@ -20,14 +21,17 @@ import 'package:tech_restore/features/shop/data/models/products/product_model.da
 import 'package:tech_restore/features/shop/data/models/dashboard/date_range_request.dart';
 import 'package:tech_restore/features/shop/data/models/dashboard/dashboard_stats_model.dart';
 import 'package:tech_restore/features/user/profile/data/models/edit_profile_request.dart';
+import '../../../features/admin/tabs/data/model/transaction-models/transaction_admin_response.dart';
 import '../../../features/admin/tabs/manage-user/data/models/user_model_response.dart';
 import '../../../features/admin/tabs/manage-user/data/models/update_user_role_request.dart';
 import '../../../features/admin/tabs/data/model/admin-states/admin_states_response.dart';
 import '../../../features/admin/tabs/data/model/categories-model/categories_model_response.dart';
 import '../../../features/admin/tabs/data/model/categories-model/categories_request.dart';
-import '../../../features/admin/tabs/data/model/transaction-models/transaction_admin_response.dart';
 import '../../../features/admin/tabs/data/model/delivery-model/delivery_admin_response.dart';
 import '../../../features/admin/tabs/data/model/delivery-model/content_delivery_admin.dart';
+import '../../../features/admin/tabs/data/model/subscription-model/subscription_response.dart';
+import '../../../features/admin/tabs/manage-offers/data/models/offer_page_model.dart';
+import '../../../features/admin/tabs/manage-repair-requests/data/models/repair_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/forget_password_request_model.dart';
 import '../../../features/auth/data/models/forget_password_models/reset_password_request_model.dart';
 import '../../../features/auth/data/models/login_models/login_request_model.dart';
@@ -257,9 +261,12 @@ abstract class ApiClient {
 
   @GET(ApiEndPoints.getDeliveriesAdminById)
   @Extra({'auth': true})
-  Future<ContentDeliveryAdmin> getDeliveryAdminById(
-    @Path('deliveryId') String deliveryId,
-  );
+  Future<ContentDeliveryAdmin> getDeliveryAdminById(@Path('deliveryId') String deliveryId);
+
+  @PUT(ApiEndPoints.approveShops)
+  @Extra({'auth': true})
+  Future<String> approveShop(@Path('shopId') String shopId);
+
 
   @GET(ApiEndPoints.getAllAddresses)
   @Extra({'auth': true})
@@ -324,6 +331,41 @@ abstract class ApiClient {
   @GET(ApiEndPoints.getFinancialReport)
   @Extra({'auth': true})
   Future<FinancialReportModel> getFinancialReport();
+
+  @PUT(ApiEndPoints.suspendShops)
+  @Extra({'auth': true})
+  Future<String> suspendShop(@Path('shopId') String shopId);
+
+  @GET(ApiEndPoints.getAllReviews)
+  @Extra({'auth': true})
+  Future<ReviewListResponse> getReviews();
+
+  @DELETE(ApiEndPoints.deleteReview)
+  @Extra({'auth': true})
+  Future<String> deleteReview(@Path('reviewId') String reviewId);
+
+  @GET(ApiEndPoints.subscriptionWithPayment)
+  @Extra({'auth': true})
+  Future<SubscriptionResponse> getAllSubscriptions(@Query('page') int page);
+
+  @GET(ApiEndPoints.cashPending)
+  @Extra({'auth': true})
+  Future<SubscriptionResponse> getPendingCashSubscriptions(@Query('page') int page);
+
+  @GET(ApiEndPoints.adminOffers)
+  @Extra({'auth': true})
+  Future<OfferPageModel> getAdminOffers(@Query('page') int page);
+
+  @GET(ApiEndPoints.adminRepairRequests)
+  @Extra({'auth': true})
+  Future<RepairRequestModel> getAdminRepairRequests(@Query('page') int page);
+
+  @GET(ApiEndPoints.adminRepairRequestsByStatus)
+  @Extra({'auth': true})
+  Future<RepairRequestModel> getAdminRepairRequestsByStatus(
+    @Path('status') String status,
+    @Query('page') int page,
+  );
 
   // Dashboard
   @GET(ApiEndPoints.getDashboardRepairsTotal)

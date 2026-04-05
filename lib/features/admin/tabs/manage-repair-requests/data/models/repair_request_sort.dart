@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'sort_transaction.g.dart';
+part 'repair_request_sort.g.dart';
 
 @JsonSerializable()
-class SortTransaction {
+class RepairRequestSort {
   @JsonKey(name: "direction")
   final String? direction;
   @JsonKey(name: "nullHandling")
@@ -15,7 +15,7 @@ class SortTransaction {
   @JsonKey(name: "ignoreCase")
   final bool? ignoreCase;
 
-  SortTransaction({
+  RepairRequestSort({
     this.direction,
     this.nullHandling,
     this.ascending,
@@ -23,11 +23,11 @@ class SortTransaction {
     this.ignoreCase,
   });
 
-  factory SortTransaction.fromJson(Map<String, dynamic> json) {
-    return _$SortTransactionFromJson(json);
+  factory RepairRequestSort.fromJson(Map<String, dynamic> json) {
+    return _$RepairRequestSortFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$SortTransactionToJson(this);
+    return _$RepairRequestSortToJson(this);
   }
 }

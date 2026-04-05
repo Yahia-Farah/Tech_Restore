@@ -2579,131 +2579,437 @@ abstract class AppLocalizations {
   /// **'Setting this as the default address will remove the default status from your current default address. Do you want to continue?'**
   String get default_address_warning;
 
-  /// No description provided for @my_addresses.
+  /// No description provided for @shops_management.
   ///
   /// In en, this message translates to:
-  /// **'My Addresses'**
-  String get my_addresses;
+  /// **'Shops Management'**
+  String get shops_management;
 
-  /// No description provided for @delete_address.
+  /// No description provided for @manage_approve_suspend_view_shop_details.
   ///
   /// In en, this message translates to:
-  /// **'Delete Address'**
-  String get delete_address;
+  /// **'Manage, approve, suspend, and view shop details'**
+  String get manage_approve_suspend_view_shop_details;
 
-  /// No description provided for @address_title.
+  /// No description provided for @filter_by_status.
   ///
   /// In en, this message translates to:
-  /// **'Address Title'**
-  String get address_title;
+  /// **'Filter by Status'**
+  String get filter_by_status;
 
-  /// No description provided for @address_title_hint.
+  /// No description provided for @all_shops.
   ///
   /// In en, this message translates to:
-  /// **'e.g., Home, Office, etc.'**
-  String get address_title_hint;
+  /// **'All Shops'**
+  String get all_shops;
 
-  /// No description provided for @full_address.
+  /// No description provided for @approved_shops.
   ///
   /// In en, this message translates to:
-  /// **'Full Address'**
-  String get full_address;
+  /// **'Approved Shops'**
+  String get approved_shops;
 
-  /// No description provided for @full_address_hint.
+  /// No description provided for @suspended_shops.
   ///
   /// In en, this message translates to:
-  /// **'Street, Building, Apartment'**
-  String get full_address_hint;
+  /// **'Suspended Shops'**
+  String get suspended_shops;
 
-  /// No description provided for @city_state.
+  /// No description provided for @shop_type.
   ///
   /// In en, this message translates to:
-  /// **'City, State'**
-  String get city_state;
+  /// **'SHOP TYPE'**
+  String get shop_type;
 
-  /// No description provided for @city_state_hint.
+  /// No description provided for @view.
   ///
   /// In en, this message translates to:
-  /// **'e.g., Cairo, Egypt'**
-  String get city_state_hint;
+  /// **'View'**
+  String get view;
 
-  /// No description provided for @special_instructions.
+  /// No description provided for @approve.
   ///
   /// In en, this message translates to:
-  /// **'Special Instructions (Optional)'**
-  String get special_instructions;
+  /// **'Approve'**
+  String get approve;
 
-  /// No description provided for @special_instructions_hint.
+  /// No description provided for @no_shops_match_filters.
   ///
   /// In en, this message translates to:
-  /// **'Delivery notes, landmarks, etc.'**
-  String get special_instructions_hint;
+  /// **'No shops match your filters'**
+  String get no_shops_match_filters;
 
-  /// No description provided for @save_address.
+  /// No description provided for @rating.
   ///
   /// In en, this message translates to:
-  /// **'Save Address'**
-  String get save_address;
+  /// **'Rating'**
+  String get rating;
 
-  /// No description provided for @update_address.
+  /// No description provided for @description.
   ///
   /// In en, this message translates to:
-  /// **'Update Address'**
-  String get update_address;
+  /// **'Description'**
+  String get description;
 
-  /// No description provided for @delete_address_confirmation.
+  /// No description provided for @data_copied_to_clipboard.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to delete this address? This action cannot be undone.'**
-  String get delete_address_confirmation;
+  /// **'Data copied to clipboard'**
+  String get data_copied_to_clipboard;
 
-  /// No description provided for @address_added_successfully.
+  /// No description provided for @suspend.
   ///
   /// In en, this message translates to:
-  /// **'Address added successfully'**
-  String get address_added_successfully;
+  /// **'Suspend'**
+  String get suspend;
 
-  /// No description provided for @address_updated_successfully.
+  /// No description provided for @shop_approved_successfully.
   ///
   /// In en, this message translates to:
-  /// **'Address updated successfully'**
-  String get address_updated_successfully;
+  /// **'Shop approved successfully'**
+  String get shop_approved_successfully;
 
-  /// No description provided for @address_deleted_successfully.
+  /// No description provided for @shop_suspended_successfully.
   ///
   /// In en, this message translates to:
-  /// **'Address deleted successfully'**
-  String get address_deleted_successfully;
+  /// **'Shop suspended successfully'**
+  String get shop_suspended_successfully;
 
-  /// No description provided for @no_addresses_found.
+  /// No description provided for @shop_approval_failed.
   ///
   /// In en, this message translates to:
-  /// **'No addresses found'**
-  String get no_addresses_found;
+  /// **'Failed to approve shop'**
+  String get shop_approval_failed;
 
-  /// No description provided for @failed_to_load_addresses.
+  /// No description provided for @shop_suspension_failed.
   ///
   /// In en, this message translates to:
-  /// **'Failed to load addresses'**
-  String get failed_to_load_addresses;
+  /// **'Failed to suspend shop'**
+  String get shop_suspension_failed;
 
-  /// No description provided for @failed_to_add_address.
+  /// No description provided for @review_management.
   ///
   /// In en, this message translates to:
-  /// **'Failed to add address'**
-  String get failed_to_add_address;
+  /// **'Review Management'**
+  String get review_management;
 
-  /// No description provided for @failed_to_update_address.
+  /// No description provided for @monitor_and_manage_customer_feedback.
   ///
   /// In en, this message translates to:
-  /// **'Failed to update address'**
-  String get failed_to_update_address;
+  /// **'Monitor and manage customer feedback'**
+  String get monitor_and_manage_customer_feedback;
 
-  /// No description provided for @failed_to_delete_address.
+  /// No description provided for @total_reviews.
   ///
   /// In en, this message translates to:
-  /// **'Failed to delete address'**
-  String get failed_to_delete_address;
+  /// **'Total Reviews'**
+  String get total_reviews;
+
+  /// No description provided for @flagged.
+  ///
+  /// In en, this message translates to:
+  /// **'Flagged'**
+  String get flagged;
+
+  /// No description provided for @search_by_customer_shop_or_comment.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by customer, shop, or comment...'**
+  String get search_by_customer_shop_or_comment;
+
+  /// No description provided for @all_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'All Reviews'**
+  String get all_reviews;
+
+  /// No description provided for @flagged_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Flagged Reviews'**
+  String get flagged_reviews;
+
+  /// No description provided for @comment.
+  ///
+  /// In en, this message translates to:
+  /// **'comment'**
+  String get comment;
+
+  /// No description provided for @no_reviews_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews available'**
+  String get no_reviews_available;
+
+  /// No description provided for @review_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Review Details'**
+  String get review_details;
+
+  /// No description provided for @review_deleted_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Review deleted successfully'**
+  String get review_deleted_successfully;
+
+  /// No description provided for @user_role.
+  ///
+  /// In en, this message translates to:
+  /// **'USER'**
+  String get user_role;
+
+  /// No description provided for @admin_role.
+  ///
+  /// In en, this message translates to:
+  /// **'ADMIN'**
+  String get admin_role;
+
+  /// No description provided for @shop_owner_role.
+  ///
+  /// In en, this message translates to:
+  /// **'SHOP_OWNER'**
+  String get shop_owner_role;
+
+  /// No description provided for @guest_role.
+  ///
+  /// In en, this message translates to:
+  /// **'GUEST'**
+  String get guest_role;
+
+  /// No description provided for @subscription_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Management'**
+  String get subscription_management;
+
+  /// No description provided for @monitor_and_manage_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor and manage subscription plans'**
+  String get monitor_and_manage_subscriptions;
+
+  /// No description provided for @total_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Subscriptions'**
+  String get total_subscriptions;
+
+  /// No description provided for @expired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get expired;
+
+  /// No description provided for @search_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Search subscriptions...'**
+  String get search_subscriptions;
+
+  /// No description provided for @no_subscriptions_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No subscriptions available'**
+  String get no_subscriptions_available;
+
+  /// No description provided for @products_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Products Management'**
+  String get products_management;
+
+  /// No description provided for @monitor_and_manage_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor and manage shop products'**
+  String get monitor_and_manage_products;
+
+  /// No description provided for @total_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Products'**
+  String get total_products;
+
+  /// No description provided for @in_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'In Stock'**
+  String get in_stock;
+
+  /// No description provided for @out_of_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'Out of Stock'**
+  String get out_of_stock;
+
+  /// No description provided for @search_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products...'**
+  String get search_products;
+
+  /// No description provided for @no_products_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No products available'**
+  String get no_products_available;
+
+  /// No description provided for @repair_requests_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair Requests Management'**
+  String get repair_requests_management;
+
+  /// No description provided for @search_repair_requests.
+  ///
+  /// In en, this message translates to:
+  /// **'Search repair requests...'**
+  String get search_repair_requests;
+
+  /// No description provided for @no_repair_requests_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No repair requests available'**
+  String get no_repair_requests_available;
+
+  /// No description provided for @offers_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers Management'**
+  String get offers_management;
+
+  /// No description provided for @total_offers.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Offers'**
+  String get total_offers;
+
+  /// No description provided for @no_offers_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No offers available'**
+  String get no_offers_available;
+
+  /// No description provided for @stores.
+  ///
+  /// In en, this message translates to:
+  /// **'Stores'**
+  String get stores;
+
+  /// No description provided for @subscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get subscription;
+
+  /// No description provided for @reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get reviews;
+
+  /// No description provided for @pending_payments.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Payments'**
+  String get pending_payments;
+
+  /// No description provided for @pending_cash_payments.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Cash Payments'**
+  String get pending_cash_payments;
+
+  /// No description provided for @all_subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'All Subscriptions'**
+  String get all_subscriptions;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @search_by_shop_id_name_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by Shop ID, Name, or Email...'**
+  String get search_by_shop_id_name_email;
+
+  /// No description provided for @shop_id.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop ID'**
+  String get shop_id;
+
+  /// No description provided for @method.
+  ///
+  /// In en, this message translates to:
+  /// **'Method'**
+  String get method;
+
+  /// No description provided for @no_subscriptions_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No subscriptions found'**
+  String get no_subscriptions_found;
+
+  /// No description provided for @pending_cash_payments_only.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Cash Payments Only'**
+  String get pending_cash_payments_only;
+
+  /// No description provided for @view_details.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get view_details;
+
+  /// No description provided for @offer_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer Name'**
+  String get offer_name;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
+  /// No description provided for @start_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get start_date;
+
+  /// No description provided for @end_date.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get end_date;
+
+  /// No description provided for @device_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Device Category'**
+  String get device_category;
+
+  /// No description provided for @delivery_method.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Method'**
+  String get delivery_method;
+
+  /// No description provided for @confirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get confirmed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

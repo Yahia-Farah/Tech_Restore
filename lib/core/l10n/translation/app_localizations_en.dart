@@ -1255,65 +1255,218 @@ class AppLocalizationsEn extends AppLocalizations {
   String get default_address_warning => 'Setting this as the default address will remove the default status from your current default address. Do you want to continue?';
 
   @override
-  String get my_addresses => 'My Addresses';
+  String get shops_management => 'Shops Management';
 
   @override
-  String get delete_address => 'Delete Address';
+  String get manage_approve_suspend_view_shop_details => 'Manage, approve, suspend, and view shop details';
 
   @override
-  String get address_title => 'Address Title';
+  String get filter_by_status => 'Filter by Status';
 
   @override
-  String get address_title_hint => 'e.g., Home, Office, etc.';
+  String get all_shops => 'All Shops';
 
   @override
-  String get full_address => 'Full Address';
+  String get approved_shops => 'Approved Shops';
 
   @override
-  String get full_address_hint => 'Street, Building, Apartment';
+  String get suspended_shops => 'Suspended Shops';
 
   @override
-  String get city_state => 'City, State';
+  String get shop_type => 'SHOP TYPE';
 
   @override
-  String get city_state_hint => 'e.g., Cairo, Egypt';
+  String get view => 'View';
 
   @override
-  String get special_instructions => 'Special Instructions (Optional)';
+  String get approve => 'Approve';
 
   @override
-  String get special_instructions_hint => 'Delivery notes, landmarks, etc.';
+  String get no_shops_match_filters => 'No shops match your filters';
 
   @override
-  String get save_address => 'Save Address';
+  String get rating => 'Rating';
 
   @override
-  String get update_address => 'Update Address';
+  String get description => 'Description';
 
   @override
-  String get delete_address_confirmation => 'Are you sure you want to delete this address? This action cannot be undone.';
+  String get data_copied_to_clipboard => 'Data copied to clipboard';
 
   @override
-  String get address_added_successfully => 'Address added successfully';
+  String get suspend => 'Suspend';
 
   @override
-  String get address_updated_successfully => 'Address updated successfully';
+  String get shop_approved_successfully => 'Shop approved successfully';
 
   @override
-  String get address_deleted_successfully => 'Address deleted successfully';
+  String get shop_suspended_successfully => 'Shop suspended successfully';
 
   @override
-  String get no_addresses_found => 'No addresses found';
+  String get shop_approval_failed => 'Failed to approve shop';
 
   @override
-  String get failed_to_load_addresses => 'Failed to load addresses';
+  String get shop_suspension_failed => 'Failed to suspend shop';
 
   @override
-  String get failed_to_add_address => 'Failed to add address';
+  String get review_management => 'Review Management';
 
   @override
-  String get failed_to_update_address => 'Failed to update address';
+  String get monitor_and_manage_customer_feedback => 'Monitor and manage customer feedback';
 
   @override
-  String get failed_to_delete_address => 'Failed to delete address';
+  String get total_reviews => 'Total Reviews';
+
+  @override
+  String get flagged => 'Flagged';
+
+  @override
+  String get search_by_customer_shop_or_comment => 'Search by customer, shop, or comment...';
+
+  @override
+  String get all_reviews => 'All Reviews';
+
+  @override
+  String get flagged_reviews => 'Flagged Reviews';
+
+  @override
+  String get comment => 'comment';
+
+  @override
+  String get no_reviews_available => 'No reviews available';
+
+  @override
+  String get review_details => 'Review Details';
+
+  @override
+  String get review_deleted_successfully => 'Review deleted successfully';
+
+  @override
+  String get user_role => 'USER';
+
+  @override
+  String get admin_role => 'ADMIN';
+
+  @override
+  String get shop_owner_role => 'SHOP_OWNER';
+
+  @override
+  String get guest_role => 'GUEST';
+
+  @override
+  String get subscription_management => 'Subscription Management';
+
+  @override
+  String get monitor_and_manage_subscriptions => 'Monitor and manage subscription plans';
+
+  @override
+  String get total_subscriptions => 'Total Subscriptions';
+
+  @override
+  String get expired => 'Expired';
+
+  @override
+  String get search_subscriptions => 'Search subscriptions...';
+
+  @override
+  String get no_subscriptions_available => 'No subscriptions available';
+
+  @override
+  String get products_management => 'Products Management';
+
+  @override
+  String get monitor_and_manage_products => 'Monitor and manage shop products';
+
+  @override
+  String get total_products => 'Total Products';
+
+  @override
+  String get in_stock => 'In Stock';
+
+  @override
+  String get out_of_stock => 'Out of Stock';
+
+  @override
+  String get search_products => 'Search products...';
+
+  @override
+  String get no_products_available => 'No products available';
+
+  @override
+  String get repair_requests_management => 'Repair Requests Management';
+
+  @override
+  String get search_repair_requests => 'Search repair requests...';
+
+  @override
+  String get no_repair_requests_available => 'No repair requests available';
+
+  @override
+  String get offers_management => 'Offers Management';
+
+  @override
+  String get total_offers => 'Total Offers';
+
+  @override
+  String get no_offers_available => 'No offers available';
+
+  @override
+  String get stores => 'Stores';
+
+  @override
+  String get subscription => 'Subscription';
+
+  @override
+  String get reviews => 'Reviews';
+
+  @override
+  String get pending_payments => 'Pending Payments';
+
+  @override
+  String get pending_cash_payments => 'Pending Cash Payments';
+
+  @override
+  String get all_subscriptions => 'All Subscriptions';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get search_by_shop_id_name_email => 'Search by Shop ID, Name, or Email...';
+
+  @override
+  String get shop_id => 'Shop ID';
+
+  @override
+  String get method => 'Method';
+
+  @override
+  String get no_subscriptions_found => 'No subscriptions found';
+
+  @override
+  String get pending_cash_payments_only => 'Pending Cash Payments Only';
+
+  @override
+  String get view_details => 'View Details';
+
+  @override
+  String get offer_name => 'Offer Name';
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get start_date => 'Start Date';
+
+  @override
+  String get end_date => 'End Date';
+
+  @override
+  String get device_category => 'Device Category';
+
+  @override
+  String get delivery_method => 'Delivery Method';
+
+  @override
+  String get confirmed => 'Confirmed';
 }

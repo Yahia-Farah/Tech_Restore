@@ -1255,65 +1255,218 @@ class AppLocalizationsAr extends AppLocalizations {
   String get default_address_warning => 'تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟';
 
   @override
-  String get my_addresses => 'عناويني';
+  String get shops_management => 'إدارة المتاجر';
 
   @override
-  String get delete_address => 'حذف العنوان';
+  String get manage_approve_suspend_view_shop_details => 'إدارة وموافقة وتعليق وعرض تفاصيل المتاجر';
 
   @override
-  String get address_title => 'عنوان العنوان';
+  String get filter_by_status => 'تصفية حسب الحالة';
 
   @override
-  String get address_title_hint => 'مثل: المنزل، المكتب، إلخ';
+  String get all_shops => 'جميع المتاجر';
 
   @override
-  String get full_address => 'العنوان الكامل';
+  String get approved_shops => 'المتاجر الموافق عليها';
 
   @override
-  String get full_address_hint => 'الشارع، المبنى، الشقة';
+  String get suspended_shops => 'المتاجر المعلقة';
 
   @override
-  String get city_state => 'المدينة، المحافظة';
+  String get shop_type => 'نوع المتجر';
 
   @override
-  String get city_state_hint => 'مثل: القاهرة، مصر';
+  String get view => 'عرض';
 
   @override
-  String get special_instructions => 'تعليمات خاصة (اختياري)';
+  String get approve => 'موافقة';
 
   @override
-  String get special_instructions_hint => 'ملاحظات التوصيل، معالم، إلخ';
+  String get no_shops_match_filters => 'لا توجد متاجر تطابق المرشحات';
 
   @override
-  String get save_address => 'حفظ العنوان';
+  String get rating => 'التقييم';
 
   @override
-  String get update_address => 'تحديث العنوان';
+  String get description => 'الوصف';
 
   @override
-  String get delete_address_confirmation => 'هل أنت متأكد أنك تريد حذف هذا العنوان؟ لا يمكن التراجع عن هذا الإجراء.';
+  String get data_copied_to_clipboard => 'تم نسخ البيانات إلى الحافظة';
 
   @override
-  String get address_added_successfully => 'تم إضافة العنوان بنجاح';
+  String get suspend => 'تعليق';
 
   @override
-  String get address_updated_successfully => 'تم تحديث العنوان بنجاح';
+  String get shop_approved_successfully => 'تمت الموافقة على المتجر بنجاح';
 
   @override
-  String get address_deleted_successfully => 'تم حذف العنوان بنجاح';
+  String get shop_suspended_successfully => 'تم تعليق المتجر بنجاح';
 
   @override
-  String get no_addresses_found => 'لم يتم العثور على عناوين';
+  String get shop_approval_failed => 'فشل في الموافقة على المتجر';
 
   @override
-  String get failed_to_load_addresses => 'فشل تحميل العناوين';
+  String get shop_suspension_failed => 'فشل في تعليق المتجر';
 
   @override
-  String get failed_to_add_address => 'فشل إضافة العنوان';
+  String get review_management => 'إدارة التقييمات';
 
   @override
-  String get failed_to_update_address => 'فشل تحديث العنوان';
+  String get monitor_and_manage_customer_feedback => 'مراقبة وإدارة تعليقات العملاء';
 
   @override
-  String get failed_to_delete_address => 'فشل حذف العنوان';
+  String get total_reviews => 'إجمالي التقييمات';
+
+  @override
+  String get flagged => 'مبلغ عنها';
+
+  @override
+  String get search_by_customer_shop_or_comment => 'البحث بالعميل أو المتجر أو التعليق...';
+
+  @override
+  String get all_reviews => 'All Reviews';
+
+  @override
+  String get flagged_reviews => 'Flagged Reviews';
+
+  @override
+  String get comment => 'تعليق';
+
+  @override
+  String get no_reviews_available => 'لا توجد تقييمات متاحة';
+
+  @override
+  String get review_details => 'تفاصيل التقييم';
+
+  @override
+  String get review_deleted_successfully => 'تم حذف التقييم بنجاح';
+
+  @override
+  String get user_role => 'مستخدم';
+
+  @override
+  String get admin_role => 'مدير';
+
+  @override
+  String get shop_owner_role => 'صاحب متجر';
+
+  @override
+  String get guest_role => 'ضيف';
+
+  @override
+  String get subscription_management => 'إدارة الاشتراكات';
+
+  @override
+  String get monitor_and_manage_subscriptions => 'مراقبة وإدارة خطط الاشتراك';
+
+  @override
+  String get total_subscriptions => 'إجمالي الاشتراكات';
+
+  @override
+  String get expired => 'منتهية الصلاحية';
+
+  @override
+  String get search_subscriptions => 'البحث في الاشتراكات...';
+
+  @override
+  String get no_subscriptions_available => 'لا توجد اشتراكات متاحة';
+
+  @override
+  String get products_management => 'إدارة المنتجات';
+
+  @override
+  String get monitor_and_manage_products => 'مراقبة وإدارة منتجات المتاجر';
+
+  @override
+  String get total_products => 'إجمالي المنتجات';
+
+  @override
+  String get in_stock => 'متوفر';
+
+  @override
+  String get out_of_stock => 'غير متوفر';
+
+  @override
+  String get search_products => 'البحث في المنتجات...';
+
+  @override
+  String get no_products_available => 'لا توجد منتجات متاحة';
+
+  @override
+  String get repair_requests_management => 'إدارة طلبات الإصلاح';
+
+  @override
+  String get search_repair_requests => 'البحث في طلبات الإصلاح...';
+
+  @override
+  String get no_repair_requests_available => 'لا توجد طلبات إصلاح متاحة';
+
+  @override
+  String get offers_management => 'إدارة العروض';
+
+  @override
+  String get total_offers => 'إجمالي العروض';
+
+  @override
+  String get no_offers_available => 'لا توجد عروض متاحة';
+
+  @override
+  String get stores => 'المتاجر';
+
+  @override
+  String get subscription => 'الاشتراك';
+
+  @override
+  String get reviews => 'التقييمات';
+
+  @override
+  String get pending_payments => 'المدفوعات المعلقة';
+
+  @override
+  String get pending_cash_payments => 'المدفوعات النقدية المعلقة';
+
+  @override
+  String get all_subscriptions => 'جميع الاشتراكات';
+
+  @override
+  String get refresh => 'تحديث';
+
+  @override
+  String get search_by_shop_id_name_email => 'البحث برقم المتجر أو الاسم أو البريد الإلكتروني...';
+
+  @override
+  String get shop_id => 'رقم المتجر';
+
+  @override
+  String get method => 'الطريقة';
+
+  @override
+  String get no_subscriptions_found => 'لم يتم العثور على اشتراكات';
+
+  @override
+  String get pending_cash_payments_only => 'المدفوعات النقدية المعلقة فقط';
+
+  @override
+  String get view_details => 'عرض التفاصيل';
+
+  @override
+  String get offer_name => 'اسم العرض';
+
+  @override
+  String get discount => 'الخصم';
+
+  @override
+  String get start_date => 'تاريخ البدء';
+
+  @override
+  String get end_date => 'تاريخ الانتهاء';
+
+  @override
+  String get device_category => 'فئة الجهاز';
+
+  @override
+  String get delivery_method => 'طريقة التوصيل';
+
+  @override
+  String get confirmed => 'مؤكد';
 }

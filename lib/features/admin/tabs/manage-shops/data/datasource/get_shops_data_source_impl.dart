@@ -11,4 +11,12 @@ class GetShopsRemoteDataSource {
   Future<ShopListResponse> getShops() async {
     return await _apiClient.getShops();
   }
+
+  Future<String> approveShop(String shopId) async {
+    return await _apiClient.approveShop(shopId);
+  }
+
+  Future<String> suspendShop(String shopId) async {
+    return await _apiClient.suspendShop(shopId);
+  }
 }

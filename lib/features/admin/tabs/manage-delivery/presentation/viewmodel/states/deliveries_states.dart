@@ -24,3 +24,5 @@ class DeliveriesError extends DeliveriesState {
 
   DeliveriesError(this.message);
 }
+
+

@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sort_transaction.dart';
+part of 'sort_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SortTransaction _$SortTransactionFromJson(Map<String, dynamic> json) =>
-    SortTransaction(
+SortModel _$SortModelFromJson(Map<String, dynamic> json) => SortModel(
       direction: json['direction'] as String?,
       nullHandling: json['nullHandling'] as String?,
       ascending: json['ascending'] as bool?,
@@ -15,8 +14,7 @@ SortTransaction _$SortTransactionFromJson(Map<String, dynamic> json) =>
       ignoreCase: json['ignoreCase'] as bool?,
     );
 
-Map<String, dynamic> _$SortTransactionToJson(SortTransaction instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SortModelToJson(SortModel instance) => <String, dynamic>{
       'direction': instance.direction,
       'nullHandling': instance.nullHandling,
       'ascending': instance.ascending,

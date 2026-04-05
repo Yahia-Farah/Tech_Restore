@@ -21,3 +21,4 @@ class Sort {
     return _$SortToJson(this);
   }
 }
+

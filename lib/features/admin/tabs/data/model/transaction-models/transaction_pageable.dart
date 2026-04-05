@@ -1,13 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tech_restore/features/admin/tabs/data/model/transaction-models/sort_transaction.dart';
-part 'pagable_admin.g.dart';
+import 'transaction_sort.dart';
+
+part 'transaction_pageable.g.dart';
 
 @JsonSerializable()
-class PageableAdminTransaction {
+class TransactionPageable {
   @JsonKey(name: "offset")
   final int? offset;
   @JsonKey(name: "sort")
-  final List<SortTransaction>? sort;
+  final TransactionSort? sort;
   @JsonKey(name: "paged")
   final bool? paged;
   @JsonKey(name: "pageSize")
@@ -17,7 +18,7 @@ class PageableAdminTransaction {
   @JsonKey(name: "unpaged")
   final bool? unpaged;
 
-  PageableAdminTransaction({
+  TransactionPageable({
     this.offset,
     this.sort,
     this.paged,
@@ -26,11 +27,12 @@ class PageableAdminTransaction {
     this.unpaged,
   });
 
-  factory PageableAdminTransaction.fromJson(Map<String, dynamic> json) {
-    return _$PageableAdminTransactionFromJson(json);
+  factory TransactionPageable.fromJson(Map<String, dynamic> json) {
+    return _$TransactionPageableFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$PageableAdminTransactionToJson(this);
+    return _$TransactionPageableToJson(this);
   }
 }
+

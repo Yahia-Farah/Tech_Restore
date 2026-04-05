@@ -11,3 +11,4 @@ class ActivateUserUseCase {
     return await _adminRepo.activateUser(userId);
   }
 }
+
