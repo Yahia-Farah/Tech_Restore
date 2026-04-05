@@ -1255,6 +1255,69 @@ class AppLocalizationsAr extends AppLocalizations {
   String get default_address_warning => 'تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟';
 
   @override
+  String get my_addresses => 'عناويني';
+
+  @override
+  String get delete_address => 'حذف العنوان';
+
+  @override
+  String get address_title => 'عنوان العنوان';
+
+  @override
+  String get address_title_hint => 'مثل: المنزل، المكتب، إلخ';
+
+  @override
+  String get full_address => 'العنوان الكامل';
+
+  @override
+  String get full_address_hint => 'الشارع، المبنى، الشقة';
+
+  @override
+  String get city_state => 'المدينة، المحافظة';
+
+  @override
+  String get city_state_hint => 'مثل: القاهرة، مصر';
+
+  @override
+  String get special_instructions => 'تعليمات خاصة (اختياري)';
+
+  @override
+  String get special_instructions_hint => 'ملاحظات التوصيل، معالم، إلخ';
+
+  @override
+  String get save_address => 'حفظ العنوان';
+
+  @override
+  String get update_address => 'تحديث العنوان';
+
+  @override
+  String get delete_address_confirmation => 'هل أنت متأكد أنك تريد حذف هذا العنوان؟ لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get address_added_successfully => 'تم إضافة العنوان بنجاح';
+
+  @override
+  String get address_updated_successfully => 'تم تحديث العنوان بنجاح';
+
+  @override
+  String get address_deleted_successfully => 'تم حذف العنوان بنجاح';
+
+  @override
+  String get no_addresses_found => 'لم يتم العثور على عناوين';
+
+  @override
+  String get failed_to_load_addresses => 'فشل تحميل العناوين';
+
+  @override
+  String get failed_to_add_address => 'فشل إضافة العنوان';
+
+  @override
+  String get failed_to_update_address => 'فشل تحديث العنوان';
+
+  @override
+  String get failed_to_delete_address => 'فشل حذف العنوان';
+
+  @override
   String get shops_management => 'إدارة المتاجر';
 
   @override

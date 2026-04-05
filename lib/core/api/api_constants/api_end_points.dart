@@ -128,5 +128,5 @@ abstract class ApiEndPoints {
   static const String getShopReviews = 'reviews/{shopId}/reviews';
   static const String addReview = 'reviews/{shopId}';
   static const String updateReview = 'reviews/{id}';
-  static const String deleteReview = 'reviews/cancel/{id}';
+  static const String deleteShopReview = 'reviews/cancel/{id}';
 }

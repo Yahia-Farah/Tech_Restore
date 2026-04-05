@@ -447,7 +447,7 @@
   "failed_to_load_addresses": "Failed to load addresses",
   "failed_to_add_address": "Failed to add address",
   "failed_to_update_address": "Failed to update address",
-  "failed_to_delete_address": "Failed to delete address"
+  "failed_to_delete_address": "Failed to delete address",
   "default_address_warning": "Setting this as the default address will remove the default status from your current default address. Do you want to continue?",
   "shops_management": "Shops Management",
   "manage_approve_suspend_view_shop_details": "Manage, approve, suspend, and view shop details",

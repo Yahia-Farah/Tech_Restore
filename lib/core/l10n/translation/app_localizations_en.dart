@@ -1255,6 +1255,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String get default_address_warning => 'Setting this as the default address will remove the default status from your current default address. Do you want to continue?';
 
   @override
+  String get my_addresses => 'My Addresses';
+
+  @override
+  String get delete_address => 'Delete Address';
+
+  @override
+  String get address_title => 'Address Title';
+
+  @override
+  String get address_title_hint => 'e.g., Home, Office, etc.';
+
+  @override
+  String get full_address => 'Full Address';
+
+  @override
+  String get full_address_hint => 'Street, Building, Apartment';
+
+  @override
+  String get city_state => 'City, State';
+
+  @override
+  String get city_state_hint => 'e.g., Cairo, Egypt';
+
+  @override
+  String get special_instructions => 'Special Instructions (Optional)';
+
+  @override
+  String get special_instructions_hint => 'Delivery notes, landmarks, etc.';
+
+  @override
+  String get save_address => 'Save Address';
+
+  @override
+  String get update_address => 'Update Address';
+
+  @override
+  String get delete_address_confirmation => 'Are you sure you want to delete this address? This action cannot be undone.';
+
+  @override
+  String get address_added_successfully => 'Address added successfully';
+
+  @override
+  String get address_updated_successfully => 'Address updated successfully';
+
+  @override
+  String get address_deleted_successfully => 'Address deleted successfully';
+
+  @override
+  String get no_addresses_found => 'No addresses found';
+
+  @override
+  String get failed_to_load_addresses => 'Failed to load addresses';
+
+  @override
+  String get failed_to_add_address => 'Failed to add address';
+
+  @override
+  String get failed_to_update_address => 'Failed to update address';
+
+  @override
+  String get failed_to_delete_address => 'Failed to delete address';
+
+  @override
   String get shops_management => 'Shops Management';
 
   @override

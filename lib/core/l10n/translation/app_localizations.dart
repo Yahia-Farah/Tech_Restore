@@ -2579,6 +2579,132 @@ abstract class AppLocalizations {
   /// **'Setting this as the default address will remove the default status from your current default address. Do you want to continue?'**
   String get default_address_warning;
 
+  /// No description provided for @my_addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'My Addresses'**
+  String get my_addresses;
+
+  /// No description provided for @delete_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Address'**
+  String get delete_address;
+
+  /// No description provided for @address_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Address Title'**
+  String get address_title;
+
+  /// No description provided for @address_title_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Home, Office, etc.'**
+  String get address_title_hint;
+
+  /// No description provided for @full_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Address'**
+  String get full_address;
+
+  /// No description provided for @full_address_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Street, Building, Apartment'**
+  String get full_address_hint;
+
+  /// No description provided for @city_state.
+  ///
+  /// In en, this message translates to:
+  /// **'City, State'**
+  String get city_state;
+
+  /// No description provided for @city_state_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Cairo, Egypt'**
+  String get city_state_hint;
+
+  /// No description provided for @special_instructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Special Instructions (Optional)'**
+  String get special_instructions;
+
+  /// No description provided for @special_instructions_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery notes, landmarks, etc.'**
+  String get special_instructions_hint;
+
+  /// No description provided for @save_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Address'**
+  String get save_address;
+
+  /// No description provided for @update_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Address'**
+  String get update_address;
+
+  /// No description provided for @delete_address_confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this address? This action cannot be undone.'**
+  String get delete_address_confirmation;
+
+  /// No description provided for @address_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address added successfully'**
+  String get address_added_successfully;
+
+  /// No description provided for @address_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address updated successfully'**
+  String get address_updated_successfully;
+
+  /// No description provided for @address_deleted_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address deleted successfully'**
+  String get address_deleted_successfully;
+
+  /// No description provided for @no_addresses_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No addresses found'**
+  String get no_addresses_found;
+
+  /// No description provided for @failed_to_load_addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load addresses'**
+  String get failed_to_load_addresses;
+
+  /// No description provided for @failed_to_add_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add address'**
+  String get failed_to_add_address;
+
+  /// No description provided for @failed_to_update_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update address'**
+  String get failed_to_update_address;
+
+  /// No description provided for @failed_to_delete_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete address'**
+  String get failed_to_delete_address;
+
   /// No description provided for @shops_management.
   ///
   /// In en, this message translates to:

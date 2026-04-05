@@ -473,7 +473,7 @@ abstract class ApiClient {
 
   @DELETE(ApiEndPoints.deleteReview)
   @Extra({'auth': true})
-  Future<dynamic> deleteReview(@Path('id') String reviewId);
+  Future<dynamic> deleteShopReview(@Path('id') String reviewId);
 
   // Cart
   @GET(ApiEndPoints.getCart)

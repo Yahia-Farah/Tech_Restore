@@ -510,7 +510,7 @@
   "end_date": "تاريخ الانتهاء",
   "device_category": "فئة الجهاز",
   "delivery_method": "طريقة التوصيل",
-  "confirmed": "مؤكد"
+  "confirmed": "مؤكد",
   "default_address_warning": "تعيين هذا العنوان كافتراضي سيؤدي إلى إزالة الحالة الافتراضية من عنوانك الافتراضي الحالي. هل تريد المتابعة؟",
   "my_addresses": "عناويني",
   "add_new_address": "إضافة عنوان جديد",
